@@ -127,18 +127,22 @@ bindsym $mod+Ctrl+l workspace prev
 #                 set $ws2 2:
 set $ws1 1:main
 set $ws2 2:web
+set $ws3 3:other
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
 
 # Open applications on specific workspaces
 assign [class="Firefox"] $ws2
