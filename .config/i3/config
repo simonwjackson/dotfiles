@@ -151,8 +151,8 @@ set $ws7 7
 set $ws8 8
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
+bindsym $mod+1 workspace $ws1 1:main
+bindsym $mod+2 workspace $ws2 2:web
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
