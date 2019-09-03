@@ -142,7 +142,7 @@ bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
+assign [class="Firefox"] $ws2
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
