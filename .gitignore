@@ -1,0 +1,12 @@
+
+*
+!*/
+
+# Self
+
+!/.gitignore
+
+# Config files
+
+!/.config/i3/**
+!/.config/kitty/**
