@@ -10,3 +10,7 @@
 
 !/.config/i3/**
 !/.config/kitty/**
+
+# Apps
+
+!/PACKAGES
