@@ -10,4 +10,4 @@ git remote add origin https://github.com/simonwjackson/dotfiles.git
 git pull origin master
 
 # Install Apps
-pacman -S - < ~/PACKAGES
+pacman -S --noconfirm - < ~/PACKAGES
