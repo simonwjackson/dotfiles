@@ -11,16 +11,17 @@ set $alt Mod1
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+# new_window pixel 1
+new_window none
 new_float normal
 
 # Hide borders
 hide_edge_borders none
 
 # change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+# bindsym $mod+u border none
+# bindsym $mod+y border pixel 1
+# bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -239,6 +240,7 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-iid xsetroot -solid "#1e1e3f"
 # exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
@@ -294,7 +296,7 @@ bar {
 	i3bar_command i3bar
 	status_command i3status
 	position top
-	mode hide
+	mode invisible
 	hidden_state hide
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
