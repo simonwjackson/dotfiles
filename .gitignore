@@ -11,6 +11,7 @@
 !/.config/kitty/**
 !/.mozilla/firefox/default/chrome/**
 !/.mozilla/firefox/profiles.ini
+!/.zshrc
 
 # Apps
 
