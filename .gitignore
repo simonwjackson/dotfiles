@@ -1,4 +1,4 @@
-*
+* 
 !*/
 
 # Self
@@ -21,3 +21,6 @@
 # Local scripts
 
 !/bin/**
+
+.local/**
+storage/**
