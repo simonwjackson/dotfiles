@@ -14,7 +14,7 @@ git pull origin master
 
 # Install Apps
 
-pacman --sync --noconfirm --needed - < ~/.config/packages.install
+source ./install.sh
 
 # Remove preinstalled apps and its non-shared dependencies
 
@@ -38,4 +38,9 @@ ln -s ~/.config/zsh/rc ~/.zshrc
 
 # Git
 
+### Empty
+
+# NeoVim
+
+nvim +PlugInstall +qa
 git config --global core.editor "nvim"
