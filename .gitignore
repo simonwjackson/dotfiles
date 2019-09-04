@@ -12,6 +12,7 @@
 !/.config/kitty/**
 !/.config/firefox/**
 !/.config/zsh/**
+!/.config/nvim/**
 
 # Apps
 
