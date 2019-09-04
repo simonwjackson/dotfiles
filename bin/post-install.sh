@@ -25,3 +25,13 @@ do
         pacman --remove --recursive --noconfirm ${P}
     fi
 done
+
+# Firefox
+
+mkdir -p ~/.mozilla/firefox/default/
+ln -s ~/.config/mozilla/firefox/default/chrome ~/.mozilla/firefox/default/chrome
+ln -s ~/.config/mozilla/firefox/profiles.ini ~/.mozilla/firefox/profiles.ini
+
+# ZSH
+
+ln -s ~/.config/zsh/rc ~/.zshrc
