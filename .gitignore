@@ -8,6 +8,7 @@
 # Config files
 
 !/.config/i3/**
+!/.config/zsh/**
 !/.config/kitty/**
 !/.mozilla/firefox/default/chrome/**
 !/.mozilla/firefox/profiles.ini
