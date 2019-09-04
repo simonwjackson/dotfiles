@@ -1,4 +1,3 @@
-
 *
 !*/
 
@@ -10,6 +9,8 @@
 
 !/.config/i3/**
 !/.config/kitty/**
+!/.mozilla/firefox/simonwjackson/chrome/**
+!/.mozilla/firefox/profiles.ini
 
 # Apps
 
