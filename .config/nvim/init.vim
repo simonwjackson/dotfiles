@@ -14,3 +14,8 @@ syntax enable
 colorscheme shades_of_purple
 
 let mapleader=" "
+
+set number
+
+"""" Hide tildas
+hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
