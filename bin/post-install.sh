@@ -52,3 +52,6 @@ nvm install node
 
 ## global eslint is required for vim-ale :(
 npm i -g eslint
+
+# task warrior
+ln -s .config/task/rc ~/.taskrc

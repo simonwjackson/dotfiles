@@ -11,6 +11,7 @@
 !/.config/zsh/**
 !/.config/kitty/**
 !/.config/firefox/**
+!/.config/task/**
 !/.config/zsh/**
 !/.config/nvim/**.vim
 
@@ -22,5 +23,6 @@
 
 !/bin/**
 
+# Explicitly ignore these dirs
 .local/**
 storage/**
