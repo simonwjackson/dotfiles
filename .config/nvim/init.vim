@@ -8,6 +8,9 @@ Plug 'Rigellute/shades-of-purple.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
+" easy motion
+Plug 'easymotion/vim-easymotion'
+
 " Initialize plugin system
 call plug#end()
 
