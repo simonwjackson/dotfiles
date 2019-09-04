@@ -191,3 +191,6 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
   		ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
     ;;
 esac
+
+# NVM
+source /usr/share/nvm/init-nvm.sh

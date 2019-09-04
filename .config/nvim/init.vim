@@ -11,6 +11,9 @@ Plug 'mxw/vim-jsx'
 " Ctrl-p
 Plug 'ctrlpvim/ctrlp.vim'
 
+" ale
+ Plug 'w0rp/ale'
+
 " Nerd tree
 Plug 'scrooloose/nerdtree'
 
@@ -53,3 +56,16 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 "" Auto close if last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Ale
+"" files
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+
+"" symbols
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '~'
+
+"" lint on save
+let g:ale_fix_on_save = 1
