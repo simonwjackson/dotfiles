@@ -35,3 +35,7 @@ ln -s ~/.config/mozilla/firefox/profiles.ini ~/.mozilla/firefox/profiles.ini
 # ZSH
 
 ln -s ~/.config/zsh/rc ~/.zshrc
+
+# Git
+
+git config --global core.editor "nvim"

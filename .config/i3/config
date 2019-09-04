@@ -5,8 +5,6 @@
 set $mod Mod4
 set $alt Mod1
 
-bindsym $mod+$alt+m exec --no-startup-id $HOME/bin/toggle-mouse.sh
-
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
@@ -73,6 +71,9 @@ bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
+
+# Toggle mouse
+bindsym $mod+$alt+m exec --no-startup-id $HOME/bin/toggle-mouse.sh
 
 # change focus
 bindsym $mod+h focus left
