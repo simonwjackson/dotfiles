@@ -12,7 +12,7 @@ Plug 'mxw/vim-jsx'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " ale
- Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " Nerd tree
 Plug 'scrooloose/nerdtree'
@@ -69,3 +69,11 @@ let g:ale_sign_warning = '~'
 
 "" lint on save
 let g:ale_fix_on_save = 1
+
+" Ctrl-P
+
+"" main command
+let g:ctrlp_map = '<leader>t'
+
+"" ignored paths
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
