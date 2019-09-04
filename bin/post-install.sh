@@ -44,3 +44,8 @@ ln -s ~/.config/zsh/rc ~/.zshrc
 
 nvim +PlugInstall +qa
 git config --global core.editor "nvim"
+
+# NVM
+
+## install latest version
+nvm install node
