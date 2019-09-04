@@ -11,6 +11,9 @@ Plug 'mxw/vim-jsx'
 " easy motion
 Plug 'easymotion/vim-easymotion'
 
+" surround
+Plug 'tpope/vim-surround'
+
 " Initialize plugin system
 call plug#end()
 
