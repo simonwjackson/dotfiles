@@ -49,3 +49,6 @@ git config --global core.editor "nvim"
 
 ## install latest version
 nvm install node
+
+## global eslint is required for vim-ale :(
+npm i -g eslint
