@@ -8,6 +8,9 @@ Plug 'Rigellute/shades-of-purple.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
+" Ctrl-p
+Plug 'ctrlpvim/ctrlp.vim'
+
 " Nerd tree
 Plug 'scrooloose/nerdtree'
 
