@@ -16,3 +16,7 @@
 # Apps
 
 !/.config/packages.*
+
+# Local scripts
+
+!/bin/**
