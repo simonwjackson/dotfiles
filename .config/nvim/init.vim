@@ -1,7 +1,12 @@
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Theme
 Plug 'Rigellute/shades-of-purple.vim'
+
+" React
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " Initialize plugin system
 call plug#end()
