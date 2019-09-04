@@ -14,6 +14,9 @@ Plug 'easymotion/vim-easymotion'
 " surround
 Plug 'tpope/vim-surround'
 
+" git gutter
+Plug 'airblade/vim-gitgutter'
+
 " Initialize plugin system
 call plug#end()
 
@@ -30,3 +33,6 @@ set number
 
 """" Hide tildas
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
+" GitGutter
+let g:gitgutter_highlight_linenrs = 1
