@@ -1,38 +1,42 @@
 " vim:fdm=marker
 
-" Plugin system {{{ 
+" Plugins: {{{ 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Themes {{{
+" Plugins: Themes {{{
 Plug 'Rigellute/shades-of-purple.vim'
 " }}}
 
-" Syntax {{{
+" Plugins: Syntax {{{
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " }}}
 
-" Extras {{{ 
-" GraphQL
+" Plugins: Extras {{{ 
+" Gist:
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+
+" GraphQL:
 Plug 'jparise/vim-graphql'
 
-" Ctrl-p
+" Ctrlp:
 Plug 'ctrlpvim/ctrlp.vim'
 
-" ale
+" Ale:
 Plug 'w0rp/ale'
 
-" Nerd tree
+" Nerdtree:
 Plug 'scrooloose/nerdtree'
 
-" easy motion
+" Easymotion:
 Plug 'easymotion/vim-easymotion'
 
-" surround
+" Surround:
 Plug 'tpope/vim-surround'
 
-" git gutter
+" GitGutter:
 Plug 'airblade/vim-gitgutter'
 " }}}
 call plug#end()
@@ -98,11 +102,15 @@ let g:ale_sign_warning = '~'
 let g:ale_fix_on_save = 1 
 " }}}
 
-" Ctrl-P {{{
+" CtrlP: {{{
 
 "" main command
 let g:ctrlp_map = '<leader>t'
 
 "" ignored paths
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" }}}
+
+" Gist: {{{
+let g:gist_use_password_in_gitconfig = 1 
 " }}}

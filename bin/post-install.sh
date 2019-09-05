@@ -1,5 +1,6 @@
 cd ~ 
 
+git config --global github.user simonwjackson
 # Start a new git repository
 
 git init
@@ -10,7 +11,7 @@ git remote add origin https://github.com/simonwjackson/dotfiles.git
 
 # Pull and merge with local git
 
-git pull origin master
+git pull origin +master
 
 # Install Apps
 
