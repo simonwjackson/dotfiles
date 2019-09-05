@@ -10,7 +10,7 @@
 !/.config/i3/**
 !/.config/zsh/**
 !/.config/kitty/**
-!/.config/firefox/**
+!/.config/mozilla/firefox/default/chrome/**
 !/.config/task/**
 !/.config/zsh/**
 !/.config/mutt/**
