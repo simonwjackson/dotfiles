@@ -13,6 +13,9 @@
 !/.config/firefox/**
 !/.config/task/**
 !/.config/zsh/**
+!/.config/mutt/**
+/.config/mutt/passwords
+!/.config/mailcap
 !/.config/nvim/**.vim
 
 # Apps

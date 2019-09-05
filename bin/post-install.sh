@@ -55,3 +55,5 @@ npm i -g eslint
 
 # task warrior
 ln -s .config/task/rc ~/.taskrc
+ln -s ~/.config/mailcap ~/.mailcap
+ln -s ~/.config/mutt/rc ~/.muttrc

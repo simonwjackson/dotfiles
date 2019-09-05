@@ -1,0 +1,32 @@
+# vim: filetype=muttrc
+
+set realname = "Simon W. Jackson"
+set from = "simon.jackson@gmail.com"
+set use_from = yes
+set envelope_from = yes
+
+source "$HOME/.config/mutt/passwords"
+set smtp_url = "smtps://simon.jackson@gmail.com@smtp.gmail.com:465/"
+set imap_user = "simon.jackson@gmail.com"
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+
+# G to get mail
+bind index G imap-fetch-mail
+set editor = "nvim"
+set charset = "utf-8"
+set record = ''
+
+# remove headers
+ignore *
+unignore from date subject to cc
+
+# prefer plain text
+alternative_order text/plain text/enriched text/html
+
+# auto convert text/html MIME type to text/plain
+auto_view text/html
+
+# Colors
+color normal	white default
