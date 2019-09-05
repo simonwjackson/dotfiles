@@ -15,11 +15,11 @@ git pull origin +master
 
 # Install Apps
 
-source ./install.sh
+source $HOME/bin/install.sh
 
 # Remove preinstalled apps and its non-shared dependencies
 
-for P in $( < ~/.config/packages.remove )
+for P in $( < $HOME/.config/packages.remove )
 do
     if (pacman -Qi ${P} > /dev/null)
     then
@@ -29,13 +29,13 @@ done
 
 # Firefox
 
-mkdir -p ~/.mozilla/firefox/default/
-ln -s ~/.config/mozilla/firefox/default/chrome ~/.mozilla/firefox/default/chrome
-ln -s ~/.config/mozilla/firefox/profiles.ini ~/.mozilla/firefox/profiles.ini
+mkdir -p $HOME/.mozilla/firefox/default/
+ln -s $HOME/.config/mozilla/firefox/default/chrome $HOME/.mozilla/firefox/default/chrome
+ln -s $HOME/.config/mozilla/firefox/profiles.ini $HOME/.mozilla/firefox/profiles.ini
 
 # ZSH
 
-ln -s ~/.config/zsh/rc ~/.zshrc
+ln -s $HOME/.config/zsh/rc $HOME/.zshrc
 
 # Git
 
@@ -55,6 +55,6 @@ nvm install node
 npm i -g eslint
 
 # task warrior
-ln -s .config/task/rc ~/.taskrc
-ln -s ~/.config/mailcap ~/.mailcap
-ln -s ~/.config/mutt/rc ~/.muttrc
+ln -s .config/task/rc $HOME/.taskrc
+ln -s $HOME/.config/mailcap $HOME/.mailcap
+ln -s $HOME/.config/mutt/rc $HOME/.muttrc

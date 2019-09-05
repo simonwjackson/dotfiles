@@ -54,6 +54,8 @@ colorscheme shades_of_purple
 " }}}
 
 " Custom UI {{{
+set tabstop=2
+set shiftwidth=2
 let mapleader=" " 
 set number
 
@@ -76,6 +78,9 @@ set foldlevelstart=0
 " }}}
 
 " GitGutter {{{
+" Floating previews
+let g:gitgutter_preview_win_floating = 1
+
 let g:gitgutter_highlight_linenrs = 1
 " }}}
 
