@@ -393,3 +393,7 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+
+# Override firefox keybindings
+bindsym --release Ctrl+n [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Down
+bindsym --release Ctrl+p [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Up
