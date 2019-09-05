@@ -18,6 +18,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 
+" TaskWarrior:
+Plug 'blindFS/vim-taskwarrior'
+
 " GraphQL:
 Plug 'jparise/vim-graphql'
 
