@@ -13,7 +13,10 @@ Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " }}}
 
-" Extras {{{
+" Extras {{{ 
+" GraphQL
+Plug 'jparise/vim-graphql'
+
 " Ctrl-p
 Plug 'ctrlpvim/ctrlp.vim'
 
