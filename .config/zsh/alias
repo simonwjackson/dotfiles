@@ -10,3 +10,6 @@ alias vi='vim'
 alias gitamend='git commit --amend' 
 alias gitall='git add . && git commit' 
 alias gitup='gitall && git push'
+
+# mpv
+alias mpvfill='mpv --panscan=1 --'
