@@ -55,6 +55,9 @@ syntax enable
 colorscheme shades_of_purple
 " }}}
 
+" Share clipboard
+set clipboard+=unnamedplus
+
 " Custom UI {{{
 set tabstop=2
 set shiftwidth=2
