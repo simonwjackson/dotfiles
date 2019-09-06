@@ -10,3 +10,7 @@ xorg-xsetroot
 nvm
 chromium
 xcape
+bluez-utils-compat
+pulseaudio-bluetooth 
+puleaudio
+youtube-dl

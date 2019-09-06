@@ -28,6 +28,7 @@
 # Local scripts
 
 !/bin/**
+/bin/**/*.txt
 
 # Explicitly ignore these dirs
 .local/**
