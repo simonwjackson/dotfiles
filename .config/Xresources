@@ -7,53 +7,54 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background:        #222D31
-XTerm*foreground:        #d8d8d8
-XTerm*pointerColor:      #1ABB9B
+XTerm*background:        #1D1B40
+XTerm*foreground:        #c8bff3
+XTerm*pointerColor:      #fad000
 XTerm*faceName:          Fixed
 XTerm*faceSize:          11
 XTerm*reverseVideo:      on
 XTerm*selectToClipboard: true
 
-*background:                      #222D31
-*foreground:                      #d8d8d8
+*background:                      #1D1B40
+*foreground:                      #c8bff3
 *fading:                          8
 *fadeColor:                       black
-*cursorColor:                     #1ABB9B
+*cursorColor:                     #fad000
 *pointerColorBackground:          #2B2C2B
 *pointerColorForeground:          #16A085
 
 !! black dark/light
-*color0:                          #222D31
-*color8:                          #585858
+*color0:					 								#000000
+*color8: 													#5C5C61
 
 !! red dark/light
-*color1:                          #ab4642
-*color9:                          #ab4642
+
+*color1: #EC3A37
+*color9: #EC3A37
 
 !! green dark/light
-*color2:                          #7E807E
-*color10:                         #8D8F8D
+*color2:  #75e44c
+*color10: #3AD900
 
 !! yellow dark/light
-*color3:                          #f7ca88
-*color11:                         #f7ca88
+*color3:  #FAD000
+*color11: #FAD000 
 
 !! blue dark/light
-*color4:                          #7cafc2
-*color12:                         #7cafc2
+*color4:  #6943FF
+*color12: #6943FF
 
-!! magenta dark/light
-*color5:                          #ba8baf
-*color13:                         #ba8baf
+!! magenta dark/light 
+*color5:  #FF2C70
+*color13: #FB94FF 
 
 !! cyan dark/light
-*color6:                          #1ABB9B
-*color14:                         #1ABB9B
+*color6:  #80FCFF
+*color14: #80FCFF
 
 !! white dark/light
-*color7:                          #d8d8d8
-*color15:                         #f8f8f8
+*color7:  #ffffff
+*color15: #2D2B55
 
 Xcursor.theme: xcursor-breeze
 Xcursor.size:                     0
