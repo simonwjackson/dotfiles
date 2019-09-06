@@ -11,6 +11,7 @@
 !/.config/zsh/**
 !/.config/kitty/**
 !/.config/mozilla/firefox/default/chrome/**
+!/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
 !/.config/task/**
 !/.config/zsh/**
