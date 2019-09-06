@@ -8,6 +8,7 @@
 # Config files
 
 !/.config/i3/**
+!/.config/rofi/**
 !/.config/zsh/**
 !/.config/kitty/**
 !/.config/mozilla/firefox/default/chrome/**
