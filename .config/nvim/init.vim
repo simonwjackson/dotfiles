@@ -14,6 +14,8 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " }}}
 
 " Plugins: Extras {{{ 
+Plug 'scrooloose/nerdcommenter'
+
 " Gist:
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
