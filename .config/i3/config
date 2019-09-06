@@ -402,9 +402,7 @@ bindsym --release Ctrl+p [class="firefox"] exec --no-startup-id xdotool key --cl
 # NOTE: This should probably be placed in ~/.xinitrc
 
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier' 
-exec --no-startup-id xcape -t 150 -e 'Caps_Lock=Escape' 
-exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier' 
-exec --no-startup-id xcape -t 150 -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
+exec --no-startup-id xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
 
 # Headphones toggle
 bindsym $mod+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
