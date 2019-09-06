@@ -4,8 +4,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
-set $mod Mod4
-set $alt Mod1
+set $mod Mod1
+set $alt Mod4
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -397,3 +397,11 @@ mode "$mode_gaps_outer" {
 # Override firefox keybindings
 bindsym --release Ctrl+n [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Down
 bindsym --release Ctrl+p [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Up
+
+# Caps to ESC/Ctrl
+# NOTE: This should probably be placed in ~/.xinitrc
+
+exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier' 
+exec --no-startup-id xcape -t 250 -e 'Caps_Lock=Escape' 
+exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier' 
+exec --no-startup-id xcape -t 250 -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
