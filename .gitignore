@@ -11,9 +11,11 @@
 !/.config/zsh/**
 !/.config/kitty/**
 !/.config/mozilla/firefox/default/chrome/**
+!/.config/mozilla/native-messaging-hosts/**
 !/.config/task/**
 !/.config/zsh/**
 !/.config/mutt/**
+!/.config/Xresources
 /.config/mutt/passwords
 !/.config/mailcap
 !/.config/nvim/**.vim

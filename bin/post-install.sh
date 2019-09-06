@@ -72,3 +72,23 @@ ln -s $HOME/.config/mailcap $HOME/.mailcap
 
 rm $HOME/.muttrc
 ln -s $HOME/.config/mutt/rc $HOME/.muttrc
+
+# Firefox
+
+rm $HOME/.mozilla/native-messaging-hosts
+ln -s $HOME/.config/mozilla/native-messaging-hosts $HOME/.mozilla/native-messaging-hosts
+
+# Bluetooth
+grep -qxF 'load-module module-bluetooth-policy' /etc/pulse/system.pa || sudo -E echo '# Bluetooth\nload-module module-bluetooth-policy' >> /etc/pulse/system.pa
+grep -qxF 'load-module module-bluetooth-discover' /etc/pulse/system.pa || sudo -E echo 'load-module module-bluetooth-discover' >> /etc/pulse/system.pa
+
+sudo -E sed -i -E 's/#?AutoEnable=false/AutoEnable=true/' /etc/bluetooth/main.conf 
+sudo -E sed -i -E 's/#DiscoverableTimeout.*/DiscoverableTimeout=0/' /etc/bluetooth/main.conf
+
+if [[ $(grep -qxF '^Discoverable ?=.*' /etc/bluetooth/main.conf) ]]; then
+	sudo -E sed -i -E 's/#?Discoverable ?=.*/Discoverable=true/' /etc/bluetooth/main.conf 
+else
+	sudo -E sed -i -E 's/\[General\]/[General\]\nDiscoverable=true/' /etc/bluetooth/main.conf
+fi
+ln -s /home/simonwjackson/.config/mozilla/firefox/default/user.js /home/simonwjackson/.mozilla/firefox/default/user.js
+ln -s /home/simonwjackson/.config/Xresources /home/simonwjackson/.Xresources
