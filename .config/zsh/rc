@@ -206,3 +206,5 @@ bottomline_vpn() {
 	#10.231.50.14/0
 	#10.11.13.93/0
 }
+
+export TERMINAL=kitty
