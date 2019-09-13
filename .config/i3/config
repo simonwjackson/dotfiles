@@ -32,12 +32,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
-
+bindsym $mod+Shift+Return exec kitty --class floatingApp
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
-#bindsym $mod+space exec --no-startup-id rofi -show run
 bindsym $mod+space exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 # launch categorized menu
@@ -136,30 +135,39 @@ bindsym $mod+Ctrl+l workspace prev
 #                 set $ws2 2:
 set $ws1 1:main
 set $ws2 2:web
-set $ws3 3:other
+set $ws3 3:tasks
+set $ws4 4:comm
+set $ws5 4:scratch
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
 
 # Move focused container to workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
 bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
 
 # Move to workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 
 # Open applications on specific workspaces
-assign [class="Firefox"] $ws2
+for_window [title="^todos$"] move to workspace $ws3
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
+for_window [class="floatingApp"] floating enable 
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
 for_window [class="Clipgrab"] floating enable
@@ -251,7 +259,7 @@ exec --no-startup-id clipit
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id fix_xcursor 
 
 bindsym $mod+9 exec --no-startup-id exec kitty --title "todos" sh -c 'nvim -c "TW +workflow and -someday or project:Analytics"'; 
 #: }}}
