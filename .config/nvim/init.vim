@@ -133,3 +133,10 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " Gist: {{{
 let g:gist_use_password_in_gitconfig = 1 
 " }}}
+
+" Splits: {{{
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+" }}}
