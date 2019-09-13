@@ -37,7 +37,8 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+space exec --no-startup-id rofi -show run
+#bindsym $mod+space exec --no-startup-id rofi -show run
+bindsym $mod+space exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
