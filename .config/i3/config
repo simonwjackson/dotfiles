@@ -252,6 +252,7 @@ exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 
+bindsym $mod+9 exec --no-startup-id exec kitty --title "todos" sh -c 'nvim -c "TW +workflow and -someday or project:Analytics"'; 
 #: }}}
 
 #: Colors {{{
