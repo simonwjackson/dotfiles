@@ -99,6 +99,11 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 "" Auto close if last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Close NERDTree on file open
+
+let NERDTreeQuitOnOpen=1
+
 " }}}
 
 " Ale {{{
