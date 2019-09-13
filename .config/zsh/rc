@@ -194,3 +194,15 @@ esac
 
 # NVM
 source /usr/share/nvm/init-nvm.sh
+
+# Bottomline VPN
+
+bottomline_vpn() {
+	user="simonwjackson"
+	server="goomba.mynetgear.com"
+	port="9999" 
+
+  sshuttle --dns --remote $user@$server:$port --exclude $server 0/0
+	#10.231.50.14/0
+	#10.11.13.93/0
+}
