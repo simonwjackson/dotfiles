@@ -112,6 +112,7 @@ let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '~'
 
 "" lint on save
+let g:ale_enabled = 1
 let g:ale_fix_on_save = 1 
 " }}}
 
