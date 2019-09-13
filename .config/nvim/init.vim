@@ -59,6 +59,7 @@ colorscheme shades_of_purple
 set clipboard+=unnamedplus
 
 " Custom UI {{{
+set ignorecase
 set tabstop=2
 set shiftwidth=2
 let mapleader=" " 
@@ -69,17 +70,17 @@ hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 " }}}
 
 " Folding {{{
-"syntax highlighting items specify folds
+" syntax highlighting items specify folds
 set foldmethod=syntax
 
-"defines 0 col at window left, to indicate folding
+" defines 0 col at window left, to indicate folding
 set foldcolumn=0
 
-"activate folding by JS syntax
-let javaScript_fold=1
+" activate folding by JS syntax
+" let javaScript_fold=1
 
-"start file with all folds opened
-set foldlevelstart=0
+" start file with all folds opened
+set foldlevelstart=999
 " }}}
 
 " GitGutter {{{
@@ -105,7 +106,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeQuitOnOpen=1
 
 " }}}
-
 " Ale {{{
 "" files
 let g:ale_fixers = {
@@ -118,7 +118,7 @@ let g:ale_sign_warning = '~'
 
 "" lint on save
 let g:ale_enabled = 1
-let g:ale_fix_on_save = 1 
+let g:ale_fix_on_save = 1
 " }}}
 
 " CtrlP: {{{
