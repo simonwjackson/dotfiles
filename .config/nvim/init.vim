@@ -15,6 +15,8 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " }}}
 
 " Plugins: Extras {{{ 
+Plug 'janko/vim-test'
+
 Plug 'scrooloose/nerdcommenter'
 
 " Gist:
@@ -140,6 +142,14 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+" }}}
+
+" Tests: {{{
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
 " }}}
 
 " Write to file even when it does not exist
