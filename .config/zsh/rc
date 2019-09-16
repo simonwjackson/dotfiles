@@ -204,4 +204,6 @@ export TERMINAL=kitty
 
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+alias vimsh="vi -c \"set nonumber | set noshowmode | set noruler | set laststatus=2 | set showcmd | startinsert | set syn=sh | set shortmess=F | terminal"\"
+
 export BROWSER='/usr/bin/firefox'
