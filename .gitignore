@@ -11,6 +11,7 @@
 !/.config/rofi/**
 !/.config/zsh/**
 !/.config/kitty/**
+!/.config/tridactyl/**
 !/.config/mozilla/firefox/default/chrome/**
 !/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
