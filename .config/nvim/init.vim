@@ -141,3 +141,16 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 " }}}
+
+" Write to file even when it does not exist
+function! s:WriteCreatingDirs()
+  let l:file=expand("%")
+  if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
+    let dir=fnamemodify(l:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
+    endif
+  endif
+  write
+endfunction
+command! W call s:WriteCreatingDirs()
