@@ -204,3 +204,4 @@ export TERMINAL=kitty
 
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
+export BROWSER='/usr/bin/firefox'
