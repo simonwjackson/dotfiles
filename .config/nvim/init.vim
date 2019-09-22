@@ -8,6 +8,7 @@ Plug 'Rigellute/shades-of-purple.vim'
 " }}}
 
 " Plugins: Syntax {{{
+Plug 'jxnblk/vim-mdx-js'
 Plug 'mboughaba/i3config.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -15,6 +16,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " }}}
 
 " Plugins: Extras {{{ 
+  
 Plug 'janko/vim-test'
 
 Plug 'scrooloose/nerdcommenter'
