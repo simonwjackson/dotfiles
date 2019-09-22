@@ -66,7 +66,7 @@ set ignorecase
 set tabstop=2
 set shiftwidth=2
 let mapleader=" " 
-set number
+set number relativenumber
 
 """" Hide tildas
 hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
