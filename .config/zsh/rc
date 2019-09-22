@@ -205,4 +205,18 @@ alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
 alias vimsh="vi -c \"set nonumber | set noshowmode | set noruler | set laststatus=2 | set showcmd | startinsert | set syn=sh | set shortmess=F | terminal"\"
 
+alias inbox="vim -c 'set title titlestring=Inbox | TW -PROJECT -TAGGED'" 
+alias active="vim -c 'set title titlestring=Active | TW +PROJECT +UNBLOCKED project.not:someday'"
+alias someday="vim -c 'set title titlestring=Someday | TW proj:someday'"
+alias workflow="vim -c 'set title titlestring=Workflow | TW project.not:someday project:workflow +UNBLOCKED'"
+alias accomplished="vim -c 'set title titlestring=Accomplished | TW end.after:today completed'"
+alias review="vim -c 'set title titlestring=Review | TW end.after:today-1wk completed'"
+
+function next () {
+	echo $(for i in $(task project.not:someday _projects); do task project:"${i}" +UNBLOCKED _ids \
+		| head -n 1; done) \
+		| paste -d , -s \
+		| xargs -I % sh -c "nvim -c 'set title titlestring=Next | TW % list'" 
+	}
+
 export BROWSER='/usr/bin/firefox'
