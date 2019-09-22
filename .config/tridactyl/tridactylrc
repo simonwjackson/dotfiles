@@ -8,5 +8,17 @@ sanitise tridactyllocal tridactylsync
 " Hide mode
 set modeindicator false
 
-" color
+" Color: {{{
 colorscheme dark
+" }}}
+
+" Keybindings: {{{
+unbind --mode=normal d
+bind --mode=normal h back
+bind --mode=normal l forward
+bind --mode=normal d tabdetach
+
+bind --mode=normal b fillcmdline taball
+bind --mode=normal B fillcmdline tab
+" }}}
+
