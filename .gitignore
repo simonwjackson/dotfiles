@@ -8,6 +8,7 @@
 # Config files
 
 !/.config/i3**
+!/.config/sway/**
 !/.config/rofi/**
 !/.config/zsh/**
 !/.config/kitty/**
@@ -23,8 +24,6 @@
 !/.config/mailcap
 !/.config/nvim/**.vim
 
-# Apps
-
 !/.config/packages.*
 
 # Local scripts
@@ -33,5 +32,7 @@
 /bin/**/*.txt
 
 # Explicitly ignore these dirs
-.local/**
 storage/**
+
+# Apps
+!/.local/share/applications/firefox.desktop
