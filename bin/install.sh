@@ -1,2 +1,2 @@
-pamac install --no-confirm $(cat ./.config/packages.install)
-pamac build --no-confirm $(cat ./.config/packages.install.aur)
+pamac install --no-confirm $(cat ${HOME}/.config/packages.install)
+pamac build --no-confirm $(cat ${HOME}/.config/packages.install.aur)
