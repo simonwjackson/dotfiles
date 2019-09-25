@@ -220,3 +220,4 @@ function next () {
 	}
 
 export BROWSER='/usr/bin/firefox'
+alias installed="comm -23 <(pacman -Qqt | sort) <(pacman -Sqg base base-devel | sort)"
