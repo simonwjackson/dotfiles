@@ -184,6 +184,8 @@ case $(basename "$(cat "/proc/$PPID/comm")") in
     ;;
 esac
 
+source ${HOME}/.config/zsh/functions/**
+
 # NVM
 source /usr/share/nvm/init-nvm.sh
 
