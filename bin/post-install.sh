@@ -93,3 +93,8 @@ fi
 
 ln -s /home/simonwjackson/.config/mozilla/firefox/default/user.js /home/simonwjackson/.mozilla/firefox/default/user.js
 ln -s /home/simonwjackson/.config/Xresources /home/simonwjackson/.Xresources
+
+# Enable SSH
+systemctl enable sshd
+systemctl start sshd
+
