@@ -8,6 +8,9 @@ sanitise tridactyllocal tridactylsync
 " Hide mode
 set modeindicator false
 
+" Set terminal
+set editorcmd kitty --class floatingAppFocus vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | startinsert | imap <ENTER> <ESC>:x<ENTER> | map <ENTER> :x<ENTER> | nmap <ESC> :q!<ENTER>" %f
+
 " Color: {{{
 colorscheme dark
 " }}}
