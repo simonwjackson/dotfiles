@@ -13,3 +13,5 @@ alias gitup='gitall && git push'
 
 # mpv
 alias mpvfill='mpv --panscan=1 --'
+
+alias prune_node_modules="find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
