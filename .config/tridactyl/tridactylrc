@@ -14,13 +14,17 @@ colorscheme dark
 
 " Keybindings: {{{
 unbind --mode=normal d
+unbind --mode=normal B
+
 bind --mode=normal h back
 bind --mode=normal l forward
-bind --mode=normal d tabdetach
 
 bind --mode=normal b fillcmdline taball
-bind --mode=normal B fillcmdline tab
-" }}}
+
+bind --mode=normal t fillcmdline winopen
+bind --mode=normal T current_url winopen
+
+
 
 " Config dump
 " {
