@@ -57,7 +57,7 @@ call plug#end()
 set termguicolors
 
 syntax enable
-colorscheme shades_of_purple
+silent! colorscheme shades_of_purple
 " }}}
 
 " Share clipboard
@@ -71,7 +71,7 @@ let mapleader=" "
 set number relativenumber
 
 """" Hide tildas
-hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 " }}}
 
 " Folding {{{
