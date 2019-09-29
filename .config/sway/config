@@ -148,10 +148,10 @@ bindsym $gui+e layout toggle split
 bindsym $gui+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-# bindsym $gui+Shift+space floating toggle
+bindsym $gui+Shift+space floating toggle
 
 # Swap focus between the tiling area and the floating area
-# bindsym $gui+space focus mode_toggle
+bindsym $gui+space focus mode_toggle
 
 # Move focus to the parent container
 bindsym $gui+a focus parent
@@ -293,10 +293,7 @@ bindsym $gui+d floating toggle
 bindsym $gui+Shift+d focus mode_toggle
 
 # toggle sticky
-# bindsym $gui+Shift+s sticky toggle
-
-## focus the parent container
-#bindsym $gui+a focus parent
+bindsym $gui+Shift+s sticky toggle
 
 #navigate workspaces next / previous
 bindsym $gui+Ctrl+h workspace prev
