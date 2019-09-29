@@ -14,6 +14,11 @@ set $down j
 set $up k
 set $right l
 
+# Shades of purple colors
+client.focused          #2e2a58 #2e2a58 #c8bff3 #2e2a58   #2e2a58
+client.focused_inactive          #1e1e3f #1e1e3f #c8bff3 #1e1e3f   #1e1e3f
+client.unfocused          #1e1e3f #1e1e3f #c8bff3 #1e1e3f   #1e1e3f
+
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border none
 # new_window pixel 1
@@ -195,8 +200,8 @@ bar {
 
     colors {
         statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        background #2e2a58
+        inactive_workspace #c8bff3 #c8bff3 #5c5c5c
     }
 }
 
