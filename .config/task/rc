@@ -12,9 +12,9 @@ include /usr/share/doc/task/rc/dark-gray-256.theme
 
 # Sync
 taskd.server=freecinc.com:53589
-taskd.key=\/home\/simonwjackson\/.task\/freecinc_133e689d.key.pem
-taskd.certificate=\/home\/simonwjackson\/.task\/freecinc_133e689d.cert.pem
-taskd.ca=\/home\/simonwjackson\/.task\/freecinc_133e689d.ca.pem
+taskd.key=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.key.pem
+taskd.certificate=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.cert.pem
+taskd.ca=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.ca.pem
 taskd.credentials=FreeCinc\/freecinc_133e689d\/e20a8186-0833-4185-a046-dc5bc35a51c3
 
 # Reports
@@ -23,4 +23,5 @@ report.latest.description=last 10 entries
 report.latest.columns=id,description.count
 report.latest.sort=id-
 report.latest.filter=limit:10 +UNBLOCKED
+
 default.command=latest

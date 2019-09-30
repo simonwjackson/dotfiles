@@ -1,5 +1,5 @@
 MAC="CC:98:8B:93:2A:1F"
-AUTOREMOTE_KEY=$(cat $HOME/bin/ar-key.txt)
+AUTOREMOTE_KEY=$(cat $HOME/.keys/autoremote)
 
 if [[ $(pacmd list-sinks | grep $MAC) ]]; then
 	echo -e "disconnect $MAC" | bluetoothctl
