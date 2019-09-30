@@ -1,0 +1,11 @@
+[Unit] 
+Description=bugwarrior-pull 
+
+[Service] 
+Environment="DISPLAY=:0"
+EnvironmentFile=%h/.keys/bitwarden.env
+ExecStart=/usr/bin/bugwarrior-pull 
+Type=oneshot
+
+[Install] 
+WantedBy=default.target 

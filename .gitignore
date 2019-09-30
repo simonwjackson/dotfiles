@@ -8,6 +8,8 @@
 # Config files
 
 !/.config/i3**
+!/.config/systemd/*.service
+!/.config/systemd/*.timer
 !/.config/sway/**
 !/.config/rofi/**
 !/.config/zsh/**
