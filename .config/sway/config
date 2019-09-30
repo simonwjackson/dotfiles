@@ -44,7 +44,6 @@ output * bg #2e2a58 solid_color
 output DP-6 position 0,0
 
 # Laptop screen
-# output eDP-1 scale 2 transform 270 position 1920,0
 output eDP-1 scale 3 transform 270 position 1920,0
 # output eDP-1 scale 2 transform 0 position 1920,0
 
@@ -216,46 +215,11 @@ gaps outer 0
 smart_gaps on
 smart_borders on
 
-# Press $gui+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces. 
-
-set $guie_gaps Gaps: (o) outer, (i) inner
-set $guie_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $guie_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-
-bindsym $gui+Shift+g mode "$guie_gaps"
-
-mode "$guie_gaps" {
-	bindsym o      mode "$guie_gaps_outer"
-	bindsym i      mode "$guie_gaps_inner"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}                                                                                                 
-
-mode "$guie_gaps_inner" {
-	bindsym plus  gaps inner current plus 5
-	bindsym minus gaps inner current minus 5
-	bindsym 0     gaps inner current set 0
-
-	bindsym Shift+plus  gaps inner all plus 5
-	bindsym Shift+minus gaps inner all minus 5
-	bindsym Shift+0     gaps inner all set 0
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-mode "$guie_gaps_outer" {
-  bindsym plus  gaps outer current plus 5
-	bindsym minus gaps outer current minus 5
-	bindsym 0     gaps outer current set 0
-
-	bindsym Shift+plus  gaps outer all plus 5
-	bindsym Shift+minus gaps outer all minus 5
-	bindsym Shift+0     gaps outer all set 0
-
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-} 
+bindsym $gui+z					gaps outer current plus 5
+bindsym $gui+Shift+z		gaps outer current minus 5
+bindsym $gui+s					gaps inner current plus 5
+bindsym $gui+Shift+s		gaps inner current minus 5
+bindsym $gui+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 # set default desktop layout (default is tiling)
 workspace_layout default 
@@ -288,14 +252,11 @@ bindsym $gui+q split toggle
 # toggle fullscreen mode for the focused container
 #bindsym $gui+f fullscreen toggle
 
-# toggle tiling / floating
-bindsym $gui+d floating toggle
-
-# change focus between tiling / floating windows
-bindsym $gui+Shift+d focus mode_toggle
-
 # toggle sticky
-bindsym $gui+Shift+s sticky toggle
+# bindsym $gui+Shift+s sticky toggle
+# bindsym $gui+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left 
+# bindsym $gui+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
+
 
 #navigate workspaces next / previous
 bindsym $gui+Ctrl+h workspace prev
@@ -305,8 +266,6 @@ bindsym $gui+Ctrl+k workspace next
 
 # Move entire workspace to another screen
 bindsym $gui+Shift+Ctrl+h move workspace to output left
-bindsym $gui+Shift+Ctrl+j move workspace to output left
-bindsym $gui+Shift+Ctrl+k move workspace to output right
 bindsym $gui+Shift+Ctrl+l move workspace to output right
 
 ## Open applications on specific workspaces
