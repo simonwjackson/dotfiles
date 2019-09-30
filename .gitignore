@@ -10,6 +10,7 @@
 !/.config/i3**
 !/.config/systemd/*.service
 !/.config/systemd/*.timer
+!/.config/packages/**
 !/.config/sway/**
 !/.config/rofi/**
 !/.config/zsh/**
@@ -25,9 +26,6 @@
 /.config/mutt/passwords
 !/.config/mailcap
 !/.config/nvim/**.vim
-
-!/.config/packages.*
-!/.config/addons.firefox
 
 # Local scripts
 
