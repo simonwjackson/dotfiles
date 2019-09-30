@@ -33,8 +33,8 @@ bindsym $gui+Return exec $term
 
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu rofi | xargs swaymsg exec --
-bindsym $gui+space exec --no-startup-id "rofi -show drun -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"   
+# set $menu rofi | xargs swaymsg exec --
+# bindsym $gui+space exec --no-startup-id "rofi -show drun -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"   
 
 ### Output configuration
 
@@ -46,6 +46,7 @@ output DP-6 position 0,0
 # Laptop screen
 # output eDP-1 scale 2 transform 270 position 1920,0
 output eDP-1 scale 3 transform 270 position 1920,0
+# output eDP-1 scale 2 transform 0 position 1920,0
 
 # Right Screen
 output DP-5 position 2720,0
@@ -155,6 +156,7 @@ bindsym $gui+space focus mode_toggle
 
 # Move focus to the parent container
 bindsym $gui+a focus parent
+
 #
 # Scratchpad:
 #
