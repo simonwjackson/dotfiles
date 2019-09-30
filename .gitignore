@@ -27,6 +27,7 @@
 !/.config/nvim/**.vim
 
 !/.config/packages.*
+!/.config/addons.firefox
 
 # Local scripts
 
