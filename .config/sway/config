@@ -216,7 +216,7 @@ bar {
 # Gaps
 
 gaps inner 10
-gaps outer 0
+gaps outer -10
 smart_gaps on
 smart_borders on
 
@@ -224,6 +224,7 @@ bindsym $gui+z					gaps outer current plus 5
 bindsym $gui+Shift+z		gaps outer current minus 5
 bindsym $gui+s					gaps inner current plus 5
 bindsym $gui+Shift+s		gaps inner current minus 5
+bindsym $gui+d					gaps inner current set 10; gaps outer current set -10
 bindsym $gui+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 # set default desktop layout (default is tiling)
