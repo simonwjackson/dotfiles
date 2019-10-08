@@ -205,18 +205,13 @@ export TERMINAL=kitty
 
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
-alias vimsh="vi -c \"set nonumber | set noshowmode | set noruler | set laststatus=2 | set showcmd | startinsert | set syn=sh | set shortmess=F | terminal"\"
 
-
-alias taw="task add project:workflow"
-
-alias inbox="vim -c 'set title titlestring=Inbox | TW -PROJECT -TAGGED'" 
-alias active="vim -c 'set title titlestring=Active | TW +PROJECT +UNBLOCKED project.not:someday'"
-alias someday="vim -c 'set title titlestring=Someday | TW proj:someday'"
-alias workflow="vim -c 'set title titlestring=Workflow | TW project.not:someday project:workflow +UNBLOCKED'"
-alias work="vim -c 'set title titlestring=Bottomline | TW +bottomline +UNBLOCKED'"
-alias accomplished="vim -c 'set title titlestring=Accomplished | TW end.after:today completed'"
-alias review="vim -c 'set title titlestring=Review | TW end.after:today-1wk completed'"
+bigsync () {
+	echo "BW_SESSION=$(bw unlock --raw)" >! ${HOME}/.keys/bitwarden.env \
+		&& export $(cat ~/.keys/bitwarden.env) \
+		&& bugwarrior-pull \
+		&& task sync
+}
 
 function next () {
 	echo $(for i in $(task project.not:someday _projects); do task project:"${i}" +UNBLOCKED _ids \
@@ -229,6 +224,10 @@ export BROWSER='/usr/bin/firefox'
 alias installed="comm -23 <(pacman -Qqt | sort) <(pacman -Sqg base base-devel | sort)"
 alias firefox="MOZ_ENABLE_WAYLAND=1 firefox"
 
+# Unlock vault
+export $(cat ~/.keys/bitwarden.env) 
+
 if [ "$(tty)" = "/dev/tty1" ]; then 
 	exec sway
 fi
+
