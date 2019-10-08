@@ -178,43 +178,43 @@ bindsym $gui+minus scratchpad show
 
 #
 # Resizing containers:
-bindsym $gui+Shift+y			resize shrink width 10px
+bindsym $gui+Shift+y				resize shrink width 10px
 bindsym $gui+Shift+Ctrl+y		resize shrink width 100px
-bindsym $gui+Shift+u			resize grow height 10px
+bindsym $gui+Shift+u			  resize grow height 10px
 bindsym $gui+Shift+Ctrl+u		resize grow height 100px
-bindsym $gui+Shift+i			resize shrink height 10px
+bindsym $gui+Shift+i				resize shrink height 10px
 bindsym $gui+Shift+Ctrl+i		resize shrink height 100px
-bindsym $gui+Shift+o			resize grow width 10px
+bindsym $gui+Shift+o				resize grow width 10px
 bindsym $gui+Shift+Ctrl+o		resize grow width 100px
 
 
 
 mode "GTD" {
-		bindsym a exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
-		bindsym $gui+a exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
-		bindsym s exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
-		bindsym $gui+s exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
-		bindsym d exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
-		bindsym $gui+d exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
-		bindsym x exec "timew stop", mode default
-		bindsym $gui+x exec "timew stop", mode default
+	bindsym a 			exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
+	bindsym $gui+a 	exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
+	bindsym s 			exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
+	bindsym $gui+s 	exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
+	bindsym d 			exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
+	bindsym $gui+d 	exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
+	bindsym x 			exec "timew stop", mode default
+	bindsym $gui+x 	exec "timew stop", mode default
 
-    # Return to default mode
-    bindsym Escape mode "default"
+	# Return to default mode
+	bindsym Escape mode "default"
 }
 
 bindsym $gui+g mode "GTD"
 
 mode "apps" {
-		bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
-		bindsym $gui+f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
+	bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
+	bindsym $gui+f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
 
-		bindsym s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
-		bindsym $gui+s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+	bindsym s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+	bindsym $gui+s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	# Return to default mode
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $gui+o mode "apps"
@@ -223,18 +223,29 @@ bindsym $gui+o mode "apps"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+set $light_text #999999
+set $dark_text #444444
+set $dark_bg #000000
+
 bar {
     position top
-		mode hide
+		#mode hide
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
+    # status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
+		status_command i3blocks
+		separator_symbol "·"
 
     colors {
-        statusline #ffffff
-        background #2e2a58
-        inactive_workspace #c8bff3 #c8bff3 #5c5c5c
+		separator #333333
+        statusline $dark_text
+        background $dark_bg
+		# type					border	 	bg		text
+        urgent_workspace	 	#ff0000		$dark_bg  $light_text
+        active_workspace	 	$dark_bg	$dark_bg  $light_text
+        inactive_workspace		$dark_bg	$dark_bg  $dark_text
+        focused_workspace		$dark_bg	$dark_bg  $light_text
     }
 }
 
