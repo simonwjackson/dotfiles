@@ -19,11 +19,16 @@ client.focused          #2e2a58 #2e2a58 #c8bff3 #2e2a58   #2e2a58
 client.focused_inactive          #1e1e3f #1e1e3f #c8bff3 #1e1e3f   #1e1e3f
 client.unfocused          #1e1e3f #1e1e3f #c8bff3 #1e1e3f   #1e1e3f
 
+for_window [app_id="fzf-menu"] floating enable, focus, resize set 640 480, border none
+
+# Colors									border	bg			text		indicator child_border
+client.focused          	#21242D #21242D #d7d7d7 #21242D   #21242D
+client.focused_inactive   #21242D #21242D #d7d7d7 #21242D   #21242D
+client.unfocused          #000000 #000000 #d7d7d7 #000000   #000000
+client.placeholder        #000000 #000000 #d7d7d7 #000000   #000000
+
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border none
-# new_window pixel 1
-# new_window none
-# new_float normal
 
 # Your preferred terminal emulator
 set $term kitty 
@@ -38,7 +43,7 @@ bindsym $gui+Return exec $term
 
 ### Output configuration
 
-output * bg #2e2a58 solid_color
+output * bg #000000 solid_color
 
 # Left screen
 output DP-6 position 0,0

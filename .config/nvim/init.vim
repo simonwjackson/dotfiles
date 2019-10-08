@@ -5,6 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugins: Themes {{{
 Plug 'Rigellute/shades-of-purple.vim'
+Plug 'flrnprz/plastic.vim'
 " }}}
 
 " Plugins: Syntax {{{
@@ -57,7 +58,16 @@ call plug#end()
 set termguicolors
 
 syntax enable
-silent! colorscheme shades_of_purple
+
+" Theme: Dark {{{
+set background=dark
+silent! colorscheme plastic
+hi VertSplit guibg=bg guifg=black
+hi StatusLine guibg=bg guifg=#888888
+hi StatusLineNC guibg=bg guifg=#555555
+hi foldColumn guibg=bg
+""" Hide tildas
+silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 " }}}
 
 " Share clipboard
