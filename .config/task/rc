@@ -24,5 +24,9 @@ report.latest.columns=id,description.count
 report.latest.sort=id-
 report.latest.filter=limit:10 +UNBLOCKED
 
+uda.processed.label=Processed
+uda.processed.type=string
+uda.processed.values=I,
+
 uda.est.label=EST
 uda.est.type=numeric
