@@ -16,7 +16,10 @@ source $(setup_dir)/nvm.sh
 
 # task warrior 
 rm ${HOME}/.taskrc
-ln -s .config/task/rc ${HOME}/.taskrc
+ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
+
+# VIT
+ln -s ${HOME}/.config/vit ${HOME}/.vit
 
 # Mutt
 rm ${HOME}/.mailcap
