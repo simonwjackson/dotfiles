@@ -19,15 +19,12 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 " Plugins: Extras {{{ 
   
 Plug 'janko/vim-test'
-
+Plug 'tpope/vim-fugitive' 
 Plug 'scrooloose/nerdcommenter'
 
 " Gist:
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-
-" TaskWarrior:
-Plug 'blindFS/vim-taskwarrior'
 
 " GraphQL:
 Plug 'jparise/vim-graphql'
@@ -56,7 +53,6 @@ call plug#end()
 " Theme {{{
 """" enable 24bit true color
 set termguicolors
-
 syntax enable
 
 " Theme: Dark {{{
