@@ -78,11 +78,7 @@ set ignorecase
 set tabstop=2
 set shiftwidth=2
 let mapleader=" " 
-set number relativenumber
-
-"""" Hide tildas
-silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-" }}}
+set nonumber 
 
 " Folding {{{
 " syntax highlighting items specify folds
