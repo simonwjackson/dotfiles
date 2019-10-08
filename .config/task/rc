@@ -8,7 +8,7 @@
 data.location=~/.local/share/task
 
 # Color theme
-include /usr/share/doc/task/rc/dark-gray-256.theme
+include /usr/share/doc/task/rc/no-color.theme
 
 # Sync
 taskd.server=freecinc.com:53589
