@@ -136,3 +136,30 @@ uda.processed.values=I,
 
 uda.est.label=EST
 uda.est.type=numeric
+
+# Urgency
+urgency.due.coefficient=15.0 # overdue or near due date
+urgency.user.tag.next.coefficient=12.0 # +next tag
+urgency.user.tag.bottomline.coefficient=6.0
+urgency.user.tag.mosquito.coefficient=6 # medium priority
+urgency.uda.priority.H.coefficient=6.0 # high priority
+urgency.user.project.workflow.coefficient=5.0
+urgency.user.project.workflow.xps.coefficient=8.0
+urgency.scheduled.coefficient=5.0 # scheduled tasks
+urgency.user.tag.solitude.coefficient=4.0
+urgency.active.coefficient=4.0 # already started tasks
+urgency.user.tag.hobby.coefficient=2.0
+urgency.age.coefficient=2.0 # coefficient for age
+urgency.annotations.coefficient=1.0 # has annotations
+urgency.uda.priority.M.coefficient=0 # medium priority
+urgency.tags.coefficient=0 # has tags, 1
+urgency.project.coefficient=0 # assigned to any project, 1
+urgency.blocking.coefficient=0 # blocking other tasks, 8
+urgency.user.tag.aesthetic.coefficient=-5.0 # +next tag
+urgency.user.tag.fun.coefficient=-5.0 # +next tag
+urgency.user.tag.try.coefficient=-5.0 # +next tag 
+urgency.user.tag.someday.coefficient=-5.0 # +next tag 
+urgency.uda.priority.L.coefficient=-5 # low priority, 1.8
+urgency.waiting.coefficient=-10.0 # waiting task
+urgency.blocked.coefficient=-15.0 # blocked by other tasks
+
