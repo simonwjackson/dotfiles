@@ -9,6 +9,7 @@
 
 !/.config/i3**
 !/.config/vit/**
+!/.config/bugwarrior/**
 !/.config/systemd/*.service
 !/.config/systemd/*.timer
 !/.config/packages/**
