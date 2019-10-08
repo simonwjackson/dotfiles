@@ -166,3 +166,8 @@ function! s:WriteCreatingDirs()
   write
 endfunction
 command! W call s:WriteCreatingDirs()
+
+" Update term title but restore old title after leaving Vim 
+set title 
+set titleold=
+
