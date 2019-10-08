@@ -1,4 +1,6 @@
 bitwarden-cli
+bluez
+bluez-utils
 brillo
 bugwarrior
 chromium
@@ -24,6 +26,5 @@ task
 tmux
 unzip
 vim-plug
-youtube-dl
-bugwarrior
 vit
+youtube-dl
