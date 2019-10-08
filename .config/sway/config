@@ -209,6 +209,9 @@ mode "apps" {
 		bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
 		bindsym $gui+f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
 
+		bindsym s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+		bindsym $gui+s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -332,10 +335,6 @@ for_window [app_id="Xfburn"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
-# Override firefox keybindings
-# TODO: Find `xdotool` wayland replacement
-#bindsym --release Ctrl+n [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Tab
-#bindsym --release Ctrl+p [class="firefox"] exec --no-startup-id xdotool key --clearmodifiers Shift_L+Tab
 
 # Headphones toggle
 bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
