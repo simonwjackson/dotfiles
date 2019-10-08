@@ -5,7 +5,7 @@
 # Logo key. Use Mod1 for Alt.
 set $gui Mod1
 set $alt Mod4
-set $hyper Mod4+Mod1+Ctrl+Shift
+set $hyper $gui+$alt+Ctrl+Shift
 set $meh $alt+Shift+Ctrl
 
 # Home row direction keys, like vim
