@@ -9,7 +9,7 @@ sanitise tridactyllocal tridactylsync
 set modeindicator false
 
 " Set terminal
-set editorcmd kitty --class floatingAppFocus vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | startinsert | imap <ENTER> <ESC>:x<ENTER> | map <ENTER> :x<ENTER> | nmap <ESC> :q!<ENTER>" %f
+set editorcmd kitty --class floatingAppFocus vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | startinsert! | imap <ENTER> <ESC>:x<ENTER> | map <ENTER> :x<ENTER> | nmap <ESC> :q!<ENTER>" %f
 
 " Color: {{{
 colorscheme dark
@@ -21,6 +21,8 @@ unbind --mode=normal B
 
 bind --mode=normal h back
 bind --mode=normal l forward
+
+bind --mode=normal B fillcmdline bmarks
 
 bind --mode=normal b fillcmdline taball
 
