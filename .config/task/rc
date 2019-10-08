@@ -24,6 +24,10 @@ report.latest.columns=id,description.count
 report.latest.sort=id-
 report.latest.filter=limit:10 +UNBLOCKED
 
+uda.priority.label=Priority
+uda.priority.type=string
+uda.priority.values=H,M,,L
+
 uda.processed.label=Processed
 uda.processed.type=string
 uda.processed.values=I,
