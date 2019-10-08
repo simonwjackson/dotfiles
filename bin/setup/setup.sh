@@ -32,3 +32,6 @@ source $(setup_dir)/bluetooth.sh
 source $(setup_dir)/services.sh 
 source $(setup_dir)/pip.sh 
 source $(setup_dir)/backlight.sh
+
+# time sync
+timedatectl set-ntp true 
