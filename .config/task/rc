@@ -24,4 +24,5 @@ report.latest.columns=id,description.count
 report.latest.sort=id-
 report.latest.filter=limit:10 +UNBLOCKED
 
-default.command=latest
+uda.est.label=EST
+uda.est.type=numeric
