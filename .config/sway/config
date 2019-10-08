@@ -187,6 +187,21 @@ bindsym $gui+Shift+Ctrl+o		resize grow width 100px
 
 
 
+mode "GTD" {
+		bindsym a exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
+		bindsym $gui+a exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
+		bindsym s exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
+		bindsym $gui+s exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
+		bindsym d exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
+		bindsym $gui+d exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
+		bindsym x exec "timew stop", mode default
+		bindsym $gui+x exec "timew stop", mode default
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+
+bindsym $gui+g mode "GTD"
 
 mode "apps" {
 		bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
@@ -323,14 +338,16 @@ for_window [urgent=latest] focus
 # Headphones toggle
 bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
 
-# Taskwarrior: add
-bindsym Ctrl+space exec $HOME/bin/taskwarrior/add.sh
-# bindsym Ctrl+space exec kitty -- zsh -c "read 'TASK?Task > '; echo $TASK; read simon"
 
-#: Startup {{{
+# Startup: {{{
+
 # Firefox -> MPV server
 # TODO: Setup FF2MPV as system daemon
 exec --no-startup-id $HOME/bin/ff2mpv.py
+
+# GTD
+exec tmuxinator start -p $HOME/.config/tmuxinator/focus.yml && "$HOME/bin/gtd.sh"
+exec --no-startup-id kitty --class "GTD" --title "Routine" tmux -L focus new-session -t focus \; select-window -t 0 \; & 
 #: }}} 
 
 # Fuzzy finder example
