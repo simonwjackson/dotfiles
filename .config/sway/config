@@ -329,3 +329,12 @@ bindsym Ctrl+space exec $HOME/bin/taskwarrior/add.sh
 # TODO: Setup FF2MPV as system daemon
 exec --no-startup-id $HOME/bin/ff2mpv.py
 #: }}} 
+
+# Fuzzy finder example
+# bindsym $gui+Shift+Ctrl+space exec kitty -- zsh -c "fzf --layout=reverse | xargs -r swaymsg -t command exec"
+
+# Toggle monitors
+# swaymsg output DP-[5|6] [on|off] 
+
+# Hide cursor when idle
+seat * hide_cursor 3000  
