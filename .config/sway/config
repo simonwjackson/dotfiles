@@ -63,6 +63,10 @@ output DP-5 position 2880,0
 exec swayidle -w timeout 180 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 
 ### Input configuration
+input "1133:45849:Logitech_K810_Keyboard" {
+	xkb_options caps:escape
+}
+
 input "1241:323:MD600_RGB" {
 	xkb_options caps:escape
 }
