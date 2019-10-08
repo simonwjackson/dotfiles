@@ -1,0 +1,18 @@
+[task]
+command=if [[ $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') == "There is no active time tracking." ]]; then echo "<span foreground=\"red\">░▒▓ ╳ NOT TRACKING TIME ╳ ▓▒░</span>"; else echo "<span>Task:</span> <span foreground=\"#d7d7d7\"> $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') </span>"; fi
+markup=pango
+interval=1
+
+[wifi]
+command=nmcli d wifi | grep "^\*" | grep -v "\*.*SSID" | awk '{ print $8 }' | sed 's/$/%/'
+interval=30
+
+[battery]
+interval=120
+command=zsh -c "source ${HOME}/.config/zsh/functions/battery/percent.sh && get_battery_combined_percent" | sed 's/$/%/'
+
+[time]
+command=date +'%l:%M'
+interval=15
+
+

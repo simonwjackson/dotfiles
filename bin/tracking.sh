@@ -1,0 +1,1 @@
+if [[ $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') == "There is no active time tracking." ]]; then echo "░▒▓ ╳ NOT TRACKING TIME ╳ ▓▒░"; else echo "Task: $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/')"; fi
