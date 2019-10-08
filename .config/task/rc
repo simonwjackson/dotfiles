@@ -20,10 +20,87 @@ taskd.credentials=FreeCinc\/freecinc_133e689d\/e20a8186-0833-4185-a046-dc5bc35a5
 # Reports
 ## Latest (last 10)
 report.latest.description=last 10 entries
-report.latest.columns=id,description.count
+report.latest.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.latest.labels=ID,U,P,Tags,Project,Description,URL,URL
 report.latest.sort=id-
 report.latest.filter=limit:10 +UNBLOCKED
 
+## To estimate
+report.est.description=Estimate
+report.est.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.est.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.est.sort=entry- 
+report.est.filter=(est.none:) and -COMPLETED and -DELETED
+
+## Mosquito
+report.mosquito.description=Mosquito
+report.mosquito.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.mosquito.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.mosquito.sort=urgency-
+report.mosquito.filter=(+shopping or +mosquito or +errrand) -COMPLETED -DELETED -next
+
+## Routine
+report.routine.description=Routine
+report.routine.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.routine.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.routine.sort=entry- 
+report.routine.filter=status.not:Recurring proj:routine +DUETODAY -COMPLETED -DELETED -next -WAITING
+
+## Inbox
+report.inbox.description=Inbox
+report.inbox.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.inbox.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.inbox.sort=entry- 
+report.inbox.filter=project.not:routine and processed.not:I and -COMPLETED and -DELETED and -WAITING
+
+## Active
+#report.active.description=Active
+#report.active.columns=id,urgency,priority,tags,project,description,url,jiraurl
+#report.active.labels=ID,U,P,Tags,Project,Description,URL,URL
+#report.active.sort=entry- 
+#report.active.filter=+PROJECT +UNBLOCKED project.not:someday -someday -COMPLETED -DELETED -next
+
+## Someday
+report.someday.description=Someday
+report.someday.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.someday.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.someday.sort=entry- 
+report.someday.filter=proj:someday or +someday -COMPLETED and -DELETED -next
+
+## XMAS
+report.xmas.description=XMAS
+report.xmas.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.xmas.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.xmas.sort=entry- 
+report.xmas.filter=(project:xmas or +xmas) +UNBLOCKED -COMPLETED -DELETED -next
+
+## Focus
+report.focus.description=Focus
+report.focus.columns=id,est,urgency,priority,tags,project,description,url,jiraurl
+report.focus.labels=ID,E,U,P,Tags,Project,Description,URL,URL
+report.focus.sort=urgency- 
+report.focus.filter=(+next or (due:today and project.not:routine)) -COMPLETED -DELETED -BLOCKED
+
+## Workflow
+report.workflow.description=Workflow
+report.workflow.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.workflow.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.workflow.sort=urgency-
+report.workflow.filter=project.not:someday project:workflow -someday +UNBLOCKED -COMPLETED -DELETED -next
+
+## Bottomline
+report.bottomline.description=Bottomline
+report.bottomline.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.bottomline.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.bottomline.sort=urgency-,project-,created+
+report.bottomline.filter=(+bottomline or project:bottomline) +UNBLOCKED -someday -hide -COMPLETED -DELETED -next
+
+## Other
+report.other.description=Other
+report.other.columns=id,urgency,priority,tags,project,description,url,jiraurl
+report.other.labels=ID,U,P,Tags,Project,Description,URL,URL
+report.other.sort=urgency-,project-,created+
+report.other.filter=proj.not:routine proj.not:workflow project.not:xmas -bottomline proj.not:someday -hide -COMPLETED -DELETED +UNBLOCKED -next
 
 # URL UDA
 uda.url.type=string
