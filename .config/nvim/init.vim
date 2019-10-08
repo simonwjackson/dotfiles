@@ -139,6 +139,31 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 let g:gist_use_password_in_gitconfig = 1 
 " }}}
 
+" NERDCommenter: {{{
+let g:task_rc_override = 'rc.defaultwidth=0 rc.report.next.sort=project-,tags- rc.report.next.columns=id,priority,tags,project,description,url,jiraurl rc.report.next.labels=ID,P,Tags,Proj,Desc,URL,URL'
+" }}}
+" Add spaces after comment delimiters by default
+
+" NERDCommenter: {{{
+" Add spaces after comment delimiters by default 
+let g:NERDSpaceDelims = 1 
+
+" Use compact syntax for prettified multi-line comments 
+let g:NERDCompactSexyComs = 1 
+
+" Align line-wise comment delimiters flush left instead of following code indentation 
+let g:NERDDefaultAlign = 'left' 
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1 
+
+" Enable trimming of trailing whitespace when uncommenting 
+let g:NERDTrimTrailingWhitespace = 1 
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+" }}}
+
 " Splits: {{{
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
