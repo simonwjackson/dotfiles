@@ -3,7 +3,7 @@
 # section below determining their properties, how to query them, etc.  The name 
 # is just a symbol, and doesn't have any functional importance.
 
-targets = bottomline
+targets = simonwjackson,bottomline
 
 # Setting this to true will shorten links with http://da.gd/ 
 # shorten = True 
