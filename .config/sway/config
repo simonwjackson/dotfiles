@@ -3,10 +3,11 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $gui Mod1
-set $alt Mod4
-set $hyper $gui+$alt+Ctrl+Shift
-set $meh $alt+Shift+Ctrl
+set $gui		Mod1
+set $alt 		Mod4
+set $hyper		$gui+$alt+ctrl+shift
+set $charged 	$gui+$alt+ctrl
+set $meh 		$alt+shift+ctrl
 
 # Home row direction keys, like vim
 set $left h
