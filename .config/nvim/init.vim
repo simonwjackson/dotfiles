@@ -168,3 +168,11 @@ command! W call s:WriteCreatingDirs()
 set title 
 set titleold=
 
+" Quick File Managment: {{{
+nmap <Leader>w :write<Enter>
+nmap <Leader>a :wall<Enter>
+nmap <Leader>x :exit<Enter>
+nmap <Leader>X :xa<Enter>
+nmap <Leader>q :q<Enter>
+nmap <Leader>Q :qall!<Enter>
+" }}}
