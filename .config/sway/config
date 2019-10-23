@@ -10,10 +10,10 @@ set $charged 	$gui+$alt+ctrl
 set $meh 		$alt+shift+ctrl
 
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+set $left 	h
+set $down 	j
+set $up		k
+set $right 	l
 
 bindsym $gui+ctrl+Down exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
 bindsym $gui+shift+ctrl+Down exec --no-startup-id "${HOME}/bin/sway/bin/sway fullDown"
