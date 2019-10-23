@@ -1,0 +1,21 @@
+{
+    "allow_http": false,
+    "always_transcode": false,
+    "audio_ac3passthrough": false,
+    "audio_dtspassthrough": false,
+    "audio_output": "hdmi",
+    "auto_play": true,
+    "client_uuid": "52ff60bd-5475-437a-9d6b-b41ed3054b3a",
+    "enable_play_queue": true,
+    "http_port": "3000",
+    "idle_cmd": null,
+    "idle_cmd_delay": 60,
+    "media_ended_cmd": null,
+    "player_name": "manjaro",
+    "pre_media_cmd": null,
+    "remote_kbps_thresh": 5000,
+    "remote_transcode": true,
+    "stop_cmd": null,
+    "transcode_kbps": 2000,
+    "transcode_res": "720p"
+}

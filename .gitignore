@@ -16,6 +16,7 @@
 !/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
 !/.config/mpv/*.conf
+!/.config/plex-mpv-shim/**
 !/.config/task/**
 !/.config/timewarrior
 !/.config/zsh/**
