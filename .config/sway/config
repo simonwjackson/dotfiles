@@ -92,9 +92,13 @@ bindsym $gui+$alt+j $volumeDown
 bindsym $gui+$alt+k $volumeUp
 
 # Brightness
+set $brightnessDown exec brillo -q -u 300000 -U 5
+set $brightnessUp exec brillo -q -u 300000 -A 5
 
-bindsym XF86MonBrightnessDown exec brillo -u 300000 -U 5
-bindsym XF86MonBrightnessUp exec brillo -u 300000 -A 5 
+bindsym XF86MonBrightnessDown	$brightnessDown
+bindsym XF86MonBrightnessUp		$brightnessUp
+bindsym $hyper+k				$brightnessUp
+bindsym $hyper+j				$brightnessDown 
 
 ### Key bindings
 #
@@ -201,6 +205,7 @@ bindsym $gui+Shift+Ctrl+i	resize shrink height 100px; move position center
 bindsym $gui+Shift+o		resize grow width 10px; move position center 
 bindsym $gui+Shift+Ctrl+o	resize grow width 100px; move position center 
 
+# bindsym $gui+Comma 		[title="configs"] scratchpad show, mode default
 
 
 mode "GTD" {
@@ -243,8 +248,6 @@ set $dark_bg #000000
 
 bar {
     position top
-		#mode hide
-
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     # status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
@@ -255,6 +258,7 @@ bar {
 		separator #333333
         statusline $dark_text
         background $dark_bg
+		
 		# type					border	 	bg		text
         urgent_workspace	 	#ff0000		$dark_bg  $light_text
         active_workspace	 	$dark_bg	$dark_bg  $light_text
@@ -272,12 +276,12 @@ gaps outer -10
 smart_gaps on
 smart_borders on
 
-bindsym $gui+z					gaps outer current plus 5
-bindsym $gui+Shift+z		gaps outer current minus 5
-bindsym $gui+s					gaps inner current plus 5
-bindsym $gui+Shift+s		gaps inner current minus 5
-bindsym $gui+d					gaps inner current set 10; gaps outer current set -10
-bindsym $gui+Shift+d		gaps inner current set 0; gaps outer current set 0
+bindsym $gui+z			gaps outer current plus 5
+bindsym $gui+Shift+z	gaps outer current minus 5
+bindsym $gui+s			gaps inner current plus 5
+bindsym $gui+Shift+s	gaps inner current minus 5
+bindsym $gui+d			gaps inner current set 10; gaps outer current set -10
+bindsym $gui+Shift+d	gaps inner current set 0; gaps outer current set 0
 
 # set default desktop layout (default is tiling)
 workspace_layout default 
@@ -287,7 +291,7 @@ hide_edge_borders none
 
 # change borders
 bindsym $gui+u border none
-bindsym $gui+y border pixel 1
+bindsym $gui+y border pixel 10
 bindsym $gui+n border normal
 
 exec --no-startup-id volumeicon
@@ -307,15 +311,6 @@ workspace_auto_back_and_forth yes
 # split orientation
 bindsym $gui+q split toggle
 
-# toggle fullscreen mode for the focused container
-#bindsym $gui+f fullscreen toggle
-
-# toggle sticky
-# bindsym $gui+Shift+s sticky toggle
-# bindsym $gui+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left 
-# bindsym $gui+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
-
-
 #navigate workspaces next / previous
 bindsym $gui+Ctrl+h workspace prev
 bindsym $gui+Ctrl+j workspace prev
@@ -328,6 +323,8 @@ bindsym $gui+Shift+Ctrl+l move workspace to output right
 
 ## Open applications on specific workspaces
 for_window [app_id="^GTD$"] move to 1
+
+default_floating_border pixel 10
 
 # Open specific applications in floating mode
 for_window [app_id="mpv"] floating enable, focus
