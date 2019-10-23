@@ -79,6 +79,18 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# Volume
+set $volumeUp exec amixer set Master 10%+
+set $volumeDown exec amixer set Master 10%-
+
+bindsym XF86AudioPlay exec echo '{"command": ["cycle", "pause"]}' | socat - /tmp/mpvsocket
+bindsym XF86AudioNext exec echo '{"command": ["seek", "30"]}' | socat - /tmp/mpvsocket
+bindsym XF86AudioPrev exec echo '{"command": ["seek", "-30"]}' | socat - /tmp/mpvsocket
+bindsym XF86AudioLowerVolume $volumeDown
+bindsym XF86AudioRaiseVolume $volumeUp
+bindsym $gui+$alt+j $volumeDown
+bindsym $gui+$alt+k $volumeUp
+
 # Brightness
 
 bindsym XF86MonBrightnessDown exec brillo -u 300000 -U 5
@@ -87,7 +99,6 @@ bindsym XF86MonBrightnessUp exec brillo -u 300000 -A 5
 ### Key bindings
 #
 # Basics:
-
 
 # Kill focused window
 bindsym $gui+Shift+q kill
@@ -384,7 +395,9 @@ bindsym $gui+$alt+space		exec ${HOME}/bin/media toggle
 bindsym $gui+p exec kitty --class=floatingApp -- zsh -c "fd --type d . '/storage/code' | fzf --layout=reverse --sync | xargs -I {} kitty --detach -- nvim -c 'cd \"{}\"' {}"
 
 # Music
-bindsym $gui+$alt+ctrl+m exec kitty --class=floatingApp ${HOME}/bin/music.zsh
+bindsym $gui+$alt+ctrl+m	exec kitty --class=floatingApp ${HOME}/bin/music.zsh
+bindsym $gui+$alt+y			exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube, mode default
+bindsym $gui+$alt+a			exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube-music, mode default
 
 # GTD
 bindsym $gui+g exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
