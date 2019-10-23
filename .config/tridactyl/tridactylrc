@@ -1,426 +1,209 @@
-" vim: set filetype=vim:
-
 " NB: If you want "vim-like" behaviour where removing a line from
 " here makes the setting disappear
-
 sanitise tridactyllocal tridactylsync
 
-" Hide mode
+" General Settings
 set modeindicator false
+set editorcmd kitty --class floatingAppFocus -- nvim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | nnoremap <ENTER> :x<ENTER> | nnoremap <ESC><ESC> :q!<ENTER> | inoremap <ENTER> <ESC>:x!<ENTER>" %f
+set theme dark
+set configversion 1.7
 
-" Set terminal
-set editorcmd kitty --class floatingAppFocus vim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | startinsert! | imap <ENTER> <ESC>:x<ENTER> | map <ENTER> :x<ENTER> | nmap <ESC> :q!<ENTER>" %f
+" bind <A-p> pin
+" bind <A-m> mute toggle
+" bind <F1> help
+" bind o fillcmdline open
+" bind O current_url open
+" bind w fillcmdline winopen
+" bind W current_url winopen
+" bind ]] followpage next
+" bind [[ followpage prev
+" bind [c urlincrement -1
+" bind ]c urlincrement 1
+" bind <C-x> urlincrement -1
+" bind <C-a> urlincrement 1
+" bind yy clipboard yank
+" bind ys clipboard yankshort
+" bind yc clipboard yankcanon
+" bind ym clipboard yankmd
+" bind yt clipboard yanktitle
+" bind gh home
+" bind gH home true
+" bind p clipboard open
+" bind P clipboard tabopen
+" bind j scrollline 10
+" bind <C-e> scrollline 10
+" bind k scrollline -10
+" bind <C-y> scrollline -10
+" bind G scrollto 100
+" bind gg scrollto 0
+" bind <C-u> scrollpage -0.5
+" bind <C-d> scrollpage 0.5
+" bind <C-f> scrollpage 1
+" bind <C-b> scrollpage -1
+" bind $ scrollto 100 x
+" bind ^ scrollto 0 x
+" bind <C-6> tab #
+" bind <C-^> tab #
+" bind H back
+" bind L forward
+" bind <C-o> jumpprev
+" bind <C-i> jumpnext
+" bind D composite tabprev; tabclose #
+" bind gx0 tabclosealltoleft
+" bind gx$ tabclosealltoright
+" bind << tabmove -1
+" bind >> tabmove +1
+" bind u undo
+" bind U undo window
+" bind r reload
+" bind R reloadhard
+" bind x stop
+" bind g? rot13
+" bind g; changelistjump -1
+" bind J tabprev
+" bind K tabnext
+" bind gt tabnext_gt
+" bind gT tabprev
+" bind g^ tabfirst
+" bind g0 tabfirst
+" bind g$ tablast
+" bind gu urlparent
+" bind gU urlroot
+" bind gf viewsource
+" bind : fillcmdline_notrail
+" bind s fillcmdline open search
+" bind S fillcmdline tabopen search
+" bind M gobble 1 quickmark
+" bind ZZ qall
+" bind f hint
+" bind F hint -b
+" bind gF hint -qb
+" bind ;i hint -i
+" bind ;b hint -b
+" bind ;o hint
+" bind ;I hint -I
+" bind ;k hint -k
+" bind ;y hint -y
+" bind ;p hint -p
+" bind ;P hint -P
+" bind ;r hint -r
+" bind ;s hint -s
+" bind ;S hint -S
+" bind ;a hint -a
+" bind ;A hint -A
+" bind ;; hint -;
+" bind ;# hint -#
+" bind ;v hint -W mpvsafe
+" bind ;w hint -w
+" bind ;t hint -W tabopen
+" bind ;O hint -W fillcmdline_notrail open
+" bind ;W hint -W fillcmdline_notrail winopen
+" bind ;T hint -W fillcmdline_notrail tabopen
+" bind ;z hint -z
+" bind ;m composite hint -pipe img src | js -p tri.excmds.open('images.google.com/searchbyimage?image_url=' + JS_ARG)
+" bind ;M composite hint -pipe img src | jsb -p tri.excmds.tabopen('images.google.com/searchbyimage?image_url=' + JS_ARG)
+" bind ;gi hint -qi
+" bind ;gI hint -qI
+" bind ;gk hint -qk
+" bind ;gy hint -qy
+" bind ;gP hint -qP
+" bind ;gr hint -qr
+" bind ;gs hint -qs
+" bind ;gS hint -qS
+" bind ;gA hint -qA
+" bind ;g; hint -q;
+" bind ;g# hint -q#
+" bind ;gw hint -qw
+" bind ;gb hint -qb
+" bind ;gF hint -qb
+" bind ;gf hint -q
+" bind <S-Insert> mode ignore
+" bind <CA-Escape> mode ignore
+" bind <CA-`> mode ignore
+" bind <S-Escape> mode ignore
+" bind <Escape> composite mode normal ; hidecmdline
+" bind <C-[> composite mode normal ; hidecmdline
+" bind a current_url bmark
+" bind A bmark
+" bind zi zoom 0.1 true
+" bind zo zoom -0.1 true
+" bind zm zoom 0.5 true
+" bind zr zoom -0.5 true
+" bind zM zoom 0.5 true
+" bind zR zoom -0.5 true
+" bind zz zoom 1
+" bind zI zoom 3
+" bind zO zoom 0.3
+" bind . repeat
+" bind <SA-ArrowUp><SA-ArrowUp><SA-ArrowDown><SA-ArrowDown><SA-ArrowLeft><SA-ArrowRight><SA-ArrowLeft><SA-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
 
-" Color: {{{
-colorscheme dark
-" }}}
+" command alias command
+" alias au autocmd
+" alias aucon autocontain
+" alias audel autocmddelete
+" alias audelete autocmddelete
+" alias b tab
+" alias clsh clearsearchhighlight
+" alias nohlsearch clearsearchhighlight
+" alias noh clearsearchhighlight
+" alias o open
+" alias w winopen
+" alias t tabopen
+" alias tabnew tabopen
+" alias tabm tabmove
+" alias tabo tabonly
+" alias tn tabnext_gt
+" alias bn tabnext_gt
+" alias tnext tabnext_gt
+" alias bnext tabnext_gt
+" alias tp tabprev
+" alias tN tabprev
+" alias bp tabprev
+" alias bN tabprev
+" alias tprev tabprev
+" alias bprev tabprev
+" alias tabfirst tab 1
+" alias tablast tab 0
+" alias bfirst tabfirst
+" alias blast tablast
+" alias tfirst tabfirst
+" alias tlast tablast
+" alias buffer tab
+" alias bufferall taball
+" alias bd tabclose
+" alias bdelete tabclose
+" alias quit tabclose
+" alias q tabclose
+" alias qa qall
+" alias sanitize sanitise
+" alias tutorial tutor
+" alias h help
+" alias unmute mute unmute
+" alias authors credits
+" alias openwith hint -W
+" alias ! exclaim
+" alias !s exclaim_quiet
+" alias containerremove containerdelete
+" alias colours colourscheme
+" alias colorscheme colourscheme
+" alias colors colourscheme
+" alias man help
+" alias !js fillcmdline_tmp 3000 !js is deprecated. Please use js instead
+" alias !jsb fillcmdline_tmp 3000 !jsb is deprecated. Please use jsb instead
+" alias get_current_url js document.location.href
+" alias current_url composite get_current_url | fillcmdline_notrail
+" alias stop js window.stop()
+" alias zo zoom
+" alias installnative nativeinstall
+" alias nativeupdate updatenative
+" alias mkt mktridactylrc
+" alias mkt! mktridactylrc -f
+" alias mktridactylrc! mktridactylrc -f
+" alias mpvsafe js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))
+" alias exto extoptions
+" alias extpreferences extoptions
+" alias extp extpreferences
 
-" Keybindings: {{{
-unbind --mode=normal d
-unbind --mode=normal B
+" autocmd TriStart .* source_quiet
 
-bind --mode=normal h back
-bind --mode=normal l forward
-
-bind --mode=normal B fillcmdline bmarks
-
-bind --mode=normal b fillcmdline taball
-
-bind --mode=normal t fillcmdline winopen
-bind --mode=normal T current_url winopen
-
-
-
-" Config dump
-" {
-"   "configversion": "1.7",
-"   "subconfigs": {
-"     "www.google.com": {
-"       "followpagepatterns": {
-"         "next": "Next",
-"         "prev": "Previous"
-"       }
-"     }
-"   },
-"   "priority": 0,
-"   "exmaps": {
-"     "<Enter>": "ex.accept_line",
-"     "<C-j>": "ex.accept_line",
-"     "<C-m>": "ex.accept_line",
-"     "<Escape>": "ex.hide_and_clear",
-"     "<ArrowUp>": "ex.prev_history",
-"     "<ArrowDown>": "ex.next_history",
-"     "<C-a>": "text.beginning_of_line",
-"     "<C-e>": "text.end_of_line",
-"     "<C-u>": "text.backward_kill_line",
-"     "<C-k>": "text.kill_line",
-"     "<C-c>": "text.kill_whole_line",
-"     "<C-f>": "ex.complete",
-"     "<Tab>": "ex.next_completion",
-"     "<S-Tab>": "ex.prev_completion",
-"     "<Space>": "ex.insert_space_or_completion"
-"   },
-"   "ignoremaps": {
-"     "<S-Insert>": "mode normal",
-"     "<CA-Escape>": "mode normal",
-"     "<CA-`>": "mode normal",
-"     "<S-Escape>": "mode normal",
-"     "<C-^>": "tab #",
-"     "<C-6>": "tab #"
-"   },
-"   "imaps": {
-"     "<Escape>": "composite unfocus | mode normal",
-"     "<C-[>": "composite unfocus | mode normal",
-"     "<C-i>": "editor",
-"     "<CA-Escape>": "mode normal",
-"     "<CA-`>": "mode normal",
-"     "<C-6>": "tab #",
-"     "<C-^>": "tab #",
-"     "<S-Escape>": "mode ignore"
-"   },
-"   "inputmaps": {
-"     "<Escape>": "composite unfocus | mode normal",
-"     "<C-[>": "composite unfocus | mode normal",
-"     "<C-i>": "editor",
-"     "<CA-Escape>": "mode normal",
-"     "<CA-`>": "mode normal",
-"     "<C-6>": "tab #",
-"     "<C-^>": "tab #",
-"     "<S-Escape>": "mode ignore",
-"     "<Tab>": "focusinput -n",
-"     "<S-Tab>": "focusinput -N"
-"   },
-"   "nmaps": {
-"     "<A-p>": "pin",
-"     "<A-m>": "mute toggle",
-"     "<F1>": "help",
-"     "o": "fillcmdline open",
-"     "O": "current_url open",
-"     "w": "fillcmdline winopen",
-"     "W": "current_url winopen",
-"     "t": "fillcmdline tabopen",
-"     "]]": "followpage next",
-"     "[[": "followpage prev",
-"     "[c": "urlincrement -1",
-"     "]c": "urlincrement 1",
-"     "<C-x>": "urlincrement -1",
-"     "<C-a>": "urlincrement 1",
-"     "T": "current_url tabopen",
-"     "yy": "clipboard yank",
-"     "ys": "clipboard yankshort",
-"     "yc": "clipboard yankcanon",
-"     "ym": "clipboard yankmd",
-"     "yt": "clipboard yanktitle",
-"     "gh": "home",
-"     "gH": "home true",
-"     "p": "clipboard open",
-"     "P": "clipboard tabopen",
-"     "j": "scrollline 10",
-"     "<C-e>": "scrollline 10",
-"     "k": "scrollline -10",
-"     "<C-y>": "scrollline -10",
-"     "G": "scrollto 100",
-"     "gg": "scrollto 0",
-"     "<C-u>": "scrollpage -0.5",
-"     "<C-d>": "scrollpage 0.5",
-"     "<C-f>": "scrollpage 1",
-"     "<C-b>": "scrollpage -1",
-"     "$": "scrollto 100 x",
-"     "^": "scrollto 0 x",
-"     "<C-6>": "tab #",
-"     "<C-^>": "tab #",
-"     "H": "back",
-"     "L": "forward",
-"     "<C-o>": "jumpprev",
-"     "<C-i>": "jumpnext",
-"     "D": "composite tabprev; tabclose #",
-"     "gx0": "tabclosealltoleft",
-"     "gx$": "tabclosealltoright",
-"     "<<": "tabmove -1",
-"     ">>": "tabmove +1",
-"     "u": "undo",
-"     "U": "undo window",
-"     "r": "reload",
-"     "R": "reloadhard",
-"     "x": "stop",
-"     "gi": "focusinput -l",
-"     "g?": "rot13",
-"     "g;": "changelistjump -1",
-"     "J": "tabprev",
-"     "K": "tabnext",
-"     "gt": "tabnext_gt",
-"     "gT": "tabprev",
-"     "g^": "tabfirst",
-"     "g0": "tabfirst",
-"     "g$": "tablast",
-"     "gr": "reader",
-"     "gu": "urlparent",
-"     "gU": "urlroot",
-"     "gf": "viewsource",
-"     ":": "fillcmdline_notrail",
-"     "s": "fillcmdline open search",
-"     "S": "fillcmdline tabopen search",
-"     "M": "gobble 1 quickmark",
-"     "ZZ": "qall",
-"     "f": "hint",
-"     "F": "hint -b",
-"     "gF": "hint -qb",
-"     ";i": "hint -i",
-"     ";b": "hint -b",
-"     ";o": "hint",
-"     ";I": "hint -I",
-"     ";k": "hint -k",
-"     ";y": "hint -y",
-"     ";p": "hint -p",
-"     ";P": "hint -P",
-"     ";r": "hint -r",
-"     ";s": "hint -s",
-"     ";S": "hint -S",
-"     ";a": "hint -a",
-"     ";A": "hint -A",
-"     ";;": "hint -;",
-"     ";#": "hint -#",
-"     ";v": "hint -W mpvsafe",
-"     ";w": "hint -w",
-"     ";t": "hint -W tabopen",
-"     ";O": "hint -W fillcmdline_notrail open ",
-"     ";W": "hint -W fillcmdline_notrail winopen ",
-"     ";T": "hint -W fillcmdline_notrail tabopen ",
-"     ";z": "hint -z",
-"     ";m": "composite hint -pipe img src | js -p tri.excmds.open('images.google.com/searchbyimage?image_url=' + JS_ARG)",
-"     ";M": "composite hint -pipe img src | jsb -p tri.excmds.tabopen('images.google.com/searchbyimage?image_url=' + JS_ARG)",
-"     ";gi": "hint -qi",
-"     ";gI": "hint -qI",
-"     ";gk": "hint -qk",
-"     ";gy": "hint -qy",
-"     ";gp": "hint -qp",
-"     ";gP": "hint -qP",
-"     ";gr": "hint -qr",
-"     ";gs": "hint -qs",
-"     ";gS": "hint -qS",
-"     ";ga": "hint -qa",
-"     ";gA": "hint -qA",
-"     ";g;": "hint -q;",
-"     ";g#": "hint -q#",
-"     ";gv": "hint -qW mpvsafe",
-"     ";gw": "hint -qw",
-"     ";gb": "hint -qb",
-"     ";gF": "hint -qb",
-"     ";gf": "hint -q",
-"     "<S-Insert>": "mode ignore",
-"     "<CA-Escape>": "mode ignore",
-"     "<CA-`>": "mode ignore",
-"     "<S-Escape>": "mode ignore",
-"     "<Escape>": "composite mode normal ; hidecmdline",
-"     "<C-[>": "composite mode normal ; hidecmdline",
-"     "a": "current_url bmark",
-"     "A": "bmark",
-"     "zi": "zoom 0.1 true",
-"     "zo": "zoom -0.1 true",
-"     "zm": "zoom 0.5 true",
-"     "zr": "zoom -0.5 true",
-"     "zM": "zoom 0.5 true",
-"     "zR": "zoom -0.5 true",
-"     "zz": "zoom 1",
-"     "zI": "zoom 3",
-"     "zO": "zoom 0.3",
-"     ".": "repeat",
-"     "<SA-ArrowUp><SA-ArrowUp><SA-ArrowDown><SA-ArrowDown><SA-ArrowLeft><SA-ArrowRight><SA-ArrowLeft><SA-ArrowRight>ba": "open https://www.youtube.com/watch?v=M3iOROuTuMA"
-"   },
-"   "hintmaps": {
-"     "<Backspace>": "hint.popKey",
-"     "<Escape>": "hint.reset",
-"     "<Tab>": "hint.focusPreviousHint",
-"     "<S-Tab>": "hint.focusNextHint",
-"     "<ArrowUp>": "hint.focusTopHint",
-"     "<ArrowDown>": "hint.focusBottomHint",
-"     "<ArrowLeft>": "hint.focusLeftHint",
-"     "<ArrowRight>": "hint.focusRightHint",
-"     "<Enter>": "hint.selectFocusedHint",
-"     "<Space>": "hint.selectFocusedHint"
-"   },
-"   "leavegithubalone": "false",
-"   "blacklistkeys": [
-"     "/"
-"   ],
-"   "autocmds": {
-"     "DocStart": {},
-"     "DocLoad": {
-"       "^https://github.com/tridactyl/tridactyl/issues/new$": "issue"
-"     },
-"     "DocEnd": {},
-"     "TriStart": {
-"       ".*": "source_quiet"
-"     },
-"     "TabEnter": {},
-"     "TabLeft": {},
-"     "FullscreenChange": {},
-"     "FullscreenEnter": {},
-"     "FullscreenLeft": {}
-"   },
-"   "keytranslatemap": {},
-"   "keytranslatemodes": {
-"     "nmaps": "true",
-"     "imaps": "false",
-"     "inputmaps": "false",
-"     "ignoremaps": "false",
-"     "exmaps": "false",
-"     "hintmaps": "false"
-"   },
-"   "autocontain": {},
-"   "exaliases": {
-"     "alias": "command",
-"     "au": "autocmd",
-"     "aucon": "autocontain",
-"     "audel": "autocmddelete",
-"     "audelete": "autocmddelete",
-"     "b": "tab",
-"     "clsh": "clearsearchhighlight",
-"     "nohlsearch": "clearsearchhighlight",
-"     "noh": "clearsearchhighlight",
-"     "o": "open",
-"     "w": "winopen",
-"     "t": "tabopen",
-"     "tabnew": "tabopen",
-"     "tabm": "tabmove",
-"     "tabo": "tabonly",
-"     "tn": "tabnext_gt",
-"     "bn": "tabnext_gt",
-"     "tnext": "tabnext_gt",
-"     "bnext": "tabnext_gt",
-"     "tp": "tabprev",
-"     "tN": "tabprev",
-"     "bp": "tabprev",
-"     "bN": "tabprev",
-"     "tprev": "tabprev",
-"     "bprev": "tabprev",
-"     "tabfirst": "tab 1",
-"     "tablast": "tab 0",
-"     "bfirst": "tabfirst",
-"     "blast": "tablast",
-"     "tfirst": "tabfirst",
-"     "tlast": "tablast",
-"     "buffer": "tab",
-"     "bufferall": "taball",
-"     "bd": "tabclose",
-"     "bdelete": "tabclose",
-"     "quit": "tabclose",
-"     "q": "tabclose",
-"     "qa": "qall",
-"     "sanitize": "sanitise",
-"     "tutorial": "tutor",
-"     "h": "help",
-"     "unmute": "mute unmute",
-"     "authors": "credits",
-"     "openwith": "hint -W",
-"     "!": "exclaim",
-"     "!s": "exclaim_quiet",
-"     "containerremove": "containerdelete",
-"     "colours": "colourscheme",
-"     "colorscheme": "colourscheme",
-"     "colors": "colourscheme",
-"     "man": "help",
-"     "!js": "fillcmdline_tmp 3000 !js is deprecated. Please use js instead",
-"     "!jsb": "fillcmdline_tmp 3000 !jsb is deprecated. Please use jsb instead",
-"     "get_current_url": "js document.location.href",
-"     "current_url": "composite get_current_url | fillcmdline_notrail ",
-"     "stop": "js window.stop()",
-"     "zo": "zoom",
-"     "installnative": "nativeinstall",
-"     "nativeupdate": "updatenative",
-"     "mkt": "mktridactylrc",
-"     "mkt!": "mktridactylrc -f",
-"     "mktridactylrc!": "mktridactylrc -f",
-"     "mpvsafe": "js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet('mpv ' + url))"
-"   },
-"   "followpagepatterns": {
-"     "next": "^(next|newer)\\b|»|>>|more",
-"     "prev": "^(prev(ious)?|older)\\b|«|<<"
-"   },
-"   "searchengine": "",
-"   "searchurls": {
-"     "google": "https://www.google.com/search?q=",
-"     "googlelucky": "https://www.google.com/search?btnI=I'm+Feeling+Lucky&q=",
-"     "scholar": "https://scholar.google.com/scholar?q=",
-"     "googleuk": "https://www.google.co.uk/search?q=",
-"     "bing": "https://www.bing.com/search?q=",
-"     "duckduckgo": "https://duckduckgo.com/?q=",
-"     "yahoo": "https://search.yahoo.com/search?p=",
-"     "twitter": "https://twitter.com/search?q=",
-"     "wikipedia": "https://en.wikipedia.org/wiki/Special:Search/",
-"     "youtube": "https://www.youtube.com/results?search_query=",
-"     "amazon": "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias=aps&field-keywords=",
-"     "amazonuk": "https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias=aps&field-keywords=",
-"     "startpage": "https://startpage.com/do/search?language=english&cat=web&query=",
-"     "github": "https://github.com/search?utf8=✓&q=",
-"     "searx": "https://searx.me/?category_general=on&q=",
-"     "cnrtl": "http://www.cnrtl.fr/lexicographie/",
-"     "osm": "https://www.openstreetmap.org/search?query=",
-"     "mdn": "https://developer.mozilla.org/en-US/search?q=",
-"     "gentoo_wiki": "https://wiki.gentoo.org/index.php?title=Special:Search&profile=default&fulltext=Search&search=",
-"     "qwant": "https://www.qwant.com/?q="
-"   },
-"   "newtab": "",
-"   "viewsource": "tridactyl",
-"   "storageloc": "sync",
-"   "homepages": [],
-"   "hintchars": "hjklasdfgyuiopqwertnmzxcvb",
-"   "hintfiltermode": "simple",
-"   "hintnames": "short",
-"   "hintuppercase": "true",
-"   "hintdelay": 300,
-"   "allowautofocus": "true",
-"   "preventautofocusjackhammer": "false",
-"   "newtabfocus": "page",
-"   "smoothscroll": "false",
-"   "scrollduration": 100,
-"   "tabopenpos": "next",
-"   "relatedopenpos": "related",
-"   "ttsvoice": "default",
-"   "ttsvolume": 1,
-"   "ttsrate": 1,
-"   "ttspitch": 1,
-"   "gimode": "nextinput",
-"   "cursorpos": "end",
-"   "theme": "dark",
-"   "customthemes": {},
-"   "modeindicator": "false",
-"   "jumpdelay": 3000,
-"   "logging": {
-"     "cmdline": "warning",
-"     "containers": "warning",
-"     "controller": "warning",
-"     "excmd": "error",
-"     "hinting": "warning",
-"     "messaging": "warning",
-"     "native": "warning",
-"     "performance": "warning",
-"     "state": "warning",
-"     "styling": "warning"
-"   },
-"   "noiframe": "false",
-"   "noiframeon": [],
-"   "editorcmd": "auto",
-"   "rsscmd": "yank %u",
-"   "browser": "firefox",
-"   "yankto": "clipboard",
-"   "putfrom": "clipboard",
-"   "externalclipboardcmd": "auto",
-"   "profiledir": "auto",
-"   "tabopencontaineraware": "false",
-"   "containerindicator": "true",
-"   "auconcreatecontainer": "true",
-"   "historyresults": 50,
-"   "bmarkweight": 100,
-"   "findresults": -1,
-"   "findcontextlen": 100,
-"   "findcase": "smart",
-"   "incsearch": "false",
-"   "minincsearchlen": 3,
-"   "csp": "untouched",
-"   "wordpattern": "[^\\s]+",
-"   "perfcounters": "false",
-"   "perfsamples": "10001",
-"   "modeindicatorshowkeys": "false",
-"   "urlparenttrailingslash": "true"
-" }
+" vim: set filetype=vim:
