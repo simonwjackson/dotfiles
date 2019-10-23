@@ -208,6 +208,8 @@ bind gR readlater
 " alias extpreferences extoptions
 " alias extp extpreferences
 
+" Autocmds
+autocmd DocStart /www.youtube.com/watch\?v=.* js document.head.insertAdjacentHTML("beforeend", `<style>#comments,#player{display: none !important}</style>`)
 " autocmd TriStart .* source_quiet
 
 " Components
