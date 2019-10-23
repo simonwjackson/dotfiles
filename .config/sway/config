@@ -179,14 +179,16 @@ bindsym $gui+minus scratchpad show
 
 #
 # Resizing containers:
-bindsym $gui+Shift+y				resize shrink width 10px
-bindsym $gui+Shift+Ctrl+y		resize shrink width 100px
-bindsym $gui+Shift+u			  resize grow height 10px
-bindsym $gui+Shift+Ctrl+u		resize grow height 100px
-bindsym $gui+Shift+i				resize shrink height 10px
-bindsym $gui+Shift+Ctrl+i		resize shrink height 100px
-bindsym $gui+Shift+o				resize grow width 10px
-bindsym $gui+Shift+Ctrl+o		resize grow width 100px
+bindsym $gui+c				move position center
+
+bindsym $gui+Shift+y		resize shrink width 10px; move position center 
+bindsym $gui+Shift+Ctrl+y	resize shrink width 100px; move position center 
+bindsym $gui+Shift+u		resize grow height 10px; move position center 
+bindsym $gui+Shift+Ctrl+u	resize grow height 100px; move position center 
+bindsym $gui+Shift+i		resize shrink height 10px; move position center 
+bindsym $gui+Shift+Ctrl+i	resize shrink height 100px; move position center 
+bindsym $gui+Shift+o		resize grow width 10px; move position center 
+bindsym $gui+Shift+Ctrl+o	resize grow width 100px; move position center 
 
 
 
@@ -347,20 +349,10 @@ for_window [app_id="Xfburn"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
-
 # Headphones toggle
 bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
 
-
 # Startup: {{{
-
-# Firefox -> MPV server
-# TODO: Setup FF2MPV as system daemon
-exec --no-startup-id $HOME/bin/ff2mpv.py
-
-# GTD
-exec tmuxinator start -p $HOME/.config/tmuxinator/focus.yml && "$HOME/bin/gtd.sh"
-exec --no-startup-id kitty --class "GTD" --title "Routine" tmux -L focus new-session -t focus \; select-window -t 0 \; & 
 #: }}} 
 
 # Fuzzy finder example
