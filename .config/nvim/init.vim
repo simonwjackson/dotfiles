@@ -4,7 +4,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugins: Themes {{{
-Plug 'Rigellute/shades-of-purple.vim'
 Plug 'flrnprz/plastic.vim'
 " }}}
 
@@ -28,9 +27,6 @@ Plug 'mattn/webapi-vim'
 
 " GraphQL:
 Plug 'jparise/vim-graphql'
-
-" Ctrlp:
-Plug 'ctrlpvim/ctrlp.vim'
 
 " Ale:
 Plug 'w0rp/ale'
@@ -113,6 +109,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeQuitOnOpen=1
 
 " }}}
+
 " Ale {{{
 "" files
 let g:ale_fixers = {
@@ -126,15 +123,6 @@ let g:ale_sign_warning = '~'
 "" lint on save
 let g:ale_enabled = 1
 let g:ale_fix_on_save = 1
-" }}}
-
-" CtrlP: {{{
-
-"" main command
-let g:ctrlp_map = '<leader>t'
-
-"" ignored paths
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 " }}}
 
 " Gist: {{{
@@ -171,14 +159,6 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-" }}}
-
-" Tests: {{{
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
 " }}}
 
 " Write to file even when it does not exist
