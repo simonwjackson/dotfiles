@@ -141,6 +141,8 @@ bind gR readlater
 " bind <SA-ArrowUp><SA-ArrowUp><SA-ArrowDown><SA-ArrowDown><SA-ArrowLeft><SA-ArrowRight><SA-ArrowLeft><SA-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
 
 " Aliases
+alias eval_script js -p tri.native.read(`${JS_ARG}`).then(r => eval(`(() => { ${r.content} })()`))
+
 " command alias command
 " alias au autocmd
 " alias aucon autocontain
