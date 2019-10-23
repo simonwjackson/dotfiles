@@ -9,12 +9,7 @@
 
 !/.config/beets/**/*.yaml
 !/.config/bugwarrior/**
-!/.config/systemd/*.service
-!/.config/systemd/*.timer
-!/.config/packages/**
-!/.config/sway/**
-!/.config/rofi/**
-!/.config/zsh/**
+!/.config/i3blocks/**
 !/.config/kitty/**
 !/.config/tridactyl/**
 !/.config/mozilla/firefox/default/chrome/**

@@ -14,5 +14,3 @@ command=zsh -c "source ${HOME}/.config/zsh/functions/battery/percent.sh && get_b
 [time]
 command=date +'%l:%M'
 interval=15
-
-
