@@ -22,7 +22,7 @@ bindsym $gui+shift+ctrl+Up		exec --no-startup-id "${HOME}/bin/sway/bin/sway full
 bindsym $gui+ctrl+Left			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
 bindsym $gui+ctrl+Right			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
 
-for_window [app_id="fzf-menu"] floating enable, focus, resize set 640 480, border none
+for_window [app_id="wifi-menu"] floating enable, resize set 824 300, border pixel 10, client.focused #000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused #000000 #000000 #d7d7d7 #000000 #000000, client.placeholder #000000 #000000 #d7d7d7 #000000 #000000, focus
 
 # Colors									border	bg			text		indicator child_border
 client.focused          	#21242D #21242D #d7d7d7 #21242D   #21242D
@@ -371,3 +371,7 @@ exec --no-startup-id kitty --class "GTD" --title "Routine" tmux -L focus new-ses
 
 # Hide cursor when idle
 seat * hide_cursor 3000  
+
+# Wifi Menu
+bindsym $gui+Shift+w exec kitty --class wifi-menu ${HOME}/bin/wifi
+
