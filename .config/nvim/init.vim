@@ -9,42 +9,29 @@ Plug 'flrnprz/plastic.vim'
 
 " Plugins: Syntax {{{
 Plug 'jxnblk/vim-mdx-js'
-Plug 'mboughaba/i3config.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } 
 Plug 'terminalnode/sway-vim-syntax'
 Plug 'sngn/vim-i3blocks-syntax'
+
 " }}}
 
 " Plugins: Extras {{{ 
-  
+Plug 'Zaptic/elm-vim'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-fugitive' 
 Plug 'scrooloose/nerdcommenter'
-
-" Gist:
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-
-" GraphQL:
 Plug 'jparise/vim-graphql'
-
-" Ale:
 Plug 'w0rp/ale'
-
-" Nerdtree:
 Plug 'scrooloose/nerdtree'
-
-" Easymotion:
 Plug 'easymotion/vim-easymotion'
-
-" Surround:
 Plug 'tpope/vim-surround'
-
-" GitGutter:
 Plug 'airblade/vim-gitgutter'
 " }}}
+
 call plug#end()
 " }}}
 
