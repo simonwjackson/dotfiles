@@ -8,9 +8,16 @@ set editorcmd kitty --class floatingAppFocus -- nvim -c "set noshowmode | set no
 set theme dark
 
 " Binds
+unbind d
+unbind B
+unbind b
+unbind T
 
-bind gr readnow
-bind gR readlater
+bind gi composite focusinput -l | editor
+bind h back
+bind l forward
+
+
 " bind <A-p> pin
 " bind <A-m> mute toggle
 " bind <F1> help
@@ -226,5 +233,16 @@ bind gR readlater
 alias send_to_phone composite get_current_url | !s ${HOME}/bin/url-to-phone
 bind gp send_to_phone
 bind ;gp hint -W send_to_phone
+
+"" MPV
+alias mpvvideo composite get_current_url | js -p tri.excmds.exclaim(`$HOME/bin/xdg-video '${JS_ARG}'`)
+alias mpvaudio composite get_current_url | js -p tri.excmds.exclaim(`$HOME/bin/xdg-audio '${JS_ARG}'`)
+bind gv mpvvideo
+bind ga mpvaudio
+bind ;ga hint -W mpvaudio
+bind ;gv hint -W mpvvideo
+
+"" Taskwarrior
+bind t composite get_current_url | js -p tri.excmds.fillcmdline(`! task add url:"${JS_ARG}"`)
 
 " vim: set filetype=vim:
