@@ -6,8 +6,11 @@ sanitise tridactyllocal tridactylsync
 set modeindicator false
 set editorcmd kitty --class floatingAppFocus -- nvim -c "set noshowmode | set noruler | set laststatus=0 | set noshowcmd | set cmdheight=1 | nnoremap <ENTER> :x<ENTER> | nnoremap <ESC><ESC> :q!<ENTER> | inoremap <ENTER> <ESC>:x!<ENTER>" %f
 set theme dark
-set configversion 1.7
 
+" Binds
+
+bind gr readnow
+bind gR readlater
 " bind <A-p> pin
 " bind <A-m> mute toggle
 " bind <F1> help
@@ -137,6 +140,7 @@ set configversion 1.7
 " bind . repeat
 " bind <SA-ArrowUp><SA-ArrowUp><SA-ArrowDown><SA-ArrowDown><SA-ArrowLeft><SA-ArrowRight><SA-ArrowLeft><SA-ArrowRight>ba open https://www.youtube.com/watch?v=M3iOROuTuMA
 
+" Aliases
 " command alias command
 " alias au autocmd
 " alias aucon autocontain
@@ -205,5 +209,11 @@ set configversion 1.7
 " alias extp extpreferences
 
 " autocmd TriStart .* source_quiet
+
+" Components
+alias readnow eval_script ${HOME}/.config/tridactyl/scripts/readnow.js
+alias readlater eval_script ${HOME}/.config/tridactyl/scripts/readlater.js
+bind gr readnow
+bind gR readlater
 
 " vim: set filetype=vim:
