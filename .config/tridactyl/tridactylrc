@@ -215,9 +215,16 @@ autocmd DocStart /www.youtube.com/watch\?v=.* js document.head.insertAdjacentHTM
 " autocmd TriStart .* source_quiet
 
 " Components
+
+"" Instapaper
 alias readnow eval_script ${HOME}/.config/tridactyl/scripts/readnow.js
 alias readlater eval_script ${HOME}/.config/tridactyl/scripts/readlater.js
 bind gr readnow
 bind gR readlater
+
+"" Send to phone
+alias send_to_phone composite get_current_url | !s ${HOME}/bin/url-to-phone
+bind gp send_to_phone
+bind ;gp hint -W send_to_phone
 
 " vim: set filetype=vim:
