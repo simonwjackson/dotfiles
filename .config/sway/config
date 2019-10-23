@@ -375,3 +375,6 @@ seat * hide_cursor 3000
 # Wifi Menu
 bindsym $gui+Shift+w exec kitty --class wifi-menu ${HOME}/bin/wifi
 
+# Dictionary
+bindsym $gui+Ctrl+Space exec kitty --class floatingApp ${HOME}/bin/define.zsh
+
