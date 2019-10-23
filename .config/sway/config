@@ -228,8 +228,9 @@ mode "apps" {
 	bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
 	bindsym $gui+f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
 
-	bindsym s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
-	bindsym $gui+s exec --no-startup-id grim -t png "screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+	set $stackoverflow kitty --class floatingApp -- ${HOME}/bin/stackoverflow, mode default
+	bindsym o exec --no-startup-id $stackoverflow
+	bindsym $gui+o exec --no-startup-id $stackoverflow 
 
 	# Return to default mode
 	bindsym Return mode "default"
