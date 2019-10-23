@@ -5,6 +5,7 @@
 # Logo key. Use Mod1 for Alt.
 set $gui		Mod1
 set $alt 		Mod4
+set $media      $gui+alt
 set $hyper		$gui+$alt+ctrl+shift
 set $charged 	$gui+$alt+ctrl
 set $meh 		$alt+shift+ctrl
