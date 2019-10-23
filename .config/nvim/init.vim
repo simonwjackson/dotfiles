@@ -19,6 +19,7 @@ Plug 'sngn/vim-i3blocks-syntax'
 
 " Plugins: Extras {{{ 
 Plug 'Zaptic/elm-vim'
+Plug 'junegunn/fzf.vim'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-fugitive' 
 Plug 'scrooloose/nerdcommenter'
