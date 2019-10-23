@@ -1,0 +1,27 @@
+#!/bin/env sh
+
+echo "" | \
+fzf \
+		--reverse \
+		--sync \
+		--print-query \
+		--prompt "Google > " | \
+xargs \
+	-I {} \
+	googler --json {} | \
+	jq -c -r '.[] | [.title, .abstract, .url] | @tsv' | \
+	fzf \
+		--sync \
+		--no-sort \
+		--reverse \
+		--with-nth 1 \
+		--delimiter $'\t' \
+		--preview-window="down:40%:wrap" \
+		--preview='echo {} | awk -F "\t" "{print \$2}"' | \
+	awk \
+		-F $'\t' \
+		'{print $3}' | \
+	{ xargs \
+		-I {} \
+		firefox {} & }
+	

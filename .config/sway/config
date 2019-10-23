@@ -224,9 +224,9 @@ mode "GTD" {
 
 bindsym $gui+g mode "GTD"
 
-mode "apps" {
-	bindsym f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
-	bindsym $gui+f exec --no-startup-id MOZ_ENABLE_WAYLAND=1 firefox, mode default
+	set $google kitty --class floatingApp -- ${HOME}/bin/google, mode default
+	bindsym g exec --no-startup-id $gogole
+	bindsym $gui+g exec --no-startup-id $google 
 
 	set $stackoverflow kitty --class floatingApp -- ${HOME}/bin/stackoverflow, mode default
 	bindsym o exec --no-startup-id $stackoverflow
