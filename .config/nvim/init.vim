@@ -176,3 +176,22 @@ nmap <Leader>X :xa<Enter>
 nmap <Leader>q :q<Enter>
 nmap <Leader>Q :qall!<Enter>
 " }}}
+
+" EasyMotion: {{{
+let g:EasyMotion_do_mapping = 0
+
+nmap f <Plug>(easymotion-f)
+nmap F <Plug>(easymotion-F)
+nmap t <Plug>(easymotion-t)
+nmap T <Plug>(easymotion-T)
+nmap w <Plug>(easymotion-w)
+nmap W <Plug>(easymotion-W)
+nmap b <Plug>(easymotion-b)
+nmap B <Plug>(easymotion-B)
+nmap e <Plug>(easymotion-e)
+nmap E <Plug>(easymotion-E)
+nmap ge <Plug>(easymotion-ge)
+nmap gE <Plug>(easymotion-gE)
+nmap s <Plug>(easymotion-s2)
+" }}}
+
