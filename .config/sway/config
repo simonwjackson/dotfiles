@@ -1,4 +1,4 @@
-# Read `man 5 sway` for a complete reference.
+# Read `man 5 sway` for a complete reference.  
 
 ### Variables
 #
@@ -22,13 +22,14 @@ bindsym $gui+shift+ctrl+Up		exec --no-startup-id "${HOME}/bin/sway/bin/sway full
 bindsym $gui+ctrl+Left			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
 bindsym $gui+ctrl+Right			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
 
+for_window [app_id="fzf-menu"]	floating enable, focus, resize set 640 480, border none
 for_window [app_id="wifi-menu"] floating enable, resize set 824 300, border pixel 10, client.focused #000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused #000000 #000000 #d7d7d7 #000000 #000000, client.placeholder #000000 #000000 #d7d7d7 #000000 #000000, focus
 
-# Colors									border	bg			text		indicator child_border
-client.focused          	#21242D #21242D #d7d7d7 #21242D   #21242D
-client.focused_inactive   #21242D #21242D #d7d7d7 #21242D   #21242D
-client.unfocused          #000000 #000000 #d7d7d7 #000000   #000000
-client.placeholder        #000000 #000000 #d7d7d7 #000000   #000000
+# Colors				border	bg		text	indicator child_border
+client.focused			#21242D #21242D #d7d7d7 #21242D   #21242D
+client.focused_inactive	#21242D #21242D #d7d7d7 #21242D   #21242D
+client.unfocused		#000000 #000000 #d7d7d7 #21242D   #000000
+client.placeholder		#000000 #000000 #d7d7d7 #21242D   #000000
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border none
@@ -39,6 +40,11 @@ set $term kitty
 # Start a terminal
 bindsym $gui+Return exec $term
 
+# Scratchpad Term
+for_window [title="myterm"] move scratchpad; move position center;
+exec --no-startup-id ${HOME}/bin/floating-terminal
+bindsym $gui+Shift+Return [title="myterm"] scratchpad show, mode default, move position center
+
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 # set $menu rofi | xargs swaymsg exec --
@@ -46,16 +52,18 @@ bindsym $gui+Return exec $term
 
 ### Output configuration
 
+for_window [title="forceTop"] move container to output DP-6
+
 output * bg #000000 solid_color
 
 # Left screen
-output DP-6 position 0,0
+output DP-6 transform 180 position -500,0
 
 # Laptop screen
-output eDP-1 scale 2.5 transform 270 position 1920,0
+output eDP-1 scale 3 transform 0 position 0,1080
 
 # Right Screen
-output DP-5 position 2880,0
+output DP-5 position 800,1080
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -102,7 +110,7 @@ bindsym $hyper+j				$brightnessDown
 
 ### Key bindings
 #
-# Basics:
+# Basics: 
 
 # Kill focused window
 bindsym $gui+Shift+q kill
@@ -195,7 +203,7 @@ bindsym $gui+minus scratchpad show
 #
 # Resizing containers:
 bindsym $gui+c				move position center
-
+ 
 bindsym $gui+Shift+y		resize shrink width 10px; move position center 
 bindsym $gui+Shift+Ctrl+y	resize shrink width 100px; move position center 
 bindsym $gui+Shift+u		resize grow height 10px; move position center 
@@ -207,22 +215,14 @@ bindsym $gui+Shift+Ctrl+o	resize grow width 100px; move position center
 
 # bindsym $gui+Comma 		[title="configs"] scratchpad show, mode default
 
+mode "apps" {
+	set $firefox MOZ_ENABLE_WAYLAND=1 GDK_BACKEND=wayland firefox, mode default
+	bindsym f exec --no-startup-id $firefox
+	bindsym $gui+f exec --no-startup-id $firefox
 
-mode "GTD" {
-	bindsym a 			exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
-	bindsym $gui+a 	exec --no-startup-id kitty --class "fzf-menu-add" zsh -i, mode default
-	bindsym s 			exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
-	bindsym $gui+s 	exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/start.sh", mode default
-	bindsym d 			exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
-	bindsym $gui+d 	exec --no-startup-id kitty --class "fzf-menu" "${HOME}/bin/tasking/done.sh", mode default
-	bindsym x 			exec "timew stop", mode default
-	bindsym $gui+x 	exec "timew stop", mode default
-
-	# Return to default mode
-	bindsym Escape mode "default"
-}
-
-bindsym $gui+g mode "GTD"
+	set $grim grim -t png "screenshots/screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+	bindsym s exec --no-startup-id $grim
+	bindsym $gui+s exec --no-startup-id $grim 
 
 	set $google kitty --class floatingApp -- ${HOME}/bin/google, mode default
 	bindsym g exec --no-startup-id $gogole
@@ -252,8 +252,8 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     # status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
-		status_command i3blocks
-		separator_symbol "·"
+	status_command i3blocks
+	separator_symbol "·"
 
     colors {
 		separator #333333
@@ -363,7 +363,7 @@ for_window [urgent=latest] focus
 bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
 
 # Startup: {{{
-#: }}} 
+#: }}}
 
 # Fuzzy finder example
 # bindsym $gui+Shift+Ctrl+space exec kitty -- zsh -c "fzf --layout=reverse | xargs -r swaymsg -t command exec"
