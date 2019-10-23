@@ -11,19 +11,22 @@
 !/.config/bugwarrior/**
 !/.config/i3blocks/**
 !/.config/kitty/**
-!/.config/tridactyl/**
 !/.config/mozilla/firefox/default/chrome/**
 !/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
 !/.config/mpv/*.conf
+!/.config/nvim/**.vim
+!/.config/packages/**
 !/.config/plex-mpv-shim/**
+!/.config/sway/**
+!/.config/systemd/*.service
+!/.config/systemd/*.timer
 !/.config/task/**
 !/.config/timewarrior
+!/.config/tmuxinator/**
+!/.config/tridactyl/**
+!/.config/vit/**
 !/.config/zsh/**
-!/.config/mutt/**
-/.config/mutt/passwords
-!/.config/mailcap
-!/.config/nvim/**.vim
 
 # Local scripts
 
