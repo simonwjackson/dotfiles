@@ -382,12 +382,15 @@ bindsym $gui+Ctrl+Space exec kitty --class floatingApp ${HOME}/bin/define.zsh
 bindsym Ctrl+space exec ${HOME}/bin/tasking/add
 
 # Media Controls
-bindsym $media+ctrl+h	exec ${HOME}/bin/media prev
-bindsym $media+ctrl+j	exec ${HOME}/bin/media seek 5
-bindsym $media+ctrl+k	exec ${HOME}/bin/media seek -5
-bindsym $media+ctrl+l	exec ${HOME}/bin/media next
-bindsym $media+space	exec ${HOME}/bin/media toggle
+bindsym $gui+$alt+ctrl+h	exec ${HOME}/bin/media prev
+bindsym $gui+$alt+ctrl+j	exec ${HOME}/bin/media seek 5
+bindsym $gui+$alt+ctrl+k	exec ${HOME}/bin/media seek -5
+bindsym $gui+$alt+ctrl+l	exec ${HOME}/bin/media next
+bindsym $gui+$alt+space		exec ${HOME}/bin/media toggle
 
 # Code Projects
 bindsym $gui+p exec kitty --class=floatingApp -- zsh -c "fd --type d . '/storage/code' | fzf --layout=reverse --sync | xargs -I {} kitty --detach -- nvim -c 'cd \"{}\"' {}"
+
+# Music
+bindsym $gui+$alt+ctrl+m exec kitty --class=floatingApp ${HOME}/bin/music.zsh
 
