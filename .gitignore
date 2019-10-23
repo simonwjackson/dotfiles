@@ -15,6 +15,7 @@
 !/.config/mozilla/firefox/default/chrome/**
 !/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
+!/.config/mpv/*.conf
 !/.config/task/**
 !/.config/zsh/**
 !/.config/mutt/**
