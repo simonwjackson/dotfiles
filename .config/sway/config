@@ -5,31 +5,31 @@
 # Logo key. Use Mod1 for Alt.
 set $gui		Mod1
 set $alt 		Mod4
-set $media      $gui+alt
-set $hyper		$gui+$alt+ctrl+shift
+set $media	$gui+alt
+set $hyper	$gui+$alt+ctrl+shift
 set $meh 		$alt+shift+ctrl
 
 # Home row direction keys, like vim
 set $left 	h
 set $down 	j
-set $up		k
+set $up			k
 set $right 	l
 
-bindsym $gui+ctrl+Down			exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
+bindsym $gui+ctrl+Down				exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
 bindsym $gui+shift+ctrl+Down	exec --no-startup-id "${HOME}/bin/sway/bin/sway fullDown"
-bindsym $gui+ctrl+Up			exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterUp"
+bindsym $gui+ctrl+Up					exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterUp"
 bindsym $gui+shift+ctrl+Up		exec --no-startup-id "${HOME}/bin/sway/bin/sway fullUp"
-bindsym $gui+ctrl+Left			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
-bindsym $gui+ctrl+Right			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
+bindsym $gui+ctrl+Left				exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
+bindsym $gui+ctrl+Right				exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
 
 for_window [app_id="fzf-menu"]	floating enable, focus, resize set 640 480, border none
 for_window [app_id="wifi-menu"] floating enable, resize set 824 300, border pixel 10, client.focused #000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused #000000 #000000 #d7d7d7 #000000 #000000, client.placeholder #000000 #000000 #d7d7d7 #000000 #000000, focus
 
-# Colors				border	bg		text	indicator child_border
-client.focused			#21242D #21242D #d7d7d7 #21242D   #21242D
+# Colors								border	bg		text	indicator child_border
+client.focused					#21242D #21242D #d7d7d7 #21242D   #21242D
 client.focused_inactive	#21242D #21242D #d7d7d7 #21242D   #21242D
-client.unfocused		#000000 #000000 #d7d7d7 #21242D   #000000
-client.placeholder		#000000 #000000 #d7d7d7 #21242D   #000000
+client.unfocused				#000000 #000000 #d7d7d7 #21242D   #000000
+client.placeholder			#000000 #000000 #d7d7d7 #21242D   #000000
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border none
@@ -248,24 +248,24 @@ set $dark_text #444444
 set $dark_bg #000000
 
 bar {
-    position top
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    # status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
+	position top
+	# When the status_command prints a new line to stdout, swaybar updates.
+	# The default just shows the current date and time.
+	# status_command while ${HOME}/bin/status-bar.sh; do sleep 1; done
 	status_command i3blocks
 	separator_symbol "·"
 
-    colors {
+	colors {
 		separator #333333
-        statusline $dark_text
-        background $dark_bg
+		statusline $dark_text
+		background $dark_bg
 		
 		# type					border	 	bg		text
-        urgent_workspace	 	#ff0000		$dark_bg  $light_text
-        active_workspace	 	$dark_bg	$dark_bg  $light_text
-        inactive_workspace		$dark_bg	$dark_bg  $dark_text
-        focused_workspace		$dark_bg	$dark_bg  $light_text
-    }
+		urgent_workspace	 	#ff0000		$dark_bg  $light_text
+		active_workspace	 	$dark_bg	$dark_bg  $light_text
+		inactive_workspace	$dark_bg	$dark_bg  $dark_text
+		focused_workspace		$dark_bg	$dark_bg  $light_text
+	}
 }
 
 # include @sysconfdir@/sway/config.d/*
@@ -277,11 +277,11 @@ gaps outer -10
 smart_gaps on
 smart_borders on
 
-bindsym $gui+z			gaps outer current plus 5
+bindsym $gui+z				gaps outer current plus 5
 bindsym $gui+Shift+z	gaps outer current minus 5
-bindsym $gui+s			gaps inner current plus 5
+bindsym $gui+s				gaps inner current plus 5
 bindsym $gui+Shift+s	gaps inner current minus 5
-bindsym $gui+d			gaps inner current set 10; gaps outer current set -10
+bindsym $gui+d				gaps inner current set 10; gaps outer current set -10
 bindsym $gui+Shift+d	gaps inner current set 0; gaps outer current set 0
 
 # set default desktop layout (default is tiling)
@@ -295,10 +295,10 @@ bindsym $gui+u border none
 bindsym $gui+y border pixel 10
 bindsym $gui+n border normal
 
-exec --no-startup-id volumeicon
-exec --no-startup-id pulseaudio
-exec --no-startup-id pa-applet
-bindsym $gui+Ctrl+m exec pavucontrol
+exec --no-startup-id	volumeicon
+exec --no-startup-id	pulseaudio
+exec --no-startup-id	pa-applet
+bindsym $gui+Ctrl+m		exec pavucontrol
 
 # Don't auto focus with mouse
 focus_follows_mouse no
@@ -375,13 +375,13 @@ bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
 seat * hide_cursor 3000  
 
 # Wifi Menu
-bindsym $gui+Shift+w exec kitty --class wifi-menu ${HOME}/bin/wifi
+bindsym $gui+Shift+w			exec kitty --class wifi-menu ${HOME}/bin/wifi
 
 # Dictionary
-bindsym $gui+Ctrl+Space exec kitty --class floatingApp ${HOME}/bin/define.zsh
+bindsym $gui+Ctrl+Space 	exec kitty --class floatingApp ${HOME}/bin/define.zsh
 
 # Task Add
-bindsym Ctrl+space exec ${HOME}/bin/tasking/add
+bindsym Ctrl+space 				exec ${HOME}/bin/tasking/add
 
 # Media Controls
 bindsym $gui+$alt+ctrl+h	exec ${HOME}/bin/media prev
@@ -395,8 +395,8 @@ bindsym $gui+p exec kitty --class=floatingApp -- zsh -c "fd --type d . '/storage
 
 # Music
 bindsym $gui+$alt+ctrl+m	exec kitty --class=floatingApp ${HOME}/bin/music.zsh
-bindsym $gui+$alt+y			exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube, mode default
-bindsym $gui+$alt+a			exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube-music, mode default
+bindsym $gui+$alt+y				exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube, mode default
+bindsym $gui+$alt+a				exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube-music, mode default
 
 # GTD
 bindsym $gui+g exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
