@@ -1,0 +1,5 @@
+#!/bin/env zsh
+
+AUTOREMOTE_KEY=$(cat $HOME/.keys/autoremote)
+
+curl "https://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_KEY&message=browse=:=$@"
