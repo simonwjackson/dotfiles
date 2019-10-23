@@ -13,6 +13,7 @@ Plug 'mboughaba/i3config.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'terminalnode/sway-vim-syntax'
 " }}}
 
 " Plugins: Extras {{{ 

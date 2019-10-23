@@ -36,6 +36,7 @@
 # Explicitly ignore these dirs
 storage/**
 .cache
+.local
 
 # Apps
 !/.local/share/applications/firefox.desktop
