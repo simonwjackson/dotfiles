@@ -15,12 +15,12 @@ set $down 	j
 set $up		k
 set $right 	l
 
-bindsym $gui+ctrl+Down exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
-bindsym $gui+shift+ctrl+Down exec --no-startup-id "${HOME}/bin/sway/bin/sway fullDown"
-bindsym $gui+ctrl+Up exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterUp"
-bindsym $gui+shift+ctrl+Up exec --no-startup-id "${HOME}/bin/sway/bin/sway fullUp"
-bindsym $gui+ctrl+Left exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
-bindsym $gui+ctrl+Right exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
+bindsym $gui+ctrl+Down			exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
+bindsym $gui+shift+ctrl+Down	exec --no-startup-id "${HOME}/bin/sway/bin/sway fullDown"
+bindsym $gui+ctrl+Up			exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterUp"
+bindsym $gui+shift+ctrl+Up		exec --no-startup-id "${HOME}/bin/sway/bin/sway fullUp"
+bindsym $gui+ctrl+Left			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
+bindsym $gui+ctrl+Right			exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
 
 for_window [app_id="fzf-menu"] floating enable, focus, resize set 640 480, border none
 
