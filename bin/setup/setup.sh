@@ -28,6 +28,10 @@ ln -s ${HOME}/.config/mailcap ${HOME}/.mailcap
 rm ${HOME}/.muttrc
 ln -s ${HOME}/.config/mutt/rc ${HOME}/.muttrc
 
+# Timewarrior
+mkdir -p ${HOME}/.timewarrior
+ln -s ${HOME}/.config/timewarrior ${HOME}/.timewarrior/timewarrior.cfg
+
 source $(setup_dir)/bluetooth.sh
 source $(setup_dir)/services.sh 
 source $(setup_dir)/pip.sh 

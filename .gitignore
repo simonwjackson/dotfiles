@@ -17,6 +17,7 @@
 !/.config/mozilla/native-messaging-hosts/**
 !/.config/mpv/*.conf
 !/.config/task/**
+!/.config/timewarrior
 !/.config/zsh/**
 !/.config/mutt/**
 /.config/mutt/passwords
