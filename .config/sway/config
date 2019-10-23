@@ -331,9 +331,10 @@ for_window [app_id="^GTD$"] move to 1
 
 # Open specific applications in floating mode
 for_window [app_id="mpv"] floating enable, focus
-for_window [app_id="floatingApp"] floating enable 
-for_window [app_id="floatingAppFocus"] floating enable, focus, resize set 640 150, border none
-for_window [title="alsamixer"] floating enable border pixel 1
+for_window [app_id="singleLineInput"] 	floating enable, 	resize set 640 20, 	border pixel 10, 	client.focused 						#000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused          #000000 #000000 #d7d7d7 #000000 #000000, 	client.placeholder        #000000 #000000 #d7d7d7 #000000 #000000, 	focus
+for_window [app_id="floatingApp"] 	floating enable, 	resize set 640 480, 	border pixel 10, 	client.focused 						#000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused          #000000 #000000 #d7d7d7 #000000 #000000, 	client.placeholder        #000000 #000000 #d7d7d7 #000000 #000000, 	focus
+for_window [app_id="floatingAppFocus"] 	floating enable, 	resize set 640 150, 	border pixel 10, 	client.focused 						#000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused          #000000 #000000 #d7d7d7 #000000 #000000, 	client.placeholder        #000000 #000000 #d7d7d7 #000000 #000000, 	focus
+
 for_window [app_id="calamares"] floating enable border normal
 for_window [app_id="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
