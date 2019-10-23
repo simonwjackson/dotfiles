@@ -394,3 +394,5 @@ bindsym $gui+p exec kitty --class=floatingApp -- zsh -c "fd --type d . '/storage
 # Music
 bindsym $gui+$alt+ctrl+m exec kitty --class=floatingApp ${HOME}/bin/music.zsh
 
+# GTD
+bindsym $gui+g exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
