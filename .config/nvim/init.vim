@@ -14,12 +14,12 @@ Plug 'mxw/vim-jsx'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } 
 Plug 'terminalnode/sway-vim-syntax'
 Plug 'sngn/vim-i3blocks-syntax'
-
 " }}}
 
 " Plugins: Extras {{{ 
 Plug 'Zaptic/elm-vim'
 Plug 'junegunn/fzf.vim'
+Plug 'jreybert/vimagit'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-fugitive' 
 Plug 'scrooloose/nerdcommenter'
