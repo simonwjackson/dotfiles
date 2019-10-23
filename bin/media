@@ -1,0 +1,53 @@
+#!/bin/env zsh
+
+file=${0:a}
+dir=${0:a:h} 
+mpvsocket="/tmp/mpvsocket" 
+AUTOREMOTE_KEY=$(cat "${HOME}/.keys/autoremote")
+
+if [[ -z $(ps -e | grep mpv) ]]; then 
+	mvpopen=false
+else 
+	mvpopen=true
+fi
+
+
+case "$1" in 
+	toggle) 
+		if "${mvpopen}"; then
+			echo '{ "command": ["cycle", "pause"] }' | socat - ${mpvsocket}
+		else 
+			curl "https://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_KEY&message=media=:=toggle"
+		fi 
+		;; 
+
+	prev) 
+		if "${mvpopen}"; then
+			echo '{ "command": ["playlist-prev"] }' | socat - ${mpvsocket}
+		else 
+			curl "https://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_KEY&message=media=:=prev"
+		fi 
+		;; 
+
+	next) 
+		if "${mvpopen}"; then
+			echo '{ "command": ["playlist-next"] }' | socat - ${mpvsocket}
+		else 
+			curl "https://autoremotejoaomgcd.appspot.com/sendmessage?key=$AUTOREMOTE_KEY&message=media=:=next"
+		fi
+		;; 
+		
+	seek)
+		echo "{ \"command\": [\"seek\", \"${2}\"] }" | socat - ${mpvsocket}
+		;;
+
+	*)
+		echo "prev\nnext\nseek" \
+			| fzf \
+				--inline-info \
+				--layout=reverse \
+			| xargs -I %a "${file}" %a
+
+esac
+
+

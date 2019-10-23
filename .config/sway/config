@@ -7,7 +7,6 @@ set $gui		Mod1
 set $alt 		Mod4
 set $media      $gui+alt
 set $hyper		$gui+$alt+ctrl+shift
-set $charged 	$gui+$alt+ctrl
 set $meh 		$alt+shift+ctrl
 
 # Home row direction keys, like vim
@@ -382,3 +381,9 @@ bindsym $gui+Ctrl+Space exec kitty --class floatingApp ${HOME}/bin/define.zsh
 # Task Add
 bindsym Ctrl+space exec ${HOME}/bin/tasking/add
 
+# Media Controls
+bindsym $media+ctrl+h	exec ${HOME}/bin/media prev
+bindsym $media+ctrl+j	exec ${HOME}/bin/media seek 5
+bindsym $media+ctrl+k	exec ${HOME}/bin/media seek -5
+bindsym $media+ctrl+l	exec ${HOME}/bin/media next
+bindsym $media+space	exec ${HOME}/bin/media toggle
