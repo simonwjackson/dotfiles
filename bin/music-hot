@@ -1,0 +1,1 @@
+beet ls -a state:Hot | fzf
