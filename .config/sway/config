@@ -378,3 +378,6 @@ bindsym $gui+Shift+w exec kitty --class wifi-menu ${HOME}/bin/wifi
 # Dictionary
 bindsym $gui+Ctrl+Space exec kitty --class floatingApp ${HOME}/bin/define.zsh
 
+# Task Add
+bindsym Ctrl+space exec ${HOME}/bin/tasking/add
+
