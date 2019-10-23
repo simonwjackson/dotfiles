@@ -14,6 +14,7 @@
 !/.config/mozilla/firefox/default/chrome/**
 !/.config/mozilla/firefox/default/user.js
 !/.config/mozilla/native-messaging-hosts/**
+!/.config/mps-youtube/config
 !/.config/mpv/*.conf
 !/.config/nvim/**.vim
 !/.config/packages/**
@@ -34,6 +35,7 @@
 
 # Explicitly ignore these dirs
 storage/**
+.cache
 
 # Apps
 !/.local/share/applications/firefox.desktop
