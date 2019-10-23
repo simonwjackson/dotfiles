@@ -195,3 +195,5 @@ nmap gE <Plug>(easymotion-gE)
 nmap s <Plug>(easymotion-s2)
 " }}}
 
+" Autocmd
+autocmd! BufWritePost $MYVIMRC source % 
