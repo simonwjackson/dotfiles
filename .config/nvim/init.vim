@@ -193,7 +193,27 @@ nmap E <Plug>(easymotion-E)
 nmap ge <Plug>(easymotion-ge)
 nmap gE <Plug>(easymotion-gE)
 nmap s <Plug>(easymotion-s2)
+
+vmap j <Plug>(easymotion-j)
+vmap k <Plug>(easymotion-k)
+vmap f <Plug>(easymotion-f)
+vmap F <Plug>(easymotion-F)
+vmap t <Plug>(easymotion-t)
+vmap T <Plug>(easymotion-T)
+vmap w <Plug>(easymotion-w)
+vmap W <Plug>(easymotion-W)
+vmap b <Plug>(easymotion-b)
+vmap B <Plug>(easymotion-B)
+vmap e <Plug>(easymotion-e)
+vmap E <Plug>(easymotion-E)
+vmap ge <Plug>(easymotion-ge)
+vmap gE <Plug>(easymotion-gE)
+vmap s <Plug>(easymotion-s2)
 " }}}
+
+nnoremap  \|\| :silent ! kitty & <Enter>
+nnoremap <Bslash><Bslash> :silent ! kitty -- nvim & <Enter>
+set timeoutlen=200
 
 " Autocmd
 autocmd! BufWritePost $MYVIMRC source % 
