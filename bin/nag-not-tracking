@@ -1,0 +1,32 @@
+#!/bin/env zsh
+
+sleep=120
+sleep $sleep
+
+while true; do
+	tracking=false
+	swaypid=$(pidof swaynag)
+
+	if [[ $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') == "There is no active time tracking." ]]
+	then 
+		tracking=false
+	else
+		tracking=true
+	fi
+
+	if [[ $tracking == false && $swaypid == "" ]]; then
+		padding=180
+		(exec -a trackingnag swaynag \
+			--message-padding "${padding}" \
+			--button-border-size 0 \
+			--button-background '900000' \
+			--button-padding "${padding}" \
+			--font "monospace 50" \
+			--message 'NOT TRACKING TIME') &
+		echo "yep"
+	elif [[ $tracking == true && $swaypid != "" ]]; then
+		pkill -f trackingnag
+		sleep $sleep
+	fi 
+	sleep 5
+done
