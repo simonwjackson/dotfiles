@@ -379,6 +379,8 @@ bindsym $gui+Ctrl+Space 	exec kitty --class floatingApp ${HOME}/bin/define.zsh
 
 # Task Add
 bindsym ctrl+space 				exec ${HOME}/bin/tasking/add, move position center 
+bindsym ctrl+shift+space	exec ${HOME}/bin/tasking/add-and-start, move position center 
+
 # Media Controls
 bindsym $gui+$alt+ctrl+h	exec ${HOME}/bin/media prev
 bindsym $gui+$alt+ctrl+j	exec ${HOME}/bin/media seek 5
