@@ -17,6 +17,8 @@ Plug 'sngn/vim-i3blocks-syntax'
 " }}}
 
 " Plugins: Extras {{{ 
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'Zaptic/elm-vim'
 Plug 'junegunn/fzf.vim'
 Plug 'jreybert/vimagit'
@@ -217,3 +219,9 @@ set timeoutlen=200
 
 " Autocmd
 autocmd! BufWritePost $MYVIMRC source % 
+
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+
+nmap <Leader>l :Limelight!!<Enter>
+" xmap <Leader>l <Plug>(Limelight)
