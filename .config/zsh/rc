@@ -56,6 +56,8 @@ source /usr/share/nvm/init-nvm.sh
 # Unlock vault
 export $(cat ~/.keys/bitwarden.env) 
 
+PATH=${PATH}:${HOME}/bin
+
 if [ "$(tty)" = "/dev/tty1" ]; then 
 	exec sway
 fi
