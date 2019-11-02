@@ -14,3 +14,6 @@ alias gitup='gitall && git push'
 # pacman
 alias prune_node_modules="find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
 alias installed="comm -23 <(pacman -Qqt | sort) <(pacman -Sqg base base-devel | sort)"
+
+# taskwarrior
+alias taskc="echo task stop ${1}; task start ${1}"
