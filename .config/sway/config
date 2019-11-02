@@ -15,12 +15,12 @@ set $down 	j
 set $up			k
 set $right 	l
 
-bindsym $gui+ctrl+Down				exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterDown"
-bindsym $gui+shift+ctrl+Down	exec --no-startup-id "${HOME}/bin/sway/bin/sway fullDown"
-bindsym $gui+ctrl+Up					exec --no-startup-id "${HOME}/bin/sway/bin/sway quarterUp"
-bindsym $gui+shift+ctrl+Up		exec --no-startup-id "${HOME}/bin/sway/bin/sway fullUp"
-bindsym $gui+ctrl+Left				exec --no-startup-id "${HOME}/bin/sway/bin/sway transformCounter"
-bindsym $gui+ctrl+Right				exec --no-startup-id "${HOME}/bin/sway/bin/sway transformClock"
+bindsym $gui+ctrl+Down				exec "${HOME}/bin/sway/bin/sway quarterDown"
+bindsym $gui+shift+ctrl+Down	exec "${HOME}/bin/sway/bin/sway fullDown"
+bindsym $gui+ctrl+Up					exec "${HOME}/bin/sway/bin/sway quarterUp"
+bindsym $gui+shift+ctrl+Up		exec "${HOME}/bin/sway/bin/sway fullUp"
+bindsym $gui+ctrl+Left				exec "${HOME}/bin/sway/bin/sway transformCounter"
+bindsym $gui+ctrl+Right				exec "${HOME}/bin/sway/bin/sway transformClock"
 
 for_window [app_id="fzf-menu"]	floating enable, focus, resize set 640 480, border none
 for_window [app_id="wifi-menu"] floating enable, resize set 824 300, border pixel 10, client.focused #000000 #000000 #d7d7d7 #000000 #000000, 	client.focused_inactive   #000000 #000000 #d7d7d7 #000000 #000000, 	client.unfocused #000000 #000000 #d7d7d7 #000000 #000000, client.placeholder #000000 #000000 #d7d7d7 #000000 #000000, focus
@@ -42,13 +42,13 @@ bindsym $gui+Return exec $term
 
 # Scratchpad Term
 for_window [title="myterm"] move scratchpad; move position center;
-exec --no-startup-id ${HOME}/bin/floating-terminal
+exec ${HOME}/bin/floating-terminal
 bindsym $gui+Shift+Return [title="myterm"] scratchpad show, mode default, move position center
 
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 # set $menu rofi | xargs swaymsg exec --
-# bindsym $gui+space exec --no-startup-id "rofi -show drun -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"   
+# bindsym $gui+space exec "rofi -show drun -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"   
 
 ### Output configuration
 
@@ -217,20 +217,20 @@ bindsym $gui+Shift+Ctrl+o	resize grow width 100px; move position center
 
 mode "apps" {
 	set $firefox MOZ_ENABLE_WAYLAND=1 GDK_BACKEND=wayland firefox, mode default
-	bindsym f exec --no-startup-id $firefox
-	bindsym $gui+f exec --no-startup-id $firefox
+	bindsym f exec $firefox
+	bindsym $gui+f exec $firefox
 
-	set $grim grim -t png "screenshots/screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
-	bindsym s exec --no-startup-id $grim
-	bindsym $gui+s exec --no-startup-id $grim 
+	set $grim grim -t png "/storage/screenshots/screenshot-$(date +%Y-%m-%dT%R:%S).png", mode default
+	bindsym s exec $grim
+	bindsym $gui+s exec $grim 
 
 	set $google kitty --class floatingApp -- ${HOME}/bin/google, mode default
-	bindsym g exec --no-startup-id $gogole
-	bindsym $gui+g exec --no-startup-id $google 
+	bindsym g exec $gogole
+	bindsym $gui+g exec $google 
 
 	set $stackoverflow kitty --class floatingApp -- ${HOME}/bin/stackoverflow, mode default
-	bindsym o exec --no-startup-id $stackoverflow
-	bindsym $gui+o exec --no-startup-id $stackoverflow 
+	bindsym o exec $stackoverflow
+	bindsym $gui+o exec $stackoverflow 
 
 	# Return to default mode
 	bindsym Return mode "default"
@@ -295,16 +295,16 @@ bindsym $gui+u border none
 bindsym $gui+y border pixel 10
 bindsym $gui+n border normal
 
-exec --no-startup-id	volumeicon
-exec --no-startup-id	pulseaudio
-exec --no-startup-id	pa-applet
+exec	volumeicon
+exec	pulseaudio
+exec	pa-applet
 bindsym $gui+Ctrl+m		exec pavucontrol
 
 # Don't auto focus with mouse
 focus_follows_mouse no
 
 # Toggle mouse
-bindsym $gui+$alt+m exec --no-startup-id $HOME/bin/toggle-mouse.sh
+bindsym $gui+$alt+m exec $HOME/bin/toggle-mouse.sh
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth yes
@@ -360,10 +360,7 @@ for_window [app_id="Xfburn"] floating enable
 for_window [urgent=latest] focus
 
 # Headphones toggle
-bindsym $gui+apostrophe exec --no-startup-id $HOME/bin/toggle-sony-headphones.sh
-
-# Startup: {{{
-#: }}}
+bindsym $gui+apostrophe		exec $HOME/bin/toggle-sony-headphones.sh
 
 # Fuzzy finder example
 # bindsym $gui+Shift+Ctrl+space exec kitty -- zsh -c "fzf --layout=reverse | xargs -r swaymsg -t command exec"
@@ -381,8 +378,7 @@ bindsym $gui+Shift+w			exec kitty --class wifi-menu ${HOME}/bin/wifi
 bindsym $gui+Ctrl+Space 	exec kitty --class floatingApp ${HOME}/bin/define.zsh
 
 # Task Add
-bindsym Ctrl+space 				exec ${HOME}/bin/tasking/add
-
+bindsym ctrl+space 				exec ${HOME}/bin/tasking/add, move position center 
 # Media Controls
 bindsym $gui+$alt+ctrl+h	exec ${HOME}/bin/media prev
 bindsym $gui+$alt+ctrl+j	exec ${HOME}/bin/media seek 5
@@ -395,8 +391,8 @@ bindsym $gui+p exec kitty --class=floatingApp -- zsh -c "fd --type d . '/storage
 
 # Music
 bindsym $gui+$alt+ctrl+m	exec kitty --class=floatingApp ${HOME}/bin/music.zsh
-bindsym $gui+$alt+y				exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube, mode default
-bindsym $gui+$alt+a				exec --no-startup-id kitty --class floatingApp -- ${HOME}/bin/youtube-music, mode default
+bindsym $gui+$alt+y				exec kitty --class floatingApp -- ${HOME}/bin/youtube, mode default
+bindsym $gui+$alt+a				exec kitty --class floatingApp -- ${HOME}/bin/youtube-music, mode default
 
 # GTD
-bindsym $gui+g exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
+bindsym $gui+g 						exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
