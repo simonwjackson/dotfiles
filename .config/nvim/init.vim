@@ -64,6 +64,14 @@ set shiftwidth=2
 let mapleader=" " 
 set nonumber 
 
+set history=1000
+set undofile
+set undolevels=1000
+set undoreload=10000
+set undodir=~/.local/share/nvim/undo
+set backupdir=~/.local/share/nvim/backup
+set directory=~/.local/share/nvim/backup
+
 " Folding {{{
 " syntax highlighting items specify folds
 set foldmethod=syntax
