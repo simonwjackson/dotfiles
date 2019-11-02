@@ -215,7 +215,10 @@ vmap s <Plug>(easymotion-s2)
 
 nnoremap  \|\| :silent ! kitty & <Enter>
 nnoremap <Bslash><Bslash> :silent ! kitty -- nvim & <Enter>
-set timeoutlen=200
+
+set notimeout
+set ttimeout
+
 
 " Autocmd
 autocmd! BufWritePost $MYVIMRC source % 
