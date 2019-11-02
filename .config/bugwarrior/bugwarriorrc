@@ -65,5 +65,5 @@ jira.username = simon.jackson
 jira.password = @oracle:eval:bw get password 4543e2f4-c2e4-41f1-b59e-aad90023d6c4 
 jira.add_tags = bottomline
 jira.version = 7
-jira.query = status in (New, Open, "In Progress", "Dev In Progress") AND assignee=Simon.Jackson OR "Epic Link" = GLU-1806
-jira.default_priority = ''
+jira.query = status in (New, Open, "In Progress", "Dev In Progress") AND (assignee=Simon.Jackson OR "Epic Link" = GLU-1806) AND project !=AO
+#jira.default_priority = 
