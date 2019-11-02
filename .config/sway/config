@@ -397,6 +397,8 @@ bindsym $gui+$alt+a				exec kitty --class floatingApp -- ${HOME}/bin/youtube-mus
 # GTD
 bindsym $gui+g 						exec kitty --class=floatingApp ${HOME}/bin/tasking/projects
 
+bindsym $gui+semicolon 		exec ${HOME}/bin/toggle-tracking.sh
+
 # Startup: {{{
 exec ${HOME}/bin/nag-not-tracking
 exec ${HOME}/bin/nag-take-break
