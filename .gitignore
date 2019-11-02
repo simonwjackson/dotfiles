@@ -28,6 +28,7 @@
 !/.config/tridactyl/**
 !/.config/vit/**
 !/.config/zsh/**
+!/.config/user-dirs.dirs
 
 # Local scripts
 
