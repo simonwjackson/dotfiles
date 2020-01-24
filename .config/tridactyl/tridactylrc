@@ -12,6 +12,7 @@ unbind d
 unbind B
 unbind b
 unbind T
+unbind gf 
 
 bind gi composite focusinput -l | editor
 bind h back
@@ -79,7 +80,6 @@ bind l forward
 " bind g$ tablast
 " bind gu urlparent
 " bind gU urlroot
-" bind gf viewsource
 " bind : fillcmdline_notrail
 " bind s fillcmdline open search
 " bind S fillcmdline tabopen search
