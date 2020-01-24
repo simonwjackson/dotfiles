@@ -43,3 +43,4 @@ storage/**
 !/.local/share/applications/firefox.desktop
 
 node_modules
+!/.local/share/nvim/plugged/**
