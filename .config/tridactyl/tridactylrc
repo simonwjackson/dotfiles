@@ -88,45 +88,45 @@ bind l forward
 " bind f hint
 " bind F hint -b
 " bind gF hint -qb
-" bind ;i hint -i
-" bind ;b hint -b
-" bind ;o hint
-" bind ;I hint -I
-" bind ;k hint -k
-" bind ;y hint -y
-" bind ;p hint -p
-" bind ;P hint -P
-" bind ;r hint -r
-" bind ;s hint -s
-" bind ;S hint -S
-" bind ;a hint -a
-" bind ;A hint -A
-" bind ;; hint -;
-" bind ;# hint -#
-" bind ;v hint -W mpvsafe
-" bind ;w hint -w
-" bind ;t hint -W tabopen
-" bind ;O hint -W fillcmdline_notrail open
-" bind ;W hint -W fillcmdline_notrail winopen
-" bind ;T hint -W fillcmdline_notrail tabopen
-" bind ;z hint -z
-" bind ;m composite hint -pipe img src | js -p tri.excmds.open('images.google.com/searchbyimage?image_url=' + JS_ARG)
-" bind ;M composite hint -pipe img src | jsb -p tri.excmds.tabopen('images.google.com/searchbyimage?image_url=' + JS_ARG)
-" bind ;gi hint -qi
-" bind ;gI hint -qI
-" bind ;gk hint -qk
-" bind ;gy hint -qy
-" bind ;gP hint -qP
-" bind ;gr hint -qr
-" bind ;gs hint -qs
-" bind ;gS hint -qS
-" bind ;gA hint -qA
-" bind ;g; hint -q;
-" bind ;g# hint -q#
-" bind ;gw hint -qw
-" bind ;gb hint -qb
-" bind ;gF hint -qb
-" bind ;gf hint -q
+bind 'i hint -i
+bind 'b hint -b
+bind 'o hint
+bind 'I hint -I
+bind 'k hint -k
+bind 'y hint -y
+bind 'p hint -p
+bind 'P hint -P
+bind 'r hint -r
+bind 's hint -s
+bind 'S hint -S
+bind 'a hint -a
+bind 'A hint -A
+bind '; hint -;
+bind '# hint -#
+bind 'v hint -W mpvsafe
+bind 'w hint -w
+bind 't hint -W tabopen
+bind 'O hint -W fillcmdline_notrail open
+bind 'W hint -W fillcmdline_notrail winopen
+bind 'T hint -W fillcmdline_notrail tabopen
+bind 'z hint -z
+bind 'm composite hint -pipe img src | js -p tri.excmds.open('images.google.com/searchbyimage?image_url=' + JS_ARG)
+bind 'M composite hint -pipe img src | jsb -p tri.excmds.tabopen('images.google.com/searchbyimage?image_url=' + JS_ARG)
+bind 'gi hint -qi
+bind 'gI hint -qI
+bind 'gk hint -qk
+bind 'gy hint -qy
+bind 'gP hint -qP
+bind 'gr hint -qr
+bind 'gs hint -qs
+bind 'gS hint -qS
+bind 'gA hint -qA
+bind 'g; hint -q;
+bind 'g# hint -q#
+bind 'gw hint -qw
+bind 'gb hint -qb
+bind 'gF hint -qb
+bind 'gf hint -q
 " bind <S-Insert> mode ignore
 " bind <CA-Escape> mode ignore
 " bind <CA-`> mode ignore
@@ -232,15 +232,18 @@ bind gR readlater
 "" Send to phone
 alias send_to_phone composite get_current_url | !s ${HOME}/bin/url-to-phone
 bind gp send_to_phone
-bind ;gp hint -W send_to_phone
+bind 'gp hint -W send_to_phone
 
 "" MPV
-alias mpvvideo composite get_current_url | js -p tri.excmds.exclaim(`$HOME/bin/xdg-video '${JS_ARG}'`)
-alias mpvaudio composite get_current_url | js -p tri.excmds.exclaim(`$HOME/bin/xdg-audio '${JS_ARG}'`)
-bind gv mpvvideo
-bind ga mpvaudio
-bind ;ga hint -W mpvaudio
-bind ;gv hint -W mpvvideo
+alias mpvvideo composite get_current_url | js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet(`$HOME/bin/xdg-video ${url}`))
+alias mpvaudio composite get_current_url | js -p tri.excmds.shellescape(JS_ARG).then(url => tri.excmds.exclaim_quiet(`$HOME/bin/xdg-audio ${url}`))
+
+bind gv mpvvideo 
+bind 'gv hint -W mpvvideo 
+"bind 'gV hint -W mpvvideoenque
+" bind ga mpvaudio
+" bind 'ga hint -W mpvaudio
+"bind 'gA hint -W mpvaudioenque
 
 "" Taskwarrior
 bind t composite get_current_url | js -p tri.excmds.fillcmdline(`! task add url:"${JS_ARG}"`)
