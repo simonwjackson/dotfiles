@@ -18,7 +18,10 @@ while true; do
 		tracking=true
 	fi
 
-if [[ $tracking == true && $swaypid == "" && $(echo "${last_break_end_till_now} > ${ideal_max_time}" | bc) != 0 ]]; then
+	if [[ ${last_real_break_end_time} == "" ]]; then
+		# nothing to do
+		sleep 2 
+	elif [[ $tracking == true && $swaypid == "" && $(echo "${last_break_end_till_now} > ${ideal_max_time}" | bc) != 0 ]]; then
 		# echo "going to show"
 		padding=50 
 		(exec -a breaknag swaynag \
@@ -30,10 +33,10 @@ if [[ $tracking == true && $swaypid == "" && $(echo "${last_break_end_till_now} 
 			--message 'YOU NEED A 20 MIN BREAK!') &
 
 elif [[ $tracking == true && $swaypid != "" && $(echo "${last_break_end_till_now} > ${ideal_max_time}" | bc) == 0 ]]; then
-	# echo "going to kill"
+	# going to kill
 	pkill -f breaknag
 else 
-	# echo "nothing to do"
+	# nothing to do
 	sleep 2
 fi
 
