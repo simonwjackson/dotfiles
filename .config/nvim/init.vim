@@ -1431,14 +1431,15 @@ endfunction
 " => FZF / Git Branch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function GitCheckout()
+function FZFGitCheckout()
     function! s:open_branch_fzf(line)
         let l:parser = split(a:line)
         let l:branch = l:parser[0]
         if l:branch ==? '*'
             let l:branch = l:parser[1]
         endif
-        execute '!git checkout --track ' . l:branch
+
+        silent execute '!git checkout --track -b ' . l:branch . ' || git checkout -b ' . l:branch
     endfunction
 
     call fzf#vim#grep(
@@ -1449,7 +1450,7 @@ function GitCheckout()
                 \ ) 
 endfunction
 
-command! -bang -nargs=0 GCheckout
+command! -nargs=* FZFGitCheckout :call FZFGitCheckout() 
 
 
 
