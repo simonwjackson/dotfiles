@@ -161,7 +161,17 @@ Plug 'francoiscabrol/ranger.vim'
 " GitHub extension for fugitive
 Plug 'tpope/vim-rhubarb'
 
-call plug#end()
+" COC for code completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Coc languages
+Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
+Plug 'neoclide/coc-jest', {'do': 'npm install'}
+Plug 'neoclide/coc-json', {'do': 'npm install'}
+Plug 'neoclide/coc-html', {'do': 'npm install'}
+Plug 'neoclide/coc-css', {'do': 'npm install'}
+
+call plug#end() 
 
 
 
@@ -630,6 +640,15 @@ endif
 " ============================================================================
 " => Helper functions
 " ============================================================================
+
+" ----------------------------------------------------------------------------
+"  - Upgrade all plugins
+" ----------------------------------------------------------------------------
+
+function! UpgradePlugins()
+    CocUpdateSync
+    PlugInstall
+endfunction
 
 " ----------------------------------------------------------------------------
 "  - Restore cursor, window, and last search after running a command.
@@ -1121,6 +1140,19 @@ autocmd! BufWritePost $MYVIMRC source $MYVIMRC
 " ============================================================================
 " => Plugin configuration
 " ============================================================================
+
+" ----------------------------------------------------------------------------
+"  - Coc
+" ----------------------------------------------------------------------------
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " ----------------------------------------------------------------------------
 "  - Todos here
