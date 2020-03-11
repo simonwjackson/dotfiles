@@ -192,7 +192,7 @@ au FocusGained,BufEnter * checktime
 let mapleader=" "
 
 " How often the UI updates
-set updatetime=500
+set updatetime=300
 
 " Dont show mode
 autocmd BufEnter,BufWritePost * set noshowmode
