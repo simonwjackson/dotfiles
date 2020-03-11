@@ -1763,11 +1763,11 @@ let g:highlightedyank_highlight_duration = 2000
 " => janko/vim-test
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <silent> <leader><leader>tn :TestNearest<CR>
-nmap <silent> <leader><leader>tf :TestFile<CR>
-nmap <silent> <leader><leader>ts :TestSuite<CR>
-nmap <silent> <leader><leader>tl :TestLast<CR>
-nmap <silent> <leader><leader>tv :TestVisit<CR>
+" nmap <silent> <leader><leader>tn :TestNearest<CR>
+" nmap <silent> <leader><leader>tf :TestFile<CR>
+" nmap <silent> <leader><leader>ts :TestSuite<CR>
+" nmap <silent> <leader><leader>tl :TestLast<CR>
+" nmap <silent> <leader><leader>tv :TestVisit<CR>
 
 let test#neovim#term_position = "topleft"
 
