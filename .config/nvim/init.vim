@@ -1078,6 +1078,7 @@ au FileType javascript imap <C-a> alert();<esc>hi
 
 au FileType javascript inoremap <buffer> $r return
 au FileType javascript inoremap <buffer> $f // --- PH<esc>FP2xi
+au FileType javascript nnoremap <leader><leader>d i/**<right>
 
 function! JavaScriptFold()
     setl foldmethod=syntax
@@ -1139,7 +1140,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 "  - Todos here
 " ----------------------------------------------------------------------------
 
-nnoremap <leader>a :call FZFTodosHere()<cr<cr>>
+nnoremap <leader>a :call FZFTodosHere()<cr>
 
 " ----------------------------------------------------------------------------
 "  - Git gutter 
@@ -1191,19 +1192,19 @@ endfunction
 let g:lightline#bufferline#enable_devicons = 1
 set laststatus=2
 
-" \             [ 'author' ]
 " \   'author': 'GitBlameAuthor'
+" \   'gutentags': 'gutentags#statusline'
+
 let g:lightline = {
             \ 'colorscheme': 'plastic',
             \ 'active': {
             \   'left': [[ 'gitbranch', 'filename' ]],
-            \   'right': [[ 'gutentags', 'todos', 'lineinfo' ],
+            \   'right': [[ 'lineinfo' ],
             \             [ 'linter_errors', 'linter_warnings', 'linter_infos' ]]
             \ },
             \ 'component_function': {
             \   'todos': 'tasklist#total',
             \   'gitbranch': 'fugitive#head',
-            \   'gutentags': 'gutentags#statusline'
             \ },
             \ }
 
@@ -1235,10 +1236,11 @@ let g:lightline#ale#indicator_errors = " "
 let g:fzf_command_prefix = "FZF"
 let g:fzf_buffers_jump = 1
 
-nnoremap <F1> :GCheckout<CR>
+nnoremap <leader>gb :FZFGitCheckout<CR>
 nnoremap <silent> <Leader>f :FZFOmniFiles<CR>
 nnoremap <Leader>b :FZFBuffers<CR>
-nnoremap <Leader>t :FZFTags<CR>
+nnoremap <Leader>t :FZFBTags<CR>
+nnoremap <Leader><leader>t :FZFTags<CR>
 
 " Hide FZF status line
 autocmd! FileType fzf
