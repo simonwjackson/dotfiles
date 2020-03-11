@@ -56,7 +56,7 @@ source /usr/share/nvm/init-nvm.sh
 # Unlock vault
 export $(cat ~/.keys/bitwarden.env) 
 
-PATH=${PATH}:${HOME}/bin
+PATH=${PATH}:${HOME}/bin:${HOME}/.gem/ruby/2.6.0/bin
 
 if [ "$(tty)" = "/dev/tty1" ]; then 
 	exec sway
