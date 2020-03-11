@@ -1,5 +1,9 @@
 #!/bin/env zsh
 
+# Check out these options
+# --no-audio-display
+# --no-audio-exclusive
+
 if [[ -z $(ps -e | grep mpv) ]]; then
 	nohup mpv --video=no ${@} &
 else
