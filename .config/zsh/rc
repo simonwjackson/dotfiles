@@ -58,6 +58,18 @@ export $(cat ~/.keys/bitwarden.env)
 
 PATH=${PATH}:${HOME}/bin:${HOME}/.gem/ruby/2.6.0/bin
 
-if [ "$(tty)" = "/dev/tty1" ]; then 
-	exec sway
-fi
+# fbr - checkout git branch (including remote branches)
+fbr() {                               
+
+  local branches branch
+
+  branches=$(git branch --all) &&
+
+  branch=$(echo "$branches" |
+
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+
+}
+
