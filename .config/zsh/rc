@@ -85,3 +85,9 @@ fshow() {
 FZF-EOF"
 }
 
+alias vimrc="nvim ${HOME}/.config/nvim/init.vim"
+alias tridactylrc="nvim ${HOME}/.config/tridactyl/tridactylrc"
+alias zshrc="nvim ${HOME}/.config/zsh/rc"
+alias kittyrc="nvim ${HOME}/.config/kitty/kitty.conf"
+alias swayrc="nvim ${HOME}/.config/sway/config"
+
