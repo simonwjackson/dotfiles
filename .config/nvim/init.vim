@@ -65,9 +65,6 @@ Plug 'terryma/vim-multiple-cursors'
 " A light and configurable statusline/tabline plugin for Vim http
 Plug 'itchyny/lightline.vim'
 
-" Deoplete plugin for elm-oracle.
-Plug 'pbogut/deoplete-elm'
-
 " Snippet support to Vim
 Plug 'Shougo/neosnippet.vim'
 
@@ -88,9 +85,6 @@ Plug 'junegunn/goyo.vim'
 
 " 🔦 Hyperfocus-writing in Vim.
 Plug 'junegunn/limelight.vim'
-
-" Elm plugin for Vim
-Plug 'Zaptic/elm-vim'
 
 " fzf for vim
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim'
@@ -1073,16 +1067,6 @@ command! Bclose call <SID>BufcloseCloseIt()
 " ============================================================================
 "  => Language Specific Options
 " ============================================================================
-
-" ----------------------------------------------------------------------------
-"  - Elm
-" ----------------------------------------------------------------------------
-
-" Start elm server
-function! ElmLive()
-    term('elm-live src/Main.elm')
-endfunction
-
 
 " ----------------------------------------------------------------------------
 "  - Javascript
