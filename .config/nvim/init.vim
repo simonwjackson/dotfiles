@@ -78,7 +78,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ruanyl/coverage.vim'
 
 " A Vim plugin that manages your tag files 
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " 🌷 Distraction-free writing in Vim 
 Plug 'junegunn/goyo.vim'
