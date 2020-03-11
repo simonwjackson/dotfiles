@@ -46,10 +46,6 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 "  - Extras
 " ----------------------------------------------------------------------------
 
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
-
 "Ranger integration in vim and neovim
 Plug 'rbgrouleff/bclose.vim' | Plug 'francoiscabrol/ranger.vim'
 
@@ -387,8 +383,6 @@ endtry
 " Hide tildas 
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
-" Hide folding characters
-set fillchars=fold:\ 
 
 
 
@@ -404,6 +398,9 @@ autocmd VimResized * wincmd =
 " ============================================================================
 "  => Folding 
 " ============================================================================
+
+" Hide folding characters
+set fillchars=fold:\ 
 
 " syntax highlighting items specify folds
 set foldmethod=syntax
