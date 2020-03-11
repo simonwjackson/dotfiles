@@ -1,10 +1,15 @@
-[task]
-command=if [[ $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') == "There is no active time tracking." ]]; then echo "<span foreground=\"red\">░▒▓ ╳ NOT TRACKING TIME ╳ ▓▒░</span>"; else echo "<span>Task:</span> <span foreground=\"#d7d7d7\"> $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') </span>"; fi
+[mpvloading]
+command=${HOME}/bin/mpv-loading
 markup=pango
 interval=1
 
+[task]
+command=[[ $(timew | head -n 1 | sed -r 's/.+?"(.+?)".*/\1/') != "There is no active time tracking." ]] && echo "<span foreground=\"#d7d7d7\"> $(timew | head -n 1 | sed -r 's/Tracking (.+?)/\1/' | sed -r 's/\"//g') </span>"
+markup=pango
+interval=5
+
 [wifi]
-command=nmcli d wifi | grep "^\*" | grep -v "\*.*SSID" | awk '{ print $8 }' | sed 's/$/%/'
+command=nmcli d wifi | grep "^\*" | grep -v "\*.*SSID" | awk '{ print $7 }' | sed 's/$/%/'
 interval=30
 
 [battery]
