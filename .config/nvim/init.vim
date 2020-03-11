@@ -1660,35 +1660,35 @@ endfunction
 
 nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
 
-autocmd BufEnter,BufWritePost *.js syntax match equals '=' conceal cchar=
-
-autocmd BufEnter,BufWritePost * syntax match fatArrow '=>' conceal cchar=ﰲ
-autocmd BufEnter,BufWritePost * syntax match skinnyArrow '->' conceal cchar=
-autocmd BufEnter,BufWritePost * syntax match pipe '|>' conceal cchar=ﲖ
-autocmd BufEnter,BufWritePost * syntax match pipeDown '|>$' conceal cchar=ﲔ
-autocmd BufEnter,BufWritePost * syntax match composeUp '<|' conceal cchar=ﲗ
-autocmd BufEnter,BufWritePost * syntax match compose '\( \{2}\)\@<!<|' conceal cchar=ﲕ
-
-" autocmd BufEnter,BufWritePost *.js syntax match compose 'compose' conceal cchar=
-" autocmd BufEnter,BufWritePost *.js syntax match pipe 'pipe' conceal cchar=ﳤ
-
-" autocmd BufEnter,BufWritePost *.js syntax match semi '\;' conceal cchar=
-" autocmd BufEnter,BufWritePost *.js syntax keyword jsReturn return conceal cchar=
-autocmd BufEnter,BufWritePost *.js syntax match parens '(' conceal cchar=(
-autocmd BufEnter,BufWritePost *.js syntax match parens ')' conceal cchar=)
-" autocmd BufEnter,BufWritePost *.js syntax keyword export export conceal cchar=丹
-
-autocmd BufEnter,BufWritePost *.js syntax match notEquals '\v\!\=' conceal cchar=≠
-autocmd BufEnter,BufWritePost *.js syntax match lte '\v\<\=' conceal cchar=≤
-autocmd BufEnter,BufWritePost *.js syntax match gte '\v\>\=' conceal cchar=≥
-autocmd BufEnter,BufWritePost *.js syntax match not '\v\!' conceal cchar=¬
-
-" autocmd BufEnter,BufWritePost *.js syntax match undefined '\vundefined' conceal cchar=
-" autocmd BufEnter,BufWritePost *.js syntax match null '\vnull' conceal cchar=ﳠ
-" autocmd BufEnter,BufWritePost *.js syntax match function '\vfunction' conceal cchar=
-
-autocmd BufEnter,BufWritePost *.js,*.elm syntax match true 'true' conceal cchar=⊤
-autocmd BufEnter,BufWritePost *.js,*.elm syntax match false 'false' conceal cchar=⊥
+" autocmd BufEnter,BufWritePost *.js syntax match equals '=' conceal cchar=
+"
+" autocmd BufEnter,BufWritePost * syntax match fatArrow '=>' conceal cchar=ﰲ
+" autocmd BufEnter,BufWritePost * syntax match skinnyArrow '->' conceal cchar=
+" autocmd BufEnter,BufWritePost * syntax match pipe '|>' conceal cchar=ﲖ
+" autocmd BufEnter,BufWritePost * syntax match pipeDown '|>$' conceal cchar=ﲔ
+" autocmd BufEnter,BufWritePost * syntax match composeUp '<|' conceal cchar=ﲗ
+" autocmd BufEnter,BufWritePost * syntax match compose '\( \{2}\)\@<!<|' conceal cchar=ﲕ
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match compose 'compose' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax match pipe 'pipe' conceal cchar=ﳤ
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match semi '\;' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax keyword jsReturn return conceal cchar=
+" autocmd BufEnter,BufWritePost *.js syntax match parens '(' conceal cchar=(
+" autocmd BufEnter,BufWritePost *.js syntax match parens ')' conceal cchar=)
+" " autocmd BufEnter,BufWritePost *.js syntax keyword export export conceal cchar=丹
+"
+" autocmd BufEnter,BufWritePost *.js syntax match notEquals '\v\!\=' conceal cchar=≠
+" autocmd BufEnter,BufWritePost *.js syntax match lte '\v\<\=' conceal cchar=≤
+" autocmd BufEnter,BufWritePost *.js syntax match gte '\v\>\=' conceal cchar=≥
+" autocmd BufEnter,BufWritePost *.js syntax match not '\v\!' conceal cchar=¬
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match undefined '\vundefined' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax match null '\vnull' conceal cchar=ﳠ
+" " autocmd BufEnter,BufWritePost *.js syntax match function '\vfunction' conceal cchar=
+"
+" autocmd BufEnter,BufWritePost *.js,*.elm syntax match true 'true' conceal cchar=⊤
+" autocmd BufEnter,BufWritePost *.js,*.elm syntax match false 'false' conceal cchar=⊥
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
