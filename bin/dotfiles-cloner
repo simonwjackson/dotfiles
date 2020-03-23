@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if ! [ -x "$(command -v git)" ]; then
+  echo 'Error: git is not installed.' >&2
+  exit 1
+fi
+if ! [ -x "$(command -v rsync)" ]; then
+  echo 'Error: rsync is not installed.' >&2
+  exit 1
+fi 
+
+TMP_DOTFILES=$(mktemp --directory)
+GIT_HOME=${HOME}/.git
+
+git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
+
+if git rev-parse --git-dir ${GIT_HOME} > /dev/null 2>&1; then
+  echo "git dir found... will not clone"
+else
+  rsync -a ${TMP_DOTFILES}/.git/ ${GIT_HOME}
+fi
+
+EXCLUSIONS=$(git \
+  --git-dir ${GIT_HOME} \
+  diff \
+  --name-only \
+  --line-prefix=`git rev-parse --show-toplevel`/ \
+| sed 's/^/--exclude=/g')
+
+rsync --verbose -a ${EXCLUSIONS} --exclude ${GIT_HOME} ${TMP_DOTFILES}/ ${HOME}
+
+rm -rdf ${TMP_DOTFILES}
