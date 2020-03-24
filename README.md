@@ -8,5 +8,5 @@ Guide: https://simonwjackson.io/guide/developer-setup
 curl -s \
   "https://raw.githubusercontent.com/simonwjackson/dotfiles/master/bin/dotfiles-cloner" \
   | sh &&
-sh ${HOME}/bin/setup/setup.sh && \
+sh ${HOME}/bin/setup/setup.sh
 ```
