@@ -1,3 +1,5 @@
+source ${HOME}/.profile
+
 ## Options section
 setopt correct                                                  # Auto correct mistakes
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
@@ -94,6 +96,10 @@ alias swayrc="nvim ${HOME}/.config/sway/config"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export LC_ALL=C
 
-#if [ "$(tty)" = "/dev/tty1" ]; then 
-	 #exec sway
-#fi
+if [[ -z "$TMUX" ]]; then
+    if tmux has-session 2>/dev/null; then
+        exec tmux attach
+    else
+        exec tmux
+    fi
+fi

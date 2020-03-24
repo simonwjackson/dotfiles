@@ -24,7 +24,7 @@
 !/.config/systemd/*.timer
 !/.config/task/**
 !/.config/timewarrior
-!/.config/tmuxinator/**
+!/.config/tmux/**
 !/.config/tridactyl/**
 !/.config/vit/**
 !/.config/zsh/**
