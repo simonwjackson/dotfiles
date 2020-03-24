@@ -13,16 +13,15 @@ git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
 if git rev-parse --git-dir ${GIT_HOME} > /dev/null 2>&1; then
   echo "git dir found... will not clone"
 else
-  rsync -a ${TMP_DOTFILES}/.git/ ${GIT_HOME}
+  rsync --archive ${TMP_DOTFILES}/.git/ ${GIT_HOME}
 fi
 
 EXCLUSIONS=$(git \
-  --git-dir ${GIT_HOME} \
+  --git-dir ${HOME}/.git \
   diff \
   --name-only \
-  --line-prefix=`git rev-parse --show-toplevel`/ \
-| sed 's/^/--exclude=/g')
+  --line-prefix=/ | sed 's/^/--exclude=/g')
 
-rsync --verbose -a ${EXCLUSIONS} --exclude ${GIT_HOME} ${TMP_DOTFILES}/ ${HOME}
+rsync --verbose --archive --recursive ${EXCLUSIONS} --exclude /.git ${TMP_DOTFILES}/ ${HOME}
 
 rm -rdf ${TMP_DOTFILES}
