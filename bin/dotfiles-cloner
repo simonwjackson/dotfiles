@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v curl)" ]; }; then 
+if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v rsync)" ] && [ -x "$(command -v curl)" ]; }; then 
   echo 'Error: Missing dependencies. installing..' >&2
-  yay -S --noconfirm git rsync
+  yay -S --noconfirm git rsync curl
 fi 
 
 TMP_DOTFILES=$(mktemp --directory)
