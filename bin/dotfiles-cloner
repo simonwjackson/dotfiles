@@ -1,12 +1,8 @@
 #!/bin/sh
 
-if ! [ -x "$(command -v git)" ]; then
-  echo 'Error: git is not installed.' >&2
-  exit 1
-fi
-if ! [ -x "$(command -v rsync)" ]; then
-  echo 'Error: rsync is not installed.' >&2
-  exit 1
+if ! [ -x "$(command -v git && command -v rsync)" ]; then
+  echo 'Error: Missing dependencies. installing..' >&2
+  yay -S --noconfirm git rsync
 fi 
 
 TMP_DOTFILES=$(mktemp --directory)
