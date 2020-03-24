@@ -12,6 +12,10 @@ source ${HOME}/bin/setup/arch.sh
 ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
 chsh -s $(which zsh)
 
+# ZSH
+
+ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
+
 # source $(setup_dir)/nvm.sh
 
 # task warrior 

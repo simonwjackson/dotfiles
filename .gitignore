@@ -38,6 +38,7 @@
 storage/**
 .cache
 .local
+.tmux
 
 # Apps
 !/.local/share/applications/firefox.desktop
