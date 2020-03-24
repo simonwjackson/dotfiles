@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if ! [ -x "$(command -v git && command -v rsync)" ]; then
+if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v curl)" ]; }; then 
   echo 'Error: Missing dependencies. installing..' >&2
   yay -S --noconfirm git rsync
 fi 
