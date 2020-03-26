@@ -7,8 +7,6 @@
 
 # Config files
 
-!/.profile
-
 !/.config/beets/**/*.yaml
 !/.config/bugwarrior/**
 !/.config/i3blocks/**
