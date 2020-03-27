@@ -100,10 +100,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 function yay-commit () {
     local LIST=${HOME}/.config/packages/arch
     local GIT_HOME=${HOME}/.git 
-    local GIT="--git-dir=${HOME}/.git --work-tree=${HOME}"
 
     yay --sync --noconfirm $1 \
-    git --git-dir=${HOME}/.git --work-tree=${HOME} stash \
+    && git --git-dir=${HOME}/.git --work-tree=${HOME} stash \
     && (grep -qxF ${1} ${LIST} \
        || echo $1 >> ${LIST}) \
     && git --git-dir=${HOME}/.git --work-tree=${HOME} add ${LIST} \
