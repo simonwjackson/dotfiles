@@ -8,7 +8,7 @@ fi
 TMP_DOTFILES=$(mktemp --directory)
 GIT_HOME=${HOME}/.git
 
-git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
+git clone git@github.com:simonwjackson/dotfiles.git ${TMP_DOTFILES}
 
 if git rev-parse --git-dir ${GIT_HOME} > /dev/null 2>&1; then
   echo "git dir found... will not clone"
