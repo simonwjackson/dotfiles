@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 source ${HOME}/.profile
 
 ## Options section
@@ -23,8 +25,8 @@ HISTFILE=${HOME}/.zhistory
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 WORDCHARS=${WORDCHARS//\/[&.;]}									# Don't consider certain characters part of the word
-
 ## Exports 
+
 source ${HOME}/.config/zsh/exports
 
 ## Keybindings
@@ -94,6 +96,21 @@ alias kittyrc="nvim ${HOME}/.config/kitty/kitty.conf"
 alias swayrc="nvim ${HOME}/.config/sway/config"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+function yay-commit () {
+    local LIST=${HOME}/.config/packages/arch
+    local GIT_HOME=${HOME}/.git 
+    local GIT="--git-dir=${HOME}/.git --work-tree=${HOME}"
+
+    yay --sync --noconfirm $1 \
+    git --git-dir=${HOME}/.git --work-tree=${HOME} stash \
+    && (grep -qxF ${1} ${LIST} \
+       || echo $1 >> ${LIST}) \
+    && git --git-dir=${HOME}/.git --work-tree=${HOME} add ${LIST} \
+    && git --git-dir=${HOME}/.git --work-tree=${HOME} commit -m "pacman: add $1" \
+    && git --git-dir=${HOME}/.git --work-tree=${HOME} push
+    git --git-dir=${HOME}/.git --work-tree=${HOME} stash pop
+}
 
 # UTF support
 LANG=en_US.utf8
