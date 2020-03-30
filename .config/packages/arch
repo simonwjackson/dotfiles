@@ -1,16 +1,11 @@
+python-pip
 entr
 fd
 fzf
 htop
 jq
-
-# Neovim
 neovim
 vim-plug-git
-
-# Python
-python-pip 
-
 powertop
 ranger
 rsync
