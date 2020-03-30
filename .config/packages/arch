@@ -6,7 +6,7 @@ jq
 
 # Neovim
 neovim
-vim-plug
+vim-plug-git
 
 # Python
 python-pip 
@@ -22,7 +22,7 @@ tmux
 unzip
 youtube-dl
 sshuttle
-nvm
+nvm-git
 zsh
 hub
 googler
