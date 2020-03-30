@@ -2,7 +2,7 @@
 
 # TODO: AUR update should be moved an init script.
 curl https://www.archlinux.org/mirrorlist/?ip_version=6 \
-  | sed --quiet 's/^#Server/Server/' \
+  | sed 's/^#Server/Server/' \
   | sudo tee /etc/pacman.d/mirrorlist \
   && yay -Syyu
 
