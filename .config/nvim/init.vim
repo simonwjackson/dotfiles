@@ -151,6 +151,9 @@ Plug 'francoiscabrol/ranger.vim'
 " GitHub extension for fugitive
 Plug 'tpope/vim-rhubarb'
 
+" Seamless navigation between tmux panes and vim splits
+Plug 'christoomey/vim-tmux-navigator'
+
 " COC for code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -544,17 +547,17 @@ endif
 " ----------------------------------------------------------------------------
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-nnoremap <silent> <M-j> :move+<cr>
-nnoremap <silent> <M-k> :move-2<cr>
-xnoremap <silent> <M-k> :move-2<cr>gv
-xnoremap <silent> <M-j> :move'>+<cr>gv
-
-if has("mac") || has("macunix")
-    nmap <D-j> <M-j>
-    nmap <D-k> <M-k>
-    vmap <D-j> <M-j>
-    vmap <D-k> <M-k>
-endif
+" nnoremap <silent> <M-j> :move+<cr>
+" nnoremap <silent> <M-k> :move-2<cr>
+" xnoremap <silent> <M-k> :move-2<cr>gv
+" xnoremap <silent> <M-j> :move'>+<cr>gv
+"
+" if has("mac") || has("macunix")
+"     nmap <D-j> <M-j>
+"     nmap <D-k> <M-k>
+"     vmap <D-j> <M-j>
+"     vmap <D-k> <M-k>
+" endif
 
 
 
@@ -1827,3 +1830,16 @@ nmap ga <Plug>(EasyAlign)
 if PlugLoaded('fzf.vim')
     inoremap <expr> <c-x><c-k> fzf#vim#complete('cat /usr/share/dict/cracklib-small')
 endif 
+
+
+
+" ----------------------------------------------------------------------------
+"  - Tmux / Vim
+" ----------------------------------------------------------------------------
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
