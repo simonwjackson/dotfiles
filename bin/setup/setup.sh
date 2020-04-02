@@ -18,8 +18,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 source ${HOME}/bin/setup/nvm.sh
 
 # task warrior 
-# rm ${HOME}/.taskrc
-# ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
+rm ${HOME}/.taskrc
+ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
 
 # VIT
 # ln -s ${HOME}/.config/vit ${HOME}/.vit
