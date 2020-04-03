@@ -89,6 +89,7 @@ fshow() {
 FZF-EOF"
 }
 
+alias tmuxrc="nvim ${HOME}/.config/tmux/tmux.conf"
 alias vimrc="nvim ${HOME}/.config/nvim/init.vim"
 alias tridactylrc="nvim ${HOME}/.config/tridactyl/tridactylrc"
 alias zshrc="nvim ${HOME}/.config/zsh/rc"
