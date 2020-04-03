@@ -75,10 +75,10 @@ Plug 'itchyny/lightline.vim'
 " Plug 'ludovicchabant/vim-gutentags'
 
 " 🌷 Distraction-free writing in Vim
-" Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 " 🔦 Hyperfocus-writing in Vim.
-" Plug 'junegunn/limelight.vim'
+Plug 'junegunn/limelight.vim'
 
 " fzf for vim
 Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim' | Plug 'yuki-ycino/fzf-preview.vim'
@@ -1611,32 +1611,49 @@ vmap s <Plug>(easymotion-s2)
 "
 "
 "
-" " ----------------------------------------------------------------------------
-" "  - goyo.vim + limelight.vim
-" " ----------------------------------------------------------------------------
-"
-" let g:goyo_height = '100%'
-" let g:limelight_paragraph_span = 1
-" let g:limelight_priority = -1
-"
-" " On window resize, if goyo is active, do <c-w>= to resize the window
-" autocmd VimResized * if exists('#goyo') | exe "normal \<c-w>=" | endif
-"
-" function! s:goyo_enter()
-"     Limelight
-" endfunction
-"
-" function! s:goyo_leave()
-"     Limelight!
-" endfunction
-"
-" autocmd! User GoyoEnter nested call <SID>goyo_enter()
-" autocmd! User GoyoLeave nested call <SID>goyo_leave()
-"
-" nnoremap <Leader>G :Goyo<CR>
-"
-"
-"
+" ----------------------------------------------------------------------------
+"  - goyo.vim + limelight.vim
+" ----------------------------------------------------------------------------
+
+let g:goyo_height = '100%'
+let g:limelight_paragraph_span = 1
+let g:limelight_priority = -1
+
+" On window resize, if goyo is active, do <c-w>= to resize the window
+autocmd VimResized * if exists('#goyo') | exe "normal \<c-w>=" | endif
+
+function! s:goyo_enter()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+    set noshowmode
+    set noshowcmd
+    set scrolloff=999
+    Limelight
+endfunction
+
+function! s:goyo_leave()
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
+    set showmode
+    set showcmd
+    set scrolloff=5
+    Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+nnoremap <Leader>G :Goyo<CR>
+
+nmap <Leader>l :Limelight!!<Enter>
+nmap <Leader>l :Limelight!!<Enter>
+
+
+
 " " ----------------------------------------------------------------------------
 " "  - Shougo/neosnippet.vim
 " " ----------------------------------------------------------------------------
@@ -1723,26 +1740,6 @@ vmap s <Plug>(easymotion-s2)
 "
 " " Display signs on uncovered lines
 " let g:coverage_show_uncovered = 1
-"
-"
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => francoiscabrol/ranger.vim
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" let g:ranger_map_keys = 0
-"
-" nmap <leader>r :RangerCurrentFile<CR>
-" nmap <leader><leader>r :RangerWorkingDirectory<CR>
-"
-"
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => junegunn/limelight.vim
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" nmap <Leader>l :Limelight!!<Enter>
-" " nmap <Leader>l :Limelight!!<Enter>
 
 
 
@@ -1764,15 +1761,15 @@ map gz# <Plug>(asterisk-gz#)
 
 
 
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => machakann/vim-highlightedyank
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" " Assign a number of time in milliseconds.
-" let g:highlightedyank_highlight_duration = 2000
-"
-"
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => machakann/vim-highlightedyank
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Assign a number of time in milliseconds.
+let g:highlightedyank_highlight_duration = 2000
+
+
+
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " " => janko/vim-test
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1855,7 +1852,7 @@ nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 
-nnoremap <silent> <A-C-j> :split<cr>
+
 
 " ----------------------------------------------------------------------------
 "  - FZF Preview
