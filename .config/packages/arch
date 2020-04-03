@@ -14,7 +14,7 @@ socat
 speedtest-cli
 task
 timew
-tmux
+tmux-git
 unzip
 youtube-dl
 sshuttle
