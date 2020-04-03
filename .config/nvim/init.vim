@@ -1230,6 +1230,26 @@ let g:lightline = {
 let g:fzf_command_prefix = "FZF"
 let g:fzf_buffers_jump = 1
 
+function! s:open_branch_fzf(line)
+    let l:branch = a:line
+    execute 'split | terminal git checkout ' . l:branch
+    call feedkeys('i', 'n')
+endfunction
+
+function! s:show_branches_fzf(bang)
+    let l:current = system('git symbolic-ref --short HEAD')
+    let l:current = substitute(l:current, '\n', '', 'g')
+    let l:current_scaped = substitute(l:current, '/', '\\/', 'g')
+    call fzf#vim#grep(
+                \ "git branch -r --no-color | sed -r -e 's/^[^/]*\\///' -e '/^" . l:current_scaped . "$/d' -e '/^HEAD/d' | sort -u", 0,
+                \ { 'sink': function('s:open_branch_fzf'), 'options': ['--no-multi', '--header='.l:current] }, a:bang)
+endfunction
+
+command! -bang -nargs=0 FzGCheckout call <SID>show_branches_fzf(<bang>0)
+
+" Open fzf in a floating window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
 " " nnoremap <leader>gb :FZFGitCheckout<CR>
 " " nnoremap <silent> <Leader>f :FZFOmniFiles<CR>
 " " nnoremap <Leader>b :FZFBuffers<CR>
@@ -1846,6 +1866,7 @@ xmap <Leader>f [fzf-p]
 
 nnoremap <silent> [fzf-p]f     :<C-u>FzfPreviewProjectFiles<CR>
 "nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gg    :<C-u>FzGCheckout<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
 nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
 nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
