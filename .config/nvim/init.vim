@@ -204,6 +204,9 @@ noremap X "_x
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p pgvy
 
+" Vertical movements should respect line wrapping
+nnoremap j gj
+nnoremap k gk
 
 
 " ============================================================================
