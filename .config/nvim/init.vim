@@ -476,6 +476,22 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " ============================================================================
 
 if g:crkbd == 1
+    nnoremap <A-H> 2<C-w><
+    vnoremap <A-H> 2<C-w><
+    inoremap <A-H> 2<C-o><C-w><
+
+    nnoremap <A-J> 2<C-w>+<CR>
+    vnoremap <A-J> 2<C-w>+<CR>
+    inoremap <A-J> 2<C-o><C-w>+
+
+    nnoremap <A-K> 2<C-w>-<CR>
+    vnoremap <A-K> 2<C-w>-<CR>
+    inoremap <A-K> 2<C-o><C-w>-
+
+    nnoremap <A-L> 2<C-w>>
+    vnoremap <A-L> 2<C-w>>
+    inoremap <A-L> 2<C-o><C-w><
+
     nnoremap <S-PageDown> <C-f><CR>
     vnoremap <S-PageDown> <C-f><CR>
     inoremap <S-PageDown> <C-o><C-f><CR>
