@@ -17,6 +17,7 @@
 !/.config/mps-youtube/config
 !/.config/mpv/*.conf
 !/.config/nvim/**.vim
+!/.config/nvim/**.json
 !/.config/packages/**
 !/.config/plex-mpv-shim/**
 !/.config/sway/**
@@ -45,3 +46,4 @@ storage/**
 
 node_modules
 !/.local/share/nvim/plugged/**
+.cargo
