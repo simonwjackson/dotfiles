@@ -152,6 +152,9 @@ Plug 'christoomey/vim-tmux-navigator'
 " Fugitive extension to manage and merge Git branches
 " Plug 'idanarye/vim-merginal'
 
+" Seamless navigation between tmux panes and vim splits
+Plug 'christoomey/vim-tmux-navigator'
+
 " COC for code completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -239,9 +242,9 @@ set wildmode=list:full
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
+	set wildignore+=.git\*,.hg\*,.svn\*
 else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+	set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
 " Configure backspace so it acts as it should act
@@ -277,7 +280,7 @@ set tm=500
 
 " Properly disable sound on errors on MacVim
 if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
+	autocmd GUIEnter * set vb t_vb=
 endif
 
 " Disable line numbers
@@ -427,10 +430,10 @@ set undoreload=10000
 
 " Persistent undo
 if has("persistent_undo")
-    set undofile
-    set undodir=~/.local/share/nvim/undo
-    set backupdir=~/.local/share/nvim/backup
-    set directory=~/.local/share/nvim/backup
+	set undofile
+	set undodir=~/.local/share/nvim/undo
+	set backupdir=~/.local/share/nvim/backup
+	set directory=~/.local/share/nvim/backup
 endif
 
 
@@ -634,8 +637,8 @@ nnoremap Q @q
 " ----------------------------------------------------------------------------
 
 function! UpgradePlugins()
-    CocUpdateSync
-    PlugInstall
+	CocUpdateSync
+	PlugInstall
 endfunction
 
 " ----------------------------------------------------------------------------
@@ -643,29 +646,29 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Preserve(command)
-    " Save the last search.
-    let search = @/
+	" Save the last search.
+	let search = @/
 
-    " Save the current cursor position.
-    let cursor_position = getpos('.')
+	" Save the current cursor position.
+	let cursor_position = getpos('.')
 
-    " Save the current window position.
-    normal! H
-    let window_position = getpos('.')
-    call setpos('.', cursor_position)
+	" Save the current window position.
+	normal! H
+	let window_position = getpos('.')
+	call setpos('.', cursor_position)
 
-    " Execute the command.
-    execute a:command
+	" Execute the command.
+	execute a:command
 
-    " Restore the last search.
-    let @/ = search
+	" Restore the last search.
+	let @/ = search
 
-    " Restore the previous window position.
-    call setpos('.', window_position)
-    normal! zt
+	" Restore the previous window position.
+	call setpos('.', window_position)
+	normal! zt
 
-    " Restore the previous cursor position.
-    call setpos('.', cursor_position)
+	" Restore the previous cursor position.
+	call setpos('.', cursor_position)
 endfunction
 
 
@@ -675,7 +678,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Indent()
-    call Preserve('normal gg=G')
+	call Preserve('normal gg=G')
 endfunction
 
 
@@ -684,7 +687,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CmdLine(str)
-    call feedkeys(":" . a:str)
+	call feedkeys(":" . a:str)
 endfunction
 
 
@@ -694,7 +697,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CurrentFileDir(cmd)
-    return a:cmd . " " . expand("%:p:h") . "/"
+	return a:cmd . " " . expand("%:p:h") . "/"
 endfunction
 
 
@@ -704,14 +707,14 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! s:WriteCreatingDirs()
-    let l:file=expand("%")
-    if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
-        let dir=fnamemodify(l:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-    write
+	let l:file=expand("%")
+	if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
+		let dir=fnamemodify(l:file, ':h')
+		if !isdirectory(dir)
+			call mkdir(dir, 'p')
+		endif
+	endif
+	write
 endfunction
 
 command! W call s:WriteCreatingDirs()
@@ -791,10 +794,10 @@ command! W call s:WriteCreatingDirs()
 " ----------------------------------------------------------------------------
 
 function! PlugLoaded(name)
-    return (
-                \ has_key(g:plugs, a:name) &&
-                \ isdirectory(g:plugs[a:name].dir) &&
-                \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+	return (
+				\ has_key(g:plugs, a:name) &&
+				\ isdirectory(g:plugs[a:name].dir) &&
+				\ stridx(&rtp, g:plugs[a:name].dir) >= 0)
 endfunction
 
 
