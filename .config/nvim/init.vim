@@ -99,7 +99,7 @@ Plug 'scrooloose/nerdcommenter'
 " Plug 'mattn/webapi-vim'
 
 " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
-" Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql'
 
 " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
 " Plug 'w0rp/ale'
@@ -158,6 +158,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Coc languages
 Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
 Plug 'neoclide/coc-jest', {'do': 'npm install'}
+Plug 'neoclide/coc-eslint', {'do': 'npm install'}
 Plug 'neoclide/coc-json', {'do': 'npm install'}
 Plug 'neoclide/coc-html', {'do': 'npm install'}
 Plug 'neoclide/coc-css', {'do': 'npm install'}
@@ -1210,38 +1211,36 @@ set laststatus=2
 " \ [ 'linter_errors', 'linter_warnings', 'linter_infos' ]]
 " \   'todos': 'tasklist#total',
 
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
 let g:lightline = {
             \ 'colorscheme': 'plastic',
             \ 'active': {
-            \   'left': [[ 'gitbranch', 'filename' ]],
-            \   'right': [[ 'lineinfo' ]],
+            \   'left': [ [ 'gitbranch' ],
+            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
+            \   'cocstatus': 'coc#status',
+            \   'currentfunction': 'CocCurrentFunction',
             \   'gitbranch': 'fugitive#head',
             \ },
             \ }
 
-" " let g:lightline.component_expand = {
-" "             \  'linter_checking': 'lightline#ale#checking',
-" "             \  'linter_infos': 'lightline#ale#infos',
-" "             \  'linter_warnings': 'lightline#ale#warnings',
-" "             \  'linter_errors': 'lightline#ale#errors',
-" "             \  'linter_ok': 'lightline#ale#ok',
-" "             \ }
-"
-" " let g:lightline.component_type = {
-" "             \     'linter_checking': 'right',
-" "             \     'linter_infos': 'right',
-" "             \     'linter_warnings': 'warning',
-" "             \     'linter_errors': 'error',
-" "             \     'linter_ok': 'right',
-" "             \ }
-"
+let g:lightline.component_type = {
+            \     'linter_checking': 'right',
+            \     'linter_infos': 'right',
+            \     'linter_warnings': 'warning',
+            \     'linter_errors': 'error',
+            \     'linter_ok': 'right',
+            \ }
+
 " let g:lightline#ale#indicator_infos = "ﭦ "
 " let g:lightline#ale#indicator_warnings = " "
 " let g:lightline#ale#indicator_errors = " "
-"
-"
+
+
 " " ----------------------------------------------------------------------------
 " "  - junegunn/fzf.vim
 " " ----------------------------------------------------------------------------
