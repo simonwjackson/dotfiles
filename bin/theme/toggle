@@ -1,0 +1,10 @@
+#!/bin/sh
+
+is_light=`cat /tmp/is_light`
+
+
+if [ $is_light -eq 1 ]; then 
+    ~/bin/theme/to-dark
+else 
+    ~/bin/theme/to-light
+fi

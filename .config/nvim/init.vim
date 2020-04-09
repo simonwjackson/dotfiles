@@ -320,21 +320,15 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-function! Solar_swap()
-    if &background ==? 'dark'
-        colorscheme github
-        set background=light
-        execute "silent !tmux source-file " . shellescape(expand('~/.config/tmux/tmux-colors-light.conf'))
-    else
-        colorscheme plastic
-        set background=dark
-        execute "silent !tmux source-file " . shellescape(expand('~/.config/tmux/tmux-colors-dark.conf'))
-    endif
-    silent !osascript -e 'tell app "System Events" to keystroke "s" using {shift down, option down, control down}'
+function! ThemeLight()
+    set background=light
+    colorscheme github
 endfunction
 
-command! SolarSwap call Solar_swap()
-nnoremap <F7> :SolarSwap<CR>
+function! ThemeDark()
+    set background=dark
+    colorscheme plastic
+endfunction
 
 " ----------------------------------------------------------------------------
 "  - Theme
