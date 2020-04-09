@@ -105,7 +105,7 @@ Plug 'jparise/vim-graphql'
 " Plug 'w0rp/ale'
 
 " A tree explorer plugin for vim.
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
 " Vim motions on speed!
 Plug 'easymotion/vim-easymotion'
@@ -165,6 +165,9 @@ Plug 'neoclide/coc-eslint', {'do': 'npm install'}
 Plug 'neoclide/coc-json', {'do': 'npm install'}
 Plug 'neoclide/coc-html', {'do': 'npm install'}
 Plug 'neoclide/coc-css', {'do': 'npm install'}
+
+" Use fzf instead of coc.nvim built-in fuzzy finder.  
+Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
 
@@ -243,9 +246,9 @@ set wildmode=list:full
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
-	set wildignore+=.git\*,.hg\*,.svn\*
+    set wildignore+=.git\*,.hg\*,.svn\*
 else
-	set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
 " Configure backspace so it acts as it should act
@@ -281,7 +284,7 @@ set tm=500
 
 " Properly disable sound on errors on MacVim
 if has("gui_macvim")
-	autocmd GUIEnter * set vb t_vb=
+    autocmd GUIEnter * set vb t_vb=
 endif
 
 " Disable line numbers
@@ -317,7 +320,21 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+function! Solar_swap()
+    if &background ==? 'dark'
+        colorscheme github
+        set background=light
+        execute "silent !tmux source-file " . shellescape(expand('~/.config/tmux/tmux-colors-light.conf'))
+    else
+        colorscheme plastic
+        set background=dark
+        execute "silent !tmux source-file " . shellescape(expand('~/.config/tmux/tmux-colors-dark.conf'))
+    endif
+    silent !osascript -e 'tell app "System Events" to keystroke "s" using {shift down, option down, control down}'
+endfunction
 
+command! SolarSwap call Solar_swap()
+nnoremap <F7> :SolarSwap<CR>
 
 " ----------------------------------------------------------------------------
 "  - Theme
@@ -325,8 +342,6 @@ set ffs=unix,dos,mac
 
 try
     colorscheme plastic
-    " set background=light
-    " colorscheme github
 
     " Vim
     hi CursorColumn         guibg=None guifg=None
@@ -431,10 +446,10 @@ set undoreload=10000
 
 " Persistent undo
 if has("persistent_undo")
-	set undofile
-	set undodir=~/.local/share/nvim/undo
-	set backupdir=~/.local/share/nvim/backup
-	set directory=~/.local/share/nvim/backup
+    set undofile
+    set undodir=~/.local/share/nvim/undo
+    set backupdir=~/.local/share/nvim/backup
+    set directory=~/.local/share/nvim/backup
 endif
 
 
@@ -654,8 +669,8 @@ nnoremap Q @q
 " ----------------------------------------------------------------------------
 
 function! UpgradePlugins()
-	CocUpdateSync
-	PlugInstall
+    CocUpdateSync
+    PlugInstall
 endfunction
 
 " ----------------------------------------------------------------------------
@@ -663,29 +678,29 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Preserve(command)
-	" Save the last search.
-	let search = @/
+    " Save the last search.
+    let search = @/
 
-	" Save the current cursor position.
-	let cursor_position = getpos('.')
+    " Save the current cursor position.
+    let cursor_position = getpos('.')
 
-	" Save the current window position.
-	normal! H
-	let window_position = getpos('.')
-	call setpos('.', cursor_position)
+    " Save the current window position.
+    normal! H
+    let window_position = getpos('.')
+    call setpos('.', cursor_position)
 
-	" Execute the command.
-	execute a:command
+    " Execute the command.
+    execute a:command
 
-	" Restore the last search.
-	let @/ = search
+    " Restore the last search.
+    let @/ = search
 
-	" Restore the previous window position.
-	call setpos('.', window_position)
-	normal! zt
+    " Restore the previous window position.
+    call setpos('.', window_position)
+    normal! zt
 
-	" Restore the previous cursor position.
-	call setpos('.', cursor_position)
+    " Restore the previous cursor position.
+    call setpos('.', cursor_position)
 endfunction
 
 
@@ -695,7 +710,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Indent()
-	call Preserve('normal gg=G')
+    call Preserve('normal gg=G')
 endfunction
 
 
@@ -704,7 +719,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CmdLine(str)
-	call feedkeys(":" . a:str)
+    call feedkeys(":" . a:str)
 endfunction
 
 
@@ -714,7 +729,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CurrentFileDir(cmd)
-	return a:cmd . " " . expand("%:p:h") . "/"
+    return a:cmd . " " . expand("%:p:h") . "/"
 endfunction
 
 
@@ -724,14 +739,14 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! s:WriteCreatingDirs()
-	let l:file=expand("%")
-	if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
-		let dir=fnamemodify(l:file, ':h')
-		if !isdirectory(dir)
-			call mkdir(dir, 'p')
-		endif
-	endif
-	write
+    let l:file=expand("%")
+    if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
+        let dir=fnamemodify(l:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+    write
 endfunction
 
 command! W call s:WriteCreatingDirs()
@@ -811,10 +826,10 @@ command! W call s:WriteCreatingDirs()
 " ----------------------------------------------------------------------------
 
 function! PlugLoaded(name)
-	return (
-				\ has_key(g:plugs, a:name) &&
-				\ isdirectory(g:plugs[a:name].dir) &&
-				\ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+    return (
+                \ has_key(g:plugs, a:name) &&
+                \ isdirectory(g:plugs[a:name].dir) &&
+                \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
 endfunction
 
 
@@ -1498,28 +1513,28 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 
 
-" ----------------------------------------------------------------------------
-"  - scrooloose / nerdtree
-" ----------------------------------------------------------------------------
-
-function! NERDTreeHere()
-    if exists("g:NERDTree") && g:NERDTree.IsOpen()
-        NERDTreeClose
-    else
-        NERDTreeFind
-    endif
-endfunction
-
-" Mappings
-nnoremap <F5> :call NERDTreeHere()<CR>
-vnoremap <F5> :call NERDTreeHere()<CR>
-inoremap <F5> <C-o>:call NERDTreeHere()<CR>
-
-" Close NERDTree on file open
-let g:NERDTreeHijackNetrw=0
-let NERDTreeQuitOnOpen=1
-let g:loaded_netrw= 1
-let g:netrw_loaded_netrwPlugin= 1
+" " ----------------------------------------------------------------------------
+" "  - scrooloose / nerdtree
+" " ----------------------------------------------------------------------------
+"
+" function! NERDTreeHere()
+"     if exists("g:NERDTree") && g:NERDTree.IsOpen()
+"         NERDTreeClose
+"     else
+"         NERDTreeFind
+"     endif
+" endfunction
+"
+" " Mappings
+" nnoremap <F5> :call NERDTreeHere()<CR>
+" vnoremap <F5> :call NERDTreeHere()<CR>
+" inoremap <F5> <C-o>:call NERDTreeHere()<CR>
+"
+" " Close NERDTree on file open
+" let g:NERDTreeHijackNetrw=0
+" let NERDTreeQuitOnOpen=1
+" let g:loaded_netrw= 1
+" let g:netrw_loaded_netrwPlugin= 1
 
 
 
@@ -1771,14 +1786,22 @@ nmap <Leader>l :Limelight!!<Enter>
 " Keep cursor position across matches
 let g:asterisk#keeppos = 1
 
-map *   <Plug>(asterisk-z*)<Plug>(is-nohl-1)
-map g*  <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
-map #   <Plug>(asterisk-z#)<Plug>(is-nohl-1)
-map g#  <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
 map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
+" map *   <Plug>(asterisk-z*)<Plug>(is-nohl-1)
+" map g*  <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
+" map #   <Plug>(asterisk-z#)<Plug>(is-nohl-1)
+" map g#  <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+" map z*  <Plug>(asterisk-z*)
+" map gz* <Plug>(asterisk-gz*)
+" map z#  <Plug>(asterisk-z#)
+" map gz# <Plug>(asterisk-gz#)
 
 
 
@@ -1883,6 +1906,7 @@ nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
 nnoremap <silent> [fzf-p]f     :<C-u>FzfPreviewProjectFiles<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewProjectOldFiles<CR>
 "nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]gg    :<C-u>FzGCheckout<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
@@ -1894,6 +1918,7 @@ nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
 nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
 nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
 nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+nnoremap          [fzf-p]a    :<C-u>FzfPreviewProjectGrep<Space>TODO<CR>
 xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
@@ -1944,7 +1969,7 @@ let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading'
 let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=ansi-dark --plain'
 
 " Commands used for preview of the grep result
-let g:fzf_preview_grep_preview_cmd = expand('<sfile>:h:h') . '/bin/preview_fzf_grep'
+" let g:fzf_preview_grep_preview_cmd = expand('<sfile>:h:h') . '/bin/preview_fzf_grep'
 
 " Keyboard shortcuts while fzf preview is active
 " let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
@@ -1971,3 +1996,30 @@ let g:fzf_preview_use_dev_icons = 0
 
 " devicons character width
 let g:fzf_preview_dev_icon_prefix_length = 2
+
+
+
+" ----------------------------------------------------------------------------
+"  - Ranger
+" ----------------------------------------------------------------------------
+nnoremap <F5> :call SmartRanger()<CR>
+
+function! SmartRanger()                   
+    if @% == ""
+        silent execute "!tmux popup -x C -y C -w '50\\%' -h '80\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    else
+        silent execute "!tmux popup -x C -y C -w '50\\%' -h '80\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    endif                                   
+endfun  
+
+
+
+nnoremap <silent> <space>ea  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <space>eb  :<C-u>CocFzfList diagnostics --current-buf<CR>
+nnoremap <silent> <space>ec  :<C-u>CocFzfList commands<CR>
+nnoremap <silent> <space>ee  :<C-u>CocFzfList extensions<CR>
+nnoremap <silent> <space>el  :<C-u>CocFzfList location<CR>
+nnoremap <silent> <space>eo  :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <space>es  :<C-u>CocFzfList symbols<CR>
+nnoremap <silent> <space>eS  :<C-u>CocFzfList services<CR>
+nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>

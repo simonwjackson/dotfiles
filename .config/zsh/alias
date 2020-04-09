@@ -3,8 +3,9 @@
 alias cp="cp -i"         # Confirm before overwriting something
 alias df='df -h'         # Human-readable sizes
 alias free='free -m'     # Show sizes in MB
+alias nvim="NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim"
 alias vim='nvim'
-alias vi='vim'
+alias vi='vim' 
 
 # Git
 alias gitamend='git commit --amend' 
