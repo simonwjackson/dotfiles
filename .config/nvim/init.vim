@@ -1,5 +1,4 @@
-" ============================================================================
-"
+" ============================================================================ 
 "     Maintainer:
 "     Simon W. Jackson    @simonwjackson
 "
@@ -172,7 +171,6 @@ Plug 'antoinemadec/coc-fzf'
 call plug#end()
 
 
-
 " ============================================================================
 "  => General
 " ============================================================================
@@ -311,14 +309,21 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-" Enable syntax highlighting
-syntax enable
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" Ensure 256 color support
+set t_Co=256
+
+" Enable syntax highlighting
+syntax enable
+
+" ----------------------------------------------------------------------------
+"  - Theme
+" ----------------------------------------------------------------------------
 
 function! ThemeLight()
     set background=light
@@ -326,16 +331,12 @@ function! ThemeLight()
 endfunction
 
 function! ThemeDark()
-    set background=dark
+    set background=dark 
     colorscheme plastic
 endfunction
 
-" ----------------------------------------------------------------------------
-"  - Theme
-" ----------------------------------------------------------------------------
-
 try
-    colorscheme plastic
+    call ThemeDark()
 
     " Vim
     hi CursorColumn         guibg=None guifg=None
@@ -346,20 +347,14 @@ try
     hi SpellRare cterm=underline
     hi SpellCap cterm=underline
 
+    " call EasyMotion#highlight#init()
+    " call coc#util#init_virtual_hl()
+
     " Dim
     highlight def Dim guifg=#333c4a
 
     " Highlight Yanks
     highlight HighlightedyankRegion cterm=reverse guibg=#1d2025 guifg=#af98e6
-
-    " Ale
-    " autocmd VimEnter * :highlight! ALEErrorSign ctermbg=None guibg=None ctermfg=204 guifg='#e06c75'
-    " autocmd VimEnter * :highlight! ALEWarningSign ctermbg=None guibg=None ctermfg=180 guifg='#e5c07b'
-    " autocmd VimEnter * :highlight! ALEInfoSign ctermbg=None guibg=None ctermfg=173 guifg='#d19a66'
-    "
-    " autocmd VimEnter * :highlight! ALEError ctermbg=None guibg=None ctermfg=204 guifg='#e06c75' gui=underline
-    " autocmd VimEnter * :highlight! ALEWarning ctermbg=None guibg=None ctermfg=180 guifg='#e5c07b'
-    " autocmd VimEnter * :highlight! ALEInfo ctermbg=None guibg=None ctermfg=173 guifg='#d19a66'
 
     hi VertSplit            guibg=bg guifg=black
     hi StatusLine           guibg=bg guifg=#888888
@@ -381,7 +376,8 @@ try
     autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
 
     let g:fzf_colors =
-                \ { 'fg':    ['fg', 'Normal'],
+                \ {
+                \ 'fg':      ['fg', 'Normal'],
                 \ 'bg':      ['bg', 'Normal'],
                 \ 'hl':      ['fg', 'Comment'],
                 \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
@@ -521,46 +517,63 @@ if g:crkbd == 1
     inoremap <PageUp> <C-o><C-u>
     vnoremap <PageUp> <C-u>
 
-    nmap <A-Left> <Plug>(easymotion-ge)
-    vmap <A-Left> <Plug>(easymotion-ge)
-    imap <A-Left> <C-o><Plug>(easymotion-ge)
+    """""
 
-    nmap <C-Left> <Plug>(easymotion-b)
-    vmap <C-Left> <Plug>(easymotion-b)
-    imap <C-Left> <C-o><Plug>(easymotion-b)
+    nmap <Left> <Plug>(easymotion-b)
+    vmap <Left> <Plug>(easymotion-b)
+    imap <Left> <C-o><Plug>(easymotion-b)
 
-    nmap <C-Right> <Plug>(easymotion-w)
-    vmap <C-Right> <Plug>(easymotion-w)
-    imap <C-Right> <C-o><Plug>(easymotion-w)
+    nmap ← <Plug>(easymotion-ge)
+    vmap ← <Plug>(easymotion-ge)
+    imap ← <C-o><Plug>(easymotion-ge)
 
-    nmap <A-Right> <Plug>(easymotion-e)
-    vmap <A-Right> <Plug>(easymotion-e)
-    imap <A-Right> <C-o><Plug>(easymotion-e)
+    nmap ⇐ <Plug>(easymotion-B)
+    vmap ⇐ <Plug>(easymotion-B)
+    imap ⇐ <C-o><Plug>(easymotion-B)
 
-    nmap <C-A-S-Left> <Plug>(easymotion-gE)
-    vmap <C-A-S-Left> <Plug>(easymotion-gE)
-    imap <C-A-S-Left> <C-o><Plug>(easymotion-gE)
+    nmap <S-⇐> <Plug>(easymotion-gE)
+    vmap <S-⇐> <Plug>(easymotion-gE)
+    imap <S-⇐> <C-o><Plug>(easymotion-gE)
 
-    nmap <C-A-Left> <Plug>(easymotion-B)
-    vmap <C-A-Left> <Plug>(easymotion-B)
-    imap <C-A-Left> <C-o><Plug>(easymotion-B)
+    """""
 
-    nmap <C-A-Right> <Plug>(easymotion-W)
-    vmap <C-A-Right> <Plug>(easymotion-W)
-    imap <C-A-Right> <C-o><Plug>(easymotion-W)
+    nmap <Right> <Plug>(easymotion-w)
+    vmap <Right> <Plug>(easymotion-w)
+    imap <Right> <C-o><Plug>(easymotion-w)
 
-    nmap <C-A-S-Right> <Plug>(easymotion-E)
-    vmap <C-A-S-Right> <Plug>(easymotion-E)
-    imap <C-A-S-Right> <C-o><Plug>(easymotion-E)
+    nmap → <Plug>(easymotion-e)
+    vmap → <Plug>(easymotion-e)
+    imap → <C-o><Plug>(easymotion-e)
 
-    " Disable keys
-    noremap <Backspace> <Nop>
+    nmap ⇒ <Plug>(easymotion-W)
+    vmap ⇒ <Plug>(easymotion-W)
+    imap ⇒ <C-o><Plug>(easymotion-W)
 
-    " Save
-    inoremap <C-s>     <C-O>:update<cr>
-    nnoremap <C-s>     :update<cr>
-    "nmap <C-w> :quit<CR>
-    "inoremap <C-w> :quit<CR>
+    nmap <S-⇒> <Plug>(easymotion-E)
+    vmap <S-⇒> <Plug>(easymotion-E)
+    imap <S-⇒> <C-o><Plug>(easymotion-E)
+
+    """""
+
+    nmap <Down> <Plug>(easymotion-j)
+    vmap <Down> <Plug>(easymotion-j)
+    imap <Down> <C-o><Plug>(easymotion-j)
+
+    nmap <Up> <Plug>(easymotion-k)
+    vmap <Up> <Plug>(easymotion-k)
+    imap <Up> <C-o><Plug>(easymotion-k)
+
+    """""
+
+
+    " " Disable keys
+    " noremap <Backspace> <Nop>
+    "
+    " " Save
+    " inoremap <C-s>     <C-O>:update<cr>
+    " nnoremap <C-s>     :update<cr>
+    " "nmap <C-w> :quit<CR>
+    " "inoremap <C-w> :quit<CR>
 endif
 
 
@@ -581,6 +594,7 @@ endif
 "     vmap <D-j> <M-j>
 "     vmap <D-k> <M-k>
 " endif
+
 
 
 
@@ -706,6 +720,7 @@ endfunction
 function! Indent()
     call Preserve('normal gg=G')
 endfunction
+
 
 
 " ----------------------------------------------------------------------------
@@ -1141,8 +1156,16 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Redraw after reload
+" https://github.com/easymotion/vim-easymotion/issues/272#issuecomment-179505380
+
 autocmd! BufWritePre $MYVIMRC :call Indent()
-autocmd! BufWritePost $MYVIMRC source $MYVIMRC
+autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC | redraw
+
+
+" autocmd! BufWritePost $MYVIMRC nested
+"             \ | source $MYVIMRC | redraw
+
 
 
 " ============================================================================
@@ -1162,8 +1185,11 @@ set shortmess+=c
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" Goto definition of the symbol under the cursor
 nmap <silent> gd <Plug>(coc-definition)
 
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " " ----------------------------------------------------------------------------
 " "  - Todos here
@@ -1182,7 +1208,7 @@ let g:gitgutter_preview_win_floating=1
 let g:gitgutter_override_sign_column_highlight = 0
 call gitgutter#highlight#define_highlights()
 
-highlight clear SignColumn
+" highlight clear SignColumn
 
 " Flatten all gutter icons
 let g:gitgutter_sign_added = '│' " █▓▒░║
@@ -1227,14 +1253,21 @@ set laststatus=2
 " \   'todos': 'tasklist#total',
 
 function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
+    if !empty(get(b:, 'coc_current_function', ''))
+        return ' ' . get(b:, 'coc_current_function', '')
+    else
+        return ''
+    endif
 endfunction
 
 let g:lightline = {
             \ 'colorscheme': 'plastic',
             \ 'active': {
             \   'left': [ [ 'gitbranch' ],
-            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'filetype' ] ]
             \ },
             \ 'component_function': {
             \   'cocstatus': 'coc#status',
@@ -1616,6 +1649,12 @@ let g:EasyMotion_do_mapping = 0
 
 " Easymotion keys
 let g:EasyMotion_keys = 'asdfjklghqweruiopzxcvmtybn:'
+
+" keep cursor column when JK motion
+let g:EasyMotion_startofline = 0 
+
+" This setting makes EasyMotion work similarly to Vim's smartcase option for global searches.
+let g:EasyMotion_smartcase = 1
 
 " Finding
 nmap f <Plug>(easymotion-f)
@@ -2020,3 +2059,5 @@ nnoremap <silent> <space>eo  :<C-u>CocFzfList outline<CR>
 nnoremap <silent> <space>es  :<C-u>CocFzfList symbols<CR>
 nnoremap <silent> <space>eS  :<C-u>CocFzfList services<CR>
 nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
+
+
