@@ -22,7 +22,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'flrnprz/plastic.vim'
 Plug 'victorze/foo'
-
+Plug 'Mizux/vim-colorschemes'
+Plug 'lifepillar/vim-solarized8'
 
 
 " ----------------------------------------------------------------------------
@@ -167,6 +168,7 @@ Plug 'neoclide/coc-css', {'do': 'npm install'}
 
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
 Plug 'antoinemadec/coc-fzf'
+
 
 call plug#end()
 
@@ -327,7 +329,9 @@ syntax enable
 
 function! ThemeLight()
     set background=light
-    colorscheme github
+    g:solarized_statusline='flat'
+    g:solarized_old_cursor_style=1
+    colorscheme solarized8_flat
 endfunction
 
 function! ThemeDark()
@@ -2047,7 +2051,6 @@ function! SmartRanger()
         silent execute "!tmux popup -x C -y C -w '50\\%' -h '80\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
     endif                                   
 endfun  
-
 
 
 nnoremap <silent> <space>ea  :<C-u>CocFzfList diagnostics<CR>
