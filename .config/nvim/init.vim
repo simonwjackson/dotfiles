@@ -1162,6 +1162,9 @@ set shortmess+=c
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+nmap <silent> gd <Plug>(coc-definition)
+
+
 " " ----------------------------------------------------------------------------
 " "  - Todos here
 " " ----------------------------------------------------------------------------
