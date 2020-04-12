@@ -572,10 +572,11 @@ if g:crkbd == 1
 
     " " Disable keys
     " noremap <Backspace> <Nop>
-    "
-    " " Save
-    " inoremap <C-s>     <C-O>:update<cr>
-    " nnoremap <C-s>     :update<cr>
+
+    " Save
+    inoremap <C-s>     <C-O>:update<cr>
+    nnoremap <C-s>     :update<cr>
+
     " "nmap <C-w> :quit<CR>
     " "inoremap <C-w> :quit<CR>
 endif
@@ -1192,8 +1193,24 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Goto definition of the symbol under the cursor
 nmap <silent> gd <Plug>(coc-definition)
 
+" Goto implementation of the symbol under the cursor
+nmap <silent> gi <Plug>(coc-implementation)
+
+" Goto references of the symbol under the cursor
+nmap <silent>gr <Plug>(coc-references)
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 " " ----------------------------------------------------------------------------
 " "  - Todos here
@@ -1723,7 +1740,7 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-nnoremap <Leader>G :Goyo<CR>
+nnoremap <A-S-Z> :Goyo<CR>
 
 nmap <Leader>l :Limelight!!<Enter>
 nmap <Leader>l :Limelight!!<Enter>
@@ -2046,9 +2063,9 @@ nnoremap <F5> :call SmartRanger()<CR>
 
 function! SmartRanger()                   
     if @% == ""
-        silent execute "!tmux popup -x C -y C -w '50\\%' -h '80\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+        silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
     else
-        silent execute "!tmux popup -x C -y C -w '50\\%' -h '80\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+        silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
     endif                                   
 endfun  
 
@@ -2063,4 +2080,13 @@ nnoremap <silent> <space>es  :<C-u>CocFzfList symbols<CR>
 nnoremap <silent> <space>eS  :<C-u>CocFzfList services<CR>
 nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
 
-
+" Don't let Easymotion disturb cocs gutter
+" https://github.com/neoclide/coc.nvim/issues/110#issuecomment-428447284
+" augroup FixConflict
+"     autocmd!
+"     au InsertEnter *.js CocEnable
+"     au InsertLeave *.js CocDisable
+" augroup END
+"
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+nmap <Leader>he <Plug>(GitGutterRevertHunk)
