@@ -215,10 +215,19 @@ xnoremap p pgvy
 nnoremap j gj
 nnoremap k gk
 
+" Use RipGrep for grepping
+set grepprg=rg\ --vimgrep 
+
+" Keep lines above/below cursor
+set scrolloff=5
 
 " ============================================================================
 "  => VIM user interface
 " ============================================================================
+
+" Auto resize splits to sane minimums when entering
+set winwidth=80
+set winheight=10
 
 " split below, not above
 set splitbelow            
@@ -341,11 +350,12 @@ function! ThemeLight()
   g:solarized_statusline='flat'
   " g:solarized_old_cursor_style=1
   colorscheme solarized8_flat
-  " colorscheme github
+  colorscheme github
   let g:lightline.colorscheme = 'solarized'
   LightlineReload
 
   silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  hi CursorLine           guibg=None guifg=None
 endfunction
 
 function! ThemeDark()
@@ -355,6 +365,7 @@ function! ThemeDark()
   LightlineReload
 
   silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  hi CursorLine           guibg=#333333 guifg=None
 endfunction
 
 command! LightlineReload call LightlineReload()
@@ -370,7 +381,6 @@ try
 
   " Vim
   hi CursorColumn         guibg=None guifg=None
-  hi CursorLine           guibg=#25292f guifg=None
 
   hi SpellBad cterm=underline
   hi SpellLocal cterm=underline
