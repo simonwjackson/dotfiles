@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo 1 > /tmp/is_light
+echo 1 > /tmp/is_light &
 
-tmux source-file ~/.config/tmux/tmux-colors-light.conf &
-ls /tmp/nvim**/0 | xargs -n 1 -P 8 -I % nvr -s --nostart --servername % -c "call ThemeLight()" 
+tmux source-file ${HOME}/.config/tmux/tmux-colors-light.conf &
+ls /tmp/nvim**/0 | xargs -n 1 -P 8 -I % ${HOME}/.local/bin/nvr -s --nostart --servername % -c "call ThemeLight()" 
 

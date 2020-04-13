@@ -330,11 +330,13 @@ syntax enable
 function! ThemeLight()
     set background=light
     g:solarized_statusline='flat'
-    g:solarized_old_cursor_style=1
-    " colorscheme solarized8_flat
-    colorscheme github
+    " g:solarized_old_cursor_style=1
+    colorscheme solarized8_flat
+    " colorscheme github
     let g:lightline.colorscheme = 'solarized'
     LightlineReload
+
+    silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 endfunction
 
 function! ThemeDark()
@@ -342,6 +344,8 @@ function! ThemeDark()
     colorscheme plastic
     let g:lightline.colorscheme = 'plastic'
     LightlineReload
+
+    silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 endfunction
 
 command! LightlineReload call LightlineReload()
@@ -2084,6 +2088,9 @@ function! SmartRanger()
 endfun  
 
 
+nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
+
 nnoremap <silent> <space>ea  :<C-u>CocFzfList diagnostics<CR>
 nnoremap <silent> <space>eb  :<C-u>CocFzfList diagnostics --current-buf<CR>
 nnoremap <silent> <space>ec  :<C-u>CocFzfList commands<CR>
@@ -2105,7 +2112,4 @@ nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
 nmap <Leader>hs <Plug>(GitGutterStageHunk)
 nmap <Leader>he <Plug>(GitGutterRevertHunk)
 
-nnoremap <F10> :silent execute '!tmux new-window -a lazygit &'<CR>
-
-nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
-nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
+nnoremap <F10> :silent execute '!tmux new-window -a lazygit &'<CR> 
