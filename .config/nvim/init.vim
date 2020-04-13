@@ -331,12 +331,25 @@ function! ThemeLight()
     set background=light
     g:solarized_statusline='flat'
     g:solarized_old_cursor_style=1
-    colorscheme solarized8_flat
+    " colorscheme solarized8_flat
+    colorscheme github
+    let g:lightline.colorscheme = 'solarized'
+    LightlineReload
 endfunction
 
 function! ThemeDark()
     set background=dark 
     colorscheme plastic
+    let g:lightline.colorscheme = 'plastic'
+    LightlineReload
+endfunction
+
+command! LightlineReload call LightlineReload()
+
+function! LightlineReload()
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
 endfunction
 
 try
@@ -1964,6 +1977,7 @@ xmap <Leader>f [fzf-p]
 
 nnoremap <silent> [fzf-p]f     :<C-u>FzfPreviewProjectFiles<CR>
 nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewProjectOldFiles<CR>
+
 "nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
 nnoremap <silent> [fzf-p]gg    :<C-u>FzGCheckout<CR>
 nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
@@ -2090,3 +2104,8 @@ nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
 "
 nmap <Leader>hs <Plug>(GitGutterStageHunk)
 nmap <Leader>he <Plug>(GitGutterRevertHunk)
+
+nnoremap <F10> :silent execute '!tmux new-window -a lazygit &'<CR>
+
+nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
