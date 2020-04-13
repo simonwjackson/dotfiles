@@ -220,8 +220,17 @@ nnoremap k gk
 "  => VIM user interface
 " ============================================================================
 
+" split below, not above
+set splitbelow            
+
+" split right, not left
+set splitright            
+
+" Show substitutions live
+set inccommand=split      
+
 " Highlight current line
-" set cursorline
+set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -246,9 +255,9 @@ set wildmode=list:full
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
+  set wildignore+=.git\*,.hg\*,.svn\*
 else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
 
 " Configure backspace so it acts as it should act
@@ -284,7 +293,7 @@ set tm=500
 
 " Properly disable sound on errors on MacVim
 if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
+  autocmd GUIEnter * set vb t_vb=
 endif
 
 " Disable line numbers
@@ -308,7 +317,7 @@ set ttimeout
 " ============================================================================
 
 if (has("termguicolors"))
-    set termguicolors
+  set termguicolors
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -328,89 +337,89 @@ syntax enable
 " ----------------------------------------------------------------------------
 
 function! ThemeLight()
-    set background=light
-    g:solarized_statusline='flat'
-    " g:solarized_old_cursor_style=1
-    colorscheme solarized8_flat
-    " colorscheme github
-    let g:lightline.colorscheme = 'solarized'
-    LightlineReload
+  set background=light
+  g:solarized_statusline='flat'
+  " g:solarized_old_cursor_style=1
+  colorscheme solarized8_flat
+  " colorscheme github
+  let g:lightline.colorscheme = 'solarized'
+  LightlineReload
 
-    silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 endfunction
 
 function! ThemeDark()
-    set background=dark 
-    colorscheme plastic
-    let g:lightline.colorscheme = 'plastic'
-    LightlineReload
+  set background=dark 
+  colorscheme plastic
+  let g:lightline.colorscheme = 'plastic'
+  LightlineReload
 
-    silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 endfunction
 
 command! LightlineReload call LightlineReload()
 
 function! LightlineReload()
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
 endfunction
 
 try
-    call ThemeDark()
+  call ThemeDark()
 
-    " Vim
-    hi CursorColumn         guibg=None guifg=None
-    hi CursorLine           guibg=#25292f guifg=None
+  " Vim
+  hi CursorColumn         guibg=None guifg=None
+  hi CursorLine           guibg=#25292f guifg=None
 
-    hi SpellBad cterm=underline
-    hi SpellLocal cterm=underline
-    hi SpellRare cterm=underline
-    hi SpellCap cterm=underline
+  hi SpellBad cterm=underline
+  hi SpellLocal cterm=underline
+  hi SpellRare cterm=underline
+  hi SpellCap cterm=underline
 
-    " call EasyMotion#highlight#init()
-    " call coc#util#init_virtual_hl()
+  " call EasyMotion#highlight#init()
+  " call coc#util#init_virtual_hl()
 
-    " Dim
-    highlight def Dim guifg=#333c4a
+  " Dim
+  highlight def Dim guifg=#333c4a
 
-    " Highlight Yanks
-    highlight HighlightedyankRegion cterm=reverse guibg=#1d2025 guifg=#af98e6
+  " Highlight Yanks
+  highlight HighlightedyankRegion cterm=reverse guibg=#1d2025 guifg=#af98e6
 
-    hi VertSplit            guibg=bg guifg=black
-    hi StatusLine           guibg=bg guifg=#888888
-    hi StatusLineNC         guibg=bg guifg=#555555
-    hi foldColumn           guibg=bg
+  hi VertSplit            guibg=bg guifg=black
+  hi StatusLine           guibg=bg guifg=#888888
+  hi StatusLineNC         guibg=bg guifg=#555555
+  hi foldColumn           guibg=bg
 
-    " Coverage
-    hi CoverageUncovered    guifg=#5A5242
+  " Coverage
+  hi CoverageUncovered    guifg=#5A5242
 
-    " GitGutter
-    highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg='#556c49'
-    highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg='#56b6c2'
-    highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg='#e06c75'
-    highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg='#e5c07b'
+  " GitGutter
+  highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg='#556c49'
+  highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg='#56b6c2'
+  highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg='#e06c75'
+  highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg='#e5c07b'
 
-    " NERDTrees File highlighting only the glyph/icon
-    autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
-    autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
-    autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
+  " NERDTrees File highlighting only the glyph/icon
+  autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
+  autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
+  autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
 
-    let g:fzf_colors =
-                \ {
-                \ 'fg':      ['fg', 'Normal'],
-                \ 'bg':      ['bg', 'Normal'],
-                \ 'hl':      ['fg', 'Comment'],
-                \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-                \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-                \ 'hl+':     ['fg', 'Statement'],
-                \ 'info':    ['fg', 'PreProc'],
-                \ 'border':  ['fg', 'Ignore'],
-                \ 'prompt':  ['fg', 'Conditional'],
-                \ 'pointer': ['fg', 'Exception'],
-                \ 'marker':  ['fg', 'Keyword'],
-                \ 'spinner': ['fg', 'Label'],
-                \ 'header':  ['fg', 'Comment'] }
+  let g:fzf_colors =
+        \ {
+        \ 'fg':      ['fg', 'Normal'],
+        \ 'bg':      ['bg', 'Normal'],
+        \ 'hl':      ['fg', 'Comment'],
+        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+        \ 'hl+':     ['fg', 'Statement'],
+        \ 'info':    ['fg', 'PreProc'],
+        \ 'border':  ['fg', 'Ignore'],
+        \ 'prompt':  ['fg', 'Conditional'],
+        \ 'pointer': ['fg', 'Exception'],
+        \ 'marker':  ['fg', 'Keyword'],
+        \ 'spinner': ['fg', 'Label'],
+        \ 'header':  ['fg', 'Comment'] }
 
 catch
 endtry
@@ -457,10 +466,10 @@ set undoreload=10000
 
 " Persistent undo
 if has("persistent_undo")
-    set undofile
-    set undodir=~/.local/share/nvim/undo
-    set backupdir=~/.local/share/nvim/backup
-    set directory=~/.local/share/nvim/backup
+  set undofile
+  set undodir=~/.local/share/nvim/undo
+  set backupdir=~/.local/share/nvim/backup
+  set directory=~/.local/share/nvim/backup
 endif
 
 
@@ -475,9 +484,9 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -506,96 +515,96 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " ============================================================================
 
 if g:crkbd == 1
-    nnoremap <A-H> 2<C-w><
-    vnoremap <A-H> 2<C-w><
-    inoremap <A-H> 2<C-o><C-w><
+  nnoremap <A-H> 2<C-w><
+  vnoremap <A-H> 2<C-w><
+  inoremap <A-H> 2<C-o><C-w><
 
-    nnoremap <A-J> 2<C-w>+<CR>
-    vnoremap <A-J> 2<C-w>+<CR>
-    inoremap <A-J> 2<C-o><C-w>+
+  nnoremap <A-J> 2<C-w>+<CR>
+  vnoremap <A-J> 2<C-w>+<CR>
+  inoremap <A-J> 2<C-o><C-w>+
 
-    nnoremap <A-K> 2<C-w>-<CR>
-    vnoremap <A-K> 2<C-w>-<CR>
-    inoremap <A-K> 2<C-o><C-w>-
+  nnoremap <A-K> 2<C-w>-<CR>
+  vnoremap <A-K> 2<C-w>-<CR>
+  inoremap <A-K> 2<C-o><C-w>-
 
-    nnoremap <A-L> 2<C-w>>
-    vnoremap <A-L> 2<C-w>>
-    inoremap <A-L> 2<C-o><C-w><
+  nnoremap <A-L> 2<C-w>>
+  vnoremap <A-L> 2<C-w>>
+  inoremap <A-L> 2<C-o><C-w><
 
-    nnoremap <S-PageDown> <C-f><CR>
-    vnoremap <S-PageDown> <C-f><CR>
-    inoremap <S-PageDown> <C-o><C-f><CR>
+  nnoremap <S-PageDown> <C-f><CR>
+  vnoremap <S-PageDown> <C-f><CR>
+  inoremap <S-PageDown> <C-o><C-f><CR>
 
-    nnoremap <S-PageUp> <C-b><CR>
-    vnoremap <S-PageUp> <C-b><CR>
-    inoremap <S-PageUp> <C-o><C-b><CR>
+  nnoremap <S-PageUp> <C-b><CR>
+  vnoremap <S-PageUp> <C-b><CR>
+  inoremap <S-PageUp> <C-o><C-b><CR>
 
-    nnoremap <PageDown> <C-d>
-    inoremap <PageDown> <C-o><C-d><CR>
-    vnoremap <PageDown> <C-d><CR>
+  nnoremap <PageDown> <C-d>
+  inoremap <PageDown> <C-o><C-d><CR>
+  vnoremap <PageDown> <C-d><CR>
 
-    nnoremap <PageUp> <C-u>
-    inoremap <PageUp> <C-o><C-u>
-    vnoremap <PageUp> <C-u>
+  nnoremap <PageUp> <C-u>
+  inoremap <PageUp> <C-o><C-u>
+  vnoremap <PageUp> <C-u>
 
-    """""
+  """""
 
-    nmap <Left> <Plug>(easymotion-b)
-    vmap <Left> <Plug>(easymotion-b)
-    imap <Left> <C-o><Plug>(easymotion-b)
+  nmap <Left> <Plug>(easymotion-b)
+  vmap <Left> <Plug>(easymotion-b)
+  imap <Left> <C-o><Plug>(easymotion-b)
 
-    nmap ← <Plug>(easymotion-ge)
-    vmap ← <Plug>(easymotion-ge)
-    imap ← <C-o><Plug>(easymotion-ge)
+  nmap ← <Plug>(easymotion-ge)
+  vmap ← <Plug>(easymotion-ge)
+  imap ← <C-o><Plug>(easymotion-ge)
 
-    nmap ⇐ <Plug>(easymotion-B)
-    vmap ⇐ <Plug>(easymotion-B)
-    imap ⇐ <C-o><Plug>(easymotion-B)
+  nmap ⇐ <Plug>(easymotion-B)
+  vmap ⇐ <Plug>(easymotion-B)
+  imap ⇐ <C-o><Plug>(easymotion-B)
 
-    nmap <S-⇐> <Plug>(easymotion-gE)
-    vmap <S-⇐> <Plug>(easymotion-gE)
-    imap <S-⇐> <C-o><Plug>(easymotion-gE)
+  nmap <S-⇐> <Plug>(easymotion-gE)
+  vmap <S-⇐> <Plug>(easymotion-gE)
+  imap <S-⇐> <C-o><Plug>(easymotion-gE)
 
-    """""
+  """""
 
-    nmap <Right> <Plug>(easymotion-w)
-    vmap <Right> <Plug>(easymotion-w)
-    imap <Right> <C-o><Plug>(easymotion-w)
+  nmap <Right> <Plug>(easymotion-w)
+  vmap <Right> <Plug>(easymotion-w)
+  imap <Right> <C-o><Plug>(easymotion-w)
 
-    nmap → <Plug>(easymotion-e)
-    vmap → <Plug>(easymotion-e)
-    imap → <C-o><Plug>(easymotion-e)
+  nmap → <Plug>(easymotion-e)
+  vmap → <Plug>(easymotion-e)
+  imap → <C-o><Plug>(easymotion-e)
 
-    nmap ⇒ <Plug>(easymotion-W)
-    vmap ⇒ <Plug>(easymotion-W)
-    imap ⇒ <C-o><Plug>(easymotion-W)
+  nmap ⇒ <Plug>(easymotion-W)
+  vmap ⇒ <Plug>(easymotion-W)
+  imap ⇒ <C-o><Plug>(easymotion-W)
 
-    nmap <S-⇒> <Plug>(easymotion-E)
-    vmap <S-⇒> <Plug>(easymotion-E)
-    imap <S-⇒> <C-o><Plug>(easymotion-E)
+  nmap <S-⇒> <Plug>(easymotion-E)
+  vmap <S-⇒> <Plug>(easymotion-E)
+  imap <S-⇒> <C-o><Plug>(easymotion-E)
 
-    """""
+  """""
 
-    nmap <Down> <Plug>(easymotion-j)
-    vmap <Down> <Plug>(easymotion-j)
-    imap <Down> <C-o><Plug>(easymotion-j)
+  nmap <Down> <Plug>(easymotion-j)
+  vmap <Down> <Plug>(easymotion-j)
+  imap <Down> <C-o><Plug>(easymotion-j)
 
-    nmap <Up> <Plug>(easymotion-k)
-    vmap <Up> <Plug>(easymotion-k)
-    imap <Up> <C-o><Plug>(easymotion-k)
+  nmap <Up> <Plug>(easymotion-k)
+  vmap <Up> <Plug>(easymotion-k)
+  imap <Up> <C-o><Plug>(easymotion-k)
 
-    """""
+  """""
 
 
-    " " Disable keys
-    " noremap <Backspace> <Nop>
+  " " Disable keys
+  " noremap <Backspace> <Nop>
 
-    " Save
-    inoremap <C-s>     <C-O>:update<cr>
-    nnoremap <C-s>     :update<cr>
+  " Save
+  inoremap <C-s>     <C-O>:update<cr>
+  nnoremap <C-s>     :update<cr>
 
-    " "nmap <C-w> :quit<CR>
-    " "inoremap <C-w> :quit<CR>
+  " "nmap <C-w> :quit<CR>
+  " "inoremap <C-w> :quit<CR>
 endif
 
 
@@ -699,8 +708,8 @@ nnoremap Q @q
 " ----------------------------------------------------------------------------
 
 function! UpgradePlugins()
-    CocUpdateSync
-    PlugInstall
+  CocUpdateSync
+  PlugInstall
 endfunction
 
 " ----------------------------------------------------------------------------
@@ -708,29 +717,29 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Preserve(command)
-    " Save the last search.
-    let search = @/
+  " Save the last search.
+  let search = @/
 
-    " Save the current cursor position.
-    let cursor_position = getpos('.')
+  " Save the current cursor position.
+  let cursor_position = getpos('.')
 
-    " Save the current window position.
-    normal! H
-    let window_position = getpos('.')
-    call setpos('.', cursor_position)
+  " Save the current window position.
+  normal! H
+  let window_position = getpos('.')
+  call setpos('.', cursor_position)
 
-    " Execute the command.
-    execute a:command
+  " Execute the command.
+  execute a:command
 
-    " Restore the last search.
-    let @/ = search
+  " Restore the last search.
+  let @/ = search
 
-    " Restore the previous window position.
-    call setpos('.', window_position)
-    normal! zt
+  " Restore the previous window position.
+  call setpos('.', window_position)
+  normal! zt
 
-    " Restore the previous cursor position.
-    call setpos('.', cursor_position)
+  " Restore the previous cursor position.
+  call setpos('.', cursor_position)
 endfunction
 
 
@@ -740,7 +749,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! Indent()
-    call Preserve('normal gg=G')
+  call Preserve('normal gg=G')
 endfunction
 
 
@@ -750,7 +759,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CmdLine(str)
-    call feedkeys(":" . a:str)
+  call feedkeys(":" . a:str)
 endfunction
 
 
@@ -760,7 +769,7 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! CurrentFileDir(cmd)
-    return a:cmd . " " . expand("%:p:h") . "/"
+  return a:cmd . " " . expand("%:p:h") . "/"
 endfunction
 
 
@@ -770,14 +779,14 @@ endfunction
 " ----------------------------------------------------------------------------
 
 function! s:WriteCreatingDirs()
-    let l:file=expand("%")
-    if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
-        let dir=fnamemodify(l:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
+  let l:file=expand("%")
+  if empty(getbufvar(bufname("%"), '&buftype')) && l:file !~# '\v^\w+\:\/'
+    let dir=fnamemodify(l:file, ':h')
+    if !isdirectory(dir)
+      call mkdir(dir, 'p')
     endif
-    write
+  endif
+  write
 endfunction
 
 command! W call s:WriteCreatingDirs()
@@ -857,10 +866,10 @@ command! W call s:WriteCreatingDirs()
 " ----------------------------------------------------------------------------
 
 function! PlugLoaded(name)
-    return (
-                \ has_key(g:plugs, a:name) &&
-                \ isdirectory(g:plugs[a:name].dir) &&
-                \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
+  return (
+        \ has_key(g:plugs, a:name) &&
+        \ isdirectory(g:plugs[a:name].dir) &&
+        \ stridx(&rtp, g:plugs[a:name].dir) >= 0)
 endfunction
 
 
@@ -1223,9 +1232,9 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
@@ -1291,36 +1300,36 @@ set laststatus=2
 " \   'todos': 'tasklist#total',
 
 function! CocCurrentFunction()
-    if !empty(get(b:, 'coc_current_function', ''))
-        return ' ' . get(b:, 'coc_current_function', '')
-    else
-        return ''
-    endif
+  if !empty(get(b:, 'coc_current_function', ''))
+    return ' ' . get(b:, 'coc_current_function', '')
+  else
+    return ''
+  endif
 endfunction
 
 let g:lightline = {
-            \ 'colorscheme': 'plastic',
-            \ 'active': {
-            \   'left': [ [ 'gitbranch' ],
-            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
-            \   'right': [ [ 'lineinfo' ],
-            \              [ 'percent' ],
-            \              [ 'filetype' ] ]
-            \ },
-            \ 'component_function': {
-            \   'cocstatus': 'coc#status',
-            \   'currentfunction': 'CocCurrentFunction',
-            \   'gitbranch': 'fugitive#head',
-            \ },
-            \ }
+      \ 'colorscheme': 'plastic',
+      \ 'active': {
+      \   'left': [ [ 'gitbranch' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'gitbranch': 'fugitive#head',
+      \ },
+      \ }
 
 let g:lightline.component_type = {
-            \     'linter_checking': 'right',
-            \     'linter_infos': 'right',
-            \     'linter_warnings': 'warning',
-            \     'linter_errors': 'error',
-            \     'linter_ok': 'right',
-            \ }
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
 
 " let g:lightline#ale#indicator_infos = "ﭦ "
 " let g:lightline#ale#indicator_warnings = " "
@@ -1335,18 +1344,18 @@ let g:fzf_command_prefix = "FZF"
 let g:fzf_buffers_jump = 1
 
 function! s:open_branch_fzf(line)
-    let l:branch = a:line
-    execute 'split | terminal git checkout ' . l:branch
-    call feedkeys('i', 'n')
+  let l:branch = a:line
+  execute 'split | terminal git checkout ' . l:branch
+  call feedkeys('i', 'n')
 endfunction
 
 function! s:show_branches_fzf(bang)
-    let l:current = system('git symbolic-ref --short HEAD')
-    let l:current = substitute(l:current, '\n', '', 'g')
-    let l:current_scaped = substitute(l:current, '/', '\\/', 'g')
-    call fzf#vim#grep(
-                \ "git branch -r --no-color | sed -r -e 's/^[^/]*\\///' -e '/^" . l:current_scaped . "$/d' -e '/^HEAD/d' | sort -u", 0,
-                \ { 'sink': function('s:open_branch_fzf'), 'options': ['--no-multi', '--header='.l:current] }, a:bang)
+  let l:current = system('git symbolic-ref --short HEAD')
+  let l:current = substitute(l:current, '\n', '', 'g')
+  let l:current_scaped = substitute(l:current, '/', '\\/', 'g')
+  call fzf#vim#grep(
+        \ "git branch -r --no-color | sed -r -e 's/^[^/]*\\///' -e '/^" . l:current_scaped . "$/d' -e '/^HEAD/d' | sort -u", 0,
+        \ { 'sink': function('s:open_branch_fzf'), 'options': ['--no-multi', '--header='.l:current] }, a:bang)
 endfunction
 
 command! -bang -nargs=0 FzGCheckout call <SID>show_branches_fzf(<bang>0)
@@ -1733,25 +1742,25 @@ let g:limelight_priority = -1
 autocmd VimResized * if exists('#goyo') | exe "normal \<c-w>=" | endif
 
 function! s:goyo_enter()
-    if executable('tmux') && strlen($TMUX)
-        silent !tmux set status off
-        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    endif
-    set noshowmode
-    set noshowcmd
-    set scrolloff=999
-    Limelight
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  Limelight
 endfunction
 
 function! s:goyo_leave()
-    if executable('tmux') && strlen($TMUX)
-        silent !tmux set status on
-        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    endif
-    set showmode
-    set showcmd
-    set scrolloff=5
-    Limelight!
+  if executable('tmux') && strlen($TMUX)
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+  Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -2034,8 +2043,8 @@ let g:fzf_preview_git_status_command = "git status --short --untracked-files=all
 
 " Commands used for git status preview.
 let g:fzf_preview_git_status_preview_command =  "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} || " .
-            \ "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} || " .
-            \ g:fzf_preview_command
+      \ "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} || " .
+      \ g:fzf_preview_command
 
 " Commands used for project grep
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading'
@@ -2080,11 +2089,11 @@ let g:fzf_preview_dev_icon_prefix_length = 2
 nnoremap <F5> :call SmartRanger()<CR>
 
 function! SmartRanger()                   
-    if @% == ""
-        silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
-    else
-        silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
-    endif                                   
+  if @% == ""
+    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+  else
+    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+  endif                                   
 endfun  
 
 
