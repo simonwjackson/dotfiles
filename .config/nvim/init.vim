@@ -2102,7 +2102,7 @@ let g:fzf_preview_fzf_preview_window_option = 'down:70%'
 let g:fzf_preview_use_dev_icons = 1
 
 " devicons character width
-let g:fzf_preview_dev_icon_prefix_length = 1
+" let g:fzf_preview_dev_icon_prefix_length = 1
 
 
 
@@ -2111,11 +2111,12 @@ let g:fzf_preview_dev_icon_prefix_length = 1
 " ----------------------------------------------------------------------------
 nnoremap <F5> :call SmartRanger()<CR>
 
+" TODO: Refactor SmartRanger()
 function! SmartRanger()                   
   if @% == ""
-    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} ".getcwd()."      && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
   else
-    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=".expand('%:p')." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
   endif                                   
 endfun  
 
