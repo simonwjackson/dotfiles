@@ -2111,13 +2111,14 @@ let g:fzf_preview_use_dev_icons = 1
 " ----------------------------------------------------------------------------
 nnoremap <F5> :call SmartRanger()<CR>
 
-function! SmartRanger()                   
+" TODO: Refactor SmartRanger()
+function! SmartRanger()
   if @% == ""
-    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE}                && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} ".getcwd()." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
   else
-    silent execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=% && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
-  endif                                   
-endfun  
+    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=".expand('%:p')." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+  endif
+endfun
 
 
 nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
@@ -2187,11 +2188,10 @@ try
   hi! CocErrorSign guifg=#e06c75
   hi! CocInfoSign guibg=#61afef
   hi! CocWarningSign guifg=#d19a66
+
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 catch
 endtry
 
 " Hide tildas
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-
-
