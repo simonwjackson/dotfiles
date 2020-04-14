@@ -402,28 +402,6 @@ function! LightlineReload()
   call lightline#update()
 endfunction
 
-try
-  call ThemeDark()
-
-  " Vim
-  hi CursorColumn         guibg=None guifg=None
-
-  hi SpellBad cterm=underline
-  hi SpellLocal cterm=underline
-  hi SpellRare cterm=underline
-  hi SpellCap cterm=underline
-
-  " call EasyMotion#highlight#init()
-  " call coc#util#init_virtual_hl()
-
-  highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
-
-catch
-endtry
-
-" Hide tildas
-silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-
 
 
 
@@ -2190,3 +2168,27 @@ nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
 vnoremap <Tab>   >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
+
+
+try
+  call ThemeDark()
+
+  " Vim
+  hi CursorColumn         guibg=None guifg=None
+
+  hi SpellBad cterm=underline
+  hi SpellLocal cterm=underline
+  hi SpellRare cterm=underline
+  hi SpellCap cterm=underline
+
+  " call EasyMotion#highlight#init()
+  " call coc#util#init_virtual_hl()
+
+  highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
+catch
+endtry
+
+" Hide tildas
+silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
+
