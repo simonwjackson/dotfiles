@@ -50,9 +50,6 @@ Plug 'tpope/vim-git'
 " See Git Blame information in the status bar for the currently selected line.
 " Plug 'zivyangll/git-blame.vim'
 
-" ALE indicator for the lightline vim plugin
-" Plug 'maximbaz/lightline-ale'
-
 " True Sublime Text style multiple selections for Vim
 " Plug 'terryma/vim-multiple-cursors'
 
@@ -346,62 +343,6 @@ set t_Co=256
 " Enable syntax highlighting
 syntax enable
 
-" ----------------------------------------------------------------------------
-"  - Theme
-" ----------------------------------------------------------------------------
-
-function! ThemeLight()
-  set background=light
-  g:solarized_statusline='flat'
-  " g:solarized_old_cursor_style=1
-  colorscheme solarized8_flat
-  colorscheme github
-  let g:lightline.colorscheme = 'solarized'
-  LightlineReload
-
-  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-  hi CursorLine           guibg=None guifg=None
-endfunction
-
-
-function! ThemeDark()
-  set background=dark 
-  colorscheme plastic
-  let g:lightline.colorscheme = 'plastic'
-  LightlineReload
-
-  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-  hi CursorLine           guibg=#1D2026 guifg=None
-
-  " Dim
-  highlight def Dim guifg=#333c4a
-
-  " Highlight Yanks
-  highlight HighlightedyankRegion ctermbg=235 ctermfg=170
-
-  hi VertSplit            guibg=bg guifg=black
-  hi StatusLine           guibg=bg guifg=#888888
-  hi StatusLineNC         guibg=bg guifg=#555555
-  hi foldColumn           guibg=bg
-
-  " Coverage
-  hi CoverageUncovered    guifg=#5A5242
-
-  " GitGutter
-  highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg='#556c49'
-  highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg='#56b6c2'
-  highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg='#e06c75'
-  highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg='#e5c07b'
-endfunction
-
-command! LightlineReload call LightlineReload()
-
-function! LightlineReload()
-  call lightline#init()
-  call lightline#colorscheme()
-  call lightline#update()
-endfunction
-
 
 
 
@@ -591,18 +532,10 @@ endif
 " ----------------------------------------------------------------------------
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-"nnoremap <silent> <C-j> :move+<cr>
-"nnoremap <silent> <C-k> :move-2<cr>
-" xnoremap <silent> <M-k> :move-2<cr>gv
-" xnoremap <silent> <M-j> :move'>+<cr>gv
-"
-" if has("mac") || has("macunix")
-"     nmap <D-j> <M-j>
-"     nmap <D-k> <M-k>
-"     vmap <D-j> <M-j>
-"     vmap <D-k> <M-k>
-" endif
-
+nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-k> :move-2<cr>
+xnoremap <silent> <C-k> :move-2<cr>gv
+xnoremap <silent> <C-j> :move'>+<cr>gv
 
 
 
@@ -2171,6 +2104,98 @@ vnoremap <Tab>   >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
 
 
+
+" ----------------------------------------------------------------------------
+"  - Theme
+" ----------------------------------------------------------------------------
+
+function! ThemeLight()
+  set background=light
+  g:solarized_statusline='flat'
+  " g:solarized_old_cursor_style=1
+  colorscheme solarized8_flat
+  colorscheme github
+  let g:lightline.colorscheme = 'solarized'
+  LightlineReload
+
+  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  hi CursorLine           guibg=None guifg=None
+endfunction
+
+
+function! ThemeDark()
+  set background=dark 
+  colorscheme plastic
+
+  " =============================================================================
+  " Filename: autoload/lightline/colorscheme/plastic.vim
+  " Author: Florian Rand
+  " License: MIT License
+  " =============================================================================
+  let s:foreground = [ '#a9b2c3', 235 ]
+  let s:background = [ '#1D2026', 235 ]
+  let s:yellow = [ '#e5c07b', 180 ]
+  let s:purple = [ '#af98e6', 170 ]
+  let s:red = [ '#e06c75', 204 ]
+  let s:blue = [ '#61afef', 39 ]
+  let s:green = [ '#98c379', 114 ]
+  let s:grey = [ '#abb2bf', 59 ]
+
+  let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+  let s:p.normal.left = [ [ s:foreground, s:background ], [ s:green, s:background ] ]
+  let s:p.normal.right = [ [ s:purple, s:background ], [ s:green, s:background ] ]
+  let s:p.inactive.right = [ [ s:grey, s:background ], [ s:grey, s:background ] ]
+  let s:p.inactive.left =  [ [ s:grey, s:background ], [ s:grey, s:background ] ]
+  let s:p.insert.left = [ [ s:background, s:green ], [ s:green, s:background ] ]
+  let s:p.replace.left = [ [ s:red, s:background ], [ s:red, s:background ] ]
+  let s:p.visual.left = [ [ s:background, s:purple ], [ s:purple, s:background ] ]
+  let s:p.normal.middle = [ [ s:foreground, s:background ] ]
+  let s:p.inactive.middle = [ [ s:grey, s:background ] ]
+  let s:p.tabline.left = [ [ s:blue, s:grey ] ]
+  let s:p.tabline.tabsel = [ [ s:foreground, s:background ] ]
+  let s:p.tabline.middle = [ [ s:foreground, s:background ] ]
+  let s:p.tabline.right = copy(s:p.normal.right)
+  let s:p.normal.error = [ [ s:background, s:red ] ]
+  let s:p.normal.warning = [ [ s:background, s:yellow ] ]
+
+  let g:lightline#colorscheme#plastic#palette = lightline#colorscheme#flatten(s:p)
+  let g:lightline.colorscheme = 'plastic'
+
+  LightlineReload 
+
+  silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+  hi CursorLine           guibg=#2D3239 guifg=None
+
+  " Dim
+  highlight def Dim guifg=#333c4a
+
+  " Highlight Yanks
+  highlight HighlightedyankRegion ctermbg=235 ctermfg=170
+
+  hi VertSplit            guibg=#1D2026 guifg=#1D2026
+  hi StatusLine           guibg=bg guifg=#888888
+  hi StatusLineNC         guibg=bg guifg=#555555
+  hi foldColumn           guibg=bg
+
+  " Coverage
+  hi CoverageUncovered    guifg=#5A5242
+
+  " GitGutter
+  highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg=#556c49
+  highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg=#56b6c2
+  highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg=#e06c75
+  highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg=#e5c07b
+endfunction
+
+
+command! LightlineReload call LightlineReload()
+
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
 try
   call ThemeDark()
 
@@ -2195,3 +2220,9 @@ endtry
 
 " Hide tildas
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END  
