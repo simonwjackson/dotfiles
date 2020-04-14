@@ -2186,7 +2186,7 @@ try
   " call coc#util#init_virtual_hl()
 
   hi! CocErrorSign guifg=#e06c75
-  hi! CocInfoSign guibg=#61afef
+  hi! CocInfoSign guifg=#61afef
   hi! CocWarningSign guifg=#d19a66
 
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170

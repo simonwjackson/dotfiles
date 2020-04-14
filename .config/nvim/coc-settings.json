@@ -1,8 +1,8 @@
 {
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "eslint.autoFixOnSave":true,
-    "diagnostic.errorSign": "█", //""
-    "diagnostic.warningSign": "▌", //""
-    "diagnostic.infoSign": "▌", //""
+    "diagnostic.errorSign": "▌",
+    "diagnostic.warningSign": "▌",
+    "diagnostic.infoSign": "▌"
 }
 
