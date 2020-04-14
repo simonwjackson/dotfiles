@@ -225,9 +225,10 @@ set scrolloff=5
 "  => VIM user interface
 " ============================================================================
 
+" TODO: Dont apply to COC
 " Auto resize splits to sane minimums when entering
-set winwidth=80
-set winheight=10
+" set winwidth=80
+" set winheight=10
 
 " split below, not above
 set splitbelow            

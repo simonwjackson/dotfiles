@@ -30,6 +30,7 @@
 !/.config/vit/**
 !/.config/zsh/**
 !/.config/user-dirs.dirs
+!/.config/ranger/**
 
 # Local scripts
 
