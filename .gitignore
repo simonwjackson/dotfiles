@@ -30,7 +30,8 @@
 !/.config/vit/**
 !/.config/zsh/**
 !/.config/user-dirs.dirs
-!/.config/ranger/**
+!/.config/ranger/rc
+!/.config/jesseduffield/lazygit/config.yml
 
 # Local scripts
 
