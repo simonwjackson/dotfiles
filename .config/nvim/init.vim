@@ -2102,7 +2102,7 @@ let g:fzf_preview_fzf_preview_window_option = 'down:70%'
 let g:fzf_preview_use_dev_icons = 1
 
 " devicons character width
-let g:fzf_preview_dev_icon_prefix_length = 1
+" let g:fzf_preview_dev_icon_prefix_length = 1
 
 
 
@@ -2184,6 +2184,9 @@ try
   " call EasyMotion#highlight#init()
   " call coc#util#init_virtual_hl()
 
+  hi! CocErrorSign guifg=#e06c75
+  hi! CocInfoSign guibg=#61afef
+  hi! CocWarningSign guifg=#d19a66
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 catch
 endtry
