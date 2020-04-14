@@ -518,9 +518,9 @@ if g:crkbd == 1
   silent! vmap <unique> <PageDown> <C-d> 
   silent! imap <unique> <PageDown> <C-o><C-d>
 
-  silent! nmap <unique> <PageUp> <C-d>
-  silent! vmap <unique> <PageUp> <C-d> 
-  silent! imap <unique> <PageUp> <C-o><C-d>
+  silent! nmap <unique> <PageUp> <C-u>
+  silent! vmap <unique> <PageUp> <C-u> 
+  silent! imap <unique> <PageUp> <C-o><C-u>
 
   """""
 
