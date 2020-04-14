@@ -66,7 +66,7 @@ Plug 'itchyny/lightline.vim'
 " Plug 'Shougo/neosnippet-snippets'
 
 " Adds file type icons to Vim plugins
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
 " Code coverage vim plugin
 " Plug 'ruanyl/coverage.vim'
@@ -103,9 +103,6 @@ Plug 'jparise/vim-graphql'
 
 " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
 " Plug 'w0rp/ale'
-
-" A tree explorer plugin for vim.
-" Plug 'scrooloose/nerdtree'
 
 " Vim motions on speed!
 Plug 'easymotion/vim-easymotion'
@@ -169,7 +166,6 @@ Plug 'neoclide/coc-css', {'do': 'npm install'}
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
 Plug 'antoinemadec/coc-fzf'
 
-
 call plug#end()
 
 
@@ -207,6 +203,14 @@ set clipboard+=unnamedplus
 " Prevent x from overriding what's in the clipboard.
 noremap x "_x
 noremap X "_x
+
+" Change text without putting the text into register,
+nnoremap c "_c
+nnoremap C "_C
+nnoremap cc "_cc
+
+" Don't yank whitespace at the beginning of a line
+nnoremap Y ^y$
 
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p pgvy
@@ -359,6 +363,7 @@ function! ThemeLight()
   hi CursorLine           guibg=None guifg=None
 endfunction
 
+
 function! ThemeDark()
   set background=dark 
   colorscheme plastic
@@ -366,7 +371,27 @@ function! ThemeDark()
   LightlineReload
 
   silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-  hi CursorLine           guibg=#333333 guifg=None
+  hi CursorLine           guibg=#1D2026 guifg=None
+
+  " Dim
+  highlight def Dim guifg=#333c4a
+
+  " Highlight Yanks
+  highlight HighlightedyankRegion ctermbg=235 ctermfg=170
+
+  hi VertSplit            guibg=bg guifg=black
+  hi StatusLine           guibg=bg guifg=#888888
+  hi StatusLineNC         guibg=bg guifg=#555555
+  hi foldColumn           guibg=bg
+
+  " Coverage
+  hi CoverageUncovered    guifg=#5A5242
+
+  " GitGutter
+  highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg='#556c49'
+  highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg='#56b6c2'
+  highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg='#e06c75'
+  highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg='#e5c07b'
 endfunction
 
 command! LightlineReload call LightlineReload()
@@ -391,46 +416,7 @@ try
   " call EasyMotion#highlight#init()
   " call coc#util#init_virtual_hl()
 
-  " Dim
-  highlight def Dim guifg=#333c4a
-
-  " Highlight Yanks
-  highlight HighlightedyankRegion cterm=reverse guibg=#1d2025 guifg=#af98e6
-
-  hi VertSplit            guibg=bg guifg=black
-  hi StatusLine           guibg=bg guifg=#888888
-  hi StatusLineNC         guibg=bg guifg=#555555
-  hi foldColumn           guibg=bg
-
-  " Coverage
-  hi CoverageUncovered    guifg=#5A5242
-
-  " GitGutter
-  highlight GitGutterAdd ctermbg=None guibg=none ctermfg=114 guifg='#556c49'
-  highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg='#56b6c2'
-  highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg='#e06c75'
-  highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg='#e5c07b'
-
-  " NERDTrees File highlighting only the glyph/icon
-  autocmd filetype nerdtree highlight haskell_icon ctermbg=none ctermfg=Red guifg=#ffa500
-  autocmd filetype nerdtree highlight html_icon ctermbg=none ctermfg=Red guifg=#ffa500
-  autocmd filetype nerdtree highlight go_icon ctermbg=none ctermfg=Red guifg=#ffa500
-
-  let g:fzf_colors =
-        \ {
-        \ 'fg':      ['fg', 'Normal'],
-        \ 'bg':      ['bg', 'Normal'],
-        \ 'hl':      ['fg', 'Comment'],
-        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-        \ 'hl+':     ['fg', 'Statement'],
-        \ 'info':    ['fg', 'PreProc'],
-        \ 'border':  ['fg', 'Ignore'],
-        \ 'prompt':  ['fg', 'Conditional'],
-        \ 'pointer': ['fg', 'Exception'],
-        \ 'marker':  ['fg', 'Keyword'],
-        \ 'spinner': ['fg', 'Label'],
-        \ 'header':  ['fg', 'Comment'] }
+  highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 
 catch
 endtry
@@ -550,13 +536,13 @@ if g:crkbd == 1
   vnoremap <S-PageUp> <C-b><CR>
   inoremap <S-PageUp> <C-o><C-b><CR>
 
-  nnoremap <PageDown> <C-d>
-  inoremap <PageDown> <C-o><C-d><CR>
-  vnoremap <PageDown> <C-d><CR>
+  silent! nmap <unique> <PageDown> <C-d>
+  silent! vmap <unique> <PageDown> <C-d> 
+  silent! imap <unique> <PageDown> <C-o><C-d>
 
-  nnoremap <PageUp> <C-u>
-  inoremap <PageUp> <C-o><C-u>
-  vnoremap <PageUp> <C-u>
+  silent! nmap <unique> <PageUp> <C-d>
+  silent! vmap <unique> <PageUp> <C-d> 
+  silent! imap <unique> <PageUp> <C-o><C-d>
 
   """""
 
@@ -586,8 +572,10 @@ if g:crkbd == 1
   vmap → <Plug>(easymotion-e)
   imap → <C-o><Plug>(easymotion-e)
 
+
   nmap ⇒ <Plug>(easymotion-W)
   vmap ⇒ <Plug>(easymotion-W)
+
   imap ⇒ <C-o><Plug>(easymotion-W)
 
   nmap <S-⇒> <Plug>(easymotion-E)
@@ -1173,21 +1161,28 @@ endfunction
 "     endfunction
 "     setl foldtext=FoldText()
 " endfunction
-"
-"
-" " ----------------------------------------------------------------------------
-" "  - Shell
-" " ----------------------------------------------------------------------------
-"
-" if exists('$TMUX')
-"     if has('nvim')
-"         set termguicolors
-"     else
-"         set term=screen-256color
-"     endif
-" endif
-"
-"
+
+
+" ----------------------------------------------------------------------------
+"  - Shell
+" ----------------------------------------------------------------------------
+
+if exists('$TMUX')
+  if has('nvim')
+    set termguicolors
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  else
+    set term=screen-256color
+  endif
+endif
+
+if exists('$SUDO_USER')
+  set noswapfile
+  set nobackup
+  set nowritebackup
+  set noundofile
+endif
+
 " " ----------------------------------------------------------------------------
 " "  - Markdown
 " " ----------------------------------------------------------------------------
@@ -1203,10 +1198,6 @@ endfunction
 
 autocmd! BufWritePre $MYVIMRC :call Indent()
 autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC | redraw
-
-
-" autocmd! BufWritePost $MYVIMRC nested
-"             \ | source $MYVIMRC | redraw
 
 
 
@@ -1271,9 +1262,9 @@ call gitgutter#highlight#define_highlights()
 " Flatten all gutter icons
 let g:gitgutter_sign_added = '│' " █▓▒░║
 let g:gitgutter_sign_modified = '│'
-let g:gitgutter_sign_removed = '│'
-let g:gitgutter_sign_removed_first_line = '│'
-let g:gitgutter_sign_modified_removed = '│'
+let g:gitgutter_sign_removed = '▔'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▔'
 
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
@@ -1302,7 +1293,7 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 " "  - itchyny / lightline.vim
 " " ----------------------------------------------------------------------------
 
-" let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#enable_devicons = 1
 set laststatus=2
 
 " \   'author': 'GitBlameAuthor'
@@ -1384,7 +1375,50 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " " autocmd! FileType fzf
 " " autocmd  FileType fzf set laststatus=0 noshowmode noruler
 " " \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-"
+
+" CREATE FLOATING WINDOW {{{
+function! CreateCenteredFloatingWindow()
+  let width  = float2nr(&columns * 0.9)
+  let height = float2nr(&lines * 0.8)
+  let top    = ((&lines - height) / 2) - 1
+  let left   = (&columns - width) / 2
+  let opts   = { 'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal' }
+  let top    = "╭" . repeat("─", width - 2) . "╮"
+  let mid    = "│" . repeat(" ", width - 2) . "│"
+  let bot    = "╰" . repeat("─", width - 2) . "╯"
+  let lines  = [top] + repeat([mid], height - 2) + [bot]
+  let s:buf  = nvim_create_buf(v:false, v:true)
+
+  call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+  call nvim_open_win(s:buf, v:true, opts)
+  set winhl=Normal:Floating
+  call InvertBackground()
+
+  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, CreatePadding(opts))
+  autocmd BufWipeout <buffer> exe 'bwipeout '.s:buf
+  autocmd BufWipeout <buffer> call ResetBackground()
+endfunction
+
+function! CreatePadding(opts)
+  let a:opts.row    += 1
+  let a:opts.height -= 2
+  let a:opts.col    += 2
+  let a:opts.width  -= 4
+  return a:opts
+endfunction
+
+" INVERT && RESET BACKGROUND {{{
+function! InvertBackground()
+  hi InactiveWindow guibg=NONE
+  hi ActiveWindow   guibg=#2c323c
+  set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+endfunction
+
+function! ResetBackground()
+  hi ActiveWindow   guibg=NONE
+  hi InactiveWindow guibg=#2c323c
+  set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+endfunction
 "
 " " Terminal buffer options for fzf
 " autocmd! FileType fzf
@@ -2087,10 +2121,10 @@ let g:fzf_preview_fzf_preview_window_option = 'down:70%'
 """let g:fzf_preview_filelist_postprocess_command = 'xargs -d "\n" exa --color=always'
 
 " Use vim-devicons
-let g:fzf_preview_use_dev_icons = 0
+let g:fzf_preview_use_dev_icons = 1
 
 " devicons character width
-let g:fzf_preview_dev_icon_prefix_length = 2
+let g:fzf_preview_dev_icon_prefix_length = 1
 
 
 
@@ -2133,3 +2167,26 @@ nmap <Leader>hs <Plug>(GitGutterStageHunk)
 nmap <Leader>he <Plug>(GitGutterRevertHunk)
 
 nnoremap <F10> :silent execute '!tmux new-window -a lazygit &'<CR> 
+
+" Quickly quit help
+
+augroup easyquit
+  autocmd!
+  autocmd Filetype help nnoremap <buffer> q :q<CR>
+augroup END
+
+
+" And remove other navigations that are defined elsewhere
+nmap >>          <Nop>
+nmap <<          <Nop>
+vmap >>          <Nop>
+vmap <<          <Nop>
+
+" Enter inserts newline without leaving Normal mode
+nmap <cr>   o<Esc>
+
+" use tab and shift tab to indent and de-indent code
+nnoremap <Tab>   >>
+nnoremap <S-Tab> <<
+vnoremap <Tab>   >><Esc>gv
+vnoremap <S-Tab> <<<Esc>gv
