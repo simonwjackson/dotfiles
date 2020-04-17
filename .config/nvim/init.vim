@@ -2168,6 +2168,10 @@ try
   hi! CocWarningSign guifg=#d19a66
 
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
+
+  highlight link diffAdded DiffAdd
+  highlight link diffChanged DiffChange
+  highlight link diffRemoved DiffDelete
 catch
 endtry
 
