@@ -87,7 +87,7 @@ report.workflow.description=Workflow
 report.workflow.columns=id,urgency,priority,tags,project,description,url,jiraurl
 report.workflow.labels=ID,U,P,Tags,Project,Description,URL,URL
 report.workflow.sort=urgency-
-report.workflow.filter=project.not:someday (project:workflow or project:dotfiles) -someday +UNBLOCKED -COMPLETED -DELETED -next
+report.workflow.filter=+vim or +workflow
 
 ## Bottomline
 report.bottomline.description=Bottomline
@@ -102,6 +102,10 @@ report.other.columns=id,urgency,priority,tags,project,description,url,jiraurl
 report.other.labels=ID,U,P,Tags,Project,Description,URL,URL
 report.other.sort=urgency-,project-,created+
 report.other.filter=proj.not:routine proj.not:workflow project.not:xmas -bottomline proj.not:someday -hide -COMPLETED -DELETED +UNBLOCKED -next
+
+# effort UDA
+uda.effort.type=string
+uda.effort.label=Effort
 
 # URL UDA
 uda.url.type=string

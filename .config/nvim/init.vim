@@ -8,6 +8,7 @@
 " TODO: Turn off all plugin mappings :let no_plugin_maps = 1
 " TODO: Todo list for project
 " TODO: Todos in file in lightline
+" TODO: set goyo to 81 on help files
 
 " ============================================================================
 "  => Plugins
@@ -1177,7 +1178,15 @@ let g:gitgutter_sign_removed = '▔'
 let g:gitgutter_sign_removed_first_line = '▔'
 let g:gitgutter_sign_modified_removed = '▔'
 
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
+function! GitGutterNextHunkCycle()
+  let line = line('.')
+  silent! GitGutterNextHunk
+  if line('.') == line
+    1
+    GitGutterNextHunk
+  endif
+endfunction
+
 
 
 " " ----------------------------------------------------------------------------
@@ -1705,7 +1714,7 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
-  Limelight
+  " Limelight
 endfunction
 
 function! s:goyo_leave()
@@ -1716,7 +1725,7 @@ function! s:goyo_leave()
   set showmode
   set showcmd
   set scrolloff=5
-  Limelight!
+  " Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -1941,28 +1950,6 @@ nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 "  - FZF Preview
 " ----------------------------------------------------------------------------
 
-nmap <Leader>f [fzf-p]
-xmap <Leader>f [fzf-p]
-
-nnoremap <silent> [fzf-p]f     :<C-u>FzfPreviewProjectFiles<CR>
-nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewProjectOldFiles<CR>
-
-"nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]gg    :<C-u>FzGCheckout<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
-"nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-"nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-nnoremap          [fzf-p]a    :<C-u>FzfPreviewProjectGrep<Space>TODO<CR>
-xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 
 " Add fzf quit mapping
 let g:fzf_preview_quit_map = 1
@@ -1977,7 +1964,7 @@ let g:fzf_preview_floating_window_rate = 0.7
 let g:fzf_preview_floating_window_winblend = 0
 
 " Commands used for fzf preview.
-let g:fzf_preview_command = 'bat --color=always --style=grid {-1}' " Installed bat
+let g:fzf_preview_command = 'bat --color=always --theme=TwoDark --style=grid {-1}'
 
 " g:fzf_binary_preview_command is executed if this command succeeds, and g:fzf_preview_command is executed if it fails
 let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
@@ -2006,13 +1993,13 @@ let g:fzf_preview_git_status_preview_command =  "[[ $(git diff -- {-1}) != \"\" 
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading'
 
 " Commands used for current file lines
-let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=ansi-dark --plain'
+let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=TwoDark --plain'
 
 " Commands used for preview of the grep result
 " let g:fzf_preview_grep_preview_cmd = expand('<sfile>:h:h') . '/bin/preview_fzf_grep'
 
 " Keyboard shortcuts while fzf preview is active
-" let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+let g:fzf_preview_preview_key_bindings = 'pgdn:preview-page-down,pgup:preview-page-up,?:toggle-preview'
 
 " Specify the color of fzf
 " let g:fzf_preview_fzf_color_option = ''
@@ -2042,30 +2029,16 @@ let g:fzf_preview_use_dev_icons = 1
 " ----------------------------------------------------------------------------
 "  - Ranger
 " ----------------------------------------------------------------------------
-nnoremap <F5> :call SmartRanger()<CR>
-
 " TODO: Refactor SmartRanger()
 function! SmartRanger()
   if @% == ""
-    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} ".getcwd()." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} ".getcwd()." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K &"
   else
-    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=".expand('%:p')." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K -E &"
+    silent! execute "!tmux popup -x C -y C -w '80\\%' -h '50\\%' -R 'NVFILE=`mktemp` && ranger --choosefile=${NVFILE} --selectfile=".expand('%:p')." && nvr --nostart --servername ".v:servername." --remote $(cat ${NVFILE})' -K &"
   endif
 endfun
 
 
-nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
-nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
-
-nnoremap <silent> <space>ea  :<C-u>CocFzfList diagnostics<CR>
-nnoremap <silent> <space>eb  :<C-u>CocFzfList diagnostics --current-buf<CR>
-nnoremap <silent> <space>ec  :<C-u>CocFzfList commands<CR>
-nnoremap <silent> <space>ee  :<C-u>CocFzfList extensions<CR>
-nnoremap <silent> <space>el  :<C-u>CocFzfList location<CR>
-nnoremap <silent> <space>eo  :<C-u>CocFzfList outline<CR>
-nnoremap <silent> <space>es  :<C-u>CocFzfList symbols<CR>
-nnoremap <silent> <space>eS  :<C-u>CocFzfList services<CR>
-nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
 
 " Don't let Easymotion disturb cocs gutter
 " https://github.com/neoclide/coc.nvim/issues/110#issuecomment-428447284
@@ -2075,10 +2048,6 @@ nnoremap <silent> <space>ep  :<C-u>CocFzfListResume<CR>
 "     au InsertLeave *.js CocDisable
 " augroup END
 "
-nmap <Leader>hs <Plug>(GitGutterStageHunk)
-nmap <Leader>he <Plug>(GitGutterRevertHunk)
-
-nnoremap <F10> :silent execute '!tmux new-window -a lazygit &'<CR> 
 
 " Quickly quit help
 
@@ -2086,22 +2055,6 @@ augroup easyquit
   autocmd!
   autocmd Filetype help nnoremap <buffer> q :q<CR>
 augroup END
-
-
-" And remove other navigations that are defined elsewhere
-nmap >>          <Nop>
-nmap <<          <Nop>
-vmap >>          <Nop>
-vmap <<          <Nop>
-
-" Enter inserts newline without leaving Normal mode
-nmap <cr>   o<Esc>
-
-" use tab and shift tab to indent and de-indent code
-nnoremap <Tab>   >>
-nnoremap <S-Tab> <<
-vnoremap <Tab>   >><Esc>gv
-vnoremap <S-Tab> <<<Esc>gv
 
 
 
@@ -2215,8 +2168,15 @@ try
   hi! CocWarningSign guifg=#d19a66
 
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
+
+  highlight link diffAdded DiffAdd
+  highlight link diffChanged DiffChange
+  highlight link diffRemoved DiffDelete
 catch
 endtry
+
+
+
 
 " Hide tildas
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
@@ -2226,3 +2186,56 @@ augroup CursorLineOnlyInActiveWindow
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END  
+
+
+
+" TODO: Make this JS only
+" Open up a point free function
+nmap gO [(ysa({$i<CR>return <ESC>O
+
+
+" And remove other navigations that are defined elsewhere
+nmap >>          <Nop>
+nmap <<          <Nop>
+vmap >>          <Nop>
+vmap <<          <Nop>
+
+" Enter inserts newline without leaving Normal mode
+nmap <cr>   o<Esc>
+
+" use tab and shift tab to indent and de-indent code
+nnoremap <Tab>   >>
+nnoremap <S-Tab> <<
+vnoremap <Tab>   >><Esc>gv
+vnoremap <S-Tab> <<<Esc>gv
+
+" Finging Files
+nnoremap <silent> <F7>      :<C-u>FzfPreviewGitStatus<CR>
+nnoremap <silent> <F8>      :<C-u>FzfPreviewProjectFiles<CR>
+nnoremap <silent> <F9>      :<C-u>FzfPreviewBuffers<CR>
+nnoremap <silent> <F10>     :call SmartRanger()<CR>
+nnoremap <silent> <F11>     :<C-u>FzfPreviewProjectOldFiles<CR>
+
+" Finding code
+nnoremap          <F19>     :<C-u>FzfPreviewProjectGrep<Space>TODO<CR>
+nnoremap <silent> <F20>     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+nnoremap <silent> <F21>     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          <F22>     :<C-u>FzfPreviewProjectGrep<Space>
+xnoremap          <F22>     "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+
+" Git
+nnoremap <silent> <F25>     :GitGutterPreviewHunk<CR>
+nmap     <silent> <F31>     :silent Gcommit<CR>
+nmap     <F32>              :call GitGutterNextHunkCycle()<CR>
+nmap     <F33>              <Plug>(GitGutterPrevHunk)
+nmap     <F26>              :GitGutterStageHunk <bar> call GitGutterNextHunkCycle()<CR>
+nmap     <F27>              <Plug>(GitGutterRevertHunk)
+nnoremap <silent> <F34>     :<C-u>FzGCheckout<CR>
+nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR> 
+
+" Diagnostics
+nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
+nmap <silent> <M-C-F8>      <Plug>(coc-diagnostic-prev)   
+nmap <silent> <M-C-F9>      <Plug>(coc-diagnostic-next)
+
