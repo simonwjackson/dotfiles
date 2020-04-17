@@ -2220,15 +2220,14 @@ nnoremap          <F22>     :<C-u>FzfPreviewProjectGrep<Space>
 xnoremap          <F22>     "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
 " Git
-nnoremap <silent> <F31>     :<C-u>FzGCheckout<CR>
+nnoremap <silent> <F25>     :GitGutterPreviewHunk<CR>
+nmap     <silent> <F31>     :silent Gcommit<CR>
 nmap     <F32>              :call GitGutterNextHunkCycle()<CR>
 nmap     <F33>              <Plug>(GitGutterPrevHunk)
 nmap     <F26>              :GitGutterStageHunk <bar> call GitGutterNextHunkCycle()<CR>
 nmap     <F27>              <Plug>(GitGutterRevertHunk)
-nmap     <silent> <F34>     :Gcommit<CR>
+nnoremap <silent> <F34>     :<C-u>FzGCheckout<CR>
 nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR> 
-
-command! Greview :exec "Git difftool --tool=vimdiff --staged " . fugitive#buffer().path()
 
 " Diagnostics
 nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
