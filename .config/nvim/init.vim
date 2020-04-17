@@ -2080,11 +2080,6 @@ function! ThemeDark()
   set background=dark 
   colorscheme plastic
 
-  " =============================================================================
-  " Filename: autoload/lightline/colorscheme/plastic.vim
-  " Author: Florian Rand
-  " License: MIT License
-  " =============================================================================
   let s:foreground = [ '#a9b2c3', 235 ]
   let s:background = [ '#1D2026', 235 ]
   let s:yellow = [ '#e5c07b', 180 ]
@@ -2175,9 +2170,6 @@ try
 catch
 endtry
 
-
-
-
 " Hide tildas
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 
@@ -2187,13 +2179,14 @@ augroup CursorLineOnlyInActiveWindow
   autocmd WinLeave * setlocal nocursorline
 augroup END  
 
-
-
 " TODO: Make this JS only
 " Open up a point free function
 nmap gO [(ysa({$i<CR>return <ESC>O
 
 
+" ----------------------------------------------------------------------------
+"  - Unused Bindings
+" ----------------------------------------------------------------------------
 " And remove other navigations that are defined elsewhere
 nmap >>          <Nop>
 nmap <<          <Nop>
