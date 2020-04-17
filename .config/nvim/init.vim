@@ -1964,7 +1964,7 @@ let g:fzf_preview_floating_window_rate = 0.7
 let g:fzf_preview_floating_window_winblend = 0
 
 " Commands used for fzf preview.
-let g:fzf_preview_command = 'bat --color=always --style=grid {-1}' " Installed bat
+let g:fzf_preview_command = 'bat --color=always --theme=TwoDark --style=grid {-1}'
 
 " g:fzf_binary_preview_command is executed if this command succeeds, and g:fzf_preview_command is executed if it fails
 let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
@@ -1993,13 +1993,13 @@ let g:fzf_preview_git_status_preview_command =  "[[ $(git diff -- {-1}) != \"\" 
 let g:fzf_preview_grep_cmd = 'rg --line-number --no-heading'
 
 " Commands used for current file lines
-let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=ansi-dark --plain'
+let g:fzf_preview_lines_command = 'bat --color=always --style=grid --theme=TwoDark --plain'
 
 " Commands used for preview of the grep result
 " let g:fzf_preview_grep_preview_cmd = expand('<sfile>:h:h') . '/bin/preview_fzf_grep'
 
 " Keyboard shortcuts while fzf preview is active
-" let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+let g:fzf_preview_preview_key_bindings = 'pgdn:preview-page-down,pgup:preview-page-up,?:toggle-preview'
 
 " Specify the color of fzf
 " let g:fzf_preview_fzf_color_option = ''
@@ -2223,10 +2223,12 @@ xnoremap          <F22>     "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=subs
 nnoremap <silent> <F31>     :<C-u>FzGCheckout<CR>
 nmap     <F32>              :call GitGutterNextHunkCycle()<CR>
 nmap     <F33>              <Plug>(GitGutterPrevHunk)
-nmap     <F26>              :GitGutterStageHunk
-" | call GitGutterNextHunkCycle()<CR>
+nmap     <F26>              :GitGutterStageHunk <bar> call GitGutterNextHunkCycle()<CR>
 nmap     <F27>              <Plug>(GitGutterRevertHunk)
-nnoremap <F34>              :silent execute '!tmux new-window -a lazygit &'<CR> 
+nmap     <silent> <F34>     :Gcommit<CR>
+nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR> 
+
+command! Greview :exec "Git difftool --tool=vimdiff --staged " . fugitive#buffer().path()
 
 " Diagnostics
 nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
