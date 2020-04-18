@@ -579,12 +579,6 @@ nnoremap <leader>sp :normal! mz[s1z=`z<CR>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Quick quit
-nmap <Leader>q :q<Enter>
-
-" Quick close buffer
-nmap <Leader>x :Bclose<Enter>
-
 " Quick marker
 nnoremap <Leader>m `m
 
@@ -2179,6 +2173,7 @@ augroup END
 " Open up a point free function
 nmap gO [(ysa({$i<CR>return <ESC>O
 
+nnoremap <M-x> :x<CR>
 
 " ----------------------------------------------------------------------------
 "  - Unused Bindings
