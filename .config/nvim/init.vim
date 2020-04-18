@@ -8,7 +8,6 @@
 " TODO: Turn off all plugin mappings :let no_plugin_maps = 1
 " TODO: Todo list for project
 " TODO: Todos in file in lightline
-" TODO: set goyo to 81 on help files
 
 " ============================================================================
 "  => Plugins
@@ -178,6 +177,7 @@ call plug#end()
 "  => General
 " ============================================================================
 
+let $PAGER=''
 let g:terminal = 'kitty'
 let g:crkbd = 1
 
@@ -1714,7 +1714,7 @@ let g:limelight_priority = -1
 autocmd VimResized * if exists('#goyo') | exe "normal \<c-w>=" | endif
 
 function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
+  if executable('tmux') && strlen($TMUX) && &filetype !=# 'man' && &filetype !=# 'help'
     silent !tmux set status off
     silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
   endif
@@ -1725,7 +1725,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
+  if executable('tmux') && strlen($TMUX) 
     silent !tmux set status on
     silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
   endif
@@ -2045,22 +2045,11 @@ function! SmartRanger()
   endif
 endfun
 
-
-
-" Don't let Easymotion disturb cocs gutter
-" https://github.com/neoclide/coc.nvim/issues/110#issuecomment-428447284
-" augroup FixConflict
-"     autocmd!
-"     au InsertEnter *.js CocEnable
-"     au InsertLeave *.js CocDisable
-" augroup END
-"
-
 " Quickly quit help
-
 augroup easyquit
   autocmd!
   autocmd Filetype help nnoremap <buffer> q :q<CR>
+  autocmd Filetype man nnoremap <buffer> q :call <SID>goyo_leave() <bar> :quit <bar> :quit<CR>
 augroup END
 
 
@@ -2194,6 +2183,7 @@ nmap gO [(ysa({$i<CR>return <ESC>O
 " ----------------------------------------------------------------------------
 "  - Unused Bindings
 " ----------------------------------------------------------------------------
+
 " And remove other navigations that are defined elsewhere
 nmap >>          <Nop>
 nmap <<          <Nop>
@@ -2248,3 +2238,5 @@ let g:vimade = { "fadelevel": 0.4 }
 
 au! FocusLost * VimadeFadeActive
 au! FocusGained * VimadeUnfadeActive
+
+autocmd! Filetype help :Goyo 81

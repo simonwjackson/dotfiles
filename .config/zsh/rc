@@ -115,6 +115,14 @@ function yay-commit () {
 
 alias less="bat"
 
+# Vim is your pager now
+export MANWIDTH=120
+export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+      nvim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+      -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+      -c 'Goyo' \
+      -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
 # UTF support
 LANG=en_US.utf8
 LC_CTYPE=en_US.UTF-8
