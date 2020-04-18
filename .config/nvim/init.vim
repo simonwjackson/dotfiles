@@ -2229,6 +2229,5 @@ nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR>
 " Diagnostics
 nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
 nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
-nmap <silent> <M-C-F8>      <Plug>(coc-diagnostic-prev)   
-nmap <silent> <M-C-F9>      <Plug>(coc-diagnostic-next)
-
+nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
+nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
