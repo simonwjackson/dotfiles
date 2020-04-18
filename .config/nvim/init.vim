@@ -164,6 +164,13 @@ Plug 'neoclide/coc-css', {'do': 'npm install'}
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
 Plug 'antoinemadec/coc-fzf'
 
+" FocusGained and FocusLost for vim inside Tmux
+" This is a plugin for Vim to dim inactive windows.  
+Plug 'tmux-plugins/vim-tmux-focus-events' 
+
+" An eye friendly plugin that fades your inactive buffers and preserves your syntax highlighting!
+Plug 'TaDaa/vimade'
+
 call plug#end()
 
 
@@ -2231,3 +2238,13 @@ nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
 nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
 nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
 nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
+
+" au FocusGained * :echo "hello"
+" au FocusLost * :echo "bye"
+" autocmd WinEnter * :color plastic
+" autocmd WinLeave * color abyss
+
+let g:vimade = { "fadelevel": 0.4 }
+
+au! FocusLost * VimadeFadeActive
+au! FocusGained * VimadeUnfadeActive
