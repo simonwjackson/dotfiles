@@ -473,43 +473,21 @@ if g:crkbd == 1
 
   """""
 
-  nmap <Left> <Plug>(easymotion-b)
-  vmap <Left> <Plug>(easymotion-b)
-  imap <Left> <C-o><Plug>(easymotion-b)
+  nmap <Left> <Plug>(easymotion-bd-w)
+  vmap <Left> <Plug>(easymotion-bd-w)
+  imap <Left> <C-o><Plug>(easymotion-bd-w)
 
-  nmap ← <Plug>(easymotion-ge)
-  vmap ← <Plug>(easymotion-ge)
-  imap ← <C-o><Plug>(easymotion-ge)
+  nmap <Right> <Plug>(easymotion-bd-e)
+  vmap <Right> <Plug>(easymotion-bd-e)
+  imap <Right> <C-o><Plug>(easymotion-e)
 
-  nmap ⇐ <Plug>(easymotion-B)
-  vmap ⇐ <Plug>(easymotion-B)
-  imap ⇐ <C-o><Plug>(easymotion-B)
+  nmap <Home> <Plug>(easymotion-bd-W)
+  vmap <Home> <Plug>(easymotion-bd-W)
+  imap <Home> <C-o><Plug>(easymotion-bd-W)
 
-  nmap <S-⇐> <Plug>(easymotion-gE)
-  vmap <S-⇐> <Plug>(easymotion-gE)
-  imap <S-⇐> <C-o><Plug>(easymotion-gE)
-
-  """""
-
-  nmap <Right> <Plug>(easymotion-w)
-  vmap <Right> <Plug>(easymotion-w)
-  imap <Right> <C-o><Plug>(easymotion-w)
-
-  nmap → <Plug>(easymotion-e)
-  vmap → <Plug>(easymotion-e)
-  imap → <C-o><Plug>(easymotion-e)
-
-
-  nmap ⇒ <Plug>(easymotion-W)
-  vmap ⇒ <Plug>(easymotion-W)
-
-  imap ⇒ <C-o><Plug>(easymotion-W)
-
-  nmap <S-⇒> <Plug>(easymotion-E)
-  vmap <S-⇒> <Plug>(easymotion-E)
-  imap <S-⇒> <C-o><Plug>(easymotion-E)
-
-  """""
+  nmap <End> <Plug>(easymotion-bd-E)
+  vmap <End> <Plug>(easymotion-bd-E)
+  imap <End> <C-o><Plug>(easymotion-bd-E)
 
   nmap <Down> <Plug>(easymotion-j)
   vmap <Down> <Plug>(easymotion-j)
@@ -518,9 +496,6 @@ if g:crkbd == 1
   nmap <Up> <Plug>(easymotion-k)
   vmap <Up> <Plug>(easymotion-k)
   imap <Up> <C-o><Plug>(easymotion-k)
-
-  """""
-
 
   " " Disable keys
   " noremap <Backspace> <Nop>
@@ -587,29 +562,6 @@ nnoremap Y y$
 
 " qq to record, Q to replay
 nnoremap Q @q
-
-" nnoremap <CR> o<Esc>
-" nnoremap <S-CR> <S-o><Esc>
-
-" autocmd CmdwinEnter * nnoremap <CR> <CR>
-" autocmd BufReadPost quickfix nnoremap <CR> <CR>
-
-" nnoremap <silent> <Tab> <<
-" nnoremap <silent> <S-Tab> >>
-" xnoremap <silent> <Tab> <gv
-" xnoremap <silent> <S-Tab> >gv
-
-" if has("nvim")
-"     au TermOpen * tnoremap <Esc> <c-\><c-n>
-" endif
-
-" if has("nvim")
-"     au FileType fzf tunmap <Esc>
-" endif
-
-" command! -nargs=* Help silent execute '!'. g:terminal . " --class floatingApp -- nvim -c 'tab help | -tabclose' &"
-
-
 
 " ============================================================================
 " => Helper functions
@@ -1670,32 +1622,23 @@ let g:EasyMotion_startofline = 0
 let g:EasyMotion_smartcase = 1
 
 " Finding
-nmap f <Plug>(easymotion-f)
-nmap F <Plug>(easymotion-F)
-nmap t <Plug>(easymotion-t)
-nmap T <Plug>(easymotion-T)
-nmap s <Plug>(easymotion-s2)
+" nmap f <Plug>(easymotion-f)
+" nmap F <Plug>(easymotion-F)
+" nmap t <Plug>(easymotion-t)
+" nmap T <Plug>(easymotion-T)
+" nmap s <Plug>(easymotion-s2)
 
 " Visual mode
 vmap j <Plug>(easymotion-j)
 vmap k <Plug>(easymotion-k)
-vmap f <Plug>(easymotion-f)
-vmap F <Plug>(easymotion-F)
-vmap t <Plug>(easymotion-t)
-vmap T <Plug>(easymotion-T)
-vmap s <Plug>(easymotion-s2)
+" vmap f <Plug>(easymotion-f)
+" vmap F <Plug>(easymotion-F)
+" vmap t <Plug>(easymotion-t)
+" vmap T <Plug>(easymotion-T)
+" vmap s <Plug>(easymotion-s2)
+"
 
 
-
-" " ----------------------------------------------------------------------------
-" "  - metakirby5/codi.vim
-" " ----------------------------------------------------------------------------
-"
-" " Toggle Codi
-" nnoremap <F2> :Codi!!<CR>
-"
-"
-"
 " ----------------------------------------------------------------------------
 "  - goyo.vim + limelight.vim
 " ----------------------------------------------------------------------------
@@ -1753,78 +1696,6 @@ nmap <Leader>l :Limelight!!<Enter>
 "
 " " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.config/nvim/bundle/vim-snippets/snippets'
-"
-"
-"
-" " ----------------------------------------------------------------------------
-" "  - Conceal
-" " ----------------------------------------------------------------------------
-"
-" " For conceal markers.
-" if has('conceal')
-"     set conceallevel=2 concealcursor=niv
-" endif
-"
-"
-" function! ToggleConcealLevel()
-"     if &conceallevel == 0
-"         setlocal conceallevel=2
-"     else
-"         setlocal conceallevel=0
-"     endif
-" endfunction
-"
-" nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
-"
-" " autocmd BufEnter,BufWritePost *.js syntax match equals '=' conceal cchar=
-" "
-" " autocmd BufEnter,BufWritePost * syntax match fatArrow '=>' conceal cchar=ﰲ
-" " autocmd BufEnter,BufWritePost * syntax match skinnyArrow '->' conceal cchar=
-" " autocmd BufEnter,BufWritePost * syntax match pipe '|>' conceal cchar=ﲖ
-" " autocmd BufEnter,BufWritePost * syntax match pipeDown '|>$' conceal cchar=ﲔ
-" " autocmd BufEnter,BufWritePost * syntax match composeUp '<|' conceal cchar=ﲗ
-" " autocmd BufEnter,BufWritePost * syntax match compose '\( \{2}\)\@<!<|' conceal cchar=ﲕ
-" "
-" " " autocmd BufEnter,BufWritePost *.js syntax match compose 'compose' conceal cchar=
-" " " autocmd BufEnter,BufWritePost *.js syntax match pipe 'pipe' conceal cchar=ﳤ
-" "
-" " " autocmd BufEnter,BufWritePost *.js syntax match semi '\;' conceal cchar=
-" " " autocmd BufEnter,BufWritePost *.js syntax keyword jsReturn return conceal cchar=
-" " autocmd BufEnter,BufWritePost *.js syntax match parens '(' conceal cchar=(
-" " autocmd BufEnter,BufWritePost *.js syntax match parens ')' conceal cchar=)
-" " " autocmd BufEnter,BufWritePost *.js syntax keyword export export conceal cchar=丹
-" "
-" " autocmd BufEnter,BufWritePost *.js syntax match notEquals '\v\!\=' conceal cchar=≠
-" " autocmd BufEnter,BufWritePost *.js syntax match lte '\v\<\=' conceal cchar=≤
-" " autocmd BufEnter,BufWritePost *.js syntax match gte '\v\>\=' conceal cchar=≥
-" " autocmd BufEnter,BufWritePost *.js syntax match not '\v\!' conceal cchar=¬
-" "
-" " " autocmd BufEnter,BufWritePost *.js syntax match undefined '\vundefined' conceal cchar=
-" " " autocmd BufEnter,BufWritePost *.js syntax match null '\vnull' conceal cchar=ﳠ
-" " " autocmd BufEnter,BufWritePost *.js syntax match function '\vfunction' conceal cchar=
-" "
-" " autocmd BufEnter,BufWritePost *.js,*.elm syntax match true 'true' conceal cchar=⊤
-" " autocmd BufEnter,BufWritePost *.js,*.elm syntax match false 'false' conceal cchar=⊥
-"
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => ruanyl/coverage.vim
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" " Specify the path to `coverage.json` file relative to your current working directory.
-" let g:coverage_json_report_path = 'coverage/coverage-final.json'
-"
-" " Define the symbol display for covered lines
-" let g:coverage_sign_uncovered = '▓'
-"
-" " Define the interval time of updating the coverage lines
-" let g:coverage_interval = 500
-"
-" " Do not display signs on covered lines
-" let g:coverage_show_covered = 0
-"
-" " Display signs on uncovered lines
-" let g:coverage_show_uncovered = 1
 
 
 
@@ -1843,14 +1714,6 @@ map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
-" map *   <Plug>(asterisk-z*)<Plug>(is-nohl-1)
-" map g*  <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
-" map #   <Plug>(asterisk-z#)<Plug>(is-nohl-1)
-" map g#  <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
-" map z*  <Plug>(asterisk-z*)
-" map gz* <Plug>(asterisk-gz*)
-" map z#  <Plug>(asterisk-z#)
-" map gz# <Plug>(asterisk-gz#)
 
 
 
@@ -1863,52 +1726,6 @@ let g:highlightedyank_highlight_duration = 2000
 
 
 
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => janko/vim-test
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" " nmap <silent> <leader><leader>tn :TestNearest<CR>
-" " nmap <silent> <leader><leader>tf :TestFile<CR>
-" " nmap <silent> <leader><leader>ts :TestSuite<CR>
-" " nmap <silent> <leader><leader>tl :TestLast<CR>
-" " nmap <silent> <leader><leader>tv :TestVisit<CR>
-"
-" let test#neovim#term_position = "topleft"
-"
-" " augroup test
-" "   autocmd!
-" "   autocmd BufWrite * if test#exists() |
-" "     \   TestFile |
-" "     \ endif
-" " augroup END
-"
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => rbgrouleff/bclose.vim
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" " Don't use mappings
-" let g:bclose_no_plugin_maps = 1
-"
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" " => Dimmer
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" function! s:DimInactiveWindow()
-"     syntax region Dim start='' end='$$$end$$$'
-" endfunction
-"
-" function! s:UndimActiveWindow()
-"     ownsyntax
-" endfunction
-"
-" autocmd WinEnter * call s:UndimActiveWindow()
-" autocmd BufEnter * call s:UndimActiveWindow()
-" autocmd WinLeave * call s:DimInactiveWindow()
-"
-"
-"
 " " ----------------------------------------------------------------------------
 " "  - mbbill / undotree
 " " ----------------------------------------------------------------------------
@@ -2235,3 +2052,9 @@ au! FocusLost * VimadeFadeActive
 au! FocusGained * VimadeUnfadeActive
 
 autocmd! Filetype help :Goyo 81
+
+" hi EasyMotionShade ctermbg=none ctermfg=none guifg=none
+set mouse=a
+map <ScrollWheelUp> k
+map <ScrollWheelDown> j
+
