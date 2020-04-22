@@ -1776,7 +1776,7 @@ let g:fzf_preview_quit_map = 1
 let g:fzf_preview_use_floating_window = 1
 
 " floating window size ratio
-let g:fzf_preview_floating_window_rate = 0.7
+let g:fzf_preview_floating_window_rate = 0.6
 
 " floating window winblend value
 let g:fzf_preview_floating_window_winblend = 0
@@ -1831,7 +1831,7 @@ let g:fzf_preview_preview_key_bindings = 'pgdn:preview-page-down,pgup:preview-pa
 " let g:fzf_preview_custom_default_processors['ctrl-s'] = function('fzf_preview#resource_processor#split')
 
 " Use as fzf preview-window option
-let g:fzf_preview_fzf_preview_window_option = 'down:70%'
+let g:fzf_preview_fzf_preview_window_option = 'down:0%'
 
 " Command to be executed after file list creation
 """let g:fzf_preview_filelist_postprocess_command = 'xargs -d "\n" exa --color=always'

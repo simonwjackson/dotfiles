@@ -114,6 +114,9 @@ function yay-commit () {
 }
 
 alias less="bat"
+alias gc="git commit -m"
+alias gca="git add -A && git commit -m"
+
 
 # Vim is your pager now
 export MANWIDTH=120
