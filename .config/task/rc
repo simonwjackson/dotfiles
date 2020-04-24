@@ -85,9 +85,9 @@ report.focus.filter=(+next or (due:today and project.not:routine)) -COMPLETED -D
 
 ## Workflow
 report.workflow.description=Workflow
-report.workflow.columns=id,urgency,priority,tags,project,description,url,jiraurl
-report.workflow.labels=ID,U,P,Tags,Project,Description,URL,URL
-report.workflow.sort=urgency-
+report.workflow.columns=id,impact,effort,tags,project,description,url,jiraurl
+report.workflow.labels=ID,I,E,Tags,Project,Description,URL,
+report.workflow.sort=urgency-,impact-,effort-
 report.workflow.filter=+vim or +workflow
 
 ## Bottomline
@@ -105,8 +105,14 @@ report.other.sort=urgency-,project-,created+
 report.other.filter=proj.not:routine proj.not:workflow project.not:xmas -bottomline proj.not:someday -hide -COMPLETED -DELETED +UNBLOCKED -next
 
 # effort UDA
+uda.impact.type=string
+uda.impact.label=Impact
+uda.impact.values=H,L,
+
+# effort UDA
 uda.effort.type=string
 uda.effort.label=Effort
+uda.effort.values=H,L,
 
 # URL UDA
 uda.url.type=string
@@ -142,32 +148,36 @@ uda.processed.values=I,
 
 uda.est.label=EST
 uda.est.type=numeric
+uda.priority.values=1,4,8,,
 
 # Urgency
-urgency.due.coefficient=15.0 # overdue or near due date
-urgency.user.tag.next.coefficient=12.0 # +next tag
-urgency.user.project.workflow.xps.coefficient=8.0
-urgency.user.tag.bottomline.coefficient=6.0
-urgency.user.tag.mosquito.coefficient=6 # medium priority
-urgency.uda.priority.H.coefficient=6.0 # high priority
-urgency.user.project.workflow.coefficient=5.0
-urgency.user.project.dotfiles.coefficient=5.0
-urgency.scheduled.coefficient=5.0 # scheduled tasks
-urgency.user.tag.solitude.coefficient=4.0
-urgency.active.coefficient=4.0 # already started tasks
-urgency.user.tag.hobby.coefficient=2.0
-urgency.age.coefficient=2.0 # coefficient for age
-urgency.annotations.coefficient=1.0 # has annotations
-urgency.uda.priority.M.coefficient=0 # medium priority
-urgency.tags.coefficient=0 # has tags, 1
-urgency.project.coefficient=0 # assigned to any project, 1
-urgency.blocking.coefficient=0 # blocking other tasks, 8
-urgency.user.tag.aesthetic.coefficient=-5.0 # +next tag
-urgency.user.tag.fun.coefficient=-5.0 # +next tag
-urgency.user.tag.try.coefficient=-5.0 # +next tag 
-urgency.user.tag.optimize.coefficient=-5.0 # +next tag 
-urgency.user.tag.someday.coefficient=-5.0 # +next tag 
-urgency.uda.priority.L.coefficient=-5 # low priority, 1.8
-urgency.waiting.coefficient=-10.0 # waiting task
-urgency.blocked.coefficient=-15.0 # blocked by other tasks
+urgency.uda.impact.H.coefficient=5.0
+urgency.uda.effort.L.coefficient=5.0
+
+# urgency.due.coefficient=15.0 # overdue or near due date
+# urgency.user.tag.next.coefficient=12.0 # +next tag
+# urgency.user.project.workflow.xps.coefficient=8.0
+# urgency.user.tag.bottomline.coefficient=6.0
+# urgency.user.tag.mosquito.coefficient=6 # medium priority
+# urgency.uda.priority.H.coefficient=6.0 # high priority
+# urgency.user.project.workflow.coefficient=5.0
+# urgency.user.project.dotfiles.coefficient=5.0
+# urgency.scheduled.coefficient=5.0 # scheduled tasks
+# urgency.user.tag.solitude.coefficient=4.0
+# urgency.active.coefficient=4.0 # already started tasks
+# urgency.user.tag.hobby.coefficient=2.0
+# urgency.age.coefficient=2.0 # coefficient for age
+# urgency.annotations.coefficient=1.0 # has annotations
+# urgency.uda.priority.M.coefficient=0 # medium priority
+# urgency.tags.coefficient=0 # has tags, 1
+# urgency.project.coefficient=0 # assigned to any project, 1
+# urgency.blocking.coefficient=0 # blocking other tasks, 8
+# urgency.user.tag.aesthetic.coefficient=-5.0 # +next tag
+# urgency.user.tag.fun.coefficient=-5.0 # +next tag
+# urgency.user.tag.try.coefficient=-5.0 # +next tag 
+# urgency.user.tag.optimize.coefficient=-5.0 # +next tag 
+# urgency.user.tag.someday.coefficient=-5.0 # +next tag 
+# urgency.uda.priority.L.coefficient=-5 # low priority, 1.8
+# urgency.waiting.coefficient=-10.0 # waiting task
+# urgency.blocked.coefficient=-15.0 # blocked by other tasks
 
