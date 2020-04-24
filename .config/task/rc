@@ -12,11 +12,12 @@ data.location=~/.local/share/task
 include /usr/share/doc/task/rc/no-color.theme
 
 # Sync
-taskd.server=freecinc.com:53589
-taskd.key=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.key.pem
-taskd.certificate=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.cert.pem
-taskd.ca=\/home\/simonwjackson\/.keys\/task\/freecinc_133e689d.ca.pem
-taskd.credentials=FreeCinc\/freecinc_133e689d\/e20a8186-0833-4185-a046-dc5bc35a51c3
+taskd.certificate=~/keys/task/private.certificate.pem
+taskd.key=~/keys/task/private.key.pem
+taskd.ca=~/keys/task/ca.cert.pem
+taskd.server=taskwarrior.inthe.am:53589
+taskd.credentials=inthe_am/simon.jackson/e334e0e0-72cb-4cb0-8a00-f78f4981a0da
+taskd.trust=ignore hostname
 
 # Reports
 ## Latest (last 10)
