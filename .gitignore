@@ -2,11 +2,9 @@
 !*/
 
 # Self
-
 !/.gitignore
 
 # Config files
-
 !/.config/beets/**/*.yaml
 !/.config/bugwarrior/**
 !/.config/i3blocks/**
@@ -31,21 +29,21 @@
 !/.config/zsh/**
 !/.config/user-dirs.dirs
 !/.config/ranger/rc
-!/.config/jesseduffield/lazygit/config.yml
+!/.config/jesseduffield/lazygit/config.yml 
 
 # Local scripts
-
 !/bin/**
-
-# Explicitly ignore these dirs
-storage/**
-.cache
-.local
-.tmux
+!/.local/share/task/hooks/**
 
 # Apps
 !/.local/share/applications/firefox.desktop
 
 node_modules
-!/.local/share/nvim/plugged/**
+
+# Explicitly ignore these dirs
 .cargo
+.cache
+.tmux
+/.local/share/nvim/**
+/.local/share/tmux/**
+

@@ -4,7 +4,7 @@
 # 'man task-sync' or 'man taskrc'
 
 # Use the command 'task show' to see all defaults and overrides
-
+hooks=on
 # Files
 data.location=~/.local/share/task
 
@@ -83,12 +83,19 @@ report.focus.labels=ID,E,U,P,Tags,Project,Description,URL,URL
 report.focus.sort=urgency- 
 report.focus.filter=(+next or (due:today and project.not:routine)) -COMPLETED -DELETED -BLOCKED
 
+## Process
+report.process.description=Process
+report.process.columns=id,impact,effort,tags,project,description,url,jiraurl
+report.process.labels=ID,I,E,Tags,Project,Description,URL,
+report.process.sort=entry-
+report.process.filter=(impact:"" or effort:"" or -TAGGED) -COMPLETED -DELETED
+
 ## Workflow
 report.workflow.description=Workflow
 report.workflow.columns=id,impact,effort,tags,project,description,url,jiraurl
 report.workflow.labels=ID,I,E,Tags,Project,Description,URL,
 report.workflow.sort=urgency-,impact-,effort-
-report.workflow.filter=+vim or +workflow
+report.workflow.filter=+vim or +workflow or +tmux or +blackberry
 
 ## Bottomline
 report.bottomline.description=Bottomline
