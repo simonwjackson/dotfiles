@@ -1,24 +1,23 @@
-" ============================================================================ 
+" vim: set fdm=marker textwidth=54 colorcolumn=+1:
+" ==============================================================
 "     Maintainer:
 "     Simon W. Jackson    @simonwjackson
-"
-" ============================================================================
-" vim:fdm=marker
+" ==============================================================
 
 " TODO: Turn off all plugin mappings :let no_plugin_maps = 1
 " TODO: Todo list for project
 " TODO: Todos in file in lightline
 
-" ============================================================================
+" ====================================================
 "  => Plugins
-" ============================================================================
+" ====================================================
 
 call plug#begin('~/.local/share/nvim/plugged')
 
 
-" ----------------------------------------------------------------------------
+" ----------------------------------------------------
 "  - Themes
-" ----------------------------------------------------------------------------
+" ----------------------------------------------------
 
 Plug 'flrnprz/plastic.vim'
 Plug 'victorze/foo'
@@ -26,9 +25,9 @@ Plug 'Mizux/vim-colorschemes'
 Plug 'lifepillar/vim-solarized8'
 
 
-" ----------------------------------------------------------------------------
+" ----------------------------------------------------
 "  - Syntax
-" ----------------------------------------------------------------------------
+" ----------------------------------------------------
 
 " Plug 'jxnblk/vim-mdx-js'
 Plug 'pangloss/vim-javascript'
@@ -180,6 +179,8 @@ call plug#end()
 let $PAGER=''
 let g:terminal = 'kitty'
 let g:crkbd = 1
+
+set modeline
 
 " Sets how many lines of history VIM has to remember
 set history=1000
@@ -1885,8 +1886,7 @@ endfunction
 
 function! ThemeDark()
   set background=dark 
-  colorscheme plastic
-
+  colorscheme plastic 
   let s:foreground = [ '#a9b2c3', 235 ]
   let s:background = [ '#1D2026', 235 ]
   let s:yellow = [ '#e5c07b', 180 ]
@@ -2054,7 +2054,8 @@ au! FocusGained * VimadeUnfadeActive
 autocmd! Filetype help :Goyo 81
 
 " hi EasyMotionShade ctermbg=none ctermfg=none guifg=none
-set mouse=a
+
+" set mouse=n
 map <ScrollWheelUp> k
 map <ScrollWheelDown> j
 
