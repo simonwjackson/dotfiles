@@ -12,7 +12,7 @@ ranger
 rsync
 socat
 speedtest-cli
-task
+task-git
 timew
 tmux-git
 unzip
