@@ -6,19 +6,19 @@
 case "$1" in
 
 down)
-    tmux split-pane -v -l 38%
+    tmux split-pane -v -l 38% -c "#{pane_current_path}"
     ;;
 
 up) 
-    tmux split-pane -v -b -l 38%
+    tmux split-pane -v -b -l 38% -c "#{pane_current_path}"
     ;;
 
 left) 
-    tmux split-pane -h -b -l 38%
+    tmux split-pane -h -b -l 38% -c "#{pane_current_path}"
     ;;
 
 right)
-    tmux split-pane -h -l 38%
+    tmux split-pane -h -l 38% -c "#{pane_current_path}"
     ;;
 
 *) echo "Signal number $1 is not processed"
