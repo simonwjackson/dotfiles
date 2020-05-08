@@ -3,7 +3,8 @@
 # section below determining their properties, how to query them, etc.  The name 
 # is just a symbol, and doesn't have any functional importance.
 
-targets = simonwjackson,bottomline
+targets = github,gitlab 
+#,bottomline
 
 # Setting this to true will shorten links with http://da.gd/ 
 # shorten = True 
@@ -51,19 +52,35 @@ log.level = DEBUG
 # pre_import script has a non-zero exit code, the `bugwarrior-pull` command will 
 # exit early.
 
-[simonwjackson]
+[gitlab]
+service = gitlab
+gitlab.login = simonwjackson
+gitlab.token = @oracle:eval:echo $GITLAB_PASS
+gitlab.host = gitlab.com
+gitlab.membership = True 
+gitlab.default_priority = 
+gitlab.project_template = software.{{ project | replace(".", "-") }}
+gitlab.description_template = {{ gitlabtitle }}
+
+[github]
 service = github
 github.username = simonwjackson
 github.login = simonwjackson
-github.password = @oracle:eval:bw get password 6ca418c5-74b4-447c-a672-aad90009d7e7
-github.include_repos = dr-mario.js,dotfiles
+github.password = @oracle:eval:echo $GITHUB_PASS
+github.default_priority = 
+github.project_template = software.{{ project | replace(".", "-") }}
+github.description_template = {{ githubtitle }}
 
 [bottomline] 
 service = jira 
-jira.base_uri = https://jira.us-bottomline.root.bottomline.com 
+jira.base_uri = https://jira.us-bottomline.root.bottomline.com
 jira.username = simon.jackson
-jira.password = @oracle:eval:bw get password 4543e2f4-c2e4-41f1-b59e-aad90023d6c4 
+jira.password = @oracle:eval:echo $JIRA_PASS
 jira.add_tags = bottomline
-jira.version = 7
-jira.query = status in (New, Open, "In Progress", "Dev In Progress") AND (assignee=Simon.Jackson OR "Epic Link" = GLU-1806) AND project !=AO
-#jira.default_priority = 
+jira.version = 5
+jira.verify_ssl = False 
+jira.query = status in (New, Open, "In Progress", "Dev In Progress") AND (assignee=Simon.Jackson)
+jira.default_priority = 
+jira.description_template = {{jirasummary | replace("UI - ", "")}}
+jira.project_template = bottomline.{{project}}
+ 
