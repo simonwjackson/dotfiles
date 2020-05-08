@@ -1,5 +1,5 @@
 " vim: set fdm=marker textwidth=54 colorcolumn=+1:
-" ==============================================================
+" ============================================================
 "     Maintainer:
 "     Simon W. Jackson    @simonwjackson
 " ==============================================================
@@ -473,10 +473,15 @@ if g:crkbd == 1
   silent! imap <unique> <PageUp> <C-o><C-u>
 
   """""
+  nmap <leader><leader>h <Plug>(easymotion-bd-w)
+  vmap <leader><leader>h <Plug>(easymotion-bd-w)
 
   nmap <Left> <Plug>(easymotion-bd-w)
   vmap <Left> <Plug>(easymotion-bd-w)
   imap <Left> <C-o><Plug>(easymotion-bd-w)
+
+  nmap <leader><leader>l <Plug>(easymotion-bd-e)
+  vmap <leader><leader>l <Plug>(easymotion-bd-e) 
 
   nmap <Right> <Plug>(easymotion-bd-e)
   vmap <Right> <Plug>(easymotion-bd-e)
@@ -490,9 +495,15 @@ if g:crkbd == 1
   vmap <End> <Plug>(easymotion-bd-E)
   imap <End> <C-o><Plug>(easymotion-bd-E)
 
+  nmap <leader><leader>j <Plug>(easymotion-j)
+  vmap <leader><leader>j <Plug>(easymotion-j)
+
   nmap <Down> <Plug>(easymotion-j)
   vmap <Down> <Plug>(easymotion-j)
   imap <Down> <C-o><Plug>(easymotion-j)
+
+  nmap <leader><leader>k <Plug>(easymotion-k)
+  vmap <leader><leader>k <Plug>(easymotion-k)
 
   nmap <Up> <Plug>(easymotion-k)
   vmap <Up> <Plug>(easymotion-k)
@@ -2059,3 +2070,8 @@ autocmd! Filetype help :Goyo 81
 map <ScrollWheelUp> k
 map <ScrollWheelDown> j
 
+map <leader>x :x<cr>
+map <leader>w :update<cr>
+map <leader>q :bn <bar> bd#<cr>
+inoremap jk <Esc>
+inoremap kj <Esc>
