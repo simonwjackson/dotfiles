@@ -7,6 +7,7 @@
 " TODO: Turn off all plugin mappings :let no_plugin_maps = 1
 " TODO: Todo list for project
 " TODO: Todos in file in lightline
+" TODO: Put color scheme(s) into a separate file
 
 " ====================================================
 "  => Plugins
