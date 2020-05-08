@@ -89,12 +89,12 @@ fshow() {
 FZF-EOF"
 }
 
+alias bugrc="nvim ${HOME}/.config/bugwarrior/bugwarriorrc"
+alias taskrc="nvim ${HOME}/.config/task/rc"
 alias tmuxrc="nvim ${HOME}/.config/tmux/tmux.conf"
-alias vimrc="nvim ${HOME}/.config/nvim/init.vim"
 alias tridactylrc="nvim ${HOME}/.config/tridactyl/tridactylrc"
+alias vimrc="nvim ${HOME}/.config/nvim/init.vim"
 alias zshrc="nvim ${HOME}/.config/zsh/rc"
-alias kittyrc="nvim ${HOME}/.config/kitty/kitty.conf"
-alias swayrc="nvim ${HOME}/.config/sway/config"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
@@ -113,8 +113,25 @@ function yay-commit () {
     git --git-dir=${HOME}/.git --work-tree=${HOME} stash pop
 }
 
-alias less="bat"
+# Inline the data location to share config with docker
+alias task="nocorrect task rc.data.location=~/.local/share/task"
+
+# Taskwarrior export
+# Usage: te <filter> <args>
+te () { 
+  task $(grep "$1.filter" ~/.taskrc | cut -d '=' -f 2) "${@:2}" export
+}
+
 alias gc="git commit -m"
+function gcf () {
+  git add "${1}" && git commit -m "${@:2}"
+}
+
+alias less="bat"
+alias ta="task add"
+alias td="task do"
+alias tl="task latest"
+alias tw="task report:workflow"
 function gca () {
   git add -A && git commit -m "$@"
 }
