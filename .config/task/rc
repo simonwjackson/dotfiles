@@ -5,11 +5,9 @@
 
 # Use the command 'task show' to see all defaults and overrides
 hooks=on
-# Files
-data.location=~/.local/share/task
 
-# Color theme
-include /usr/share/doc/task/rc/no-color.theme
+#verbose=label,sync
+recurrence.limit=0
 
 # Sync
 taskd.certificate=~/keys/task/private.certificate.pem
@@ -92,10 +90,10 @@ report.process.filter=(impact:"" or effort:"" or -TAGGED) -COMPLETED -DELETED
 
 ## Workflow
 report.workflow.description=Workflow
-report.workflow.columns=id,impact,effort,tags,project,description,url,jiraurl
-report.workflow.labels=ID,I,E,Tags,Project,Description,URL,
+report.workflow.columns=id,effort,impact,tags,project,description,url,jiraurl
+report.workflow.labels=ID,E,I,Tags,Project,Description,URL,
 report.workflow.sort=urgency-,impact-,effort-
-report.workflow.filter=+vim or +workflow or +tmux or +blackberry
+report.workflow.filter=-idea and (+watch or +vim or +workflow or +tmux or +blackberry) -COMPLETED -DELETED
 
 ## Bottomline
 report.bottomline.description=Bottomline
@@ -147,7 +145,6 @@ uda.jirastatus.label=Jira Status
 
 uda.priority.label=Priority
 uda.priority.type=string
-uda.priority.values=H,M,,L
 
 uda.processed.label=Processed
 uda.processed.type=string
@@ -155,36 +152,37 @@ uda.processed.values=I,
 
 uda.est.label=EST
 uda.est.type=numeric
-uda.priority.values=1,4,8,,
 
 # Urgency
-urgency.uda.impact.H.coefficient=5.0
-urgency.uda.effort.L.coefficient=5.0
+urgency.uda.impact.H.coefficient=2.0
+urgency.uda.impact.L.coefficient=-2.0
+urgency.uda.effort.H.coefficient=0.0
+urgency.uda.effort.L.coefficient=2.0
 
 # urgency.due.coefficient=15.0 # overdue or near due date
-# urgency.user.tag.next.coefficient=12.0 # +next tag
-# urgency.user.project.workflow.xps.coefficient=8.0
-# urgency.user.tag.bottomline.coefficient=6.0
+urgency.user.tag.next.coefficient=12.0 # +next tag
 # urgency.user.tag.mosquito.coefficient=6 # medium priority
-# urgency.uda.priority.H.coefficient=6.0 # high priority
-# urgency.user.project.workflow.coefficient=5.0
-# urgency.user.project.dotfiles.coefficient=5.0
 # urgency.scheduled.coefficient=5.0 # scheduled tasks
-# urgency.user.tag.solitude.coefficient=4.0
 # urgency.active.coefficient=4.0 # already started tasks
-# urgency.user.tag.hobby.coefficient=2.0
-# urgency.age.coefficient=2.0 # coefficient for age
-# urgency.annotations.coefficient=1.0 # has annotations
-# urgency.uda.priority.M.coefficient=0 # medium priority
-# urgency.tags.coefficient=0 # has tags, 1
-# urgency.project.coefficient=0 # assigned to any project, 1
-# urgency.blocking.coefficient=0 # blocking other tasks, 8
-# urgency.user.tag.aesthetic.coefficient=-5.0 # +next tag
-# urgency.user.tag.fun.coefficient=-5.0 # +next tag
-# urgency.user.tag.try.coefficient=-5.0 # +next tag 
-# urgency.user.tag.optimize.coefficient=-5.0 # +next tag 
-# urgency.user.tag.someday.coefficient=-5.0 # +next tag 
-# urgency.uda.priority.L.coefficient=-5 # low priority, 1.8
-# urgency.waiting.coefficient=-10.0 # waiting task
-# urgency.blocked.coefficient=-15.0 # blocked by other tasks
+urgency.age.coefficient=0 # coefficient for age
+urgency.annotations.coefficient=0 # has annotations
+urgency.tags.coefficient=0 # has tags, 1
+urgency.project.coefficient=0 # assigned to any project, 1
+urgency.blocking.coefficient=0 # blocking other tasks, 8
+urgency.user.project.idea.coefficient=-5.0 # +next tag 
+urgency.waiting.coefficient=-10.0 # waiting task
+urgency.blocked.coefficient=-15.0 # blocked by other tasks
 
+context.workflow=+vim or +watch or +tmux
+context.home=project:house or +home or +chore
+context.errands=+errand or +grocery
+context.work=+bottomline or +work
+context.unwind=+research or +shopping
+
+uda.reviewed.type=date
+uda.reviewed.label=Reviewed
+
+report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
+report._reviewed.columns=uuid
+report._reviewed.sort=reviewed+,modified+
+report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
