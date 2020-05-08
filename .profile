@@ -1,3 +1,5 @@
+TZ='America/Chicago'; export TZ
+
 if ! [ -x "$(command -v tmux)" ]; then \
     curl -s \
       "https://raw.githubusercontent.com/simonwjackson/dotfiles/master/bin/dotfiles-cloner" \
