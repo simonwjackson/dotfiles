@@ -1,0 +1,57 @@
+#!/bin/sh
+
+task rc.verbose=nothing process | \
+  awk '{$1=$1};1' | \
+  cut -f 1 -d ' ' | \
+  awk NF | \
+  while read id; do 
+    MODS=""
+
+    if [ -z $(task _get ${id}.effort) ]; then
+      MODS+="effort:"
+      MODS+=$(printf "H\nL" | \
+        fzf \
+          --no-clear \
+          --bind="j:down,k:up, :accept" \
+          --reverse \
+          --prompt="Effort: " \
+          --header="$(task _get ${id}.description)") 
+      MODS+=" " 
+    fi
+
+    if [ -z $(task _get ${id}.impact) ]; then
+      MODS+="impact:"
+      MODS+=$(printf "H\nL" | \
+        fzf \
+          --no-clear \
+          --bind="j:down,k:up, :accept" \
+          --reverse \
+          --prompt="Impact: " \
+          --header="$(task _get ${id}.description)") 
+      MODS+=" "
+    fi
+
+    if [ -z $(task _get ${id}.tags) ]; then
+      MODS+=$(task \
+        rc.list.all.tags=1 tags | \
+        cut -d ' ' -f 1 | \
+        tail -n +4 | \
+        awk NF | \
+        uniq | \
+        sort | \
+        fzf \
+          --no-clear \
+          --header="$(task _get ${id}.description)" \
+          --prompt="Tags: " \
+          --multi \
+          --reverse \
+          --bind=" :toggle+down,j:down,k:up" | \
+        sed -e 's/^/+/' | \
+        tr '\n' ' '
+      )
+    fi
+
+    task rc.hooks=off mod ${id} $MODS
+  done
+
+  task sync
