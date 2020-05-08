@@ -9,11 +9,11 @@
 n=0
 while read modified_task
 do
-    n=$(($n + 1))
+  n=$(($n + 1))
 done
 
-if (($n > 0)); then
-    task sync >> ~/.task/sync_hook.log
+if [ $n -gt 0 ]; then
+  nohup task sync > /dev/null 2>&1&
 fi
 
 exit 0
