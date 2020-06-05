@@ -2,13 +2,13 @@
 
 if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v rsync)" ] && [ -x "$(command -v curl)" ] && [ -x "$(command -v openssh)" ]; }; then 
   echo 'Error: Missing dependencies. installing..' >&2
-  yay -S --noconfirm git rsync curl openssh
+  yay -S --needed --noconfirm git rsync curl openssh
 fi 
 
 TMP_DOTFILES=$(mktemp --directory)
 GIT_HOME=${HOME}/.git
 
-git clone git@github.com:simonwjackson/dotfiles.git ${TMP_DOTFILES}
+git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
 
 if git rev-parse --git-dir ${GIT_HOME} > /dev/null 2>&1; then
   echo "git dir found... will not clone"
