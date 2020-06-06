@@ -13,7 +13,6 @@ pacman \
 echo 'Installing setup dependencies..'
 pacman \
   --sync \
-  --upgrade \
   --refresh \
   --needed \
   --noconfirm \
