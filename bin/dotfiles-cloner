@@ -1,13 +1,49 @@
 #!/bin/sh
 
-[[ -f "/etc/arch-release" ]] || echo "Warning! This is not an Arch Linux based system. Things may break.."
+# function define
+
+confirm() {
+  if [ "$FORCE" == '-y' ]; then
+    true
+  else
+    read -r -p "$1 [y/N] " response < /dev/tty
+    if [[ $response =~ ^(yes|y|Y)$ ]]; then
+      true
+    else
+      false
+    fi
+  fi
+}
+
+prompt() {
+  read -r -p "$1 [y/N] " response < /dev/tty
+  if [[ $response =~ ^(yes|y|Y)$ ]]; then
+    true
+  else
+    false
+  fi
+}
+
+success() {
+  echo -e "$(tput setaf 2)$1$(tput sgr0)"
+}
+
+inform() {
+  echo -e "$(tput setaf 6)$1$(tput sgr0)"
+}
+
+warning() {
+  echo -e "$(tput setaf 1)$1$(tput sgr0)"
+}
+
+[[ -f "/etc/arch-release" ]] || warning "This is not an Arch Linux based system. Things may break.."
 
 [[ -z "${USER}" ]] && USER=$(whoami)
 HOME=$(getent passwd "${USER}" | cut -d: -f6)
 GIT_HOME="${HOME}/.git"
 
 
-echo 'Updating system..'
+inform 'Updating system..'
 pacman \
   --sync \
   --refresh \
@@ -15,7 +51,7 @@ pacman \
   --needed \
   --noconfirm
   
-echo 'Installing setup dependencies..'
+inform 'Installing setup dependencies..'
 pacman \
   --sync \
   --needed \
@@ -32,7 +68,7 @@ useradd \
   --no-user-group \
   $USER
   
-[[ -z $(git --git-dir ${GIT_HOME} status -s) ]] || echo "${HOME} is not clean! exiting.."; exit 1
+[[ -z $(git --git-dir ${GIT_HOME} status -s) ]] || warning "${HOME} is not clean! exiting.."; exit 1
 
 TMP_DOTFILES=$(mktemp --directory)
 
@@ -42,3 +78,5 @@ rm -rdf "${GIT_HOME}"
 rsync --verbose --archive --recursive ${TMP_DOTFILES}/ ${HOME}
 
 rm -rdf ${TMP_DOTFILES}
+
+success "Installation complete!"
