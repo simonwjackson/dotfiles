@@ -85,4 +85,4 @@ rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 
 rm -rdf ${TMP_DOTFILES}
 
-success "Installation complete!"
+success "Dotfiles have been cloned!"
