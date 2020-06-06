@@ -1,27 +1,19 @@
 #!/bin/sh
 
+GIT_HOME=${HOME}/.git
+
+[[ -z $(git --git-dir ${HOME}/.git status -s) ]] || echo "${HOME} is not clean! exiting.."; exit 1
+
 if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v rsync)" ] && [ -x "$(command -v curl)" ] && [ -x "$(command -v openssh)" ]; }; then 
   echo 'Error: Missing dependencies. installing..' >&2
   yay -S --needed --noconfirm git rsync curl openssh
 fi 
 
 TMP_DOTFILES=$(mktemp --directory)
-GIT_HOME=${HOME}/.git
 
 git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
 
-if git rev-parse --git-dir ${GIT_HOME} > /dev/null 2>&1; then
-  echo "git dir found... will not clone"
-else
-  rsync --archive ${TMP_DOTFILES}/.git/ ${GIT_HOME}
-fi
-
-EXCLUSIONS=$(git \
-  --git-dir ${HOME}/.git \
-  diff \
-  --name-only \
-  --line-prefix=/ | sed 's/^/--exclude=/g')
-
-rsync --verbose --archive --recursive ${EXCLUSIONS} --exclude /.git ${TMP_DOTFILES}/ ${HOME}
+rm -rdf "${GIT_HOME}"
+rsync --verbose --archive --recursive ${TMP_DOTFILES}/ ${HOME}
 
 rm -rdf ${TMP_DOTFILES}
