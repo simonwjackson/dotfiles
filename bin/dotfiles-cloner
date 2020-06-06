@@ -1,6 +1,11 @@
 #!/bin/sh
 
-GIT_HOME=${HOME}/.git
+[[ -f "/etc/arch-release" ]] || echo "Warning! This is not an Arch Linux based system. Things may break.."
+
+[[ -z "${USER}" ]] && USER=$(whoami)
+HOME=$(getent passwd "${USER}" | cut -d: -f6)
+GIT_HOME="${HOME}/.git"
+
 
 echo 'Updating system..'
 pacman \
@@ -16,8 +21,18 @@ pacman \
   --needed \
   --noconfirm \
   git rsync curl openssh 
-
-[[ -z $(git --git-dir ${HOME}/.git status -s) ]] || echo "${HOME} is not clean! exiting.."; exit 1
+  
+groupadd \
+  --force \
+  --gid 100 \
+  users
+  
+useradd \
+  --create-home \
+  --no-user-group \
+  $USER
+  
+[[ -z $(git --git-dir ${GIT_HOME} status -s) ]] || echo "${HOME} is not clean! exiting.."; exit 1
 
 TMP_DOTFILES=$(mktemp --directory)
 
