@@ -68,14 +68,21 @@ useradd \
   --no-user-group \
   $USER
   
-[[ -z $(git --git-dir ${GIT_HOME} status -s) ]] || warning "${HOME} is not clean! exiting.."; exit 1
+  
+if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
+  if ! [ -z "$(git --git-dir "${GIT_HOME}" status --untracked-files=no --porcelain)"]; then
+    echo "${HOME} is not clean! exiting.."
+    exit 1
+  fi
+fi
 
+[[ -z git -C <path> rev-parse && $(git --git-dir ${GIT_HOME} status -s) ]] || 
 TMP_DOTFILES=$(mktemp --directory)
 
 git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
 
 rm -rdf "${GIT_HOME}"
-rsync --verbose --archive --recursive ${TMP_DOTFILES}/ ${HOME}
+rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 
 rm -rdf ${TMP_DOTFILES}
 
