@@ -2,10 +2,14 @@
 
 GIT_HOME=${HOME}/.git
 
-if ! { [ -x "$(command -v git)" ] && [ -x "$(command -v rsync)" ] && [ -x "$(command -v curl)" ] && [ -x "$(command -v openssh)" ]; }; then 
-  echo 'Error: Missing dependencies. installing..' >&2
-  yay -S --needed --noconfirm git rsync curl openssh
-fi 
+echo 'Installing dependencies..'
+pacman \
+  --sync \
+  --upgrade \
+  --refresh 
+  --needed \
+  --noconfirm \
+  git rsync curl openssh 
 
 [[ -z $(git --git-dir ${HOME}/.git status -s) ]] || echo "${HOME} is not clean! exiting.."; exit 1
 
