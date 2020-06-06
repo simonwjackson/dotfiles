@@ -2,7 +2,15 @@
 
 GIT_HOME=${HOME}/.git
 
-echo 'Installing dependencies..'
+echo 'Updating system..'
+pacman \
+  --sync \
+  --refresh \
+  --sysupgrade \
+  --needed \
+  --noconfirm
+  
+echo 'Installing setup dependencies..'
 pacman \
   --sync \
   --upgrade \
