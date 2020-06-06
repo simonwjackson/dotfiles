@@ -13,7 +13,6 @@ pacman \
 echo 'Installing setup dependencies..'
 pacman \
   --sync \
-  --refresh \
   --needed \
   --noconfirm \
   git rsync curl openssh 
