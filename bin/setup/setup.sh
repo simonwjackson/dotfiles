@@ -104,8 +104,7 @@ git config --global user.name "${GIT_NAME}"
 git config --global user.email "${GIT_EMAIL}"
 git config --global github.user "${GITHUB_USERNAME}"
 
-TMP_DOTFILES=$(mktemp --directory)
-
+TMP_DOTFILES=$(sudo -u "${USER}" mktemp --directory)
 sudo -u "${USER}" git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
 
 rm -rdf "${GIT_HOME}"
