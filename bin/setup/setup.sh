@@ -1,25 +1,112 @@
 #!/bin/sh
 
-#$setup_dir=dirname $0
+confirm() {
+  if [ "$FORCE" == '-y' ]; then
+    true
+  else
+    read -r -p "$1 [y/N] " response < /dev/tty
+    if [[ $response =~ ^(yes|y|Y)$ ]]; then
+      true
+    else
+      false
+    fi
+  fi
+}
+
+prompt() {
+  read -r -p "$1 [y/N] " response < /dev/tty
+  if [[ $response =~ ^(yes|y|Y)$ ]]; then
+    true
+  else
+    false
+  fi
+}
+
+success() {
+  echo -e "$(tput setaf 2)$1$(tput sgr0)"
+}
+
+inform() {
+  echo -e "$(tput setaf 6)$1$(tput sgr0)"
+}
+
+warning() {
+  echo -e "$(tput setaf 1)$1$(tput sgr0)"
+}
+
+[[ -f "/etc/arch-release" ]] || warning "This is not an Arch Linux based system. Things may break.."
+
+[[ -z "${USER}" ]] && USER=$(whoami)
+HOME=$(getent passwd "${USER}" | cut -d: -f6)
+GIT_HOME="${HOME}/.git"
+
+
+inform 'Updating system..'
+pacman \
+  --sync \
+  --refresh \
+  --sysupgrade \
+  --needed \
+  --noconfirm
+  
+inform 'Installing setup dependencies..'
+pacman \
+  --sync \
+  --needed \
+  --noconfirm \
+  git rsync curl openssh 
+  
+groupadd \
+  --force \
+  --gid 100 \
+  users
+  
+useradd \
+  --create-home \
+  --no-user-group \
+  $USER
+  
+  
+if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
+  if ! [ -z "$(git --git-dir "${GIT_HOME}" status --untracked-files=no --porcelain)"]; then
+    echo "${HOME} is not clean! exiting.."
+    exit 1
+  fi
+fi
+
+TMP_DOTFILES=$(mktemp --directory)
+
+git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
+
+rm -rdf "${GIT_HOME}"
+rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
+
+rm -rdf ${TMP_DOTFILES}
+
+success "Dotfiles have been cloned!"
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
 
 # source $(setup_dir)/_before.sh 
-source ${HOME}/bin/setup/arch.sh 
-source ${HOME}/bin/setup/neovim.sh
+#source ${HOME}/bin/setup/arch.sh 
+#source ${HOME}/bin/setup/neovim.sh
 # source $(setup_dir)/firefox.sh
 
 # ZSH
-ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
+#ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
 # chsh -s $(which zsh)
 
 # tmux
-ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
-git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+#ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
+#git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 
-source ${HOME}/bin/setup/nvm.sh
+#source ${HOME}/bin/setup/nvm.sh
 
 # task warrior 
-rm ${HOME}/.taskrc
-ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
+#rm ${HOME}/.taskrc
+#ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
 
 # VIT
 # ln -s ${HOME}/.config/vit ${HOME}/.vit
@@ -37,25 +124,25 @@ ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
 
 # source $(setup_dir)/bluetooth.sh
 # source $(setup_dir)/services.sh 
-source ${HOME}/bin/setup/pip.sh
+#source ${HOME}/bin/setup/pip.sh
 # source $(setup_dir)/backlight.sh
 
 # time sync
 # timedatectl set-ntp true
 
 # Diff so fancy
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+#git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 
-git config --global color.ui true
+#git config --global color.ui true
 
-git config --global color.diff-highlight.oldNormal    "red bold"
-git config --global color.diff-highlight.oldHighlight "red bold 52"
-git config --global color.diff-highlight.newNormal    "green bold"
-git config --global color.diff-highlight.newHighlight "green bold 22"
+#git config --global color.diff-highlight.oldNormal    "red bold"
+#git config --global color.diff-highlight.oldHighlight "red bold 52"
+#git config --global color.diff-highlight.newNormal    "green bold"
+#git config --global color.diff-highlight.newHighlight "green bold 22"
 
-git config --global color.diff.meta       "11"
-git config --global color.diff.frag       "magenta bold"
-git config --global color.diff.commit     "yellow bold"
-git config --global color.diff.old        "red bold"
-git config --global color.diff.new        "green bold"
-git config --global color.diff.whitespace "red reverse"
+#git config --global color.diff.meta       "11"
+#git config --global color.diff.frag       "magenta bold"
+#git config --global color.diff.commit     "yellow bold"
+#git config --global color.diff.old        "red bold"
+#git config --global color.diff.new        "green bold"
+#git config --global color.diff.whitespace "red reverse"
