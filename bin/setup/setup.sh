@@ -78,7 +78,12 @@ pacman \
   --sync \
   --needed \
   --noconfirm \
-  git rsync curl openssh 
+    rsync \
+    openssh \
+    curl \
+    sed \
+    git \
+    sudo
   
 groupadd \
   --force \
