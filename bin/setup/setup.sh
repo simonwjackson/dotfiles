@@ -121,9 +121,8 @@ success "Dotfiles have been cloned!"
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
-source ${HOME}/bin/setup/arch.sh 
-# source ${HOME}/bin/setup/neovim.sh
-# source $(setup_dir)/firefox.sh
+source "${SCRIPTPATH}/arch.sh"
+# source "${SCRIPTPATH}/neovim.sh"
 
 # ZSH
 # ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
