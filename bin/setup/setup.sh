@@ -86,6 +86,10 @@ useradd \
   --create-home \
   --no-user-group \
   "${USER}"
+  
+passwd \
+  --delete \
+  "${USER}"
 
 HOME=$(getent passwd "${USER}" | cut -d: -f6)
 GIT_HOME="${HOME}/.git"
