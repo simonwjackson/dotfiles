@@ -106,7 +106,7 @@ git config --global github.user "${GITHUB_USERNAME}"
 
 TMP_DOTFILES=$(mktemp --directory)
 
-git clone https://github.com/simonwjackson/dotfiles.git ${TMP_DOTFILES}
+sudo -u "${USER}" git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
 
 rm -rdf "${GIT_HOME}"
 rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
