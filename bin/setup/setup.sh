@@ -57,9 +57,6 @@ if [[ -z "${GITHUB_USERNAME}" ]]; then
   read GITHUB_USERNAME
 fi
 
-HOME=$(getent passwd "${USER}" | cut -d: -f6)
-GIT_HOME="${HOME}/.git"
-
 inform 'Updating system..'
 pacman \
   --sync \
@@ -89,7 +86,10 @@ useradd \
   --create-home \
   --no-user-group \
   "${USER}"
-  
+
+HOME=$(getent passwd "${USER}" | cut -d: -f6)
+GIT_HOME="${HOME}/.git"
+
 # Add user to sudoers
 printf "${USER} ALL = (ALL:ALL) ALL\n" | tee -a /etc/sudoers
   
