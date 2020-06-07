@@ -1,5 +1,14 @@
 #!/bin/sh
 
+prompt() {
+  read -r -p "$1 [y/N] " response < /dev/tty
+  if [[ $response =~ ^(yes|y|Y)$ ]]; then
+    true
+  else
+    false
+  fi
+}
+
 confirm() {
   if [ "$FORCE" == '-y' ]; then
     true
@@ -10,15 +19,6 @@ confirm() {
     else
       false
     fi
-  fi
-}
-
-prompt() {
-  read -r -p "$1 [y/N] " response < /dev/tty
-  if [[ $response =~ ^(yes|y|Y)$ ]]; then
-    true
-  else
-    false
   fi
 }
 
@@ -34,9 +34,33 @@ warning() {
   echo -e "$(tput setaf 1)$1$(tput sgr0)"
 }
 
+input() {
+  echo -e "$(tput setaf 6)$1$(tput sgr0)\c"
+}
+
 [[ -f "/etc/arch-release" ]] || warning "This is not an Arch Linux based system. Things may break.."
 
 [[ -z "${USER}" ]] && USER=$(whoami)
+
+if [[ -z "${GIT_NAME}" ]]; then
+  inform "Git Name: "
+  read GIT_NAME
+fi
+
+if [[ -z "${GIT_EMAIL}" ]]; then
+  inform "Git Email: "
+  read GIT_EMAIL
+fi
+
+if [[ -z "${GITHUB_USERNAME}" ]]; then
+  inform "Github Username: "
+  read GITHUB_USERNAME
+fi
+
+git config --global user.name "${GIT_NAME}"
+git config --global user.email "${GIT_EMAIL}"
+git config --global github.user "${GITHUB_USERNAME}"
+
 HOME=$(getent passwd "${USER}" | cut -d: -f6)
 GIT_HOME="${HOME}/.git"
 
@@ -88,25 +112,23 @@ success "Dotfiles have been cloned!"
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
-
-# source $(setup_dir)/_before.sh 
-#source ${HOME}/bin/setup/arch.sh 
-#source ${HOME}/bin/setup/neovim.sh
+source ${HOME}/bin/setup/arch.sh 
+# source ${HOME}/bin/setup/neovim.sh
 # source $(setup_dir)/firefox.sh
 
 # ZSH
-#ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
+# ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
 # chsh -s $(which zsh)
 
 # tmux
-#ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
-#git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+# ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
+# git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 
 #source ${HOME}/bin/setup/nvm.sh
 
 # task warrior 
-#rm ${HOME}/.taskrc
-#ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
+# rm ${HOME}/.taskrc
+# ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
 
 # VIT
 # ln -s ${HOME}/.config/vit ${HOME}/.vit
@@ -124,25 +146,25 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 # source $(setup_dir)/bluetooth.sh
 # source $(setup_dir)/services.sh 
-#source ${HOME}/bin/setup/pip.sh
+# source ${HOME}/bin/setup/pip.sh
 # source $(setup_dir)/backlight.sh
 
 # time sync
 # timedatectl set-ntp true
 
 # Diff so fancy
-#git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+# git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 
-#git config --global color.ui true
+# git config --global color.ui true
 
-#git config --global color.diff-highlight.oldNormal    "red bold"
-#git config --global color.diff-highlight.oldHighlight "red bold 52"
-#git config --global color.diff-highlight.newNormal    "green bold"
-#git config --global color.diff-highlight.newHighlight "green bold 22"
+# git config --global color.diff-highlight.oldNormal    "red bold"
+# git config --global color.diff-highlight.oldHighlight "red bold 52"
+# git config --global color.diff-highlight.newNormal    "green bold"
+# git config --global color.diff-highlight.newHighlight "green bold 22"
 
-#git config --global color.diff.meta       "11"
-#git config --global color.diff.frag       "magenta bold"
-#git config --global color.diff.commit     "yellow bold"
-#git config --global color.diff.old        "red bold"
-#git config --global color.diff.new        "green bold"
-#git config --global color.diff.whitespace "red reverse"
+# git config --global color.diff.meta       "11"
+# git config --global color.diff.frag       "magenta bold"
+# git config --global color.diff.commit     "yellow bold"
+# git config --global color.diff.old        "red bold"
+# git config --global color.diff.new        "green bold"
+# git config --global color.diff.whitespace "red reverse"
