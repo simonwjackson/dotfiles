@@ -57,13 +57,8 @@ if [[ -z "${GITHUB_USERNAME}" ]]; then
   read GITHUB_USERNAME
 fi
 
-git config --global user.name "${GIT_NAME}"
-git config --global user.email "${GIT_EMAIL}"
-git config --global github.user "${GITHUB_USERNAME}"
-
 HOME=$(getent passwd "${USER}" | cut -d: -f6)
 GIT_HOME="${HOME}/.git"
-
 
 inform 'Updating system..'
 pacman \
@@ -104,6 +99,10 @@ if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
     exit 1
   fi
 fi
+
+git config --global user.name "${GIT_NAME}"
+git config --global user.email "${GIT_EMAIL}"
+git config --global github.user "${GITHUB_USERNAME}"
 
 TMP_DOTFILES=$(mktemp --directory)
 
