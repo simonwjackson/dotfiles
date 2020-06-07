@@ -43,17 +43,17 @@ input() {
 [[ -z "${USER}" ]] && USER=$(whoami)
 
 if [[ -z "${GIT_NAME}" ]]; then
-  inform "Git Name: "
+  input "Git Name: "
   read GIT_NAME
 fi
 
 if [[ -z "${GIT_EMAIL}" ]]; then
-  inform "Git Email: "
+  input "Git Email: "
   read GIT_EMAIL
 fi
 
 if [[ -z "${GITHUB_USERNAME}" ]]; then
-  inform "Github Username: "
+  input "Github Username: "
   read GITHUB_USERNAME
 fi
 
@@ -124,7 +124,7 @@ source ${HOME}/bin/setup/arch.sh
 # ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
 # git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 
-#source ${HOME}/bin/setup/nvm.sh
+# source ${HOME}/bin/setup/nvm.sh
 
 # task warrior 
 # rm ${HOME}/.taskrc
