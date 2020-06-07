@@ -14,7 +14,7 @@ if ! [ -x "$(command -v yay)" ]; then
   sudo -u "${USER}" bash -c 'cd ~ && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm'
 fi
 
-yay \
+sudo -u "${USER}" yay \
   --needed \
   --noconfirm \
   --sync \
