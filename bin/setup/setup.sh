@@ -132,35 +132,23 @@ source "${SCRIPTPATH}/arch.sh"
 # ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
 # git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
 
-# source ${HOME}/bin/setup/nvm.sh
+# source ${SCRIPTPATH}/nvm.sh
 
-# task warrior 
+# Taskwarrior 
 # rm ${HOME}/.taskrc
 # ln -s ${HOME}/.config/task/rc ${HOME}/.taskrc
-
-# VIT
-# ln -s ${HOME}/.config/vit ${HOME}/.vit
-
-# Mutt
-# rm ${HOME}/.mailcap
-# ln -s ${HOME}/.config/mailcap ${HOME}/.mailcap
-
-# rm ${HOME}/.muttrc
-# ln -s ${HOME}/.config/mutt/rc ${HOME}/.muttrc
 
 # Timewarrior
 # mkdir -p ${HOME}/.timewarrior
 # ln -s ${HOME}/.config/timewarrior ${HOME}/.timewarrior/timewarrior.cfg
 
-# source $(setup_dir)/bluetooth.sh
-# source $(setup_dir)/services.sh 
-# source ${HOME}/bin/setup/pip.sh
-# source $(setup_dir)/backlight.sh
+# source $(setup_dir)/services.sh
 
-# time sync
-# timedatectl set-ntp true
+# Pip
+# source ${SCRIPTPATH}/pip.sh
 
 # Diff so fancy
+
 # git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 
 # git config --global color.ui true
