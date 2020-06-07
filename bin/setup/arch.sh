@@ -1,4 +1,18 @@
-#!/usr/bin/zsh
+#!/bin/sh
+
+if ! [ -x "$(command -v yay)" ]; then
+  pacman \
+    --sync \
+    --needed \
+    --noconfirm \
+      libffi \
+      base-devel \ 
+      procps-ng \
+      go
+      
+  inform "Installing yay"
+  sudo -u "${USER}" bash -c 'cd ~ && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm'
+fi
 
 yay \
   --needed \
