@@ -6,10 +6,7 @@ if ! [ -x "$(command -v yay)" ]; then
     --sync \
     --needed \
     --noconfirm \
-      libffi \
-      base-devel \ 
-      procps-ng \
-      go
+      libffi base-devel procps-ng go
       
   inform "Installing yay"
   sudo -u "${USER}" bash -c 'cd ~ && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm'
