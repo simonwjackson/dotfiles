@@ -176,3 +176,13 @@ source "${SCRIPTPATH}/arch.sh"
 # git config --global color.diff.old        "red bold"
 # git config --global color.diff.new        "green bold"
 # git config --global color.diff.whitespace "red reverse"
+
+# SSH
+inform "Harden SSH"
+
+SSH_CONFIG=/etc/ssh/sshd_config
+
+sed -i 's/#\?\(PerminRootLogin\s*\).*$/\1 no/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' "${SSH_CONFIG}"
