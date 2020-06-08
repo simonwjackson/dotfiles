@@ -57,9 +57,10 @@ if [[ -z "${GITHUB_USERNAME}" ]]; then
   read GITHUB_USERNAME
 fi
 
-inform "Update Arch mirror list"
-curl https://www.archlinux.org/mirrorlist/?ip_version=6 \
-| sed 's/^#Server/Server/' \
+inform "Update Arch mirror list.. This may take a few moments"
+curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" \
+| sed -e 's/^#Server/Server/' -e '/^#/d' \
+| rankmirrors -n 5 - \
 | tee /etc/pacman.d/mirrorlist
 
 inform 'Updating system..'
