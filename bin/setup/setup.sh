@@ -57,7 +57,12 @@ if [[ -z "${GITHUB_USERNAME}" ]]; then
   read GITHUB_USERNAME
 fi
 
-inform "Update Arch mirror list.. This may take a few moments"
+pacman \
+  --sync \
+  --needed \
+  --noconfirm \
+  pacman-contrib
+inform "Finding the fastest Arch mirrors.. This may take a few moments.."
 curl -s "https://www.archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" \
 | sed -e 's/^#Server/Server/' -e '/^#/d' \
 | rankmirrors -n 5 - \
