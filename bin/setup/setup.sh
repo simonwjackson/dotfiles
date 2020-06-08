@@ -60,11 +60,12 @@ fi
 pacman \
   --sync \
   --needed \
+  --refresh \
   --noconfirm \
   pacman-contrib
 inform "Finding the fastest Arch mirrors.. This may take a few moments.."
 cat etc/pacman.d/mirrorlist \
-| rankmirrors -n 5 - \
+| rankmirrors - \
 | tee /etc/pacman.d/mirrorlist
 
 inform 'Updating system..'
