@@ -44,17 +44,17 @@ input() {
 
 if [[ -z "${GIT_NAME}" ]]; then
   input "Git Name: "
-  read GIT_NAME
+  read GIT_NAME < /dev/tty
 fi
 
 if [[ -z "${GIT_EMAIL}" ]]; then
   input "Git Email: "
-  read GIT_EMAIL
+  read GIT_EMAIL < /dev/tty
 fi
 
 if [[ -z "${GITHUB_USERNAME}" ]]; then
   input "Github Username: "
-  read GITHUB_USERNAME
+  read GITHUB_USERNAME < /dev/tty
 fi
 
 pacman \
