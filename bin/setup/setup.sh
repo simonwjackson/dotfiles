@@ -42,19 +42,21 @@ input() {
 
 [[ -z "${USER}" ]] && USER=$(whoami)
 
-if [[ -z "${GIT_NAME}" ]]; then
-  input "Git Name: "
-  read GIT_NAME < /dev/tty
-fi
+if [[ $- == *i* ]]; then # Interactiive shell?
+  if [[ -z "${GIT_NAME}" ]]; then
+    input "Git Name: "
+    read GIT_NAME < /dev/tty
+  fi
 
-if [[ -z "${GIT_EMAIL}" ]]; then
-  input "Git Email: "
-  read GIT_EMAIL < /dev/tty
-fi
+  if [[ -z "${GIT_EMAIL}" ]]; then
+    input "Git Email: "
+    read GIT_EMAIL < /dev/tty
+  fi
 
-if [[ -z "${GITHUB_USERNAME}" ]]; then
-  input "Github Username: "
-  read GITHUB_USERNAME < /dev/tty
+  if [[ -z "${GITHUB_USERNAME}" ]]; then
+    input "Github Username: "
+    read GITHUB_USERNAME < /dev/tty
+  fi
 fi
 
 pacman \
