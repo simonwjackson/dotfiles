@@ -49,7 +49,7 @@ pacman \
   --noconfirm \
   pacman-contrib
 
-inform "Finding the fastest Arch mirrors.. This may take a few moments.."
+inform "Sorting your pacman mirror list. This may take a moment.."
 cat /etc/pacman.d/mirrorlist \
 | rankmirrors - \
 | tee /etc/pacman.d/mirrorlist
@@ -102,7 +102,6 @@ else
 fi
 
 passwd \
-  --expire \
   "${USER}"
 
 # Add user to sudoers
