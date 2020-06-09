@@ -67,7 +67,7 @@ pacman \
   pacman-contrib
 
 inform "Finding the fastest Arch mirrors.. This may take a few moments.."
-cat etc/pacman.d/mirrorlist \
+cat /etc/pacman.d/mirrorlist \
 | rankmirrors - \
 | tee /etc/pacman.d/mirrorlist
 
