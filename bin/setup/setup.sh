@@ -63,6 +63,7 @@ pacman \
   --refresh \
   --noconfirm \
   pacman-contrib
+
 inform "Finding the fastest Arch mirrors.. This may take a few moments.."
 cat etc/pacman.d/mirrorlist \
 | rankmirrors - \
