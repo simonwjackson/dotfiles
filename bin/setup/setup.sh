@@ -99,7 +99,6 @@ groupadd \
 useradd \
   --create-home \
   --no-user-group \
-  --home "${HOME}"
   "${USER}"
   
 passwd \
@@ -132,9 +131,6 @@ rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 rm -rdf ${TMP_DOTFILES}
 
 success "Dotfiles have been cloned!"
-
-SCRIPT=$(readlink -f "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
 
 source "${HOME}/bin/setup/arch.sh"
 source "${HOME}/bin/setup/neovim.sh"
