@@ -90,6 +90,15 @@ pacman \
     sed \
     git \
     sudo
+
+# SSH
+inform "Harden SSH"
+SSH_CONFIG=/etc/ssh/sshd_config
+
+sed -i 's/#\?\(PerminRootLogin\s*\).*$/\1 no/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' "${SSH_CONFIG}"
+sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' "${SSH_CONFIG}"
   
 groupadd \
   --force \
@@ -110,32 +119,50 @@ else
 fi
 
 passwd \
-  --delete \
+  --expire \
   "${USER}"
-
-HOME=$(getent passwd "${USER}" | cut -d: -f6)
-GIT_HOME="${HOME}/.git"
 
 # Add user to sudoers
 printf "${USER} ALL = (ALL:ALL) ALL\n" | tee -a /etc/sudoers
-  
+
+inform "Installing yay.."
+if ! [ -x "$(command -v yay)" ]; then
+  pacman \
+    --sync \
+    --needed \
+    --noconfirm \
+      libffi base-devel procps-ng go
+      
+  sudo -u "${USER}" bash -c '\
+    TMP_YAY=$(mktemp --directory); \
+    git clone https://aur.archlinux.org/yay.git "${TMP_YAY}"; \
+    cd "${TMP_YAY}"; \
+    makepkg \
+      --syncdeps \
+      --install \
+      --noconfirm; \
+    rm -rdf "${TMP_YAY}"; \
+  '
+fi
+
+GIT_HOME="${HOME}/.git"
+
 if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
   if ! [ -z "$(git --git-dir "${GIT_HOME}" status --untracked-files=no --porcelain)"]; then
-    echo "${HOME} is not clean! exiting.."
+    warning "Home (${HOME}) is not clean! exiting.."
     exit 1
   fi
 fi
 
-sudo -u "${USER}" bash -c "${USER}/bin/setup/user/init.sh"
+TMP_DOTFILES=$(mktemp --directory)
+git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
 
-# SSH
-inform "Harden SSH"
-SSH_CONFIG=/etc/ssh/sshd_config
+rm -rdf "${GIT_HOME}"
+rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 
-sed -i 's/#\?\(PerminRootLogin\s*\).*$/\1 no/' "${SSH_CONFIG}"
-sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' "${SSH_CONFIG}"
-sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' "${SSH_CONFIG}"
-sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' "${SSH_CONFIG}"
+rm -rdf ${TMP_DOTFILES}
+
+sudo -u "${USER}" bash -c "${HOME}/bin/setup/user/init.sh"
 
 # Remove unused packages
 pacman \
