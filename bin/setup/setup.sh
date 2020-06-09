@@ -193,3 +193,10 @@ sed -i 's/#\?\(PerminRootLogin\s*\).*$/\1 no/' "${SSH_CONFIG}"
 sed -i 's/#\?\(PubkeyAuthentication\s*\).*$/\1 yes/' "${SSH_CONFIG}"
 sed -i 's/#\?\(PermitEmptyPasswords\s*\).*$/\1 no/' "${SSH_CONFIG}"
 sed -i 's/#\?\(PasswordAuthentication\s*\).*$/\1 no/' "${SSH_CONFIG}"
+
+# Remove unused packages
+pacman \
+  --remove \
+  --native \
+  --recursive \
+  $(pacman --query --unrequired --nodeps --quiet)
