@@ -27,7 +27,7 @@ ln -nfs ${HOME}/.config/zsh/rc ${HOME}/.zshrc
 
 # tmux
 ln -nfs ${HOME}/.config/tmux/tmux.conf ${HOME}/.tmux.conf
-git clone https://github.com/tmux-plugins/tpm ~/.local/share/tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ${HOME}/.local/share/tmux/plugins/tpm
 
 # NVM
 source ${HOME}/bin/setup/nvm.sh
