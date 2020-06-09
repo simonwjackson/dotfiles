@@ -1,3 +1,12 @@
+GIT_HOME="${HOME}/.git"
+
+if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
+  if ! [ -z "$(git --git-dir "${GIT_HOME}" status --untracked-files=no --porcelain)"]; then
+    echo "${HOME} is not clean! exiting.."
+    exit 1
+  fi
+fi
+
 git config --global user.name "${GIT_NAME}"
 git config --global user.email "${GIT_EMAIL}"
 git config --global github.user "${GITHUB_USERNAME}"
