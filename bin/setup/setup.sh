@@ -95,12 +95,20 @@ groupadd \
   --force \
   --gid 100 \
   users
-  
-useradd \
-  --create-home \
-  --no-user-group \
-  "${USER}"
-  
+
+if [[ -z "${HOME}" ]]; then
+  useradd \
+    --create-home \
+    --no-user-group \
+    "${USER}"
+else
+  useradd \
+    --create-home \
+    --no-user-group \
+    --home "${HOME}" \
+    "${USER}"
+fi
+
 passwd \
   --delete \
   "${USER}"
