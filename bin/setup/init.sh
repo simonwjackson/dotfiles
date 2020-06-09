@@ -102,6 +102,7 @@ else
 fi
 
 passwd \
+  --delete \
   "${USER}"
 
 # Add user to sudoers
