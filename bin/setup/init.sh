@@ -137,17 +137,18 @@ if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
   fi
 fi
 
-TMP_DOTFILES=$(mktemp --directory)
-git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
+TMP_DOTFILES=$(sudo -u "${USER}" mktemp --directory)
+sudo -u "${USER}" git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
 
 rm -rdf "${GIT_HOME}"
 rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 
 rm -rdf ${TMP_DOTFILES}
 
+inform "Starting user centric installation.."
 sudo -u "${USER}" bash -c "${HOME}/bin/setup/user/init.sh"
 
-# Remove unused packages
+inform "Removing unused packages.."
 pacman \
   --remove \
   --native \
