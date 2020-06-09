@@ -42,7 +42,7 @@ input() {
 
 [[ -z "${USER}" ]] && USER=$(whoami)
 
-if [[ $- == *i* ]]; then # Interactiive shell?
+if [[ $- == *i* ]]; then # Interactiive shell? 
   if [[ -z "${GIT_NAME}" ]]; then
     input "Git Name: "
     read GIT_NAME < /dev/tty
@@ -99,6 +99,7 @@ groupadd \
 useradd \
   --create-home \
   --no-user-group \
+  --home "${HOME}"
   "${USER}"
   
 passwd \
