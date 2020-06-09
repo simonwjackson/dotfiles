@@ -116,13 +116,6 @@ passwd \
 HOME=$(getent passwd "${USER}" | cut -d: -f6)
 GIT_HOME="${HOME}/.git"
 
-sudo -u "${USER}" pacman \
-  --needed \
-  --noconfirm \
-  --sync \
-  - <<< $(cat ${HOME}/.config/packages/arch | sed -e '/^[ \t]*#/d') 3>&2 2>&1 1>&3 3>&-
-exit 0
-
 # Add user to sudoers
 printf "${USER} ALL = (ALL:ALL) ALL\n" | tee -a /etc/sudoers
   
@@ -146,6 +139,13 @@ rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
 rm -rdf ${TMP_DOTFILES}
 
 success "Dotfiles have been cloned!"
+
+sudo -u "${USER}" pacman \
+  --needed \
+  --noconfirm \
+  --sync \
+  - <<< $(cat ${HOME}/.config/packages/arch | sed -e '/^[ \t]*#/d') 3>&2 2>&1 1>&3 3>&-
+exit 0
 
 source "${HOME}/bin/setup/arch.sh"
 source "${HOME}/bin/setup/neovim.sh"
