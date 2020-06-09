@@ -27,4 +27,4 @@ sudo -u "${USER}" yay \
   --needed \
   --noconfirm \
   --sync \
-  - <<< $(cat ${HOME}/.config/packages/arch | sed -e '/^[ \t]*#/d')
+  - <<< $(cat ${HOME}/.config/packages/arch | sed -e '/^[ \t]*#/d') > /dev/tty
