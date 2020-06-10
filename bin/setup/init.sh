@@ -103,7 +103,6 @@ fi
 
 passwd \
   --delete \
-  --expire \
   "${USER}"
 
 # Add user to sudoers
