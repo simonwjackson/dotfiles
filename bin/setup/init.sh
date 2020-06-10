@@ -51,8 +51,9 @@ pacman \
 
 inform "Sorting your pacman mirror list. This may take a moment.."
 cat /etc/pacman.d/mirrorlist \
-| rankmirrors - \
-| tee /etc/pacman.d/mirrorlist
+  | rankmirrors - \
+  | tee /etc/pacman.d/mirrorlist \
+  > /dev/null
 
 inform 'Updating system..'
 pacman \
