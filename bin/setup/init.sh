@@ -103,6 +103,7 @@ fi
 
 passwd \
   --delete \
+  --expire \
   "${USER}"
 
 # Add user to sudoers
@@ -116,7 +117,11 @@ if ! [ -x "$(command -v yay)" ]; then
     --noconfirm \
       libffi base-devel procps-ng go
       
-  sudo -u "${USER}" bash -c '\
+  useradd builduser -m && \
+  passwd -d builduser && \
+  printf 'builduser ALL=(ALL) ALL' | tee -a /etc/sudoers && \
+      
+  sudo -u builduser bash -c '\
     TMP_YAY=$(mktemp --directory); \
     git clone https://aur.archlinux.org/yay.git "${TMP_YAY}"; \
     cd "${TMP_YAY}"; \
@@ -126,6 +131,8 @@ if ! [ -x "$(command -v yay)" ]; then
       --noconfirm; \
     rm -rdf "${TMP_YAY}"; \
   '
+  userdel -r builduser
+  sed -i '$ d' /etc/sudoers
 fi
 
 GIT_HOME="${HOME}/.git"
