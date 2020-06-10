@@ -23,19 +23,19 @@ confirm() {
 }
 
 success() {
-  echo -e "$(tput setaf 2)$1$(tput sgr0)"
+  echo -e "\n$(tput setaf 2)$1$(tput sgr0)"
 }
 
 inform() {
-  echo -e "$(tput setaf 6)$1$(tput sgr0)"
+  echo -e "\n$(tput setaf 6)$1$(tput sgr0)"
 }
 
 warning() {
-  echo -e "$(tput setaf 1)$1$(tput sgr0)"
+  echo -e "\n$(tput setaf 1)$1$(tput sgr0)"
 }
 
 input() {
-  echo -e "$(tput setaf 6)$1$(tput sgr0)\c"
+  echo -e "\n$(tput setaf 6)$1$(tput sgr0)\c"
 }
 
 [[ -f "/etc/arch-release" ]] || warning "This is not an Arch Linux based system. Things may break.."
@@ -115,22 +115,25 @@ if ! [ -x "$(command -v yay)" ]; then
     --sync \
     --needed \
     --noconfirm \
-      libffi base-devel procps-ng go
+      libffi \
+      base-devel \
+      procps-ng \
+      go
       
   useradd builduser -m && \
-  passwd -d builduser && \
-  printf 'builduser ALL=(ALL) ALL' | tee -a /etc/sudoers && \
+    passwd -d builduser && \
+    printf 'builduser ALL=(ALL) ALL' | tee -a /etc/sudoers > /dev/null && \
       
-  sudo -u builduser bash -c '\
-    TMP_YAY=$(mktemp --directory); \
-    git clone https://aur.archlinux.org/yay.git "${TMP_YAY}"; \
-    cd "${TMP_YAY}"; \
-    makepkg \
-      --syncdeps \
-      --install \
-      --noconfirm; \
-    rm -rdf "${TMP_YAY}"; \
-  '
+    sudo -u builduser bash -c '\
+      TMP_YAY=$(mktemp --directory); \
+      git clone https://aur.archlinux.org/yay.git "${TMP_YAY}"; \
+      cd "${TMP_YAY}"; \
+      makepkg \
+        --syncdeps \
+        --install \
+        --noconfirm; \
+      rm -rdf "${TMP_YAY}"; \
+    '
   userdel -r builduser
   sed -i '$ d' /etc/sudoers
 fi
@@ -148,12 +151,18 @@ TMP_DOTFILES=$(sudo -u "${USER}" mktemp --directory)
 sudo -u "${USER}" git clone https://github.com/simonwjackson/dotfiles.git "${TMP_DOTFILES}"
 
 rm -rdf "${GIT_HOME}"
-rsync --verbose --archive --recursive "${TMP_DOTFILES}/" "${HOME}"
+rsync \
+  --verbose \
+  --archive \
+  --recursive \
+  "${TMP_DOTFILES}/" "${HOME}"
 
 rm -rdf ${TMP_DOTFILES}
 
 inform "Starting user centric installation.."
-sudo -u "${USER}" bash -c "${HOME}/bin/setup/user/init.sh"
+sudo \
+  -u "${USER}" \
+  bash -c "${HOME}/bin/setup/user/init.sh"
 
 inform "Removing unused packages.."
 pacman \
