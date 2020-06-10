@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/sh
 
-nvim -c "PlugInstall | qall"
+nvim -c "PlugInstall | qall!"
 git config --global core.editor "nvim"
