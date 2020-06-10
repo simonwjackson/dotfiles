@@ -141,7 +141,7 @@ fi
 GIT_HOME="${HOME}/.git"
 
 if git -C "${HOME}" rev-parse --git-dir > /dev/null 2>&1; then
-  if ! [ -z "$(git --git-dir "${GIT_HOME}" status --untracked-files=no --porcelain)"]; then
+  if ! [ -z "$(git --git-dir ${GIT_HOME} status --untracked-files=no --porcelain)"]; then
     warning "Home (${HOME}) is not clean! exiting.."
     exit 1
   fi
