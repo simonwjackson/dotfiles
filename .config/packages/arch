@@ -10,11 +10,11 @@ python-pip
 powertop
 ranger
 rsync
-#socat
-#speedtest-cli
-#task-git
-#timew
-#tmux-git
+socat
+speedtest-cli
+task-git
+timew
+tmux-git
 unzip
 youtube-dl
 sshuttle
@@ -25,7 +25,8 @@ man
 exa
 bat
 coreutils
-#lazygit-git
+lazygit-git
 ruby
 diff-so-fancy
 bc
+silver-searcher-git
