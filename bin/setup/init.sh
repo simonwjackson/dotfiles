@@ -106,8 +106,8 @@ passwd \
   --delete \
   "${USER}"
 
-# Add user to sudoers
-printf "${USER} ALL = (ALL:ALL) ALL\n" | tee -a /etc/sudoers
+# Add user to sudoers. Don't require password
+printf "${USER} ALL=(ALL) NOPASSWD:ALL\n" | tee -a /etc/sudoers
 
 inform "Installing yay.."
 if ! [ -x "$(command -v yay)" ]; then
