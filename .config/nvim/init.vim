@@ -2067,7 +2067,7 @@ autocmd! Filetype help :Goyo 81
 
 " hi EasyMotionShade ctermbg=none ctermfg=none guifg=none
 
-" set mouse=n
+set mouse=a
 map <ScrollWheelUp> k
 map <ScrollWheelDown> j
 
