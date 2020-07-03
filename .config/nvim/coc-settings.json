@@ -1,8 +1,9 @@
 {
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "eslint.autoFixOnSave":true,
+    "eslint.autoFixOnSave": false,
+    "eslint.enable": false,
     "diagnostic.errorSign": "▌",
     "diagnostic.warningSign": "▌",
-    "diagnostic.infoSign": "▌"
+    "diagnostic.infoSign": "▌",
+    "tsserver.enable": true,
 }
-

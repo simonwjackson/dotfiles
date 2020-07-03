@@ -1,4 +1,3 @@
-" vim: set fdm=marker textwidth=54 colorcolumn=+1:
 " ============================================================
 "     Maintainer:
 "     Simon W. Jackson    @simonwjackson
@@ -31,17 +30,30 @@ Plug 'lifepillar/vim-solarized8'
 " ----------------------------------------------------
 
 " Plug 'jxnblk/vim-mdx-js'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
 " Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 " Plug 'sngn/vim-i3blocks-syntax'
 Plug 'ekalinin/dockerfile.vim'
 " Plug 'wgwoods/vim-systemd-syntax'
 Plug 'tpope/vim-git'
-" Plug 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml'
+"
 " Plug 'PotatoesMaster/i3-vim-syntax'
 
+" A Vim syntax highlighting plugin for JavaScript and Flow.js
+Plug 'yuezk/vim-js' 
 
+" The React syntax highlighting and indenting plugin for vim.
+" Also supports the typescript tsx file.
+Plug 'maxmellon/vim-jsx-pretty'
+
+" Distinct highlighting of keywords vs values, 
+" JSON-specific (non-JS) warnings, quote concealing.
+Plug 'elzr/vim-json'
+
+" JSONC (with comments)
+Plug 'neoclide/jsonc.vim'
 
 " ----------------------------------------------------------------------------
 "  - Extras
@@ -99,7 +111,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'jparise/vim-graphql'
 
 " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
-" Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " Vim motions on speed!
 Plug 'easymotion/vim-easymotion'
@@ -150,18 +162,18 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-navigator'
 
 " COC for code completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Coc languages
-Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
-Plug 'neoclide/coc-jest', {'do': 'npm install'}
-Plug 'neoclide/coc-eslint', {'do': 'npm install'}
-Plug 'neoclide/coc-json', {'do': 'npm install'}
-Plug 'neoclide/coc-html', {'do': 'npm install'}
-Plug 'neoclide/coc-css', {'do': 'npm install'}
+" Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
+" Plug 'neoclide/coc-jest', {'do': 'npm install'}
+" Plug 'neoclide/coc-eslint', {'do': 'npm install'}
+" Plug 'neoclide/coc-json', {'do': 'npm install'}
+" Plug 'neoclide/coc-html', {'do': 'npm install'}
+" Plug 'neoclide/coc-css', {'do': 'npm install'}
 
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
-Plug 'antoinemadec/coc-fzf'
+" Plug 'antoinemadec/coc-fzf'
 
 " FocusGained and FocusLost for vim inside Tmux
 " This is a plugin for Vim to dim inactive windows.  
@@ -169,6 +181,22 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " An eye friendly plugin that fades your inactive buffers and preserves your syntax highlighting!
 Plug 'TaDaa/vimade'
+
+" MDX
+Plug 'jxnblk/vim-mdx-js'
+
+" Language Server Protocol (LSP) support for vim and neovim.
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+
+" Dark powered asynchronous completion framework for neovim/Vim8 
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Vim sugar for the UNIX shell commands that need it the most
+Plug 'tpope/vim-eunuch'
+
 
 call plug#end()
 
@@ -585,7 +613,7 @@ nnoremap Q @q
 " ----------------------------------------------------------------------------
 
 function! UpgradePlugins()
-  CocUpdateSync
+  " CocUpdateSync
   PlugInstall
 endfunction
 
@@ -799,24 +827,24 @@ endfunction
 "     endif
 " endfunction
 " command! -bang Profile call s:profile(<bang>0)
-"
-"
-"
-" " ----------------------------------------------------------------------------
-" "  - Use K to show documentation in preview window
-" " ----------------------------------------------------------------------------
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-"
-" function! s:show_documentation()
-"     if (index(['vim','help'], &filetype) >= 0)
-"         execute 'h '.expand('<cword>')
-"     else
-"         call CocAction('doHover')
-"     endif
-" endfunction
-"
-"
-"
+
+
+
+" ----------------------------------------------------------------------------
+"  - Use K to show documentation in preview window
+" ----------------------------------------------------------------------------
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+    " else
+    "   call CocAction('doHover')
+  endif
+endfunction
+
+
+
 " " ----------------------------------------------------------------------------
 " "  - #gi / #gpi | go to next/previous indentation level
 " " ----------------------------------------------------------------------------
@@ -1093,29 +1121,60 @@ set hidden
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" Goto definition of the symbol under the cursor
-nmap <silent> gd <Plug>(coc-definition)
-
-" Goto implementation of the symbol under the cursor
-nmap <silent> gi <Plug>(coc-implementation)
-
-" Goto references of the symbol under the cursor
-nmap <silent>gr <Plug>(coc-references)
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" " Use K for show documentation in preview window
+" " nnoremap <silent> K :call <SID>show_documentation()<CR>
+"
+" " <Plug>(coc-definition)
+"
+" nmap <silent> gp <Plug>(coc-float-jump)
+" " <Plug>(coc-refactor)
+" " GoTo type definition
+" nmap <silent> gy <Plug>(coc-type-definition)
+"
+" " Goto definition of the symbol under the cursor
+" nmap <silent> gd <Plug>(coc-definition)
+"
+" " Goto implementation of the symbol under the cursor
+" nmap <silent> gi <Plug>(coc-implementation)
+"
+" " Goto references of the symbol under the cursor
+" nmap <silent>gr <Plug>(coc-references)
+"
+" " Symbol renaming.
+" nmap <leader>rn <Plug>(coc-rename)
+"
+" " Select inside function
+" xmap if <Plug>(coc-funcobj-i)
+" omap if <Plug>(coc-funcobj-i)
+"
+" " Select around function
+" xmap af <Plug>(coc-funcobj-a)
+" omap af <Plug>(coc-funcobj-a)
+"
+" " Use tab for trigger completion with characters ahead and navigate.
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+"
+" " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode
+"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ?
+"       \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+"
+" let g:coc_snippet_next = '<tab>'
+"
+" " <CR> to confirm completion
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 
 " " ----------------------------------------------------------------------------
@@ -1187,26 +1246,25 @@ set laststatus=2
 " \ [ 'linter_errors', 'linter_warnings', 'linter_infos' ]]
 " \   'todos': 'tasklist#total',
 
-function! CocCurrentFunction()
-  if !empty(get(b:, 'coc_current_function', ''))
-    return ' ' . get(b:, 'coc_current_function', '')
-  else
-    return ''
-  endif
-endfunction
+" function! CocCurrentFunction()
+"
+"   if !empty(get(b:, 'coc_current_function', ''))
+"     return ' ' . get(b:, 'coc_current_function', '')
+"   else
+"     return ''
+"   endif
+" endfunction
 
 let g:lightline = {
       \ 'colorscheme': 'plastic',
       \ 'active': {
       \   'left': [ [ 'gitbranch' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'currentfunction', 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'filetype' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction',
       \   'gitbranch': 'fugitive#head',
       \ },
       \ }
@@ -1549,35 +1607,47 @@ endfunction
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " " => w0rp / ale
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" " filetypes
-" let g:ale_fixers = {
-"             \ 'javascript': ['eslint'],
-"             \ }
-"
-" " Always show ale gutter
-" let g:ale_sign_column_always = 1
-"
-" " Ale symbols
-" let g:ale_sign_error = ''
-" let g:ale_sign_warning = ''
-" let g:ale_sign_inform = 'ﭦ'
-"
-" " lint on save
-" let g:ale_enabled = 1
-" let g:ale_fix_on_save = 1
-" let g:ale_lint_delay = 1000
+
+" filetypes
+let g:ale_fixers = {
+      \   'javascript': ['eslint'],
+      \   'typescript': ['eslint'],
+      \}
+
+let g:ale_linter_aliases = {
+      \'ts': 'typescript',
+      \'js': 'javascipt',
+      \'jsx': 'javascript.jsx',
+      \'javascript.jsx': 'javascript.jsx'
+      \}
+
+" Always show ale gutter
+let g:ale_sign_column_always = 1
+
+" Ale symbols
+let g:ale_sign_error = '▌'
+let g:ale_sign_warning = '▌'
+let g:ale_sign_inform = '▌'
+
+" lint on save
+let g:ale_enabled = 1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 0
+" let g:ale_lint_on_enter = 0
+
+let g:ale_fix_on_save = 1
+let g:ale_lint_delay = 0
 " nmap <leader><tab> <Plug>(ale_next_wrap)
-" " nmap z/ <Plug>(ale_previous_wrap)
-"
-" " Toggle details
-" nmap <Leader>j :ALEDetail<Enter>
-"
-" " Better 'go to def'
+" nmap z/ <Plug>(ale_previous_wrap)
+
+" Toggle details
+nmap <Leader>j :ALEDetail<Enter>
+
+" Better 'go to def'
 " nnoremap gd :ALEGoToDefinition<cr>
-"
-"
-"
+
+
+
 " " ----------------------------------------------------------------------------
 " "  - mattn / gist-vim
 " " ----------------------------------------------------------------------------
@@ -1591,7 +1661,7 @@ endfunction
 " " ----------------------------------------------------------------------------
 "
 " " Use deoplete at startup
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 
 
@@ -1729,6 +1799,25 @@ map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => autozimu / LanguageClient-neovim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+      \ 'javascript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
+      \ 'typescript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio']
+      \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => machakann/vim-highlightedyank
@@ -1977,9 +2066,9 @@ try
   " call EasyMotion#highlight#init()
   " call coc#util#init_virtual_hl()
 
-  hi! CocErrorSign guifg=#e06c75
-  hi! CocInfoSign guifg=#61afef
-  hi! CocWarningSign guifg=#d19a66
+  " hi! CocErrorSign guifg=#e06c75
+  " hi! CocInfoSign guifg=#61afef
+  " hi! CocWarningSign guifg=#d19a66
 
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 
@@ -2048,10 +2137,10 @@ nnoremap <silent> <F34>     :<C-u>FzGCheckout<CR>
 nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR> 
 
 " Diagnostics
-nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
-nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
-nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
-nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
+" nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
+" nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
+" nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
+" nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
 
 " au FocusGained * :echo "hello"
 " au FocusLost * :echo "bye"
@@ -2063,7 +2152,7 @@ let g:vimade = { "fadelevel": 0.4 }
 au! FocusLost * VimadeFadeActive
 au! FocusGained * VimadeUnfadeActive
 
-autocmd! Filetype help :Goyo 81
+" autocmd! Filetype help :Goyo 81
 
 " hi EasyMotionShade ctermbg=none ctermfg=none guifg=none
 
@@ -2076,3 +2165,70 @@ map <leader>w :update<cr>
 map <leader>q :bn <bar> bd#<cr>
 inoremap jk <Esc>
 inoremap kj <Esc>
+
+
+
+" ----------------------------------------------------------------------------
+"  - Conceal
+" ----------------------------------------------------------------------------
+
+" For conceal markers.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=niv
+" endif
+"
+"
+" function! ToggleConcealLevel()
+"   if &conceallevel == 0
+"     setlocal conceallevel=2
+"   else
+"     setlocal conceallevel=0
+"   endif
+" endfunction
+"
+" nnoremap <silent> <C-c><C-y> :call ToggleConcealLevel()<CR>
+"
+" syn match HateWord /hate/ conceal cchar=!
+" autocmd BufEnter,BufWritePost *.js syntax match equals '=' conceal cchar=
+" autocmd BufEnter,BufWritePost *.js syntax match equals 'pipe(' conceal cchar=ﲖ
+" let g:javascript_conceal_function             = "ƒ"
+" let g:javascript_conceal_null                 = "ø"
+" let g:javascript_conceal_this                 = "@"
+" let g:javascript_conceal_return               = "⇚"
+" let g:javascript_conceal_undefined            = "¿"
+" let g:javascript_conceal_NaN                  = "ℕ"
+" let g:javascript_conceal_prototype            = "¶"
+" let g:javascript_conceal_static               = "•"
+" let g:javascript_conceal_super                = "Ω"
+" let g:javascript_conceal_arrow_function       = "⇒"
+" let g:javascript_conceal_noarg_arrow_function = "🞅"
+" let g:javascript_conceal_underscore_arrow_function = "🞅"
+
+" autocmd BufEnter,BufWritePost * syntax match fatArrow '=>' conceal cchar=ﰲ
+" autocmd BufEnter,BufWritePost * syntax match skinnyArrow '->' conceal cchar=
+" autocmd BufEnter,BufWritePost * syntax match pipe '|>' conceal cchar=ﲖ
+" autocmd BufEnter,BufWritePost * syntax match pipeDown '|>$' conceal cchar=ﲔ
+" autocmd BufEnter,BufWritePost * syntax match composeUp '<|' conceal cchar=ﲗ
+" autocmd BufEnter,BufWritePost * syntax match compose '\( \{2}\)\@<!<|' conceal cchar=ﲕ
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match compose 'compose' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax match pipe 'pipe' conceal cchar=ﳤ
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match semi '\;' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax keyword jsReturn return conceal cchar=
+" autocmd BufEnter,BufWritePost *.js syntax match parens '(' conceal cchar=(
+" autocmd BufEnter,BufWritePost *.js syntax match parens ')' conceal cchar=)
+" " autocmd BufEnter,BufWritePost *.js syntax keyword export export conceal cchar=丹
+"
+" autocmd BufEnter,BufWritePost *.js syntax match notEquals '\v\!\=' conceal cchar=≠
+" autocmd BufEnter,BufWritePost *.js syntax match lte '\v\<\=' conceal cchar=≤
+" autocmd BufEnter,BufWritePost *.js syntax match gte '\v\>\=' conceal cchar=≥
+" autocmd BufEnter,BufWritePost *.js syntax match not '\v\!' conceal cchar=¬
+"
+" " autocmd BufEnter,BufWritePost *.js syntax match undefined '\vundefined' conceal cchar=
+" " autocmd BufEnter,BufWritePost *.js syntax match null '\vnull' conceal cchar=ﳠ
+" " autocmd BufEnter,BufWritePost *.js syntax match function '\vfunction' conceal cchar=
+"
+" autocmd BufEnter,BufWritePost *.js,*.elm syntax match true 'true' conceal cchar=⊤
+" autocmd BufEnter,BufWritePost *.js,*.elm syntax match false 'false' conceal cchar=⊥
+
