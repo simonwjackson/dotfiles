@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# If running inside a docker container
+if grep docker /proc/1/cgroup -qa; then
+  DOCKER_HOST=ssh://localhost /bin/docker "$@"
+else
+  docker "$@" 
+fi
