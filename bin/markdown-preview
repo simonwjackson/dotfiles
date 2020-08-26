@@ -1,0 +1,22 @@
+#!/bin/sh
+
+source /storage/apps/.env
+
+if [ -d "${@}" ]; then 
+	ROOT_DIR=$@ 
+else
+	ROOT_DIR=$(echo "${@}" | sed -r "s/(.+)\/.+/\1/") 
+fi
+
+docker run \
+	--rm \
+  --mount type=bind,source="${ROOT_DIR}",target=/root/docs \
+  --publish 6419:6419 \
+  --network traefik \
+  --label "traefik.enable=true" \
+  --label "traefik.http.routers.markdown.rule=Host(\`markdown.$DOMAINNAME\`)" \
+  --label "traefik.http.services.markdown.loadbalancer.server.port=6419" \
+	--tty \
+	--interactive \
+  fstab/grip \
+	grip /root/docs 0.0.0.0:6419
