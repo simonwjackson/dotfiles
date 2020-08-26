@@ -9,11 +9,26 @@ alias vi='vim'
 
 # Git
 alias gitamend='git commit --amend' 
-alias gitall='git add . && git commit' 
-alias gitup='gitall && git push'
+gitall() {
+	git add .
+
+	if [ "$1" != "" ]; then
+		git commit -m "$1"
+	else 
+		git commit
+	fi
+}
+
+gitup() {
+	gitall "$1" && git push
+}
+
+alias gitup=''
+
+# npm
+alias prune_node_modules="find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
 
 # pacman
-alias prune_node_modules="find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
 alias installed="comm -23 <(pacman -Qqt | sort) <(pacman -Sqg base base-devel | sort)"
 
 # taskwarrior

@@ -60,7 +60,7 @@ source /usr/share/nvm/init-nvm.sh
 # Unlock vault
 # export $(cat ~/.keys/bitwarden.env)
 
-PATH=${PATH}:${HOME}/bin:${HOME}/.local/bin:${HOME}/.gem/ruby/2.6.0/bin
+PATH=${HOME}/bin:${PATH}:${HOME}/.local/bin:${HOME}/.gem/ruby/2.6.0/bin
 
 # fbr - checkout git branch (including remote branches)
 fbr() {                               
@@ -132,10 +132,25 @@ alias ta="task add"
 alias td="task do"
 alias tl="task latest"
 alias tw="task report:workflow"
+
+
+git config --global alias.pully 'pull -s recursive -X ours'
+git config --global alias.addall 'add -A'
+git config --global alias.amend 'commit --amend --no-edit'
+
+function gpf () {
+ git push --force "$@"
+}
+
+function gcamaf () { 
+  git addall \
+    && git commit --amend --no-edit \
+    && git push --force
+}
+
 function gca () {
   git add -A && git commit -m "$@"
 }
-
 
 # Vim is your pager now
 export MANWIDTH=120
