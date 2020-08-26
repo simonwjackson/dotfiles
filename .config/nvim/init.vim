@@ -29,9 +29,6 @@ Plug 'lifepillar/vim-solarized8'
 "  - Syntax
 " ----------------------------------------------------
 
-" Plug 'jxnblk/vim-mdx-js'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
 " Plug 'godlygeek/tabular' | Plug 'tpope/vim-markdown'
 " Plug 'sngn/vim-i3blocks-syntax'
 Plug 'ekalinin/dockerfile.vim'
@@ -90,7 +87,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " fzf for vim
-Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim' | Plug 'yuki-ycino/fzf-preview.vim'
+Plug 'junegunn/fzf' | Plug 'junegunn/fzf.vim' | Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+
 
 " Ease your git workflow within Vim
 " Plug 'jreybert/vimagit'
@@ -162,18 +160,18 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'christoomey/vim-tmux-navigator'
 
 " COC for code completion
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm install'}
 
 " Coc languages
-" Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
+Plug 'neoclide/coc-tsserver', {'do': 'npm install'}
 " Plug 'neoclide/coc-jest', {'do': 'npm install'}
-" Plug 'neoclide/coc-eslint', {'do': 'npm install'}
+Plug 'neoclide/coc-eslint', {'do': 'npm install'}
 " Plug 'neoclide/coc-json', {'do': 'npm install'}
 " Plug 'neoclide/coc-html', {'do': 'npm install'}
 " Plug 'neoclide/coc-css', {'do': 'npm install'}
 
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
-" Plug 'antoinemadec/coc-fzf'
+Plug 'antoinemadec/coc-fzf'
 
 " FocusGained and FocusLost for vim inside Tmux
 " This is a plugin for Vim to dim inactive windows.  
@@ -186,16 +184,24 @@ Plug 'TaDaa/vimade'
 Plug 'jxnblk/vim-mdx-js'
 
 " Language Server Protocol (LSP) support for vim and neovim.
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
 
 " Dark powered asynchronous completion framework for neovim/Vim8 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Vim sugar for the UNIX shell commands that need it the most
 Plug 'tpope/vim-eunuch'
+
+" Plug 'heavenshell/vim-jsdoc', {
+"       \ 'for': ['javascript', 'javascript.jsx','typescript'],
+"       \ 'do': 'make install'
+"       \}
+
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 
 call plug#end()
@@ -227,7 +233,7 @@ filetype indent on
 let mapleader=" "
 
 " How often the UI updates
-set updatetime=0
+set updatetime=300
 
 " Dont show mode
 autocmd BufEnter,BufWritePost * set noshowmode
@@ -613,7 +619,7 @@ nnoremap Q @q
 " ----------------------------------------------------------------------------
 
 function! UpgradePlugins()
-  " CocUpdateSync
+  CocUpdateSync
   PlugInstall
 endfunction
 
@@ -838,8 +844,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-    " else
-    "   call CocAction('doHover')
+  else
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -1121,60 +1127,66 @@ set hidden
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" " Use K for show documentation in preview window
-" " nnoremap <silent> K :call <SID>show_documentation()<CR>
-"
-" " <Plug>(coc-definition)
-"
-" nmap <silent> gp <Plug>(coc-float-jump)
-" " <Plug>(coc-refactor)
-" " GoTo type definition
-" nmap <silent> gy <Plug>(coc-type-definition)
-"
-" " Goto definition of the symbol under the cursor
-" nmap <silent> gd <Plug>(coc-definition)
-"
-" " Goto implementation of the symbol under the cursor
-" nmap <silent> gi <Plug>(coc-implementation)
-"
-" " Goto references of the symbol under the cursor
-" nmap <silent>gr <Plug>(coc-references)
-"
-" " Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-"
-" " Select inside function
-" xmap if <Plug>(coc-funcobj-i)
-" omap if <Plug>(coc-funcobj-i)
-"
-" " Select around function
-" xmap af <Plug>(coc-funcobj-a)
-" omap af <Plug>(coc-funcobj-a)
-"
-" " Use tab for trigger completion with characters ahead and navigate.
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
-"
-" " Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode
-"
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ?
-"       \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
-"
-" let g:coc_snippet_next = '<tab>'
-"
-" " <CR> to confirm completion
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" <Plug>(coc-definition)
+
+nmap <silent> gp <Plug>(coc-float-jump)
+" <Plug>(coc-refactor)
+
+" GoTo type definition
+nmap <silent> gy :<C-u>call CocActionAsync('jumpTypeDefinition')<CR> 
+
+" Goto definition of the symbol under the cursor
+nmap <silent> gd :<C-u>call CocActionAsync('jumpDefinition')<CR>
+
+
+" Goto implementation of the symbol under the cursor
+nmap <silent> gi :<C-u>call CocActionAsync('jumpImplementation')<CR>
+
+" Goto references of the symbol under the cursor
+nmap <silent> gr :<C-u>call CocActionAsync('jumpReferences')<CR> 
+
+nmap <silent> gs :<C-u>call CocActionAsync('showSignatureHelp')<CR> 
+
+
+" Symbol renaming.
+nmap <silent> rn :<C-u>call CocActionAsync('rename')<CR> 
+
+" Quickfixes
+nmap <silent> gq :<C-u>call CocActionAsync('quickfixes')<CR> 
+
+
+" Select inside function
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+
+" Select around function
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+
+" Use tab for trigger completion with characters ahead and navigate.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump like VSCode
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ?
+      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" <CR> to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 
 " " ----------------------------------------------------------------------------
@@ -1255,16 +1267,18 @@ set laststatus=2
 "   endif
 " endfunction
 
+
 let g:lightline = {
       \ 'colorscheme': 'plastic',
       \ 'active': {
       \   'left': [ [ 'gitbranch' ],
-      \             [ 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'filetype' ] ]
       \ },
       \ 'component_function': {
+      \   'cocstatus': 'coc#status',
       \   'gitbranch': 'fugitive#head',
       \ },
       \ }
@@ -1609,10 +1623,10 @@ endfunction
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " filetypes
-let g:ale_fixers = {
-      \   'javascript': ['eslint'],
-      \   'typescript': ['eslint'],
-      \}
+" \   'javascript': ['eslint'],
+" \   'javascriptreact': ['eslint'],
+" \   'typescript': ['eslint'],
+let g:ale_fixers = {}
 
 let g:ale_linter_aliases = {
       \'ts': 'typescript',
@@ -1807,17 +1821,17 @@ map gz# <Plug>(asterisk-gz#)
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
-      \ 'typescript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio']
-      \ }
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" let g:LanguageClient_serverCommands = {
+"       \ 'javascript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
+"       \ 'typescript': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio'],
+"       \ 'javascript.jsx': ['~/.nvm/versions/node/v14.4.0/bin/javascript-typescript-stdio']
+"       \ }
+"
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" " Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => machakann/vim-highlightedyank
@@ -2041,6 +2055,28 @@ function! ThemeDark()
   highlight GitGutterChange ctermbg=None guibg=none ctermfg=180 guifg=#56b6c2
   highlight GitGutterDelete ctermbg=None guibg=none ctermfg=204 guifg=#e06c75
   highlight GitGutterChangeDelete ctermbg=None guibg=none ctermfg=180 guifg=#e5c07b
+
+  " Coc
+  " function! CocNvimHighlight()
+  " hi! CocErrorHighlight   ctermfg=Green  guifg=#00ff00
+  " hi! CocWarningHighlight ctermfg=Green  guifg=#00ff00
+  " hi! CocInfoHighlight    ctermfg=Green  guifg=#00ff00
+  " hi! CocHintHighlight    ctermfg=Green  guifg=#00ff00
+  " hi! CocErrorLine        ctermfg=Green  guifg=#00ff00
+  " hi! CocWarningLine      ctermfg=Green  guifg=#00ff00
+  " hi! CocInfoLine         ctermfg=Green  guifg=#00ff00
+  " hi! CocHintLine         ctermfg=Green  guifg=#00ff00
+  hi! ALEErrorSign    ctermbg=None guifg=#e06c75
+  hi!                 link CocErrorSign ALEErrorSign
+  hi! ALEWarningSign  ctermbg=None guifg=#e5c07b
+  hi!                 link CocWarningSign ALEWarningSign
+  hi! AleInfoSign     ctermbg=None guifg=#61afef
+  hi!                 link AleInfoSign CocInfoSign 
+
+  highlight CocHighlightText  guibg=#111111 ctermbg=223
+  " endfunction
+
+  " autocmd VimEnter function CocNvimHighlight()
 endfunction
 
 
@@ -2066,9 +2102,6 @@ try
   " call EasyMotion#highlight#init()
   " call coc#util#init_virtual_hl()
 
-  " hi! CocErrorSign guifg=#e06c75
-  " hi! CocInfoSign guifg=#61afef
-  " hi! CocWarningSign guifg=#d19a66
 
   highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 
@@ -2113,17 +2146,18 @@ vnoremap <Tab>   >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
 
 " Finging Files
-nnoremap <silent> <F7>      :<C-u>FzfPreviewGitStatus<CR>
-nnoremap <silent> <F8>      :<C-u>FzfPreviewProjectFiles<CR>
-nnoremap <silent> <F9>      :<C-u>FzfPreviewBuffers<CR>
+nnoremap <silent> <F7>      :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> <F8>      :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <silent> <F9>      :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <silent> <F10>     :call SmartRanger()<CR>
-nnoremap <silent> <F11>     :<C-u>FzfPreviewProjectOldFiles<CR>
+nnoremap <silent> <F11>     :<C-u>CocCommand fzf-preview.ProjectOldFiles<CR>
 
 " Finding code
-nnoremap          <F19>     :<C-u>FzfPreviewProjectGrep<Space>TODO<CR>
-nnoremap <silent> <F20>     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-nnoremap <silent> <F21>     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          <F22>     :<C-u>FzfPreviewProjectGrep<Space>
+nnoremap          <F19>     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>TODO<CR>
+nnoremap <silent> <F20>     :<C-u>CocCommand fzf-preview.Lines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+nnoremap <silent> <F21>     :<C-u>CocCommand fzf-preview.Lines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+" nnoremap          <F22>     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+nnoremap          <F22>     :<C-u>CocCommand fzf-preview.ProjectCommandGrep<CR>
 xnoremap          <F22>     "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 
 " Git
@@ -2137,10 +2171,10 @@ nnoremap <silent> <F34>     :<C-u>FzGCheckout<CR>
 nnoremap <F36>              :silent execute '!tmux new-window -a lazygit &'<CR> 
 
 " Diagnostics
-" nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
-" nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
-" nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
-" nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
+nnoremap <silent> <M-C-F7>  :<C-u>CocFzfList diagnostics<CR>
+nnoremap <silent> <M-C-F10> :<C-u>CocFzfList outline<CR>
+nnoremap <silent> <M-C-F8>  :call CocActionAsync('diagnosticNext')<CR>zz
+nnoremap <silent> <M-C-F9>  :call CocActionAsync('diagnosticPrevious')<CR>zz
 
 " au FocusGained * :echo "hello"
 " au FocusLost * :echo "bye"
@@ -2165,7 +2199,7 @@ map <leader>w :update<cr>
 map <leader>q :bn <bar> bd#<cr>
 inoremap jk <Esc>
 inoremap kj <Esc>
-
+nmap <silent> <C-l> ?function<cr>:noh<cr><Plug>(jsdoc)
 
 
 " ----------------------------------------------------------------------------
