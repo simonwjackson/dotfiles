@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sudo rmmod i2c_hid && sudo modprobe i2c_hid
-# if [ "$1" = "post" ] && exec rmmod i2c_hid ; modprobe i2c_hid

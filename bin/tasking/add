@@ -1,3 +1,0 @@
-#!/bin/env zsh
-
-kitty --class singleLineInput -- zsh -c 'read ans\?"task> " && task add $ans'

@@ -5,45 +5,5 @@
 !/.gitignore
 
 # Config files
-!/.config/beets/**/*.yaml
-!/.config/bugwarrior/**
-!/.config/i3blocks/**
-!/.config/kitty/**
-!/.config/mozilla/firefox/default/chrome/**
-!/.config/mozilla/firefox/default/user.js
-!/.config/mozilla/native-messaging-hosts/**
-!/.config/mps-youtube/config
-!/.config/mpv/*.conf
 !/.config/nvim/**.vim
 !/.config/nvim/**.json
-!/.config/packages/**
-!/.config/plex-mpv-shim/**
-!/.config/sway/**
-!/.config/systemd/*.service
-!/.config/systemd/*.timer
-!/.config/task/**
-!/.config/timewarrior
-!/.config/tmux/**
-!/.config/tridactyl/**
-!/.config/vit/**
-!/.config/zsh/**
-!/.config/user-dirs.dirs
-!/.config/ranger/rc
-!/.config/jesseduffield/lazygit/config.yml 
-
-# Local scripts
-!/bin/**
-!/.local/share/task/hooks/**
-
-# Apps
-!/.local/share/applications/firefox.desktop
-
-node_modules
-
-# Explicitly ignore these dirs
-.cargo
-.cache
-.tmux
-/.local/share/nvim/**
-/.local/share/tmux/**
-

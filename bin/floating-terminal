@@ -1,7 +1,0 @@
-#!/bin/env sh
-
-while true
-	do
-		kitty --class=floatingApp --title=myterm
-		sleep 1
-done

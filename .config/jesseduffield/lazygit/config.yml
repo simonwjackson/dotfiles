@@ -1,6 +1,0 @@
-reporting: "on"
-startuppopupversion: 1
-git:
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
