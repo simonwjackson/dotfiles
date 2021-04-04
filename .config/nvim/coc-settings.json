@@ -1,0 +1,19 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["elm", "javascript", "typescript", "typescriptreact", "json", "javascriptreact","css", "Markdown"],
+    "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
+    "coc.preferences.codeLens.enable": true,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "diagnostic.errorSign": "▌",
+    "diagnostic.warningSign": "▌",
+    "diagnostic.infoSign": "▌",
+    "languageserver": {
+      "elmLS": {
+        "command": "elm-language-server",
+        "filetypes": ["elm"],
+        "rootPatterns": ["elm.json"],
+        "initializationOptions": {
+          "elmAnalyseTrigger": "change"
+        }
+      }
+    }
+}
