@@ -7,3 +7,5 @@
 # Config files
 !/.config/nvim/**.vim
 !/.config/nvim/**.json
+!/.config/tmux/**
+!/.config/zsh/**

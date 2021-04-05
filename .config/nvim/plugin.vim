@@ -111,14 +111,15 @@ Plug 'junegunn/fzf.vim'
 
 " COC for code completion
 let g:coc_global_extensions = [
-            \ 'coc-json', 
-            \ 'coc-tsserver', 
+            \ 'coc-css',
             \ 'coc-eslint', 
-            \ 'coc-prettier', 
             \ 'coc-fzf-preview', 
             \ 'coc-html',
-            \ 'coc-css',
-            \ 'coc-vimlsp'
+            \ 'coc-json', 
+            \ 'coc-prettier', 
+            \ 'coc-tsserver', 
+            \ 'coc-vimlsp',
+            \ 'coc-yaml'
             \ ]
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'npm install'}
 
