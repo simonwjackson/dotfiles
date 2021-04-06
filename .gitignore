@@ -5,7 +5,14 @@
 !/.gitignore
 
 # Config files
-!/.config/nvim/**.vim
+!/.Xresources
+!/.config/bspwm/**
+!/.config/kitty/**
 !/.config/nvim/**.json
-!/.config/tmux/**
+!/.config/nvim/**.vim
+!/.config/polybar/**
+!/.config/qutebrowser/**
+!/.config/sxhkd/**
+!/.config/tmux/**/*.conf
 !/.config/zsh/**
+!/.xinitrc
