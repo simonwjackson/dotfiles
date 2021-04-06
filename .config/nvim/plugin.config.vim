@@ -130,6 +130,4 @@ let g:vimwiki_ext2syntax = {
 "  - lf
 " ----------------------------------------------------------------------------
 
-" Open lf when vim opens a directory
-let g:lf_replace_netrw = 1
 let g:lf_command_override = 'lf -command "map <enter> open" -command "map <esc> quit"' 
