@@ -1,0 +1,18 @@
+[user]
+  email = simon@simonwjackson.com
+  name = Simon W. Jackson
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff         # Use nvim vimdiff to view diffs (`git difftool`).
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  #cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd J'
+[merge]
+  tool = vimdiff           # Use vimdiff (actually neovim's vimdiff) to view and fix merge conflicts (instead of `g mc`).
+[alias]
+  d = difftool
+  mt = mergetool # Alternative to `g mc`, `:h vimdiff` in nvim for more info (try `:dif[fupdate]`, `]c`, `do`, `dp`).
+[core]
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
