@@ -15,7 +15,8 @@
   lp = "!git log --graph --color=always --format=\"%C(auto)%h%d %s %C(black)%C(bold)<%an> %cr%C(auto)\" \"$@\" \
         | fzf --ansi -m --no-sort --reverse --tiebreak=index \
         --bind=ctrl-s:toggle-sort \
-        --preview \"(grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I % sh -c 'git show --color=always % | /usr/bin/less -R') <<< {}\" \
+        --preview-window=top:50% \
+        --preview \"(grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I % sh -c 'git show % | delta') <<< {}\" \
         --bind \"ctrl-o:execute: (grep -o '[a-f0-9]\\{7\\}' | head -1 | xargs -I % sh -c 'git show --color=always % | LINES=0 less -R') <<< {}\" #"
   # Escape < and > for github markdown, (useful for generating changelogs).
   changelog  = "! git log --pretty=format:'* %h - %s %n%w(76,4,4)%b%n' --abbrev-commit \"$@\" | perl -0 -p -e 's/(^|[^\\\\])([<>])/\\1\\\\\\2/g ; s/(\\s*\\n)+\\*/\\n\\n*/g' #"
@@ -39,4 +40,17 @@
   tool = vimdiff           # Use vimdiff (actually neovim's vimdiff) to view and fix merge conflicts (instead of `g mc`).
   
 [core]
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
+  side-by-side = false
+
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
