@@ -15,4 +15,3 @@
   mt = mergetool # Alternative to `g mc`, `:h vimdiff` in nvim for more info (try `:dif[fupdate]`, `]c`, `do`, `dp`).
 [core]
   pager = diff-so-fancy | less --tabs=4 -RFX
-
