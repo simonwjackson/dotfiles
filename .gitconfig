@@ -1,16 +1,24 @@
 [alias]
   d = difftool
   mt = mergetool # Alternative to `g mc`, `:h vimdiff` in nvim for more info (try `:dif[fupdate]`, `]c`, `do`, `dp`).
+
+  # Amend the previous commit.
+  cm  = commit -S --amend
+  # Amend the previous commit but don't change the message.
+  cmn = commit -S --amend --no-edit
+  # Commit all now: Add changed files and commit with the same message.
+  can = commit -S --amend --no-edit -a
   
-  cm  = commit -S --amend              # Amend the previous commit.
-  cmn = commit -S --amend --no-edit    # Amend the previous commit but don't change the message.
-  can = commit -S --amend --no-edit -a # Add changed files and commit with the same message.
   
-  # `l` gives you history of current branch, `la` is all commits in repo, `las` is a shortlist of the important commits, `ll` shows you who and when.
-  l   = log --graph --decorate --oneline                                # Graph log.
-  la  = log --graph --decorate --oneline --all                          # Graph log of all commits.
-  las = log --graph --decorate --oneline --all --simplify-by-decoration # Graph log of tag/branch/labelled commits.
-  ll  = log --color --graph --pretty=format:'%C(214)%h%C(reset)%C(196)%d%C(reset) %s %C(35)(%cr)%C(27) <%an>%C(reset)'
+  # Graph log: gives you history of current branch
+  l = log --graph --decorate --oneline
+  # Graph log all: all commits in repo
+  la = log --graph --decorate --oneline --all
+  # Graph log all as shortlist: tag/branch/labelled commits.
+  las = log --graph --decorate --oneline --all --simplify-by-decoration 
+  # Graph who and when.
+  lw = log --color --graph --pretty=format:'%C(214)%h%C(reset)%C(196)%d%C(reset) %s %C(35)(%cr)%C(27) <%an>%C(reset)'
+
   # Need to add other commands (and maybe switch to shortcuts as in https://junegunn.kr/, e.g. https://junegunn.kr/2016/07/fzf-git).
   lp = "!git log --graph --color=always --format=\"%C(auto)%h%d %s %C(black)%C(bold)<%an> %cr%C(auto)\" \"$@\" \
         | fzf --ansi -m --no-sort --reverse --tiebreak=index \
@@ -21,7 +29,11 @@
   # Escape < and > for github markdown, (useful for generating changelogs).
   changelog  = "! git log --pretty=format:'* %h - %s %n%w(76,4,4)%b%n' --abbrev-commit \"$@\" | perl -0 -p -e 's/(^|[^\\\\])([<>])/\\1\\\\\\2/g ; s/(\\s*\\n)+\\*/\\n\\n*/g' #"
 
-  sync = "! git fetch && git rebase --autostash && git push"
+  sync = "! git fetch --tags && git rebase --autostash && git push"
+
+  # Squash all unpushed commits with a new message
+  squash = "! git reset --soft HEAD~$(git log origin/main..main | grep commit | wc -l | awk '{$1=$1};1') && git commit"
+  s = "squash"
   
 [user]
   email = simon@simonwjackson.com
@@ -55,3 +67,7 @@
   commit-decoration-style = bold yellow box ul
   file-style = bold yellow ul
   file-decoration-style = none
+  
+[commit]
+	gpgsign = false
+  
