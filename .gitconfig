@@ -2,13 +2,23 @@
   d = difftool
   mt = mergetool # Alternative to `g mc`, `:h vimdiff` in nvim for more info (try `:dif[fupdate]`, `]c`, `do`, `dp`).
 
+  # Use commitizen as default (fallback to git-commit)
+  c = "!f() { \
+         if [ -x \"$(which npx)\" ]; then \
+           npx git-cz ${@}; \
+         else \
+           git commit ${@}; \
+        fi \
+       }; f"
   # Amend the previous commit.
-  cm  = commit -S --amend
+  cm  = c --amend
   # Amend the previous commit but don't change the message.
-  cmn = commit -S --amend --no-edit
+  cmn = commit --amend --no-edit
   # Commit all now: Add changed files and commit with the same message.
-  can = commit -S --amend --no-edit -a
-  
+  can = commit --amend --no-edit -a
+  # Commit all now and sync
+  cans = "! git can && git sync"
+
   
   # Graph log: gives you history of current branch
   l = log --graph --decorate --oneline
@@ -70,4 +80,3 @@
   
 [commit]
 	gpgsign = false
-  
