@@ -17,7 +17,7 @@ autocmd User EasyMotionPromptBegin silent! CocDisable
 autocmd User EasyMotionPromptEnd silent! CocEnable
 
 " Easymotion keys
-let g:EasyMotion_keys = 'asdfjklghqweruiopzxcvmtybn;'
+let g:EasyMotion_keys = 'fjdksla;ghrueiwoqpvmcnxbz''tyqp,.'
 
 " keep cursor column when JK motion
 let g:EasyMotion_startofline = 0 
@@ -70,6 +70,37 @@ let g:NERDToggleCheckAllLines = 1
 
 
 " ----------------------------------------------------------------------------
+"  - Lightline
+" ----------------------------------------------------------------------------
+
+function! LightlineCocCoverageStatus() abort
+  let status = str2nr(get(g:, 'coc_coverage_lines_pct', ''))
+  if empty(status)
+    return ''
+  endif
+
+  return '☂ ' . status . '%'
+endfunction
+
+let g:lightline = {
+  \ 'colorscheme': 'plastic',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'readonly', 'filename' ]
+  \   ],
+  \   'right':[
+  \     [ 'coccoverage', 'cocstatus' ],
+  \     [ 'cocapollo' ]
+  \   ],
+  \ },
+  \ 'component_function': {
+  \   'coccoverage': 'LightlineCocCoverageStatus'
+  \ }
+\ }
+
+
+" ----------------------------------------------------------------------------
 "  - Git gutter
 " ----------------------------------------------------------------------------
 
@@ -98,6 +129,14 @@ function! GitGutterNextHunkCycle()
     endif
 endfunction
 
+" ----------------------------------------------------------------------------
+"  - TaskWiki
+" ----------------------------------------------------------------------------
+
+" TODO: DRY - Load these from the config file. Or have ansible manage this
+let g:taskwiki_taskrc_location = '~/.config/taskwarrior/taskrc'
+let g:taskwiki_data_location = '~/.local/share/task'
+
 
 " ----------------------------------------------------------------------------
 "  - VimWiki
@@ -112,7 +151,7 @@ let g:vimwiki_ext = '.md'
 let g:vimwiki_main = 'README'
 
 let personal = {}
-let personal.path = '~/vimwiki'
+let personal.path = '~/Documents/notes'
 
 let guides = {}
 let guides.path = '~/guides'
@@ -131,3 +170,147 @@ let g:vimwiki_ext2syntax = {
 " ----------------------------------------------------------------------------
 
 let g:lf_command_override = 'lf -command "map <enter> open" -command "map <esc> quit"' 
+
+
+
+" ----------------------------------------------------------------------------
+"  - Goyo
+" ----------------------------------------------------------------------------
+
+let g:goyo_width = 90
+let g:goyo_height = '100%'
+
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+  :Limelight
+endfunction
+
+function! s:goyo_leave()
+  :Limelight!
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+endfunction
+
+augroup Goyo
+  autocmd!  
+  autocmd! User GoyoEnter call <SID>goyo_enter()
+  autocmd! User GoyoLeave call <SID>goyo_leave()
+augroup END
+
+
+" ----------------------------------------------------------------------------
+"  - Zettelkasten
+" ----------------------------------------------------------------------------
+
+let g:zettel_fzf_command = 'rg'
+
+
+
+" ----------------------------------------------------------------------------
+"  - Markdown
+" ----------------------------------------------------------------------------
+
+function! s:markdown_enter()
+  " :Goyo
+endfunction
+
+autocmd FileType markdown,markdown.mdx call <SID>markdown_enter() 
+
+
+" ----------------------------------------------------------------------------
+"  - Telescope
+" ----------------------------------------------------------------------------
+
+lua << EOF
+local actions = require('telescope.actions')
+
+require('telescope').setup{
+    defaults = {
+        mappings = {
+          i = {
+            ["<esc>"] = actions.close
+          },
+        },
+        vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case'
+        },
+        prompt_position = "bottom",
+        prompt_prefix = "> ",
+        selection_caret = "> ",
+        entry_prefix = "  ",
+        initial_mode = "insert",
+        selection_strategy = "reset",
+        sorting_strategy = "descending",
+        --layout_strategy = "vertical",
+        layout_defaults = {
+            horizontal = {
+                mirror = false,
+            },
+            vertical = {
+                mirror = false,
+            },
+        },
+        file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+        file_ignore_patterns = {},
+        generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+        shorten_path = true,
+        winblend = 0,
+        width = 0.75,
+        preview_cutoff = 120,
+        results_height = 1,
+        results_width = 0.8,
+        border = {},
+        borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+        color_devicons = true,
+        use_less = true,
+        set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+        -- Developer configurations: Not meant for general override
+        buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+    }
+}
+
+require('telescope').load_extension('coc')
+
+require('auto-session').setup {
+    --auto_session_enable_last_session=true,
+}
+
+require("todo-comments").setup {
+  keywords = {
+    FIX = {
+      icon = " ", -- icon used for the sign, and in search results
+      color = "error", -- can be a hex color, or a named color (see below)
+      alt = { "FIXME", "BUG", "FIXIT", "FIX", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+      -- signs = false, -- configure signs for some keywords individually
+    },
+    TODO = { icon = " ", color = "info" },
+    HACK = { icon = " ", color = "warning" },
+    WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+    PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+    NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+  }
+}
+
+require("trouble").setup {}
+
+EOF
+

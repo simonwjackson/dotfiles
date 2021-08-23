@@ -12,16 +12,19 @@ let mapleader=' '
 " ============================================================================
 
 " Finding Files
-nnoremap <silent> <F6>      :<C-u>CocCommand fzf-preview.GitActions<CR>
-nnoremap <silent> <F7>      :<C-u>CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <silent> <F6>      :<C-u>LazyGit<CR>
+nnoremap <silent> <F7>      <cmd>lua require('telescope-config').project_files()<CR>
 nnoremap <silent> <F8>      :<C-u>CocCommand fzf-preview.Buffers<CR>
 nnoremap <silent> <F9>      :Lf<CR>
-nnoremap <silent> <F10>     :<C-u>CocCommand fzf-preview.OldFiles<CR>
+nnoremap <silent> <F10>     :<C-u><CR>
 
 " Finding code
-nnoremap <silent> <F1>     :<C-u>CocCommand fzf-preview.Lines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-nnoremap          <F2>     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
-nnoremap          <F3>     :<C-u>CocCommand fzf-preview.ProjectGrep<Space>\ \(TODO\\|BUG\\|FIXME\\|HACK\)<CR>
+nnoremap <silent> <F1>      :<C-u>SearchSession<CR>
+nnoremap <silent> <F2>      :<C-u>Telescope live_grep<CR>
+nnoremap          <F3>      :<C-u>TodoTelescope<CR>
+nnoremap          <F4>      :<C-u>Telescope keymaps<CR>
+nnoremap          <F11>     :<C-u>Telescope coc references<CR>
+nnoremap          <F12>     :<C-u>Telescope coc line_code_actions<CR>
 
 
 " ============================================================================
@@ -100,3 +103,6 @@ nnoremap <silent> <C-k> :move-2<cr>
 xnoremap <silent> <C-k> :move-2<cr>gv
 xnoremap <silent> <C-j> :move'>+<cr>gv
 
+" Git
+nnoremap <silent> <Leader>gla <cmd>lua require('telescope-config').my_git_commits()<CR>
+nnoremap <silent> <Leader>gs <cmd>lua require('telescope-config').my_git_status()<CR>

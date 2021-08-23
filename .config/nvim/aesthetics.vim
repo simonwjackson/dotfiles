@@ -26,14 +26,21 @@ hi SpellLocal cterm=underline
 hi SpellRare cterm=underline
 hi SpellCap cterm=underline 
 
-highlight HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
+hi HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
 
-highlight link diffAdded DiffAdd
-highlight link diffChanged DiffChange
-highlight link diffRemoved DiffDelete
+hi link diffAdded DiffAdd
+hi link diffChanged DiffChange
+hi link diffRemoved DiffDelete
+
+hi UncoveredLine guifg=#d19a66 guibg=none
 
 " Hide tildas
 silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
+" Vertical Split
+hi VertSplit guibg=bg guifg=#1d1b26
+
+hi StatusLineNC cterm=none ctermfg=none ctermbg=none
 
 " ============================================================================
 "  => VIM user interface
