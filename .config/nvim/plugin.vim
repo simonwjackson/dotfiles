@@ -23,6 +23,9 @@ Plug 'flrnprz/plastic.vim'
 "  - Syntax
 " ----------------------------------------------------
 
+" Cucumber
+Plug 'tpope/vim-cucumber'
+
 " Elm
 Plug 'andys8/vim-elm-syntax' 
 
@@ -111,16 +114,21 @@ Plug 'junegunn/fzf.vim'
 
 " COC for code completion
 let g:coc_global_extensions = [
+            \ 'coc-apollo',
+            \ 'coc-coverage',
             \ 'coc-css',
             \ 'coc-eslint', 
+            \ 'coc-explorer',
             \ 'coc-fzf-preview', 
             \ 'coc-html',
             \ 'coc-json', 
             \ 'coc-prettier', 
             \ 'coc-sh', 
+            \ 'coc-snippets',
             \ 'coc-tsserver', 
             \ 'coc-vimlsp',
-            \ 'coc-yaml'
+            \ 'coc-yaml',
+            \ 'https://github.com/rodrigore/coc-tailwind-intellisense', 
             \ ]
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'npm install'}
 
@@ -158,8 +166,43 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " An eye friendly plugin that fades your inactive buffers and preserves your syntax highlighting!
 Plug 'TaDaa/vimade'
 
+" LF file browser
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
+
+" A personal wiki for Vim 
+Plug 'vimwiki/vimwiki'
+
+" Proper project management in vim.
+Plug 'tools-life/taskwiki'
+
+" Taskwarrior in VIM
+Plug 'farseer90718/vim-taskwarrior'
+
+" Zettelkasten for VIM
+Plug 'michal-h21/vim-zettel'
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Icons
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Auto Sessions
+Plug 'rmagatti/auto-session'
+Plug 'rmagatti/session-lens'
+
+" Todo Comments
+Plug 'folke/todo-comments.nvim'
+
+" Trouble
+Plug 'folke/trouble.nvim'
+
+" LazyGit
+Plug 'kdheepak/lazygit.nvim'
 
 call plug#end()
 
@@ -235,3 +278,43 @@ function! s:BspwmAwareNavigate(direction)
         call system(cmd)
     endif
 endfunction
+
+
+" Explorer
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+
+nmap <space>e :CocCommand explorer<CR>
+nmap <space>0 :CocCommand explorer --preset floating<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif

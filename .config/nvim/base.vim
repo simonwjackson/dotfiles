@@ -98,3 +98,15 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 autocmd! BufWritePre $MYVIMRC :call Indent()
 autocmd! BufWritePost $MYVIMRC nested source $MYVIMRC | redraw
+
+" Required for markdown-folding plugin
+set nocompatible
+if has("autocmd")
+  filetype plugin indent on
+endif
+
+" Autoindend files
+augroup autoindent
+    au!
+    autocmd BufWritePre *.feature :normal migg=G`i
+augroup End
