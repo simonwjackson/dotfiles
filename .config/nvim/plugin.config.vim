@@ -239,7 +239,7 @@ require('telescope').setup{
           i = {
             ["<esc>"] = actions.close
           },
-        }
+        },
     }
 }
 
