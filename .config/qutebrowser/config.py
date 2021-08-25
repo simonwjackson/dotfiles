@@ -2,11 +2,14 @@
 
 config.load_autoconfig(False)
 
-config.set('colors.webpage.prefers_color_scheme_dark', True)
+# Depricated
+# config.set('colors.webpage.prefers_color_scheme_dark', True)
+config.set('colors.webpage.preferred_color_scheme', 'dark')
 config.set('colors.webpage.bg', 'black')
 config.set('colors.webpage.darkmode.enabled', True)
 
 config.set('colors.tabs.bar.bg', '#000000')
+config.set('tabs.padding', { "bottom": 5, "left": 2, "right": 2, "top": 5 })
 config.set('colors.tabs.selected.even.fg', '#cccccc')
 config.set('colors.tabs.selected.odd.fg', '#cccccc')
 config.set('colors.tabs.odd.bg', '#000000')
@@ -14,7 +17,7 @@ config.set('colors.tabs.odd.fg', '#888888')
 config.set('colors.tabs.even.bg', '#000000')
 config.set('colors.tabs.even.fg', '#888888')
 
-config.set('fonts.default_size', '7pt')
+#  config.set('fonts.default_size', '7pt')
 
 config.set('colors.tabs.indicator.start', '#00000000')
 config.set('colors.tabs.indicator.stop', '#00000000')

@@ -1,4 +1,4 @@
-Xft.dpi: 144
+Xft.dpi: 192
 Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
@@ -58,5 +58,5 @@ XTerm*selectToClipboard: true
 *color15:                         #f8f8f8
 
 Xcursor.theme: xcursor-breeze
-Xcursor.size:                     0
+Xcursor.size:                     32
 

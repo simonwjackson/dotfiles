@@ -1,0 +1,6 @@
+#!/bin/env bash
+
+# TODO: When user changes the scale value, write this to a file. Check that file here, if exists, load value else default to this value below
+
+xrandr --output eDP --scale '1.3'
+bspc desktop -l monocle

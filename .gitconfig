@@ -10,14 +10,18 @@
            git commit ${@}; \
         fi \
        }; f"
-  # Amend the previous commit.
-  cm  = c --amend
-  # Amend the previous commit but don't change the message.
-  cmn = commit --amend --no-edit
-  # Commit all now: Add changed files and commit with the same message.
-  can = commit --amend --no-edit -a
+
+  # Commit all with message
+  ca = "!git add -A && git c --message"
   # Commit all now and sync
-  cans = "! git can && git sync"
+  cas = "! git uma && git sync"
+
+  # Update the previous commit with new changes
+  u = commit --amend --no-edit
+  # Update the previous commit with new changes and change the message.
+  um = c --amend 
+  # Commit all now: Add changed files and commit with the same message.
+  uma = commit --amend --no-edit -a
 
   
   # Graph log: gives you history of current branch
@@ -79,4 +83,4 @@
   file-decoration-style = none
   
 [commit]
-	gpgsign = false
+  gpgsign = false
