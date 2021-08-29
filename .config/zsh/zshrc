@@ -164,4 +164,5 @@ alias fe="fzf-file-edit-widget"
 alias more="less"
 
 # Dotfiles
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' 
+alias dotfiles='git --git-dir=$HOME/dotfiles --work-tree=$HOME' 
+alias dots='dotfiles'
