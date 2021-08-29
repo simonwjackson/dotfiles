@@ -1,50 +1,87 @@
-#!/bin/sh
+#!/usr/bin/env bash
+#
+# Bspwm configuration
+#
+
+if ! bspc wm -g &>/dev/null; then
+  echo "Bspwm is already running..exiting."
+  exit 1
+fi
+
+[[ -e "${CURRENT_THEME}/bspwm" ]] && {
+  source "${CURRENT_THEME}/bspwm"
+}
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 [[ -f "${DIR}/device" ]] && source "$DIR/device"
 
-xsetroot -solid "#000000"
+hsetroot -solid "#000000"
 
 gap=15
 PANEL_HEIGHT=30
 
-# This creates negative padding eaual to window gap so that gaps are shown only between windows and not on desktop edges.
-bspc config window_gap $gap;
-bspc config top_padding $(($PANEL_HEIGHT-gap))
-bspc config left_padding -$gap
-bspc config right_padding -$gap
-bspc config bottom_padding -$gap
-# bspc config border_width 2
+# Remove outter padding for tiled layout
+bspc subscribe desktop | while read -r _ _ _ layout; do
+   if [[ "$layout" == "monocle" ]]; then
+       gap=0
+   elif [[ "$layout" == "tiled" ]]; then
+       gap=15
+
+   fi
+
+   bspc config window_gap $gap;
+   bspc config top_padding $(($PANEL_HEIGHT-gap))
+   bspc config left_padding "-${gap}"
+   bspc config right_padding -$gap
+   bspc config bottom_padding -$gap
+done &
+
 
 # Various settings
-bspc config gapless_monocle     false 
-# Default setup uses negative padding, and gapless monocle looks really weird like that
-bspc config borderless_monocle  true
-bspc config split_ratio           0.52
+bspc config gapless_monocle       true
 bspc config borderless_monocle    true
 bspc config single_monocle        true
-bspc config gapless_monocle       true
+
+bspc config split_ratio           0.52
 bspc config focus_follows_pointer true
 
 bspc config active_border_color '#000000'
 bspc config normal_border_color '#000000'
 bspc config focused_border_color '#222222'
 
-bspc rule -a 'floating-term' state=floating follow=on focus=on rectangle=1500x1000+0+0 center=true
+bspc rule -a 'floating-term' state=floating follow=on focus=on rectangle=1000x1000+0+0 center=true
 
-# bspc rule -a mpv state=floating
+bspc rule -a mpv state=floating
 
 # Autostart applications
-# bspc desktop --focus V && alacritty &
-
-killall -q polybar
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-polybar example &
-
-killall -q sxhkd
-while pgrep -u $UID -x sxhkd >/dev/null; do sleep 1; done
-sxhkd &
-
+[[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
+[[ ! $(pgrep -u $UID polybar) ]] && polybar example &
 [[ ! $(pgrep -u $UID kitty) ]] && kitty &
 [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
+[[ ! $(pgrep -u $UID picom) ]] && picom --config ~/.config/picom/picom.conf &
+
+# Ensure shadows are only on floating windows
+bspc subscribe node_state | while read -r _ _ _ node state status; do
+    if [[ "$state" == "floating" ]]; then
+        case "$status" in
+            off) xprop -id "$node" -remove _COMPTON_SHADOW;;
+            on) xprop -id "$node" -f _COMPTON_SHADOW 32c -set _COMPTON_SHADOW 1;;
+        esac
+    fi
+done
+
+# Event listener :: theme {{{
+
+if [[ -n "$(type theme::event_listeners 2>/dev/null)" ]]; then
+  theme::event_listeners 2>/dev/null &
+fi
+
+# }}}
+
+
+echo "bspwm configuration loaded..."
+
+if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
+  theme::post_bspwmrc 2>/dev/null &
+fi
