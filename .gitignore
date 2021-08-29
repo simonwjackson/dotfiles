@@ -8,11 +8,14 @@
 !/.Xresources
 !/.config/bspwm/**
 !/.config/kitty/**
-!/.config/nvim/**.json
-!/.config/nvim/**.vim
+!/.config/nvim/**/*.json
+!/.config/nvim/**/*.vim
+!/.config/nvim/**/*.lua
 !/.config/polybar/**
+!/.config/picom/**
 !/.config/qutebrowser/**
 !/.config/sxhkd/**
 !/.config/tmux/**/*.conf
 !/.config/zsh/**
+!/.local/bin/**
 !/.xinitrc

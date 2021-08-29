@@ -1,0 +1,9 @@
+
+#!/usr/bin/env bash
+
+
+kitty \
+  --override window_padding_width=10 \
+  --override background='#101010' \
+  --class floating-term \
+  ${*}
