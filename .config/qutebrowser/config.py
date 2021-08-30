@@ -26,6 +26,11 @@ config.set('tabs.favicons.show', 'pinned')
 config.set('statusbar.show', 'in-mode')
 config.set('auto_save.session', True)
 
+config.unbind('H')
+config.unbind('L')
+
+config.bind('h', 'back')
+config.bind('l', 'forward')
 config.bind(' bu', 'spawn --userscript qutewarden user')
 config.bind(' bp', 'spawn --userscript qutewarden pass')
 config.bind(' bb', 'spawn --userscript qutewarden both')

@@ -1,21 +1,3 @@
-;==========================================================
-;
-;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
-;
-;==========================================================
-
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #000
@@ -27,7 +9,7 @@ primary = #555
 secondary = #e60053
 alert = #bd2c40
 
-[bar/example]
+[bar/heads-up]
 monitor = ${env:MONITOR:}
 width = 100%
 height = 45 
@@ -52,13 +34,10 @@ module-margin-left = 1
 module-margin-right = 0
 
 font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
-; font-0 = "Terminus:pixelsize=10;2"
-; font-1 = "TerminessTTF Nerd Font Mono:size=22;5"
-; font-2 = "TerminessTTF Nerd Font Mono:size=12;4"
 
 modules-left = bspwm
 ; modules-center = task
-modules-right = song memory cpu backlight-acpi battery pulseaudio wireless-network date
+modules-right = song filesystem memory cpu battery pulseaudio wireless-network 
 
 tray-position = right
 tray-padding = 0
@@ -71,11 +50,10 @@ wm-restack = bspwm
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/secondary]
+[bar/detail]
 ; Same as primary with no tray
-inherit = bar/example
+inherit = bar/heads-up
 monitor = ${env:MONITOR:}
-tray-position =
 
 [module/task]
 type = custom/script
@@ -97,8 +75,6 @@ tail = false
 ; Seconds to sleep between updates
 ; Default: 5 (0 if `tail = true`)
 interval = 1
-
-
 
 
 [module/song]
@@ -124,19 +100,23 @@ tail = false
 ; Default: 5 (0 if `tail = true`)
 interval = 1
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
 
 [module/filesystem]
 type = internal/fs
-interval = 25
+interval = 60
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+format-mounted = <ramp-capacity>
+
+ramp-capacity-0=﫭
+ramp-capacity-0-foreground = #ff5555
+ramp-capacity-1=﫭
+ramp-capacity-1-foreground = #fba922
+ramp-capacity-2=
+ramp-capacity-3=
+ramp-capacity-4=
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -199,6 +179,7 @@ ramp-load-3-foreground = #fba922
 ramp-load-4 = 
 ramp-load-4-foreground = #ff5555
 
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -212,6 +193,7 @@ ramp-used-3 = 
 ramp-used-3-foreground = #fba922
 ramp-used-4 = 
 ramp-used-4-foreground = #ff5555
+
 
 [module/wireless-network]
 type = internal/network
@@ -234,15 +216,12 @@ animation-packetloss-1 = 
 animation-packetloss-1-foreground = ${bar/top.foreground}
 animation-packetloss-framerate = 500
 
-[module/date]
-type = internal/date
-interval = 5
 
-time = %l:%M
+[module/time]
+type = custom/script
+exec = date '+%-l:%M'
+format-foreground = ${colors.foreground-alt}
 
-label-foreground = ${colors.foreground-alt}
-
-label = %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -271,6 +250,7 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+
 [module/battery]
 type = internal/battery
 battery = BAT1
@@ -292,64 +272,8 @@ format-discharging = <ramp-capacity>
 format-charging = <ramp-capacity>
 
 
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
-
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini

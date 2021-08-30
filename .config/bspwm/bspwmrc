@@ -54,8 +54,9 @@ bspc rule -a 'floating-term' state=floating follow=on focus=on rectangle=1000x10
 bspc rule -a mpv state=floating
 
 # Autostart applications
+bluetoothctl power on &
 [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
-[[ ! $(pgrep -u $UID polybar) ]] && polybar example &
+[[ ! $(pgrep -u $UID polybar) ]] && polybar heads-up &
 [[ ! $(pgrep -u $UID kitty) ]] && kitty &
 [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
 [[ ! $(pgrep -u $UID picom) ]] && picom --config ~/.config/picom/picom.conf &
