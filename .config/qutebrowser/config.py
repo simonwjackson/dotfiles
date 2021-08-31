@@ -39,4 +39,9 @@ config.set('url.searchengines', {
     "DEFAULT": "https://www.google.com.ar/search?q={}"
 })
 
+# More sites are responsive with this user agent
 config.set('content.headers.user_agent', "Mozilla/5.0 (Android 10; Mobile; rv:86.0) Gecko/86.0 Firefox/86.0")
+
+# Fix google account login
+config.set('content.headers.user_agent', "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0", "https://accounts.google.com/*")
+
