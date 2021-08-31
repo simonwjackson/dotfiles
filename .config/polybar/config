@@ -1,7 +1,8 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #000
-background-alt = #222
+background-alt = #21252b
+; 222
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -35,9 +36,9 @@ module-margin-right = 0
 
 font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
-modules-left = bspwm
+; modules-left = bspwm
 ; modules-center = task
-modules-right = song filesystem memory cpu battery pulseaudio wireless-network 
+modules-right = song filesystem memory cpu battery pulseaudio wireless-network time
 
 tray-position = right
 tray-padding = 0
@@ -50,10 +51,12 @@ wm-restack = bspwm
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+
 [bar/detail]
 ; Same as primary with no tray
 inherit = bar/heads-up
 monitor = ${env:MONITOR:}
+
 
 [module/task]
 type = custom/script
@@ -255,7 +258,7 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 98
+full-at = 100
 poll-interval = 0
 
 ramp-capacity-foreground = ${colors.foreground-alt}

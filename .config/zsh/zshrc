@@ -166,3 +166,8 @@ alias more="less"
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/dotfiles --work-tree=$HOME' 
 alias dots='dotfiles'
+
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
+# END_KITTY_SHELL_INTEGRATION
