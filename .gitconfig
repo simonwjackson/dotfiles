@@ -12,16 +12,16 @@
        }; f"
 
   # Commit all with message
-  ca = "!git add -A && git c --message"
+  commit-all-with-message = "!git add -A && git c --message"
   # Commit all now and sync
-  cas = "! git uma && git sync"
+  commit-with-sync = "! git uma && git sync"
 
   # Update the previous commit with new changes
-  u = commit --amend --no-edit
+  amend-staged = commit --amend --no-edit
   # Update the previous commit with new changes and change the message.
-  um = c --amend 
+  amend-staged-with-message = c --amend 
   # Commit all now: Add changed files and commit with the same message.
-  uma = commit --amend --no-edit -a
+  amend-all-now = commit --amend --no-edit -a
 
   
   # Graph log: gives you history of current branch

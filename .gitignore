@@ -19,3 +19,4 @@
 !/.config/zsh/**
 !/.local/bin/**
 !/.xinitrc
+!/.profile
