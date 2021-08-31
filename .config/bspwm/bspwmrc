@@ -49,6 +49,8 @@ bspc config active_border_color '#000000'
 bspc config normal_border_color '#000000'
 bspc config focused_border_color '#222222'
 
+bspc desktop -l monocle
+
 bspc rule -a 'floating-term' state=floating follow=on focus=on rectangle=1000x1000+0+0 center=true
 
 bspc rule -a mpv state=floating
@@ -83,3 +85,15 @@ if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
   theme::post_bspwmrc 2>/dev/null &
 fi
 
+hostname=`hostname -s`
+
+portalesWildcard=v-*ws*
+qaiservers={'v-qai01' 'v-qai02'}
+portales={'t1wsyellar01' }
+
+
+if [[ $(hostname -s) = "fiji" ]]; then
+  [[ ! $(pgrep -u $UID barriers) ]] && barriers --enable-crypto --config ~/barrier.conf
+elif [[ $(hostname -s) = "notra" ]]; then
+  [[ ! $(pgrep -u $UID barrierc) ]] && barrierc --enable-crypto
+fi

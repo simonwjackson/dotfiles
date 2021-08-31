@@ -1,10 +1,9 @@
 #!/bin/env bash
 
 # TODO: When user changes the scale value, write this to a file. Check that file here, if exists, load value else default to this value below
-
 # HACK: Grabbing first monitor from xrandr's list
+
 monitor=$(xrandr --listactivemonitors | awk '{print $4}' | sed '/^$/d' | head)
 scale=$(cat "${HOME}/.local/share/desktop/scale")
 
 xrandr --output ${monitor:-eDP1} --scale ${scale:-1}
-bspc desktop -l monocle
