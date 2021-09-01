@@ -1,7 +1,7 @@
 #!/bin/bash
 # HACK: This will fail on networks outside the home (hard coded IP)
 
-# pdof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
+pdof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
 
 touch /tmp/barrierc
 touch /tmp/barrierc-screen
@@ -9,9 +9,9 @@ touch /tmp/barrierc-connection
 
 [[ $(pgrep -u $UID -x barrierc) ]] || nohup barrierc --no-daemon --log /tmp/barrierc --enable-crypto 192.168.1.147 &
 
-[[ $(pgrep -u $UID -x barrierc-start) ]] || tail -f /tmp/barrierc | awk '
+tail -f /tmp/barrierc | awk '
   /connected/ { system("echo connected > /tmp/barrierc-connection") }
   /disconnected/ { system("echo disconnected > /tmp/barrierc-connection") }
   /entering/ { system("echo active > /tmp/barrierc-screen") }
   /leaving/ { system("echo inactive > /tmp/barrierc-screen") }
-'
+' &
