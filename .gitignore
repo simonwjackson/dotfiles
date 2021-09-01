@@ -19,5 +19,6 @@
 !/.config/zsh/**
 !/.local/bin/**
 !/.local/share/barrier/**/*.conf
+!/.local/share/polybar/**
 !/.xinitrc
 !/.profile

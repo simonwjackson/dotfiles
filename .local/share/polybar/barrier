@@ -1,0 +1,29 @@
+#!/bin/sh
+
+output=""
+
+if [[ $(pgrep -u $UID -x barriers) ]]; then
+    if [[ $(cat /tmp/barriers-screen) == "active" ]]; then
+      output="${output}%{F#aaa}"
+    elif [[ $(cat /tmp/barriers-screen) == "inactive" ]]; then
+      output="${output}%{F#555}"
+    fi
+
+    if [[ $(cat /tmp/barriers-connection) == "connected" ]]; then
+      output="${output}"
+    fi
+elif [[ $(pgrep -u $UID -x barrierc) ]]; then
+    if [[ $(cat /tmp/barrierc-screen) == "entering" ]]; then
+      output="${output}%{F#aaa}"
+    elif [[ $(cat /tmp/barrierc-screen) == "leaving" ]]; then
+      output="${output}%{F#555}"
+    fi
+
+    if [[ $(cat /tmp/barrierc-connection) == "connected" ]]; then
+      output="${output}"
+    fi
+fi
+  
+output="${output}%{F-}"
+
+echo $output
