@@ -13,9 +13,9 @@ if [[ $(pgrep -u $UID -x barriers) ]]; then
       output="${output}"
     fi
 elif [[ $(pgrep -u $UID -x barrierc) ]]; then
-    if [[ $(cat /tmp/barrierc-screen) == "entering" ]]; then
+    if [[ $(cat /tmp/barrierc-screen) == "active" ]]; then
       output="${output}%{F#aaa}"
-    elif [[ $(cat /tmp/barrierc-screen) == "leaving" ]]; then
+    elif [[ $(cat /tmp/barrierc-screen) == "inactive" ]]; then
       output="${output}%{F#555}"
     fi
 
