@@ -41,10 +41,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
         [ -x "$f" ] && . "$f"
     done
     unset f
-
-    [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
-    [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
-    bluetoothctl power on &
 fi
 
-exec dbus-launch --sh-syntax --exit-with-session bspwm
+[[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
+[[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
+bluetoothctl power on &
+
+# exec dbus-launch --sh-syntax --exit-with-session bspwm
+exec bspwm

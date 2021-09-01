@@ -87,13 +87,8 @@ fi
 
 hostname=`hostname -s`
 
-portalesWildcard=v-*ws*
-qaiservers={'v-qai01' 'v-qai02'}
-portales={'t1wsyellar01' }
-
-
-if [[ $(hostname -s) = "fiji" ]]; then
-  [[ ! $(pgrep -u $UID barriers) ]] && barriers --enable-crypto --config ~/barrier.conf
-elif [[ $(hostname -s) = "notra" ]]; then
-  [[ ! $(pgrep -u $UID barrierc) ]] && barrierc --enable-crypto
+if [[ $hostname == "fiji" ]]; then
+  ${HOME}/.local/bin/barriers-start
+elif [[ $hostname == "notra" ]]; then
+  ${HOME}/.local/bin/barrierc-start
 fi

@@ -18,5 +18,6 @@
 !/.config/tmux/**/*.conf
 !/.config/zsh/**
 !/.local/bin/**
+!/.local/share/barrier/**/*.conf
 !/.xinitrc
 !/.profile
