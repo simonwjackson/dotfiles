@@ -68,27 +68,27 @@ bspc subscribe node_state | while read -r _ _ _ node state status; do
             on) xprop -id "$node" -f _COMPTON_SHADOW 32c -set _COMPTON_SHADOW 1;;
         esac
     fi
-done
+done &
 
 # Event listener :: theme {{{
 
-if [[ -n "$(type theme::event_listeners 2>/dev/null)" ]]; then
-  theme::event_listeners 2>/dev/null &
-fi
+# if [[ -n "$(type theme::event_listeners 2>/dev/null)" ]]; then
+#   theme::event_listeners 2>/dev/null &
+# fi
 
 # }}}
 
 
 echo "bspwm configuration loaded..."
 
-if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
-  theme::post_bspwmrc 2>/dev/null &
-fi
+# if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
+#   theme::post_bspwmrc 2>/dev/null &
+# fi
 
 hostname=`hostname -s`
 
 if [[ $hostname == "fiji" ]]; then
-  ${HOME}/.local/bin/barriers-start
+  ${HOME}/.local/bin/barriers-start &
 elif [[ $hostname == "notra" ]]; then
-  ${HOME}/.local/bin/barrierc-start
+  ${HOME}/.local/bin/barrierc-start &
 fi
