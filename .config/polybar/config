@@ -38,7 +38,7 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
 ; modules-left = bspwm
 ; modules-center = task
-modules-right = song filesystem memory cpu battery pulseaudio wireless-network time
+modules-right = barrier song filesystem memory cpu battery pulseaudio wireless-network time
 
 tray-position = left
 tray-padding = 0
@@ -253,6 +253,10 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+[module/barrier]
+interval = 1
+type = custom/script
+exec = ${HOME}/.local/share/polybar/barrier
 
 [module/battery]
 type = internal/battery
