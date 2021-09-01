@@ -1,14 +1,14 @@
 #!/bin/bash
 
-pidof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
+# pidof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
 
 touch /tmp/barriers
 touch /tmp/barriers-screen
 touch /tmp/barriers-connection
 
-[[ $(pgrep -u $UID -x barrierc) ]] || nohup barriers --no-daemon --log /tmp/barriers --enable-crypto --config ${HOME}/.local/share/barrier/fiji.conf &
+[[ $(pgrep -u $UID -x barriers) ]] || nohup barriers --no-daemon --log /tmp/barriers --enable-crypto --config ${HOME}/.local/share/barrier/fiji.conf &
 
-tail -f /tmp/barriers | awk '
+[[ $(pgrep -u $UID -x barriers-start) ]] || tail -f /tmp/barriers | awk '
   /connected/ { system("echo connected > /tmp/barriers-connection") }
   /disconnected/ { system("echo disconnected > /tmp/barriers-connection") }
   /entering/ { system("echo active > /tmp/barriers-screen") }
