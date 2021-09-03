@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pdof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
+pidof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
 
 touch /tmp/barriers
 touch /tmp/barriers-screen
