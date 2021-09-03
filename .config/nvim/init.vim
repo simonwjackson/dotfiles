@@ -542,7 +542,7 @@ silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
 " Vertical Split
 hi VertSplit guibg=bg guifg=#1d1b26
 
-hi StatusLineNC cterm=none ctermfg=none ctermbg=none
+" hi StatusLineNC cterm=none ctermfg=none ctermbg=none guifg=#00ffff guibg=#00ffff
 
 " ============================================================================
 "  => VIM user interface
@@ -738,10 +738,6 @@ endfunction
 " ----------------------------------------------------------------------------
 "  - TaskWiki
 " ----------------------------------------------------------------------------
-
-" TODO: DRY - Load these from the config file. Or have ansible manage this
-let g:taskwiki_taskrc_location = '~/.config/taskwarrior/taskrc'
-let g:taskwiki_data_location = '~/.local/share/task'
 
 
 " ----------------------------------------------------------------------------

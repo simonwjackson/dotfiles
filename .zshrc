@@ -1,0 +1,1 @@
+/home/simonwjackson/.config/zsh/zshrc
