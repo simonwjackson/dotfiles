@@ -14,7 +14,7 @@ let mapleader=' '
 " Finding Files
 nnoremap <silent> <F6>      :<C-u>LazyGit<CR>
 nnoremap <silent> <F7>      <cmd>lua require('telescope-config').project_files()<CR>
-nnoremap <silent> <F8>      :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> <F8>      <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <F9>      :Lf<CR>
 nnoremap <silent> <F10>     :<C-u><CR>
 

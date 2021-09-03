@@ -16,7 +16,7 @@
 !/.config/polybar/**
 !/.config/qutebrowser/**
 !/.config/sxhkd/**
-!/.config/systemd/**
+!/.config/systemd/*
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
 !/.config/zsh/**
