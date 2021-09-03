@@ -5,11 +5,8 @@
 # section below determining their properties, how to query them, etc.  The name
 # is just a symbol, and doesn't have any functional importance.
 
-targets = simonwjackson_github
+targets = simonwjackson_github,elevate_github
 
-# This is a github example.  It says, "scrape every issue from every repository
-# on http://github.com/ralphbean.  It doesn't matter if ralphbean owns the issue
-# or not."
 [simonwjackson_github]
 service = github
 github.default_priority = H
@@ -27,7 +24,34 @@ github.username = simonwjackson
 
 # Working with a large number of projects, instead of excluding most of them I
 # can also simply include just a limited set.
-github.include_repos = dotfiles
+github.include_repos = dotfiles,simonwjackson.io,spark
+
+# Note that login and username can be different:  I can login as me, but
+# scrape issues from an organization's repos.
+#
+# - 'github.login' is the username you ask bugwarrior to
+#   login as.  Set it to your account.
+# - 'github.username' is the github entity you want to pull
+#   issues for.  It could be you, or some other user entirely.
+github.login = simonwjackson
+github.token = @oracle:eval:cat ${HOME}/.secrets/github/tokens/bugwarrior
+
+[elevate_github]
+service = github
+github.default_priority = H
+; github.add_tags = open_source
+
+# This specifies that we should pull issues from repositories belonging
+# to the 'ralphbean' github account.  See the note below about
+# 'github.username' and 'github.login'.  They are different, and you need
+# both.
+github.username = elevate-vg
+; project_owner_prefix =
+# I want taskwarrior to include issues from all my repos, except these
+# two because they're spammy or something.
+; github.exclude_repos = project_bar,project_baz
+
+github.include_repos = elevate
 
 # Note that login and username can be different:  I can login as me, but
 # scrape issues from an organization's repos.

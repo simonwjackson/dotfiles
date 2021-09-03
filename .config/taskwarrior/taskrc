@@ -45,12 +45,13 @@ urgency.uda.focus.coefficient=5.8
 #report.hud.filter=status:pending limit:page (+ACTIVE or focus:1 or due.before:tomorrow+1d) -DELETED
 #report.hud.labels=ID,Active,Age,Deps,P,Project,Tag,Recur,S,Due,Until,Description,Urg
 #report.hud.sort=urgency-
-#
-#taskd.server=freecinc.com:53589
-#taskd.key=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.key.pem
-#taskd.certificate=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.cert.pem
-#taskd.ca=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.ca.pem
-#taskd.credentials=FreeCinc\/freecinc_7de71510\/a5b8546f-d013-4b2c-b60f-62de3397f7c7
+
+taskd.server=freecinc.com:53589
+taskd.key=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.key.pem
+taskd.certificate=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.cert.pem
+taskd.ca=\/home\/simonwjackson\/.secrets\/taskwarrior\/freecinc_7de71510.ca.pem
+taskd.credentials=FreeCinc\/freecinc_7de71510\/a5b8546f-d013-4b2c-b60f-62de3397f7c7
+
 # Bugwarrior UDAs
 uda.githubtitle.type=string
 uda.githubtitle.label=Github Title
