@@ -1,7 +1,6 @@
-export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
+# export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
 export BSPWM_SOCKET="/tmp/bspwm-socket"
 export BROWSER="$(which qutebrowser)"
-export TASKRC="/home/simonwjackson/.config/taskwarrior/taskrc"
 
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
