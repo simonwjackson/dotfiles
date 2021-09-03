@@ -89,6 +89,6 @@ hostname=`hostname -s`
 
 if [[ $hostname == "fiji" ]]; then
   ${HOME}/.local/bin/barriers-start &
-elif [[ $hostname == "notra" ]]; then
+elif [[ $hostname == "tokachi" ]]; then
   ${HOME}/.local/bin/barrierc-start &
 fi
