@@ -7,6 +7,7 @@
 # Config files
 !/.Xresources
 !/.config/bspwm/**
+!/.config/bugwarrior/**
 !/.config/kitty/**
 !/.config/nvim/**/*.json
 !/.config/nvim/**/*.lua
