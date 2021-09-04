@@ -20,7 +20,6 @@ hsetroot -solid "#000000"
 
 # Remove outter padding for tiled layout
 bspc subscribe desktop | while read -r _ _ _ layout; do
-   PANEL_HEIGHT=45
    spacing=15
 
    if [[ "$layout" == "monocle" ]]; then
@@ -29,7 +28,7 @@ bspc subscribe desktop | while read -r _ _ _ layout; do
        gap=$spacing
    fi
 
-   bspc config top_padding $(($PANEL_HEIGHT-$gap))
+   bspc config top_padding $(($POLYBAR_HEIGHT-$gap))
    bspc config window_gap $gap
    bspc config left_padding -$gap
    bspc config right_padding -$gap

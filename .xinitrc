@@ -45,6 +45,7 @@ fi
 
 [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
 [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
+[[ ! $(pgrep -u $UID unclutter) ]] && unclutter --hide-on-touch &
 bluetoothctl power on &
 
 # exec dbus-launch --sh-syntax --exit-with-session bspwm

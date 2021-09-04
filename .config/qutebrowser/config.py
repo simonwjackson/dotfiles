@@ -45,3 +45,4 @@ config.set('content.headers.user_agent', "Mozilla/5.0 (Android 10; Mobile; rv:86
 # Fix google account login
 config.set('content.headers.user_agent', "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0", "https://accounts.google.com/*")
 
+config.set('content.headers.user_agent', "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0", "https://drive.google.com/*")

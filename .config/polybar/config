@@ -13,7 +13,7 @@ alert = #bd2c40
 [bar/heads-up]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 45 
+height = ${env:POLYBAR_HEIGHT:}
 offset-x = 0
 offset-y = 0
 radius = 0
@@ -28,17 +28,17 @@ line-color = #f00
 border-size = 0
 border-color = #00000000
 
-padding-left = 0
-padding-right = 0
+padding-left = 1
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 0
 
 font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
-; modules-left = bspwm
+modules-left = hostname bspwm
 ; modules-center = task
-modules-right = barrier song filesystem memory cpu battery pulseaudio wireless-network time
+modules-right = barrier song filesystem memory cpu dots-repo spark-repo battery pulseaudio wireless-network time
 
 tray-position = left
 tray-padding = 0
@@ -78,6 +78,39 @@ tail = false
 ; Seconds to sleep between updates
 ; Default: 5 (0 if `tail = true`)
 interval = 1
+
+
+[module/hostname]
+format-prefix = " "
+format-foreground = #666
+type = custom/script
+exec = hostname -s
+interval = 3200
+
+; TODO: Use "ramp" to show colors based on number of files modified
+[module/dots-repo]
+type = custom/script
+
+format-background = #623f1d
+format-foreground = #000000
+label-padding = 1
+
+exec = echo ""
+exec-if = [[ $(dots status -s | wc -l) > 0 ]] 
+interval = 20
+
+
+[module/spark-repo]
+type = custom/script
+
+format-background = #623f1d
+format-foreground = #000000
+label-padding = 1
+
+exec = echo ""
+; TODO: Update sparks repo when moved into the common code directory
+exec-if = [[ $(git --git-dir="${HOME}/spark/.git" --work-tree="${HOME}/spark" status -s | wc -l) > 0 ]] 
+interval = 20
 
 
 [module/song]
@@ -123,6 +156,8 @@ ramp-capacity-4=
 
 [module/bspwm]
 type = internal/bspwm
+
+format-foreground = #aaa
 
 label-focused = %name%
 label-focused-background = ${colors.background-alt}
@@ -207,6 +242,7 @@ ping-interval = 10
 format-connected = <ramp-signal> 
 format-connected-foreground = ${colors.foreground-alt}
 
+; TODO: Find icons to show different levels of network strength
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 

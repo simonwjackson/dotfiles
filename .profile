@@ -8,4 +8,6 @@ export QT_AUTO_SCREEN_SET_FACTOR=0
 export QT_SCALE_FACTOR=2
 export QT_FONT_DPI=96
 
+export POLYBAR_HEIGHT=60
+
 #[ "$(tty)" = "/dev/tty1" ] && startx

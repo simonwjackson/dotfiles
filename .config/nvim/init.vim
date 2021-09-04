@@ -752,6 +752,8 @@ let g:vimwiki_syntax = 'markdown'
 let g:vimwiki_ext = '.md'
 let g:vimwiki_main = 'README'
 
+au BufReadPost,BufNewFile *.md,*.txt,*.tex setlocal autoread
+
 let personal = {}
 let personal.path = '~/Documents/notes'
 
@@ -787,11 +789,11 @@ function! s:goyo_enter()
     let b:quitting_bang = 0
     autocmd QuitPre <buffer> let b:quitting = 1
     cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-    :Limelight
+    " :Limelight
 endfunction
 
 function! s:goyo_leave()
-    :Limelight!
+    " :Limelight!
     " Quit Vim if this is the only remaining buffer
     if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
         if b:quitting_bang
