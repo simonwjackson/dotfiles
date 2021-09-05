@@ -6,8 +6,7 @@ touch /tmp/barrierc
 touch /tmp/barrierc-screen
 touch /tmp/barrierc-connection
 
-# HACK: This will fail on networks outside the home (hard coded IP)
-[[ $(pgrep -u $UID -x barrierc) ]] || nohup barrierc --no-daemon --log /tmp/barrierc --enable-crypto 192.168.1.147 &
+[[ $(pgrep -u $UID -x barrierc) ]] || nohup barrierc --no-daemon --log /tmp/barrierc --enable-crypto 10.0.0.1 &
 
 tail -f /tmp/barrierc | awk '
   /connected/ { system("echo connected > /tmp/barrierc-connection") }
