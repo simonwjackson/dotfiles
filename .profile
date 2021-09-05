@@ -1,6 +1,7 @@
 # export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
 export BSPWM_SOCKET="/tmp/bspwm-socket"
 export BROWSER="$(which qutebrowser)"
+export EDITOR="$(which nvim)"
 
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
@@ -10,4 +11,5 @@ export QT_FONT_DPI=96
 
 export POLYBAR_HEIGHT=60
 
-#[ "$(tty)" = "/dev/tty1" ] && startx
+# BUG: Rotate and scale break when using this
+# [ "$(tty)" = "/dev/tty1" ] && startx
