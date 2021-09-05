@@ -88,6 +88,7 @@ exec = hostname -s
 interval = 3200
 
 ; TODO: Use "ramp" to show colors based on number of files modified
+; TODO: Show notification when out of sync with origin
 [module/dots-repo]
 type = custom/script
 
@@ -96,7 +97,7 @@ format-foreground = #000000
 label-padding = 1
 
 exec = echo ""
-exec-if = [[ $(dots status -s | wc -l) > 0 ]] 
+exec-if = [[ $(git --git-dir="${HOME}/dotfiles" --work-tree="${HOME}" status -s | wc -l) > 0 ]] 
 interval = 20
 
 
