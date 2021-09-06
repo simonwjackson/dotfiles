@@ -11,8 +11,9 @@ export QT_FONT_DPI=96
 
 export POLYBAR_HEIGHT=60
 
-# BUG: Rotate and scale break when using this
-# [ "$(tty)" = "/dev/tty1" ] && startx
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  # HACK: Rotate and scale break without sleeping momentarily
+  # Consider modifing the service file instead
+  sleep 1
   startx
 fi
