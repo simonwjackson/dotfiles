@@ -13,3 +13,6 @@ export POLYBAR_HEIGHT=60
 
 # BUG: Rotate and scale break when using this
 # [ "$(tty)" = "/dev/tty1" ] && startx
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  startx
+fi
