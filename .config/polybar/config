@@ -1,14 +1,38 @@
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #000
-background-alt = #21252b
-; 222
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
+; foreground = #dfdfdf
+; foreground-alt = #555
+
+;;;;;;;;;;;
+
+red-5 = #e06c75
+red-4 = #b75a61
+red-3 = #8e484e
+red-2 = #65363a
+red-1 = #3b2325
+
+gray-5 = #a9b2c3
+gray-4 = #8b92a0
+gray-3 = #6c727c
+gray-2 = #4e5259
+gray-1 = #303235
+
+shark = #21252b
+red = ${colors.red-5}
+gray = ${colors.gray-5}
+black = #000000
+
+background = ${colors.black}
+background-alt = ${colors.shark}
+foreground = ${colors.gray}
+foreground-dim = ${colors.gray-1}
+; foreground-alt = #a9b2c3
+
 primary = #555
 secondary = #e60053
 alert = #bd2c40
+
 
 [bar/heads-up]
 monitor = ${env:MONITOR:}
@@ -82,7 +106,7 @@ interval = 1
 
 [module/hostname]
 format-prefix = " "
-format-foreground = #666
+format-foreground = ${colors.foreground-dim}
 type = custom/script
 exec = hostname -s
 interval = 3200
@@ -173,7 +197,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %name%
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.foreground-dim}
 label-empty-padding = 2
 
 ; Separator in between workspaces
@@ -184,7 +208,7 @@ label-empty-padding = 2
 type = internal/backlight
 card = intel_backlight
 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.foreground-dim}
 
 format = <ramp>
 
@@ -212,7 +236,7 @@ format = <ramp-load>
 ramp-load-0 = 
 ramp-load-1 = 
 ramp-load-2 = 
-ramp-load-2-foreground = ${colors.foreground-alt}
+ramp-load-2-foreground = ${colors.foreground-dim}
 ramp-load-3 = 
 ramp-load-3-foreground = #fba922
 ramp-load-4 = 
@@ -227,7 +251,7 @@ format = <ramp-used>
 ramp-used-0 = 
 ramp-used-1 = 
 ramp-used-2 = 
-ramp-used-2-foreground = ${colors.foreground-alt}
+ramp-used-2-foreground = ${colors.foreground-dim}
 ramp-used-3 = 
 ramp-used-3-foreground = #fba922
 ramp-used-4 = 
@@ -241,7 +265,7 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> 
-format-connected-foreground = ${colors.foreground-alt}
+format-connected-foreground = ${colors.foreground-dim}
 
 ; TODO: Find icons to show different levels of network strength
 ramp-signal-0 = 
@@ -260,7 +284,7 @@ animation-packetloss-framerate = 500
 [module/time]
 type = custom/script
 exec = date '+%-l:%M'
-format-foreground = ${colors.foreground-alt}
+format-foreground = ${colors.foreground-dim}
 
 
 [module/pulseaudio]
@@ -268,27 +292,16 @@ type = internal/pulseaudio
 
 format-volume = <label-volume>
 label-volume = 
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 label-muted = 
-label-muted-foreground = #666
+label-muted-foreground = ${colors.foreground-dim}
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+ramp-volume-0-foreground = ${colors.gray-1}
+ramp-volume-1-foreground = ${colors.gray-2}
+ramp-volume-2-foreground = ${colors.gray-3}
+ramp-volume-3-foreground = ${colors.gray-4}
+ramp-volume-4-foreground = ${colors.gray-5}
 
 [module/barrier]
 interval = 1
@@ -300,9 +313,9 @@ type = internal/battery
 battery = BAT1
 adapter = ACAD
 full-at = 100
-poll-interval = 0
+poll-interval = 300
 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.foreground-dim}
 
 ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
