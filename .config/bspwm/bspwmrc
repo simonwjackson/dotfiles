@@ -87,7 +87,7 @@ echo "bspwm configuration loaded..."
 hostname=`hostname -s`
 
 if [[ $hostname == "fiji" ]]; then
-  ${HOME}/.local/bin/barriers-start &
+  barriers-start &
 elif [[ $hostname == "tokachi" ]]; then
-  ${HOME}/.local/bin/barrierc-start &
+  barrierc-start &
 fi

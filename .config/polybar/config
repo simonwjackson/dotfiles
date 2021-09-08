@@ -307,6 +307,7 @@ ramp-volume-4-foreground = ${colors.gray-5}
 interval = 1
 type = custom/script
 exec = ${HOME}/.local/share/polybar/barrier
+exec-if = ss | grep :24800 
 
 [module/battery]
 type = internal/battery

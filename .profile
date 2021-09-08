@@ -1,4 +1,5 @@
-# export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
+export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$PATH
+export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
 export BSPWM_SOCKET="/tmp/bspwm-socket"
 export BROWSER="$(which qutebrowser)"
 export EDITOR="$(which nvim)"

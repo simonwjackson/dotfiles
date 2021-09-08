@@ -20,7 +20,7 @@
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
 !/.config/zsh/**
-!/.local/bin/**
+!/.local/scripts/**
 !/.local/share/barrier/**/*.conf
 !/.local/share/polybar/**
 !/.local/share/taskwarrior/hooks/**

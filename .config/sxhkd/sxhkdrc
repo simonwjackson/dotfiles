@@ -4,8 +4,8 @@ super + {_, alt +} Return
 # kitty-launch, term-float} tmux new-session
 
 # kill focused window
-# super + x
-#   kill-or-close
+super + x
+  kill-or-close
 
 # start window switcher
 super + t
@@ -71,9 +71,11 @@ XF86Audio{Raise,Lower}Volume
 # super + XF86Audio{Rewind,LowerVolume,RaiseVolume,Forward}
 #   media-control {ban,tired,like,bookmark}
 
-#XF86MonBrightnessUp
+XF86MonBrightnessUp
+  backlight_control +5
 
-#XF86MonBrightnessDown
+XF86MonBrightnessDown
+  backlight_control -5
 
 #####################
 # Movement
