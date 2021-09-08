@@ -168,8 +168,7 @@ alias ls="exa --long --header --git"
 
 # Dotfiles
 alias dotfiles='git --git-dir=$HOME/dotfiles --work-tree=$HOME' 
-alias dots='dotfiles status'
-alias 'dots '='dotfiles '
+alias dots='dotfiles'
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION

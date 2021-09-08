@@ -8,12 +8,14 @@
 !/.Xresources
 !/.config/bspwm/**
 !/.config/bugwarrior/**
+!/.config/mpv/**
 !/.config/kitty/**
 !/.config/nvim/**/*.json
 !/.config/nvim/**/*.lua
 !/.config/nvim/**/*.vim
 !/.config/picom/**
 !/.config/polybar/**
+!/.config/pianobar/**
 !/.config/qutebrowser/**
 !/.config/sxhkd/**
 !/.config/systemd/*

@@ -62,7 +62,7 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
 modules-left = hostname bspwm
 ; modules-center = task
-modules-right = barrier song filesystem memory cpu dots-repo spark-repo battery pulseaudio wireless-network time
+modules-right = filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio wireless-network time
 
 tray-position = left
 tray-padding = 0
@@ -139,14 +139,15 @@ interval = 20
 
 
 [module/song]
-format-prefix = "%{T3} %{T-}"
+; format-prefix = "%{T3} %{T-}"
 
 type = custom/script
 
 ; Available tokens:
 ;   %counter%
 ; Command to be executed (using "/bin/sh -c [command]")
-exec = echo "$(cat /tmp/pianobar.title) - $(cat /tmp/pianobar.artist)   ($(cat /tmp/pianobar.station))"
+; exec = echo "$(cat /tmp/pianobar.title) - $(cat /tmp/pianobar.artist)   ($(cat /tmp/pianobar.station))"
+exec = echo ""
 
 ; Conditional command that, if defined, needs to exit successfully
 ; before the main exec command is invoked.
