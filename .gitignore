@@ -21,6 +21,7 @@
 !/.config/systemd/*
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
+!/.config/ytfzf/**
 !/.config/zsh/**
 !/.local/scripts/**
 !/.local/share/barrier/**/*.conf

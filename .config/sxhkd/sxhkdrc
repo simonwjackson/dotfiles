@@ -17,6 +17,8 @@ super + t
 super + alt + ctrl + j
   kitty-popup xrandr-scale
 
+super + y ; s
+  kitty-popup ytfzf -St --detach
 
 # Lock screen
 # super + alt + ctrl + l
