@@ -2,17 +2,13 @@
 
 # Use powerline
 USE_POWERLINE="true"
+
 # Source manjaro-zsh-configuration
-if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-  source /usr/share/zsh/manjaro-zsh-config
-fi
-# Use manjaro zsh prompt
-if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-  source /usr/share/zsh/manjaro-zsh-prompt
-fi
+MANJARO_DEFAULTS="${HOME}/.config/zsh/zshrc.manjaro.defaults" 
+MANJARO_PROMPT="${HOME}/.config/zsh/zshrc.manjaro.prompt" 
 
-
-
+[[ -e $MANJARO_DEFAULTS ]] && source $MANJARO_DEFAULTS
+[[ -e $MANJARO_PROMPT ]] && source $MANJARO_PROMPT
 
 ## Options section
 setopt correct                                                  # Auto correct mistakes
@@ -138,24 +134,29 @@ just-play () {
       --playlist=- &
 }
 
+
 # Theming section  
 autoload -U compinit colors zcalc
 compinit -d
 colors
 
+
 ## Plugins section: Enable fish style features
 # Use syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 
 # FZF keybindings
 # if [[ -e /usr/share/fzf/key-bindings.zsh ]]; then
 #   source /usr/share/fzf/key-bindings.zsh
 # fi
 
+
 # FZF completion
 if [[ -e /usr/share/fzf/completion.zsh ]]; then
   source /usr/share/fzf/completion.zsh
 fi
+
 
 # Alias section
 alias h="fzf-history-widget"
@@ -165,10 +166,26 @@ alias ff="fzf-file-widget"
 alias fe="fzf-file-edit-widget"
 alias more="less"
 alias ls="exa --long --header --git"
+alias top="bpytop || htop || top"
+
 
 # Dotfiles
-alias dotfiles='git --git-dir=$HOME/dotfiles --work-tree=$HOME' 
-alias dots='dotfiles'
+# TODO: Rewrite with zsh-autoenv
+function dots () {
+  export GIT_DIR="${HOME}/dotfiles" 
+  export GIT_WORK_TREE="${HOME}" 
+
+  if [[ $# -eq 0 ]]; then
+    git status
+  elif [[ "${1}" == "edit" ]]; then
+    nvim -c "lcd ${HOME} | Lf" "${HOME}"
+  else
+    git $@
+  fi
+
+  unset GIT_DIR
+  unset GIT_WORK_TREE
+}
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION
