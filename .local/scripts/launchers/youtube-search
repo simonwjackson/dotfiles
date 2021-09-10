@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ytfzf -tL $(dialog --title "Youtube" --inputbox "Search:" 8 40 3>&1 1>&2 2>&3 3>&-)  | (nohup xargs -I {} mpv-video '{}' >/dev/null 2>&1 &)

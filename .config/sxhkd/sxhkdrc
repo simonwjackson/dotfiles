@@ -1,7 +1,6 @@
 # new term
 super + {_, alt +} Return
-  {kitty,kitty-popup $SHELL}
-# kitty-launch, term-float} tmux new-session
+  {kitty, kitty-popup $SHELL}
 
 # kill focused window
 super + x
@@ -11,42 +10,60 @@ super + x
 super + t
   kitty-popup window-switch
 
-# super + {_, shift +} Tab
-#   kitty-popup window-switch
+super + {_, shift +} Tab
+  kitty-popup window-switch
 
 super + alt + ctrl + j
   kitty-popup xrandr-scale
 
-super + y ; s
-  kitty-popup ytfzf -St --detach
+super + y; {_, super +}y
+  kitty-popup youtube-search
 
-# Lock screen
-# super + alt + ctrl + l
-#   blurlock
+super + y; {_, super +}s
+  kitty-popup youtube-subscriptions
+
+# Reload polybar
+super + shift + r; p
+  polybar-msg cmd restart
+
+# Reload sxhkdrc
+super + shift + r; s
+  pkill -usr1 -x sxhkd;
+
+# Reload bspwmrc
+super + shift + r; b
+  ${HOME}/.config/bspwm/bspwmrc
+
+super + comma
+  resize-window 16 9
+
+
 
 # Music menu
 # super + p; {_, super +}s
 #   term-float media-control search
-#
+
 # super + p; {_, super +}l
 #   term-float media-control library
-#
-# # Pianobar
+
+# Pianobar
 # super + p; {_, super +}p
 #   term-float control-pianobar station
-#
-# # Dark Mode
+
+# Dark Mode
 # super + r ; c ; d
 #   source set-colors plastic
-#
-# # Light Mode
+
+# Light Mode
 # super + r ; c ; n
 #   source set-colors neg
 
 # Generate password
 super + r ; g ; p
-  tr -dc "a-zA-Z0-9_#@.-" < /dev/urandom | head -c 14 | xclip -selection clipboard; \
-  notify-send Password generated
+  bw generate | xclip -selection clipboard
+
+super + r ; j
+  kitty-popup node
 
 # super + d; {_,super +} {d,a,n,t,j,r}
 #   term-float tasker {_,_} {_,add,now,toggle,journal,summary}
@@ -154,6 +171,7 @@ super + m
 super + b; {_, super +}b
   qutebrowser
 
+# start firefox
 super + b; {_, super +}f
   firefox
 

@@ -165,7 +165,7 @@ alias ch="fzf-cd-widget ${HOME}"
 alias ff="fzf-file-widget"
 alias fe="fzf-file-edit-widget"
 alias more="less"
-alias ls="exa --long --header --git"
+alias ls="exa --long --header --git "
 alias top="bpytop || htop || top"
 
 

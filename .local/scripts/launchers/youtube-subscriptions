@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ytfzf -StL | xargs -I {} mpv-video '{}'
+# ytfzf -StL | (nohup xargs -I {} mpv-video '{}' >/dev/null 2>&1 &)

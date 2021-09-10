@@ -1,10 +1,6 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 ;foreground = ${xrdb:color7:#222}
-; foreground = #dfdfdf
-; foreground-alt = #555
-
-;;;;;;;;;;;
 
 red-5 = #e06c75
 red-4 = #b75a61
@@ -35,6 +31,7 @@ alert = #bd2c40
 
 
 [bar/heads-up]
+enable-ipc = true
 monitor = ${env:MONITOR:}
 width = 100%
 height = ${env:POLYBAR_HEIGHT:}
@@ -62,7 +59,7 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
 modules-left = hostname bspwm
 ; modules-center = task
-modules-right = filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio wireless-network time
+modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio wireless-network time
 
 tray-position = left
 tray-padding = 0
@@ -81,6 +78,13 @@ cursor-scroll = ns-resize
 inherit = bar/heads-up
 monitor = ${env:MONITOR:}
 
+[module/mpv]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/mpv
+interval = 1
+; label-foreground = #FFA500
+click-left = echo 'cycle pause' | socat - ${MPV_SOCKET}
+click-right = echo 'cycle mute' | socat - ${MPV_SOCKET}
 
 [module/task]
 type = custom/script

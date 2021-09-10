@@ -7,7 +7,7 @@ function type_entry () {
   | sed -e 's|^[^/]*//||' -e 's|/.*$||' \
   | xargs \
     -I % \
-    term-float bitwarden-choose --immediate % \
+    kitty-float bitwarden-choose --immediate % \
   | awk '{print $'${col}'}' \
   | (echo 'mode-enter insert' >> "${QUTE_FIFO}" && sleep .1 && cat -) \
   | xargs xdotool type \

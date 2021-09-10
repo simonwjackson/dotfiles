@@ -22,13 +22,17 @@
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
 !/.config/ytfzf/**
+!/.config/youtubedl/**
 !/.config/zsh/**
 !/.local/scripts/**
 !/.local/share/barrier/**/*.conf
 !/.local/share/polybar/**
 !/.local/share/taskwarrior/hooks/**
+!/.local/share/qutebrowser/{userscripts,greasemonkey}/**
 !/.profile
+!/.dialogrc
 !/.task
 !/.taskrc
 !/.xinitrc
 !/.zshrc
+!/.zshenv

@@ -1,17 +1,31 @@
-#!/bin/sh
+#!/bin/bash
 
-SOCKET=/tmp/mpv.socket
+SOCKET=${MPV_SOCKET:-/tmp/mpv.socket}
+URL=
+
+# Check to see if a pipe exists on stdin.
+if [ -p /dev/stdin ]; then
+    URL=$(cat)
+else
+    echo $1
+    if [ -n "$1" ]; then
+        URL=${1}
+    else
+        echo "No input given!"
+        exit
+    fi
+fi
 
 if ! pidof mpv; then
-  nohup mpv --input-ipc-server="${SOCKET}" --video=1 "${@}" &
+  nohup mpv --input-ipc-server="${SOCKET}" --video=1 "${URL}" >/dev/null 2>&1 & disown
 else
   has_video=$(echo "{ \"command\": [\"get_property\", \"video\"] }" | socat - "${SOCKET}" | jq -M -r '.data')
 
   if [ $has_video == "false" ]; then 
     killall mpv && \
-    nohup mpv --input-ipc-server="${SOCKET}" --video=1 "${@}" &
+    nohup mpv --input-ipc-server="${SOCKET}" --video=1 "${URL}" >/dev/null 2>&1 & disown
   else 
     echo "{ \"command\": [\"set_property\", \"video\", 1] }" | socat - "${SOCKET}"
-    echo "{ \"command\": [\"loadfile\", \"${@}\"] }" | socat - "${SOCKET}";
+    echo "{ \"command\": [\"loadfile\", \"${URL}\"] }" | socat - "${SOCKET}";
   fi
 fi
