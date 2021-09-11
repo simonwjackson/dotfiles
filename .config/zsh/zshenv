@@ -1,0 +1,24 @@
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_STATE_HOME="${HOME}/.local/state"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$PATH
+
+export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"
+export BSPWM_SOCKET="/tmp/bspwm-socket"
+export BROWSER="$(which qutebrowser)"
+export EDITOR="$(which nvim)"
+export MPV_SOCKET="/tmp/mpv.socket"
+
+export GDK_SCALE=2
+export GDK_DPI_SCALE=0.5
+export QT_AUTO_SCREEN_SET_FACTOR=0
+export QT_SCALE_FACTOR=2
+export QT_FONT_DPI=96
+
+export MPV_SOCKET=/tmp/mpv.socket
+
+export POLYBAR_HEIGHT=60
+
+export KITTY_POPUP_WIDTH=2000
+export KITTY_POPUP_HEIGHT=1000
