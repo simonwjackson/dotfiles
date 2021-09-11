@@ -3,11 +3,12 @@
 function type_entry () {
   local col=${1}
 
-  echo "${QUTE_URL}" \
-  | sed -e 's|^[^/]*//||' -e 's|/.*$||' \
-  | xargs \
-    -I % \
-    kitty-float bitwarden-choose --immediate % \
+  URL=$(\
+    echo "${QUTE_URL}" \
+    | sed -e 's|^[^/]*//||' -e 's|/.*$||' \
+  )
+  
+  kitty-popup bitwarden-choose \
   | awk '{print $'${col}'}' \
   | (echo 'mode-enter insert' >> "${QUTE_FIFO}" && sleep .1 && cat -) \
   | xargs xdotool type \

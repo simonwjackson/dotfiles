@@ -34,17 +34,21 @@ super + shift + r; s
 super + shift + r; b
   ${HOME}/.config/bspwm/bspwmrc
 
+super + period
+  kitty-popup sxhkd-cheat
+
 super + comma
   resize-window 16 9
 
-
+super + w
+  kitty-popup wifi-menu
 
 # Music menu
-# super + p; {_, super +}s
-#   term-float media-control search
+super + p; {_, super +}s
+  kitty-popup media-control search
 
-# super + p; {_, super +}l
-#   term-float media-control library
+super + p; {_, super +}l
+  kitty-popup media-control library
 
 # Pianobar
 # super + p; {_, super +}p

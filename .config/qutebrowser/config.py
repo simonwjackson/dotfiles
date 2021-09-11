@@ -2,8 +2,9 @@
 
 config.load_autoconfig(False)
 
-# Depricated
-# config.set('colors.webpage.prefers_color_scheme_dark', True)
+config.unbind('H')
+config.unbind('L')
+
 config.set('colors.webpage.preferred_color_scheme', 'dark')
 config.set('colors.webpage.bg', 'black')
 config.set('colors.webpage.darkmode.enabled', True)
@@ -26,10 +27,8 @@ config.set('tabs.favicons.show', 'pinned')
 config.set('statusbar.show', 'in-mode')
 config.set('auto_save.session', True)
 
-config.unbind('H')
-config.unbind('L')
-
-config.bind(';v', 'hint links spawn --detach mpv-video "{hint-url}"')
+config.bind(';v', 'hint links spawn --detach mpv-rpc --video "{hint-url}"')
+config.bind(';a', 'hint links spawn --detach mpv-rpc --audio "{hint-url}"')
 
 config.bind('h', 'back')
 config.bind('l', 'forward')

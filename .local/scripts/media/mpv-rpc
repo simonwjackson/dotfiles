@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-declare -r socket=/tmp/mpv.socket
+declare -r socket=${MPV_SOCKET:-/tmp/mpv.socket}
 declare show_video=0
 
 if [ "${1}" == "--video" ]; then 
@@ -14,10 +14,11 @@ fi
 shift
 
 
-pidof mpv || \
-  (nohup mpv --no-input-terminal --idle --input-ipc-server="${socket}" </dev/null &>/dev/null & sleep .1)
+pidof mpv \
+  || (nohup mpv --no-input-terminal --idle --input-ipc-server="${socket}" </dev/null &>/dev/null & sleep 1)
 
 echo '{ "command": ["stop"] }' | socat - "${socket}"
+
 for item in "$@"; do
   echo '{ "command": ["loadfile", "'${item}'", "append-play", "video='${show_video}'"] }' | socat - "${socket}"
 done

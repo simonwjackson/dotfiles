@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # Copyright (c) 2021
@@ -73,7 +72,7 @@ while read -r entry; do
         --extract-audio \
         --audio-quality 0 \
         --add-metadata \
-        --output="%(album)s [%(release_year)s] - %(artist)s/%(playlist_index)s - %(track)s.%(acodec)s" \
+        --output="%(album)s [%(release_year)s] - %(artist)s/%(playlist_index)s - %(track)s.m4a" \
         --yes-playlist \
         "https://music.youtube.com/playlist?list=${ytid}" \
       | tee "${cached_metadata}" 
@@ -86,7 +85,7 @@ while read -r entry; do
         pathname=""
 
         if [ '${save}' -eq 1 ]; then
-          pathname="/home/simonwjackson/Music/${1}"
+          pathname="${XDG_MUSIC_DIR}/${1}"
         elif [ '${cache}' -eq 1 ]; then
           pathname="/tmp/aaa/${1}"
         fi

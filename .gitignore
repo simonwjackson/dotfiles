@@ -8,6 +8,7 @@
 !/.Xresources
 !/.config/bspwm/**
 !/.config/bugwarrior/**
+!/.config/gtk-4.0/settings.ini
 !/.config/mpv/**
 !/.config/kitty/**
 !/.config/nvim/**/*.json
@@ -23,6 +24,7 @@
 !/.config/tmux/**/*.conf
 !/.config/ytfzf/**
 !/.config/youtubedl/**
+!/.config/user-dirs.*
 !/.config/zsh/**
 !/.local/scripts/**
 !/.local/share/barrier/**/*.conf

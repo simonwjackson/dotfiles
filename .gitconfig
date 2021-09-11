@@ -25,6 +25,7 @@
   # Commit all now: Add changed files and commit with the same message.
   amend-all-now = commit --amend --no-edit -a
 
+  fzf = "!f() { git-fzf $@ }; f"
   
   # Graph log: gives you history of current branch
   l = log --graph --decorate --oneline
@@ -63,7 +64,6 @@
   
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-  #cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd J'
   
 [merge]
   tool = vimdiff           # Use vimdiff (actually neovim's vimdiff) to view and fix merge conflicts (instead of `g mc`).

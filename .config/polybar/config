@@ -128,6 +128,7 @@ exec = echo ""
 exec-if = [[ $(git --git-dir="${HOME}/dotfiles" --work-tree="${HOME}" status -s | wc -l) > 0 ]] 
 interval = 20
 
+click-left = GIT_DIR="${HOME}/dotfiles" GIT_WORK_TREE="${HOME}" kitty-popup lazygit
 
 [module/spark-repo]
 type = custom/script
@@ -135,6 +136,8 @@ type = custom/script
 format-background = #623f1d
 format-foreground = #000000
 label-padding = 1
+
+click-left = GIT_DIR="${HOME}/spark/.git" kitty-popup lazygit
 
 exec = echo ""
 ; TODO: Update sparks repo when moved into the common code directory
@@ -269,7 +272,9 @@ interface = wlp1s0
 interval = 3.0
 ping-interval = 10
 
-format-connected = <ramp-signal> 
+click-left = kitty-popup wifi-menu
+
+format-connected = %{A:kitty-popup wifi-menu:}<ramp-signal>%{A}
 format-connected-foreground = ${colors.foreground-dim}
 
 ; TODO: Find icons to show different levels of network strength

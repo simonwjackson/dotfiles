@@ -43,7 +43,6 @@ usage["search"]="Usage: $(basename $0) search [options]
 Options:
   -a, --add Add the result to your library"
 
-
 ###########
 # Config  #
 ###########
