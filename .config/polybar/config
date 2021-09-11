@@ -323,7 +323,7 @@ exec-if = ss | grep :24800
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 100
+; full-at = 100
 poll-interval = 300
 
 ramp-capacity-foreground = ${colors.foreground-dim}
