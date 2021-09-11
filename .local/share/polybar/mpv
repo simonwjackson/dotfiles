@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if pidof mpv > /dev/null
+  then
+  IDLE=$(\
+      echo '{ "command": ["get_property", "idle-active"] }' \
+      | socat - ${MPV_SOCKET} \
+      | jq .data \
+      2>/dev/null \
+  )
+
+  BUFFERING=$(\
+      echo '{ "command": ["get_property", "paused-for-cache"] }' \
+      | socat - ${MPV_SOCKET} \
+      | jq .data \
+      2>/dev/null \
+  )
+
+  PAUSED=$(\
+      echo '{ "command": ["get_property", "pause"] }' \
+      | socat - ${MPV_SOCKET} \
+      | jq .data \
+      2>/dev/null \
+  )
+
+  if [[ $IDLE == "true" ]]; then
+    echo ""
+  elif [[ $BUFFERING == "true" ]]; then
+    echo ""
+  elif [[ $PAUSED == "true" ]]; then
+    echo ""
+  elif [[ $PAUSED == "false" ]]; then
+    echo "契"
+  elif [[ $IDLE == "true" ]]; then
+    echo ""
+  fi
+else
+  echo ""
+fi
