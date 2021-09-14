@@ -59,7 +59,7 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 
 modules-left = hostname bspwm
 ; modules-center = task
-modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio wireless-network time
+modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio network time
 
 tray-position = left
 tray-padding = 0
@@ -114,6 +114,8 @@ format-foreground = ${colors.foreground-dim}
 type = custom/script
 exec = hostname -s
 interval = 3200
+click-left = bluetooth-on
+click-right = bluetooth-on
 
 ; TODO: Use "ramp" to show colors based on number of files modified
 ; TODO: Show notification when out of sync with origin
@@ -266,29 +268,12 @@ ramp-used-4 = 
 ramp-used-4-foreground = #ff5555
 
 
-[module/wireless-network]
-type = internal/network
-interface = wlp1s0
-interval = 3.0
-ping-interval = 10
+[module/network]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/network
 
+format-foreground = ${colors.foreground-dim}
 click-left = kitty-popup wifi-menu
-
-format-connected = %{A:kitty-popup wifi-menu:}<ramp-signal>%{A}
-format-connected-foreground = ${colors.foreground-dim}
-
-; TODO: Find icons to show different levels of network strength
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-
-animation-packetloss-0 = 
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${bar/top.foreground}
-animation-packetloss-framerate = 500
 
 
 [module/time]
@@ -313,11 +298,13 @@ ramp-volume-2-foreground = ${colors.gray-3}
 ramp-volume-3-foreground = ${colors.gray-4}
 ramp-volume-4-foreground = ${colors.gray-5}
 
+
 [module/barrier]
 interval = 1
 type = custom/script
 exec = ${HOME}/.local/share/polybar/barrier
 exec-if = ss | grep :24800 
+
 
 [module/battery]
 type = internal/battery

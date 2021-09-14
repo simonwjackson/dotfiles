@@ -10,8 +10,6 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-DEFAULT_SESSION=gnome-session
-
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -46,7 +44,5 @@ fi
 [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
 [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
 [[ ! $(pgrep -u $UID unclutter) ]] && unclutter --hide-on-touch &
-# bluetoothctl power on &
 
-# exec dbus-launch --sh-syntax --exit-with-session bspwm
-exec bspwm
+exec dbus-launch --sh-syntax --exit-with-session bspwm
