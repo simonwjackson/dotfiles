@@ -14,6 +14,7 @@
 !/.config/nvim/**/*.json
 !/.config/nvim/**/*.lua
 !/.config/nvim/**/*.vim
+!/.config/nvim/spell/**/*
 !/.config/picom/**
 !/.config/polybar/**
 !/.config/pianobar/**
