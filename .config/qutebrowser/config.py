@@ -27,6 +27,7 @@ config.set('tabs.favicons.show', 'pinned')
 config.set('statusbar.show', 'in-mode')
 config.set('auto_save.session', True)
 
+config.bind(';;f', 'open -t https://fakespot.com/analyze?url={url}')
 config.bind(';v', 'hint links spawn --detach mpv-rpc --video "{hint-url}"')
 config.bind(';a', 'hint links spawn --detach mpv-rpc --audio "{hint-url}"')
 
@@ -37,8 +38,7 @@ config.bind(' bp', 'spawn --userscript qutewarden pass')
 config.bind(' bb', 'spawn --userscript qutewarden both')
 
 config.set('url.searchengines', {
-    "DEFAULT": "https://www.google.com.ar/search?q={}",
-    "fake": 'https://fakespot.com/analyze?url={}',
+    "DEFAULT": "https://www.google.com/search?q={}",
     "r": 'https://www.reddit.com/r/{}/',
 })
 
