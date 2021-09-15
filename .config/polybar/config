@@ -61,7 +61,7 @@ font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
 modules-left = hostname bspwm
 ; modules-center = task
-modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio network time
+modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio network reddit time
 
 tray-position = left
 tray-padding = 0
@@ -109,6 +109,13 @@ tail = false
 ; Default: 5 (0 if `tail = true`)
 interval = 1
 
+[module/reddit]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/reddit
+interval = 6
+format-background = #61afef
+format-foreground = #000000
+label-padding = 1
 
 [module/hostname]
 format-prefix = " "
@@ -328,7 +335,7 @@ ramp-capacity-4 =
 
 ; format-discharging = <ramp-capacity>
 format-discharging = <ramp-capacity>
-format-charging = %{T2}%percentage%%
+label-charging = %percentage%%
 format-charging-foreground = ${colors.foreground-dim}
 format-full = 
 
