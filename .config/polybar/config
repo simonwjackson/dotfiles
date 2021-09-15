@@ -56,6 +56,8 @@ module-margin-left = 1
 module-margin-right = 0
 
 font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
+font-1 = "NotoSansMono Nerd Font:pixelsize=18;4"
+font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
 modules-left = hostname bspwm
 ; modules-center = task
@@ -298,6 +300,8 @@ ramp-volume-2-foreground = ${colors.gray-3}
 ramp-volume-3-foreground = ${colors.gray-4}
 ramp-volume-4-foreground = ${colors.gray-5}
 
+[module/title]
+type = internal/xwindow
 
 [module/barrier]
 interval = 1
@@ -310,7 +314,6 @@ exec-if = ss | grep :24800
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-; full-at = 100
 poll-interval = 300
 
 ramp-capacity-foreground = ${colors.foreground-dim}
@@ -319,13 +322,15 @@ ramp-capacity-0 = 
 ramp-capacity-0-foreground = #f53c3c
 ramp-capacity-1 = 
 ramp-capacity-1-foreground = #ffa900
-ramp-capacity-2 = 
+ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
+; format-discharging = <ramp-capacity>
 format-discharging = <ramp-capacity>
-format-charging = <ramp-capacity>
-
+format-charging = %{T2}%percentage%%
+format-charging-foreground = ${colors.foreground-dim}
+format-full = 
 
 [global/wm]
 margin-top = 0
