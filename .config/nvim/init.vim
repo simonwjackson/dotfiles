@@ -56,7 +56,6 @@ function! CmdLine(str)
 endfunction
 
 
-
 " ----------------------------------------------------------------------------
 "  - Return the open file's parent directory
 " ----------------------------------------------------------------------------
@@ -64,6 +63,15 @@ endfunction
 function! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunction
+
+function! LazyGitPopup()
+    if executable('tmux') && strlen($TMUX)
+        silent execute '!tmux new-window -a lazygit &'
+    else
+        LazyGit
+    endif
+endfunction
+
 
 " ====================================================
 "  => Plugins
@@ -77,6 +85,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
+
 
 " ----------------------------------------------------
 "  - Themes
@@ -131,9 +140,6 @@ Plug 'tpope/vim-surround'
 
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
 Plug 'airblade/vim-gitgutter'
-
-" Improved * motions
-Plug 'haya14busa/vim-asterisk'
 
 " Briefly highlight which text was yanked.
 Plug 'machakann/vim-highlightedyank'
@@ -272,8 +278,6 @@ Plug 'folke/trouble.nvim'
 Plug 'kdheepak/lazygit.nvim'
 
 call plug#end()
-
-
 
 
 " ----------------------------------------------------------------------------
@@ -472,11 +476,29 @@ if has("persistent_undo")
     set directory=~/.local/share/nvim/backup
 endif 
 
+" ============================================================================
+"  => Spell checking
+" ============================================================================
+
+" Toggle and untoggle spell checking
+nnoremap <leader>ss :setlocal spell!<cr>
+
+" Show a list of spelling suggestions
+nnoremap <leader>sc :<C-u>Telescope spell_suggest <CR> 
+
+" Automatically fix the last misspelled word and jump back to where you were.
+nnoremap <leader>sp :normal! mz[s1z=`z<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set mouse=a
+map <ScrollWheelUp> <C-y>
+map <ScrollWheelDown> <C-e>
+map <C-ScrollWheelUp> <C-u>
+map <C-ScrollWheelDown> <C-d>
 
 " Jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -500,53 +522,37 @@ augroup autoindent
     autocmd BufWritePre *.feature :normal migg=G`i
 augroup End
 
-" ============================================================================
-"  => Colors and Fonts
-" ============================================================================
 
-if (has("termguicolors"))
-    set termguicolors
+" ----------------------------------------------------------------------------
+"  - Shell
+" ----------------------------------------------------------------------------
+
+if exists('$SUDO_USER')
+    set noswapfile
+    set nobackup
+    set nowritebackup
+    set noundofile
 endif
 
-" Ensure 256 color support
-set t_Co=256
-
-" Enable syntax highlighting
-syntax enable
-
-" Scheme
-colorscheme plastic
-
-hi! Pmenu ctermbg=None ctermfg=None guibg=#111111 guifg=None
-hi! SignColumn ctermfg=None ctermbg=None guibg=None
-hi! NonText ctermfg=None ctermbg=None guibg=None guifg=None
-silent! hi! EndOfBuffer ctermbg=None ctermfg=None guibg=None guifg=None
-hi CursorColumn         guibg=None guifg=None
-
-hi SpellBad cterm=underline
-hi SpellLocal cterm=underline
-hi SpellRare cterm=underline
-hi SpellCap cterm=underline 
-
-hi HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
-
-hi link diffAdded DiffAdd
-hi link diffChanged DiffChange
-hi link diffRemoved DiffDelete
-
-hi UncoveredLine guifg=#d19a66 guibg=none
-
-" Hide tildas
-silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-
-" Vertical Split
-hi VertSplit guibg=bg guifg=#1d1b26
-
-" hi StatusLineNC cterm=none ctermfg=none ctermbg=none guifg=#00ffff guibg=#00ffff
 
 " ============================================================================
 "  => VIM user interface
 " ============================================================================ 
+
+" Update term title but restore old title after leaving Vim
+set title
+set titleold=
+
+" Motion timeouts
+set notimeout
+set ttimeout
+" TODO: change help split based on screen orientation
+" Force vertical help
+" cabbrev help vert help
+
+" TODO: change buffer split based on screen orientation
+" split below, not above
+set splitbelow
 
 " split right, not left
 set splitright            
@@ -607,6 +613,18 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " ============================================================================
 " => Plugin configuration
 " ============================================================================
+
+" ----------------------------------------------------------------------------
+"  - Tmux / Vim
+" ----------------------------------------------------------------------------
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+
 
 " ----------------------------------------------------------------------------
 "  - easymotion
@@ -789,11 +807,19 @@ function! s:goyo_enter()
     let b:quitting_bang = 0
     autocmd QuitPre <buffer> let b:quitting = 1
     cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+    if executable('tmux') && strlen($TMUX) && &filetype !=# 'man' && &filetype !=# 'help'
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
     " :Limelight
 endfunction
 
 function! s:goyo_leave()
     " :Limelight!
+    if executable('tmux') && strlen($TMUX) 
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
     " Quit Vim if this is the only remaining buffer
     if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
         if b:quitting_bang
@@ -920,19 +946,17 @@ let mapleader=' '
 " ============================================================================
 
 " Finding Files
-nnoremap <silent> <F6>      :<C-u>LazyGit<CR>
+nnoremap <silent> <F6>      :<C-u>call LazyGitPopup()<CR>
 nnoremap <silent> <F7>      <cmd>lua require('telescope-config').project_files()<CR>
 nnoremap <silent> <F8>      <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <F9>      :Lf<CR>
-nnoremap <silent> <F10>     :<C-u><CR>
+nnoremap <silent> <F10>     :<C-u>Telescope oldfiles<CR>
 
 " Finding code
 nnoremap <silent> <F1>      :<C-u>SearchSession<CR>
 nnoremap <silent> <F2>      :<C-u>Telescope live_grep<CR>
 nnoremap          <F3>      :<C-u>TodoTelescope<CR>
 nnoremap          <F4>      :<C-u>Telescope keymaps<CR>
-nnoremap          <F11>     :<C-u>Telescope coc references<CR>
-nnoremap          <F12>     :<C-u>Telescope coc line_code_actions<CR>
 
 
 " ============================================================================
@@ -949,19 +973,29 @@ xmap <silent> s <Plug>(easymotion-s2)
 omap <silent> s <Plug>(easymotion-s2)
 vmap <silent> s <Plug>(easymotion-s2)
 
-" Misc
-nmap <leader>r <Plug>(coc-rename)
-nmap <silent> <leader>s <Plug>(coc-fix-current)
-nmap <silent> <leader>S <Plug>(coc-codeaction)
-nmap <silent> <leader>a <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>A <Plug>(coc-diagnostic-next-error)
-nmap <silent> <leader>d <Plug>(coc-definition)
-nmap <silent> <leader>g :call CocAction('doHover')<CR>
-nmap <silent> <leader>u <Plug>(coc-references)
+nmap <silent> <Right> <Plug>(coc-range-select)
+xmap <silent> <Right> <Plug>(coc-range-select)
 
-" inside function
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
+" Rename symbol under cursor
+nmap <leader>rn <Plug>(coc-rename)
+
+" Fix error under cursor
+nmap <silent> qf <Plug>(coc-fix-current)
+
+" Show code actions
+nmap <silent> <leader>qf :<C-u>Telescope coc code_actions<CR> 
+
+nmap <silent> <Up> <Plug>(coc-diagnostic-prev)
+nmap <silent> <Down> <Plug>(coc-diagnostic-next)
+
+" Goto definition of the symbol under the cursor
+nmap <silent> gd :<C-u>call CocActionAsync('jumpDefinition')<CR>
+
+" Goto references of the symbol under the cursor
+nmap <silent> gr :<C-u>Telescope coc references<CR> 
+
+" Goto references of the symbol under the cursor
+nmap <silent> gt :<C-u>Telescope coc type_definitions<CR> 
 
 " around function
 xmap af <Plug>(coc-funcobj-a)
@@ -1014,3 +1048,86 @@ xnoremap <silent> <C-j> :move'>+<cr>gv
 " Git
 nnoremap <silent> <Leader>gla <cmd>lua require('telescope-config').my_git_commits()<CR>
 nnoremap <silent> <Leader>gs <cmd>lua require('telescope-config').my_git_status()<CR>
+
+nnoremap <silent> <C-s> :update<CR>
+
+" TODO: Make this JS only
+" Open up a point free function
+" nmap gO [(ysa({$i<CR>return <ESC>O
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" Quick marker
+nnoremap <Leader>m `m
+
+" qq to record, Q to replay
+nnoremap Q @q
+
+
+" ============================================================================
+"  => Colors and Fonts
+" ============================================================================
+
+" BUG: This conditional causes color inconsistancies when sourcing a second time
+" https://superuser.com/a/748204
+" if exists('$TMUX')
+"     if has('nvim')
+"       set termguicolors
+"       let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"     else
+"         set term=screen-256color
+"     endif
+" endif
+
+if (has("termguicolors"))
+    set termguicolors
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+" Ensure 256 color support
+set t_Co=256
+
+" Enable syntax highlighting
+syntax enable
+
+" Scheme
+colorscheme plastic
+
+hi! Pmenu ctermbg=None ctermfg=None guibg=#111111 guifg=None
+hi! SignColumn ctermfg=None ctermbg=None guibg=None
+hi! NonText ctermfg=None ctermbg=None guibg=None guifg=None
+silent! hi! EndOfBuffer ctermbg=None ctermfg=None guibg=None guifg=None
+hi CursorColumn         guibg=None guifg=None
+
+hi SpellBad cterm=underline
+hi SpellLocal cterm=underline
+hi SpellRare cterm=underline
+hi SpellCap cterm=underline 
+
+hi HighlightedYankRegion guifg=none guibg=#413C55 ctermbg=235 ctermfg=170
+
+hi link diffAdded DiffAdd
+hi link diffChanged DiffChange
+hi link diffRemoved DiffDelete
+
+hi UncoveredLine guifg=#d19a66 guibg=none
+
+" Hide tildas
+silent! hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+
+" Vertical Split
+hi VertSplit guibg=bg guifg=#1d1b26
+
+" hi StatusLineNC cterm=none ctermfg=none ctermbg=none guifg=#00ffff guibg=#00ffff
+
+hi CursorLine           guibg=#2D3239 guifg=None
+
+" Highlight current line
+set cursorline
+
+augroup CursorLineOnlyInActiveWindow
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END  
