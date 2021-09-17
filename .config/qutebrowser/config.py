@@ -45,11 +45,14 @@ config.set('url.searchengines', {
 # More sites are responsive with this user agent
 config.set('content.headers.user_agent', "Mozilla/5.0 (Android 10; Mobile; rv:86.0) Gecko/86.0 Firefox/86.0")
 
-# Fix reddit
-config.set('content.headers.user_agent', "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36", "https://*.reddit.com/*")
+user_agent_desktop = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+prefer_desktop = (
+  "https://*.amazon.com/*",
+  "https://*.reddit.com/*",
+  "https://drive.google.com/*"
+)
+
+map(lambda url: config.set('content.headers.user_agent', user_agent_safari, url), prefer_desktop)
 
 # Fix google account login
 config.set('content.headers.user_agent', "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0", "https://accounts.google.com/*")
-
-# Desktop google drive
-config.set('content.headers.user_agent', "Mozilla/5.0 ({os_info}; rv:90.0) Gecko/20100101 Firefox/90.0", "https://drive.google.com/*")
