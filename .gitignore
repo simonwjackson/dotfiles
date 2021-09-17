@@ -19,7 +19,6 @@
 !.mutt/*
 
 # Config files
-!.Xresources
 !.config/bspwm/**
 !.config/bpytop/**/*.conf
 !.config/bugwarrior/**
@@ -50,6 +49,7 @@
 !.local/share/qutebrowser/{userscripts,greasemonkey}/**/*
 !.profile
 !.dialogrc
+!.Xresources
 
 # Symlinks
 !.task

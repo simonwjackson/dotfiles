@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Comment
-
 cat "${HOME}/.config/nvim/init.vim" \
 | sed -n 's/^let \(.*\).path = \(.*\)/\1 \2/p' \
 | fzf --with-nth 1 \

@@ -1,6 +1,9 @@
 [[ -e "${HOME}/.zshenv" ]] && source "${HOME}/.zshenv"
 
-if [ -z "${DISPLAY}" ] \
+if [[ "$(ps -o comm= -p $PPID)" == "sshd" ]]; then
+    # inside an ssh session
+    tmux a -t default || tmux new -s default && exit;
+elif [ -z "${DISPLAY}" ] \
     && [ "${XDG_VTNR}" -eq 1 ]; then
     # HACK: Rotate and scale break without sleeping momentarily
     # Consider modifing the service file instead
@@ -11,12 +14,7 @@ elif command -v tmux &> /dev/null \
     && [[ ! "$TERM" =~ screen ]] \
     && [[ ! "$TERM" =~ tmux ]] \
     && [ -z "$TMUX" ]; then
-    if [[ "$(ps -o comm= -p $PPID)" == "sshd" ]]; then
-        # inside an ssh session
-        tmux a -t default || tmux new -s default && exit;
-    else
-        # local session
-        # TODO: Instruct tmux to hide top bar when local
-        exec tmux new && exit;
-    fi
+    # local session
+    # TODO: Instruct tmux to hide top bar when local
+    exec tmux new && exit;
 fi

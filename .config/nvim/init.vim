@@ -188,6 +188,7 @@ Plug 'junegunn/fzf.vim'
 " COC for code completion
 let g:coc_global_extensions = [
             \ 'coc-apollo',
+            \ 'coc-python',
             \ 'coc-coverage',
             \ 'coc-css',
             \ 'coc-eslint', 

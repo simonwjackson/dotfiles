@@ -46,6 +46,7 @@ config.set('url.searchengines', {
 config.set('content.headers.user_agent', "Mozilla/5.0 (Android 10; Mobile; rv:86.0) Gecko/86.0 Firefox/86.0")
 
 user_agent_desktop = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
+
 prefer_desktop = (
   "https://*.amazon.com/*",
   "https://*.reddit.com/*",
