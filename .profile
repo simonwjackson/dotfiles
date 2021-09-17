@@ -20,4 +20,3 @@ elif command -v tmux &> /dev/null \
         exec tmux new && exit;
     fi
 fi
-export BW_SESSION="$(cat "${HOME}/.secrets/bitwarden/session")"

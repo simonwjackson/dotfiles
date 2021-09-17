@@ -25,7 +25,6 @@
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
 !/.config/ytfzf/**
-!/.config/youtube-dl/**
 !/.config/user-dirs.*
 !/.config/zsh/**
 !/.local/scripts/**
