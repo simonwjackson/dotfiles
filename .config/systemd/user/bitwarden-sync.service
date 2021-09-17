@@ -1,0 +1,10 @@
+[Unit]
+Description=bitwarden-sync
+
+[Service]
+ExecStart=/usr/bin/zsh -c 'exec /usr/bin/bw sync'
+; ExecStart=/bin/bash -c 'BW_SESSION=$$(/usr/bin/cat /home/simonwjackson/.secrets/bitwarden/session) exec /usr/bin/bw sync'
+Type=oneshot
+
+[Install]
+WantedBy=default.target

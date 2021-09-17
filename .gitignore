@@ -21,7 +21,8 @@
 !/.config/pianobar/**
 !/.config/qutebrowser/**
 !/.config/sxhkd/**
-!/.config/systemd/*
+!/.config/systemd/user/*.service
+!/.config/systemd/user/*.timer
 !/.config/taskwarrior/**
 !/.config/tmux/**/*.conf
 !/.config/ytfzf/**
