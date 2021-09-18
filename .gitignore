@@ -10,42 +10,60 @@
 # My global Git excludes file (acts as a global .gitignore)
 !.gitexcludes
 
-# Gem config
-!.gemrc
-
-# Mutt
-!.muttrc
-!.mutt
-!.mutt/*
-
 # Config files
+!.config
 !.config/bspwm/**
+!.config/bpytop
 !.config/bpytop/**/*.conf
+!.config/bugwarrior
 !.config/bugwarrior/**
+!.config/gtk-4.0
 !.config/gtk-4.0/settings.ini
+!.config/mpv
 !.config/mpv/**
-!.config/kitty/**
+!.config/kitty
+!.config/kitty/**/*.conf
 !.config/nvim/**/*.json
 !.config/nvim/**/*.lua
 !.config/nvim/**/*.vim
+!.config/nvim/spell
 !.config/nvim/spell/**/*
+!.config/picom
 !.config/picom/**
+!.config/polybar
 !.config/polybar/**
+!.config/pianobar
 !.config/pianobar/**
+!.config/qutebrowser
 !.config/qutebrowser/**
+!.config/sxhkd
 !.config/sxhkd/**
+!.config/systemd
+!.config/systemd/user
 !.config/systemd/user/*.service
 !.config/systemd/user/*.timer
+!.config/taskwarrior
 !.config/taskwarrior/**
+!.config/tmux
 !.config/tmux/**/*.conf
+!.config/ytfzf
 !.config/ytfzf/**
 !.config/user-dirs.*
+!.config/zsh
 !.config/zsh/**
 
+!.local
+!.local/scripts
 !.local/scripts/**/*
+!.local/share/barrier
 !.local/share/barrier/**/*.conf
+!.local/share/polybar
 !.local/share/polybar/**
+!.local/share/taskwarrior
+!.local/share/taskwarrior/hooks
 !.local/share/taskwarrior/hooks/**
+!.local/share/qutebrowser
+!.local/share/qutebrowser/{userscripts,greasemonkey}
 !.local/share/qutebrowser/{userscripts,greasemonkey}/**/*
 !.profile
 !.dialogrc
