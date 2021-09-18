@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 pidof -o %PPID -x $0 >/dev/null && echo "ERROR: Script $0 already running" && exit 1
 
 touch /tmp/barrierc

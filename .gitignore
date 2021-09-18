@@ -1,42 +1,60 @@
-* 
-!*/
+# Ignore everything by default.
+*
 
-# Self
-!/.gitignore
+# Git aliases, identification info
+!.gitconfig
+
+# The gitignore of this repository itself (!)
+!.gitignore
+
+# My global Git excludes file (acts as a global .gitignore)
+!.gitexcludes
+
+# Gem config
+!.gemrc
+
+# Mutt
+!.muttrc
+!.mutt
+!.mutt/*
 
 # Config files
-!/.Xresources
-!/.config/bspwm/**
-!/.config/bpytop/**/*.conf
-!/.config/bugwarrior/**
-!/.config/gtk-4.0/settings.ini
-!/.config/mpv/**
-!/.config/kitty/**
-!/.config/nvim/**/*.json
-!/.config/nvim/**/*.lua
-!/.config/nvim/**/*.vim
-!/.config/nvim/spell/**/*
-!/.config/picom/**
-!/.config/polybar/**
-!/.config/pianobar/**
-!/.config/qutebrowser/**
-!/.config/sxhkd/**
-!/.config/systemd/user/*.service
-!/.config/systemd/user/*.timer
-!/.config/taskwarrior/**
-!/.config/tmux/**/*.conf
-!/.config/ytfzf/**
-!/.config/user-dirs.*
-!/.config/zsh/**
-!/.local/scripts/**
-!/.local/share/barrier/**/*.conf
-!/.local/share/polybar/**
-!/.local/share/taskwarrior/hooks/**
-!/.local/share/qutebrowser/{userscripts,greasemonkey}/**
-!/.profile
-!/.dialogrc
-!/.task
-!/.taskrc
-!/.xinitrc
-!/.zshrc
-!/.zshenv
+!.Xresources
+!.config/bspwm/**
+!.config/bpytop/**/*.conf
+!.config/bugwarrior/**
+!.config/gtk-4.0/settings.ini
+!.config/mpv/**
+!.config/kitty/**
+!.config/nvim/**/*.json
+!.config/nvim/**/*.lua
+!.config/nvim/**/*.vim
+!.config/nvim/spell/**/*
+!.config/picom/**
+!.config/polybar/**
+!.config/pianobar/**
+!.config/qutebrowser/**
+!.config/sxhkd/**
+!.config/systemd/user/*.service
+!.config/systemd/user/*.timer
+!.config/taskwarrior/**
+!.config/tmux/**/*.conf
+!.config/ytfzf/**
+!.config/user-dirs.*
+!.config/zsh/**
+
+!.local/scripts/**/*
+!.local/share/barrier/**/*.conf
+!.local/share/polybar/**
+!.local/share/taskwarrior/hooks/**
+!.local/share/qutebrowser/{userscripts,greasemonkey}/**/*
+!.profile
+!.dialogrc
+
+# Symlinks
+!.task
+!.taskrc
+!.xinitrc
+!.zshrc
+!.zshenv
+!.tmux.conf

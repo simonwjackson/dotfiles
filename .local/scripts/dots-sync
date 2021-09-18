@@ -1,0 +1,20 @@
+#!/bin/sh
+
+HOST="10.0.0.130"
+GIT_DIR="${HOME}/dotfiles"
+GIT_WORK_TREE="${HOME}"
+
+{ \
+  git --git-dir=${GIT_DIR} --work-tree=${GIT_WORK_TREE} ls-files; \
+  git --git-dir=${GIT_DIR} --work-tree=${GIT_WORK_TREE} ls-files --others --exclude-standard; \
+} \
+| sed "s|^|${GIT_WORK_TREE}/|" \
+| entr -z \
+  `[ ${SERVICE:=0} -eq 1 ] && echo "-pn"` echo ""
+
+git --git-dir=${GIT_DIR} --work-tree=${GIT_WORK_TREE} status --porcelain --untracked-files=normal \
+| awk '!/^D/' \
+| sed 's|^...||' \
+| xargs -I {} echo '-path {}' \
+| xargs echo \
+| xargs unison -batch "${GIT_WORK_TREE}" "ssh://${HOST}/${GIT_WORK_TREE}" 

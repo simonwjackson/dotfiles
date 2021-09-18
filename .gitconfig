@@ -70,6 +70,7 @@
   
 [core]
   pager = delta
+	excludesfile = /home/simonwjackson/.gitexcludes
 
 [interactive]
   diffFilter = delta --color-only
