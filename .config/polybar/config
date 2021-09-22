@@ -59,7 +59,7 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=22;5"
 font-1 = "NotoSansMono Nerd Font:pixelsize=18;4"
 font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
-modules-left = hostname bspwm
+modules-left = hostname window-title tmux-bar
 ; modules-center = task
 modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio network reddit time
 
@@ -79,6 +79,13 @@ cursor-scroll = ns-resize
 ; Same as primary with no tray
 inherit = bar/heads-up
 monitor = ${env:MONITOR:}
+
+[module/tmux-bar]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/tmux-bar
+interval = 0
+format-foreground = ${colors.gray-1}
+
 
 [module/mpv]
 type = custom/script
@@ -198,29 +205,33 @@ ramp-capacity-3=
 ramp-capacity-4=
 
 
-[module/bspwm]
-type = internal/bspwm
+[module/window-title]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/window-title
+interval = 0
+
+; type = internal/bspwm
 
 format-foreground = #aaa
 
-label-focused = %name%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+; label-focused = %name%
+label-background = ${colors.background-alt}
+; label-focused-underline= ${colors.primary}
+label-padding = 2
 
-label-occupied = %name%
-label-occupied-padding = 2
-
-label-urgent = %name%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %name%
-label-empty-foreground = ${colors.foreground-dim}
-label-empty-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
+; label-occupied = %name%
+; label-occupied-padding = 2
+;
+; label-urgent = %name%!
+; label-urgent-background = ${colors.alert}
+; label-urgent-padding = 2
+;
+; label-empty = %name%
+; label-empty-foreground = ${colors.foreground-dim}
+; label-empty-padding = 2
+;
+; ; Separator in between workspaces
+; ; label-separator = |
 
 
 [module/backlight-acpi]
@@ -322,6 +333,7 @@ type = internal/battery
 battery = BAT1
 adapter = ACAD
 poll-interval = 300
+full-at = 99
 
 ramp-capacity-foreground = ${colors.foreground-dim}
 

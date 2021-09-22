@@ -20,12 +20,10 @@
 !.config/gtk-4.0
 !.config/gtk-4.0/settings.ini
 !.config/mpv
-!.config/mpv/**
+!.config/mpv/**/*[.conf, .lua]
 !.config/kitty
 !.config/kitty/**/*.conf
-!.config/nvim/**/*.json
-!.config/nvim/**/*.lua
-!.config/nvim/**/*.vim
+!.config/nvim/**/*[.json,.lua,.vim]
 !.config/nvim/spell
 !.config/nvim/spell/**/*
 !.config/picom
@@ -36,12 +34,12 @@
 !.config/pianobar/**
 !.config/qutebrowser
 !.config/qutebrowser/**
+!.config/qutebrowser/autoconfig.yml
 !.config/sxhkd
 !.config/sxhkd/**
 !.config/systemd
 !.config/systemd/user
-!.config/systemd/user/*.service
-!.config/systemd/user/*.timer
+!.config/systemd/user/*[.service,.timer]
 !.config/taskwarrior
 !.config/taskwarrior/**
 !.config/tmux
