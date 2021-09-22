@@ -1,0 +1,13 @@
+#!/bin/sh
+
+process_name=$(ps -e | grep $(xdotool getwindowpid $(xdotool getwindowfocus)) | grep -v grep | awk '{print $4}')
+
+if [[ $name =~ "tmux" ]]; then
+  name=$(xdotool getwindowfocus getwindowname) 
+  tmux_info=$(echo $name | awk -F ':' '{print $2}')
+  title=$(echo $name | awk -F ':' '{print $3}')
+  # echo "${title} $(echo $name | awk -F '.' '{print $2":"$3}')"
+  echo "tmux"
+else
+  echo "${process_name}"
+fi

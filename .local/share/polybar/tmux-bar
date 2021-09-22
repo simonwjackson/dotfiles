@@ -1,0 +1,11 @@
+#!/bin/sh
+
+name=$(xdotool getwindowfocus getwindowname) 
+tmux_info=$(echo $name | awk -F ':' '{print $2}')
+title=$(echo $name | awk -F ':' '{print $3}')
+
+if [[ $name = *:tmux ]]; then
+  echo "${title} $(echo $name | awk -F '.' '{print $2":"$3}')"
+else
+  echo "${name}" | awk 'length > 70{$0=substr($0,0,71)"..."}1'
+fi

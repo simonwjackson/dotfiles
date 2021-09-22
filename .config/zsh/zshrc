@@ -104,13 +104,6 @@ fzf-file-edit-widget() {
   fzf-file-widget "${@}" | xargs $EDITOR
 }
 
-# VIM is man
-# man () {
-#   export MANPAGER="col -b"
-#   eval '/usr/bin/man $@ | vim -MR +"set filetype=man" -';
-#   unset MANPAGER;
-# }
-
 # VIM is less
 less () {
   vim -u ~/.config/nvim/less.vimrc -
