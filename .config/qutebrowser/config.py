@@ -26,6 +26,7 @@ config.set('colors.tabs.indicator.stop', '#00000000')
 config.set('tabs.favicons.show', 'pinned')
 config.set('statusbar.show', 'in-mode')
 config.set('auto_save.session', True)
+config.set('tabs.show', 'switching')
 
 config.bind(';;f', 'open -t https://fakespot.com/analyze?url={url}')
 config.bind(';v', 'hint links spawn --detach mpv-rpc --video "{hint-url}"')
