@@ -105,11 +105,11 @@ fzf-file-edit-widget() {
 }
 
 # VIM is man
-man () {
-  export MANPAGER="col -b"
-  eval '/usr/bin/man $@ | vim -MR +"set filetype=man" -'; 
-  unset MANPAGER; 
-}
+# man () {
+#   export MANPAGER="col -b"
+#   eval '/usr/bin/man $@ | vim -MR +"set filetype=man" -';
+#   unset MANPAGER;
+# }
 
 # VIM is less
 less () {
