@@ -83,7 +83,7 @@ monitor = ${env:MONITOR:}
 [module/tmux-bar]
 type = custom/script
 exec = ${HOME}/.local/share/polybar/tmux-bar
-interval = 0
+interval = 1
 format-foreground = ${colors.gray-1}
 
 
@@ -208,7 +208,7 @@ ramp-capacity-4=
 [module/window-title]
 type = custom/script
 exec = ${HOME}/.local/share/polybar/window-title
-interval = 0
+interval = 1
 
 ; type = internal/bspwm
 
