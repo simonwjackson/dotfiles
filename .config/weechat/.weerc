@@ -1,0 +1,31 @@
+#
+# WeeChat 3.4-dev (compiled on Sep 22 2021 21:36:46)
+#
+# Use /autoconf load or cat this file to the FIFO pipe.
+#
+# For more info, see https://weechat.org/scripts/source/autoconf.py.html
+#
+
+*/set sec.crypt.passphrase_command "/usr/bin/cat ${HOME}/.secrets/weechat/main"
+*/set weechat.look.mouse on
+*/set weechat.bar.buddylist.items "buddylist"
+*/set weechat.bar.buflist.items "buflist"
+*/set weechat.bar.fset.items "fset"
+*/set weechat.bar.vi_line_numbers.items "line_numbers"
+*/set logger.level.irc 1
+*/set spell.color.suggestion *green
+*/set spell.check.default_dict "en"
+*/set spell.check.enabled on
+*/set spell.check.suggestions 3
+*/set script.scripts.download_enabled on
+*/set fset.look.auto_refresh "*,!weechat.bar.buflist.size,!plugins.var.buflist.section.*,!plugins.var.python.text_item.conky_*"
+*/set fset.format.option1 "${if:${selected_line}?${color:*white}>>:  } ${marked} ${name}  ${type}  ${value2}"
+*/set fset.color.line_selected_bg1 default
+*/set fset.color.name_changed 229
+*/set fset.color.name_changed_selected *229
+*/set fset.color.type 121
+*/set fset.color.type_selected *121
+*/set fset.color.value 31
+*/set fset.color.value_changed 229
+*/set fset.color.value_changed_selected *229
+*/set fset.color.value_selected *31
