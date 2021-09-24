@@ -1,5 +1,5 @@
 #
-# WeeChat 3.4-dev (compiled on Sep 22 2021 21:36:46)
+# WeeChat 3.4-dev (compiled on Sep 24 2021 03:39:18)
 #
 # Use /autoconf load or cat this file to the FIFO pipe.
 #
@@ -12,6 +12,7 @@
 */set weechat.bar.buflist.items "buflist"
 */set weechat.bar.fset.items "fset"
 */set weechat.bar.vi_line_numbers.items "line_numbers"
+*/set charset.default.decode "iso-8859-1"
 */set logger.level.irc 1
 */set spell.color.suggestion *green
 */set spell.check.default_dict "en"
