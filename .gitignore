@@ -12,6 +12,7 @@
 
 # Config files
 !.config
+!.config/bspwm
 !.config/bspwm/**
 !.config/bpytop
 !.config/bpytop/**/*.conf
@@ -23,6 +24,7 @@
 !.config/mpv/**/*[.conf, .lua]
 !.config/kitty
 !.config/kitty/**/*.conf
+!.config/nvim
 !.config/nvim/**/*[.json,.lua,.vim]
 !.config/nvim/spell
 !.config/nvim/spell/**/*
@@ -44,6 +46,8 @@
 !.config/taskwarrior/**
 !.config/tmux
 !.config/tmux/**/*.conf
+!.config/weechat
+!.config/weechat/**/*
 !.config/ytfzf
 !.config/ytfzf/**
 !.config/user-dirs.*
