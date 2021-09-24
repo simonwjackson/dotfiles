@@ -99,6 +99,9 @@ Plug 'flrnprz/plastic.vim'
 "  - Syntax
 " ----------------------------------------------------
 
+" Jinja2
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 " Cucumber
 Plug 'tpope/vim-cucumber'
 
