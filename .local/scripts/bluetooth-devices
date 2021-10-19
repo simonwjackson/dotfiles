@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat "${HOME}/.config/bluetooth-devices.txt" \
+| column -s ',' -t \
+| fzf \
+  --with-nth 1 \
+  --delimiter $'  ' \
+| awk -F $'  ' '{print $2}' \
+| xargs bluetoothctl connect
+
