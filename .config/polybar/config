@@ -331,7 +331,7 @@ exec-if = ss | grep :24800
 [module/battery]
 type = internal/battery
 battery = BAT1
-adapter = ACAD
+adapter = ADP1
 poll-interval = 300
 full-at = 99
 
