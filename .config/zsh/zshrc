@@ -229,6 +229,9 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
