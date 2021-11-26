@@ -64,6 +64,8 @@ yin () {
   | xargs -ro yay -S
 }
 
+
+
 fzf-history-widget () {
   print -z $(
     ([ -n "$ZSH_NAME" ] && fc -l 1 || history) \
