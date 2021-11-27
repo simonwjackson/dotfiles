@@ -1,1 +1,1 @@
-/home/simonwjackson/.config/zsh/zshenv
+.config/zsh/zshenv

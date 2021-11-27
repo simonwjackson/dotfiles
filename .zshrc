@@ -1,1 +1,1 @@
-/home/simonwjackson/.config/zsh/zshrc
+.config/zsh/zshrc
