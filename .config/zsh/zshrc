@@ -64,6 +64,8 @@ yin () {
   | xargs -ro yay -S
 }
 
+
+
 fzf-history-widget () {
   print -z $(
     ([ -n "$ZSH_NAME" ] && fc -l 1 || history) \
@@ -158,7 +160,7 @@ alias ch="fzf-cd-widget ${HOME}"
 alias ff="fzf-file-widget"
 alias fe="fzf-file-edit-widget"
 alias more="less"
-alias ls="exa --long --header --git "
+alias ll="exa --long --header --git "
 alias top="bpytop || htop || top"
 
 
@@ -204,6 +206,33 @@ function dots () {
   unset GIT_DIR
   unset GIT_WORK_TREE
 }
+
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+\. /usr/share/nvm/nvm.sh --no-use
+source /usr/share/nvm/bash_completion
+source /usr/share/nvm/install-nvm-exec
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(/bin/cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION

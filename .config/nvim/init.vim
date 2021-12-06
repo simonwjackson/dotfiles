@@ -1135,3 +1135,4 @@ augroup CursorLineOnlyInActiveWindow
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     autocmd WinLeave * setlocal nocursorline
 augroup END  
+
