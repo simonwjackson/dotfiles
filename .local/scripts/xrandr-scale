@@ -9,4 +9,4 @@ touch "${HOME}/.local/share/desktop/scale"
 
 echo ${scale} > "${HOME}/.local/share/desktop/scale"
 
-xrandr --output ${monitor} --scale ${scale}
+xrandr --output ${monitor} --mode 2880x1920 --scale ${scale} --rate 120.0

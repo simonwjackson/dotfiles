@@ -41,7 +41,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-[[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
+# [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
 [[ ! $(pgrep -u $UID udiskie) ]] && udiskie &
 [[ ! $(pgrep -u $UID unclutter) ]] && unclutter --hide-on-touch &
 

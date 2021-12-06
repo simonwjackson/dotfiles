@@ -78,14 +78,22 @@ done &
 # }}}
 
 
-echo "bspwm configuration loaded..."
+# echo "bspwm configuration loaded..."
 
 # if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
 #   theme::post_bspwmrc 2>/dev/null &
 # fi
 
-hostname=`hostname -s`
+# hostname=`hostname -s`
 
-if [[ $hostname == "tokachi" ]]; then
-  [[ ! $(pgrep -u $UID barrierc-start) ]] && barrierc-start &
-fi
+# if [[ $hostname == "fiji" ]]; then
+#   [[ ! $(pgrep -u $UID barriers-start) ]] && barriers-start &
+# elif [[ $hostname == "tokachi" ]]; then
+#   [[ ! $(pgrep -u $UID barrierc-start) ]] && barrierc-start &
+# fi
+
+#bluetoothctl power on 
+
+[[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
+
+dbus-send --system --type=method_call --print-reply=literal --dest=org.bluez /org/bluez/hci0 org.freedesktop.DBus.Properties.Set string:org.bluez.Adapter1 string:Powered variant:boolean:true
