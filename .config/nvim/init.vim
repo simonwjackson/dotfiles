@@ -269,8 +269,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Auto Sessions
-Plug 'rmagatti/auto-session'
-Plug 'rmagatti/session-lens'
+" Plug 'rmagatti/auto-session'
+" Plug 'rmagatti/session-lens'
 
 " Todo Comments
 Plug 'folke/todo-comments.nvim'
@@ -280,6 +280,12 @@ Plug 'folke/trouble.nvim'
 
 " LazyGit
 Plug 'kdheepak/lazygit.nvim'
+
+" expand region (+/-)
+Plug 'terryma/vim-expand-region'
+
+" Ultisnips: Text Expansion
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -910,9 +916,9 @@ pickers = {
 
 require('telescope').load_extension('coc')
 
-require('auto-session').setup {
-    --auto_session_enable_last_session=true,
-    }
+--require('auto-session').setup {
+--auto_session_enable_last_session=true,
+--    }
 
 require("todo-comments").setup {
     keywords = {
@@ -1136,3 +1142,18 @@ augroup CursorLineOnlyInActiveWindow
     autocmd WinLeave * setlocal nocursorline
 augroup END  
 
+augroup TodayFile
+    autocmd FileReadPre,BufWritePost ${HOME}/Documents/notes/Today.md execute "silent !gawk -i inplace 'BEGIN {p=1} /Agenda/ {print;system(\"echo; khal list; echo\");p=0} /^-+$/ {p=1} p' %" | edit
+augroup END  
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+inoremap <silent><expr> <C-Space> coc#refresh()

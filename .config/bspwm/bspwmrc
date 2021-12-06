@@ -86,8 +86,6 @@ echo "bspwm configuration loaded..."
 
 hostname=`hostname -s`
 
-if [[ $hostname == "fiji" ]]; then
-  [[ ! $(pgrep -u $UID barriers-start) ]] && barriers-start &
-elif [[ $hostname == "tokachi" ]]; then
+if [[ $hostname == "tokachi" ]]; then
   [[ ! $(pgrep -u $UID barrierc-start) ]] && barrierc-start &
 fi

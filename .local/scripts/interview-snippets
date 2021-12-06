@@ -1,0 +1,8 @@
+#!/bin/sh
+
+dir="${HOME}/Documents/snippets/interview-request"
+
+/bin/ls "${dir}" \
+    | fzf \
+    | xargs -I % cat "${dir}/%" \
+    | xsel --clipboard

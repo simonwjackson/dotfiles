@@ -1,3 +1,6 @@
+# TODO: UNBOUND KEYS
+# kitty-popup wifi-menu
+  
 # new term
 super + {_, alt +} Return
   {kitty, kitty-popup $SHELL}
@@ -40,8 +43,11 @@ super + period
 super + comma
   resize-window 16 9
 
-super + w
-  kitty-popup wifi-menu
+super + w; {_, super +}w
+  kitty-popup vimwiki-index
+
+super + w; {_, super +}i
+  kitty-popup vimwiki-inbox
 
 # Music menu
 super + p; {_, super +}s
@@ -50,6 +56,9 @@ super + p; {_, super +}s
 super + p; {_, super +}l
   kitty-popup media-control library
 
+super + apostrophe
+  kitty-popup interview-snippets
+  
 # Pianobar
 # super + p; {_, super +}p
 #   term-float control-pianobar station
@@ -87,8 +96,8 @@ XF86AudioMute
   pulseaudio-ctl mute
 
 # Change volume
-XF86Audio{Raise,Lower}Volume
-  pulseaudio-ctl {up,down} 2
+#XF86Audio{Raise,Lower}Volume
+#  pulseaudio-ctl {up,down} 2
 
 # # Pianobar
 # super + XF86Audio{Rewind,LowerVolume,RaiseVolume,Forward}
@@ -182,3 +191,11 @@ super + b; {_, super +}f
 # File explorer
 super + f
   kitty-popup lf ~
+
+#####################
+# Misc
+#####################
+
+# Bluetooth Devices
+super + r; b
+  kitty-popup bluetooth-devices

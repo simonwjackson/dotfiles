@@ -61,7 +61,7 @@ font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
 modules-left = hostname window-title tmux-bar
 ; modules-center = task
-modules-right = mpv filesystem memory cpu barrier song dots-repo spark-repo battery pulseaudio network reddit time
+modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery pulseaudio network reddit time
 
 tray-position = left
 tray-padding = 0
@@ -115,6 +115,15 @@ tail = false
 ; Seconds to sleep between updates
 ; Default: 5 (0 if `tail = true`)
 interval = 1
+
+[module/headphones]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/headphones
+interval = 10
+; format-background = #61afef
+format-foreground = ${colors.foreground-dim}
+; label-padding = 1
+
 
 [module/reddit]
 type = custom/script

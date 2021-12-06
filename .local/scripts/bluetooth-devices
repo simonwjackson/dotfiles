@@ -7,4 +7,3 @@ cat "${HOME}/.config/bluetooth-devices.txt" \
   --delimiter $'  ' \
 | awk -F $'  ' '{print $2}' \
 | xargs bluetoothctl connect
-
