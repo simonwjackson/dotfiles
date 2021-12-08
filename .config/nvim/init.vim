@@ -287,6 +287,9 @@ Plug 'terryma/vim-expand-region'
 " Ultisnips: Text Expansion
 Plug 'SirVer/ultisnips'
 
+" A multi-language debugging system for Vim 
+Plug 'puremourning/vimspector'
+
 call plug#end()
 
 
@@ -1157,3 +1160,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 inoremap <silent><expr> <C-Space> coc#refresh()
+
+let g:vimspector_enable_mappings = 'HUMAN'
