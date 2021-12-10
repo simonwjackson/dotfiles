@@ -1,11 +1,18 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 [[ -f ~/.profile ]] && . ~/.profile
 
 # Use powerline
 USE_POWERLINE="true"
 
 # Source manjaro-zsh-configuration
-MANJARO_DEFAULTS="${HOME}/.config/zsh/zshrc.manjaro.defaults" 
-MANJARO_PROMPT="${HOME}/.config/zsh/zshrc.manjaro.prompt" 
+MANJARO_DEFAULTS="${HOME}/.config/zsh/zshrc.manjaro.defaults"
+MANJARO_PROMPT="${HOME}/.config/zsh/zshrc.manjaro.prompt"
 
 [[ -e $MANJARO_DEFAULTS ]] && source $MANJARO_DEFAULTS
 [[ -e $MANJARO_PROMPT ]] && source $MANJARO_PROMPT
@@ -53,15 +60,15 @@ __fzfcmd() {
     echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
 }
 
-# Yay install
-yin () {
-  yay -Slq \
+# paru install
+paru-install () {
+  paru -Slq \
   | fzf \
     --query "${@}" \
     --multi \
-    --preview 'yay -Si {1}' \
+    --preview 'paru -Si {1}' \
     --preview-window=top \
-  | xargs -ro yay -S
+  | xargs -ro paru -S
 }
 
 
@@ -212,6 +219,7 @@ function dots () {
 source /usr/share/nvm/bash_completion
 source /usr/share/nvm/install-nvm-exec
 autoload -U add-zsh-hook
+
 load-nvmrc() {
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
@@ -234,7 +242,10 @@ add-zsh-hook chpwd load-nvmrc
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
 # END_KITTY_SHELL_INTEGRATION
+
