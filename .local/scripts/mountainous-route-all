@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Write a case statement
+
+case $1 in
+
+  "up")
+    [ ! -f /run/wireguard-wg0-all ] && {
+      # Routing all traffic through wireguard
+      ip rule delete table main && \
+      touch /run/wireguard-wg0-all
+    }
+    ;;
+
+  "down")
+    [ -f /run/wireguard-wg0-all ] && {
+      # Routing only LAN traffic through wireguard
+      ip rule add table main && \
+      rm /run/wireguard-wg0-all
+    }
+    ;;
+
+  "toggle")
+    [ -f /run/wireguard-wg0-all ] && {
+      # Routing only LAN traffic through wireguard
+      ip rule add table main && \
+      rm /run/wireguard-wg0-all
+    } || {
+      # Routing all traffic through wireguard
+      ip rule delete table main && \
+      touch /run/wireguard-wg0-all
+    }
+    ;;
+
+  *)
+    echo "Usage: $0 {up | down | toggle}"
+    exit 1
+    ;;
+esac

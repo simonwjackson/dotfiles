@@ -56,7 +56,7 @@
 
 !.local
 !.local/scripts
-!.local/scripts/**/*
+!.local/scripts/**
 !.local/share
 !.local/share/barrier
 !.local/share/barrier/**/*.conf
