@@ -3,7 +3,7 @@
   
 # new term
 super + {_, alt +} Return
-  {kitty, kitty-popup $SHELL}
+  {kitty tmux, kitty-popup $SHELL}
 
 # kill focused window
 super + x

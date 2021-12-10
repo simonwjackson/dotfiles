@@ -56,7 +56,7 @@ bspc rule -a mpv state=floating
 
 # Autostart applications
 [[ ! $(pgrep -u $UID polybar) ]] && polybar heads-up &
-[[ ! $(pgrep -u $UID kitty) ]] && kitty &
+[[ ! $(pgrep -u $UID kitty) ]] && kitty tmux &
 [[ ! $(pgrep -u $UID picom) ]] && picom --config ~/.config/picom/picom.conf &
 
 # Ensure shadows are only on floating windows
