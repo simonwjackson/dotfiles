@@ -94,10 +94,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'flrnprz/plastic.vim'
 
 
+" ----------------------------------------------------
+"  - Language Support
+" ----------------------------------------------------
 
-" ----------------------------------------------------
-"  - Syntax
-" ----------------------------------------------------
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -188,9 +190,9 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" \ 'coc-apollo',
 " COC for code completion
 let g:coc_global_extensions = [
-            \ 'coc-apollo',
             \ 'coc-python',
             \ 'coc-coverage',
             \ 'coc-css',
@@ -207,6 +209,7 @@ let g:coc_global_extensions = [
             \ 'coc-yaml',
             \ 'https://github.com/rodrigore/coc-tailwind-intellisense', 
             \ ]
+
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'npm install'}
 
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
@@ -289,6 +292,9 @@ Plug 'SirVer/ultisnips'
 
 " A multi-language debugging system for Vim 
 Plug 'puremourning/vimspector'
+
+" AI pair programmer
+Plug 'github/copilot.vim'
 
 call plug#end()
 
@@ -719,6 +725,7 @@ function! LightlineCocCoverageStatus() abort
     return '☂ ' . status . '%'
 endfunction
 
+" \     [ 'cocapollo' ]
 let g:lightline = {
             \ 'colorscheme': 'plastic',
             \ 'active': {
@@ -728,7 +735,6 @@ let g:lightline = {
                     \   ],
                     \   'right':[
                     \     [ 'coccoverage', 'cocstatus' ],
-                    \     [ 'cocapollo' ]
                     \   ],
                     \ },
                     \ 'component_function': {
