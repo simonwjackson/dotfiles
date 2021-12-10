@@ -1,0 +1,10 @@
+#!/bin/bash
+
+output=""
+[[ $(ip rule | head -n 2 | tail -n 1 | awk '{$1=$2=""; print $0}' | xargs) == "all lookup main" ]] && is_routing=0 || is_routing=1
+
+if [[ $is_routing -eq 1 ]]; then
+    output=""
+fi
+  
+echo $output

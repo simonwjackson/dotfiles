@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+headphones=$(bluetoothctl info | { grep -q AirPods || grep -q Sony } && echo 1)
+
+if [ -n "$headphones" ] && [ "$headphones" -gt 0 ]; then
+    echo ""
+else
+    echo ""
+fi
+
