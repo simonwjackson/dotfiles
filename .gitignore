@@ -61,7 +61,7 @@
 !.local/share/barrier
 !.local/share/barrier/**/*.conf
 !.local/share/polybar
-!.local/share/polybar/**/*
+!.local/share/polybar/**
 !.local/share/taskwarrior
 !.local/share/taskwarrior/hooks
 !.local/share/taskwarrior/hooks/**

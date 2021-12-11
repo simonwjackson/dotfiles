@@ -1,0 +1,10 @@
+#!/bin/bash
+
+output=""
+if pactl list sinks | grep -q 'Description: RTP'; then
+    output="%{F#af98e6}ﰝ%{F-}"
+else
+    output="%{F#333}ﰝ%{F-}"
+fi
+  
+echo $output

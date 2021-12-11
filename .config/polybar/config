@@ -61,7 +61,7 @@ font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
 modules-left = hostname window-title tmux-bar
 ; modules-center = task
-modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery pulseaudio network vpn reddit time
+modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery send-audio pulseaudio network vpn reddit time
 
 tray-position = left
 tray-padding = 0
@@ -85,6 +85,13 @@ type = custom/script
 exec = ${HOME}/.local/share/polybar/tmux-bar
 interval = 1
 format-foreground = ${colors.gray-1}
+
+[module/send-audio]
+type = custom/script
+exec = ${HOME}/.local/share/polybar/send-audio
+interval = 1
+format-foreground = ${colors.gray-1}
+click-left = send-audio toggle
 
 [module/vpn]
 type = custom/script

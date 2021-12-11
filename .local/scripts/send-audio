@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+case $1 in
+
+  "up")
+    pactl list sinks | grep -q 'Description: RTP' || {
+        pactl load-module module-null-sink sink_name=rtp sink_properties="device.description='RTP'"
+        pactl load-module module-rtp-send source=rtp.monitor destination_ip=$(avahi-resolve-host-name -4 fiji.local | awk '{print $2}')
+    }
+    ;;
+
+  "down")
+    pactl unload-module module-null-sink
+    ;;
+
+  "toggle")
+    if pactl list sinks | grep -q 'Description: RTP'; then
+        $0 down
+    else
+        $0 up
+    fi
+    ;;
+
+  *)
+    echo "Usage: $0 {up|down|toggle}"
+    exit 1
+    ;;
+esac
