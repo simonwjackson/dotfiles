@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cat "${HOME}/.config/radio-stations.txt" \
+| column -s ',' -t \
+| fzf \
+  --with-nth 1 \
+  --delimiter $'  ' \
+| awk -F $'  ' '{print $2}' \
+| xargs mpv
