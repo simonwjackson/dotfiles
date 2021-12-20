@@ -171,7 +171,8 @@ alias ff="fzf-file-widget"
 alias fe="fzf-file-edit-widget"
 alias more="less"
 alias ll="exa --long --header --git "
-alias top="bpytop || htop || top"
+alias top="btop || bpytop || htop || top"
+alias paru="paru --noconfirm"
 
 
 # ex - archive extractor
@@ -248,8 +249,8 @@ function dots () {
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit p10k
+[[ ! -f ~/.config/zsh/p10k ]] || source ~/.config/zsh/p10k
 
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -e "/usr/lib/kitty/shell-integration/kitty.zsh"; then source "/usr/lib/kitty/shell-integration/kitty.zsh"; fi
