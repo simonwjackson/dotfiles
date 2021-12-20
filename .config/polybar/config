@@ -22,7 +22,7 @@ black = #000000
 background = ${colors.black}
 background-alt = ${colors.shark}
 foreground = ${colors.gray}
-foreground-dim = ${colors.gray-1}
+foreground-dim = ${colors.gray-3}
 ; foreground-alt = #a9b2c3
 
 primary = #555
@@ -84,20 +84,20 @@ monitor = ${env:MONITOR:}
 type = custom/script
 exec = ${HOME}/.local/share/polybar/tmux-bar
 interval = 1
-format-foreground = ${colors.gray-1}
+format-foreground = ${colors.format-foreground}
 
 [module/send-audio]
 type = custom/script
 exec = ${HOME}/.local/share/polybar/send-audio
 interval = 1
-format-foreground = ${colors.gray-1}
+format-foreground = ${colors.format-foreground}
 click-left = send-audio toggle
 
 [module/vpn]
 type = custom/script
 exec = ${HOME}/.local/share/polybar/vpn
 interval = 1
-format-foreground = ${colors.gray-1}
+format-foreground = ${colors.format-foreground}
 click-left = sudo mountainous-route-all toggle
 
 [module/mpv]

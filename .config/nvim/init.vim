@@ -143,11 +143,10 @@ Plug 'jparise/vim-graphql'
 " quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
-" A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks and partial hunks.
-Plug 'airblade/vim-gitgutter'
+source ~/.config/nvim/plugins/gitgutter.vim
+" source ~/.config/nvim/plugins/which-key.vim
+source ~/.config/nvim/plugins/bspwm.vim
 
-" Briefly highlight which text was yanked.
-Plug 'machakann/vim-highlightedyank'
 
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
@@ -180,11 +179,9 @@ Plug 'itchyny/lightline.vim'
 " Adds file type icons to Vim plugins
 Plug 'ryanoasis/vim-devicons'
 
-" 🌷 Distraction-free writing in Vim
-Plug 'junegunn/goyo.vim'
 
-" 🔦 Hyperfocus-writing in Vim.
-Plug 'junegunn/limelight.vim'
+source ~/.config/nvim/plugins/goyo.vim
+source ~/.config/nvim/plugins/limelight.vim
 
 " fzf for vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -215,14 +212,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'npm install'}
 " Use fzf instead of coc.nvim built-in fuzzy finder.  
 Plug 'antoinemadec/coc-fzf' 
 
-" Vim motions on speed!
-Plug 'easymotion/vim-easymotion'
 
-" A Git wrapper so awesome, it should be illegal
-Plug 'tpope/vim-fugitive'
-
-" Vim plugin for intensely nerdy commenting powers
-Plug 'scrooloose/nerdcommenter'
+source ~/.config/nvim/plugins/easymotion.vim
+source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/nerdcommenter.vim
 
 " Improved * motions
 Plug 'haya14busa/vim-asterisk'
@@ -262,11 +255,7 @@ Plug 'farseer90718/vim-taskwarrior'
 " Zettelkasten for VIM
 Plug 'michal-h21/vim-zettel'
 
-" Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'fannheyward/telescope-coc.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+source ~/.config/nvim/plugins/telescope.vim
 
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
@@ -295,6 +284,11 @@ Plug 'puremourning/vimspector'
 
 " AI pair programmer
 Plug 'github/copilot.vim'
+
+" VIM Test
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+Plug 'dhruvasagar/vim-zoom'
 
 call plug#end()
 
@@ -331,43 +325,6 @@ function! s:show_documentation()
 endfunction
 
 
-" ----------------------------------------------------------------------------
-"  - Bspwm
-" ----------------------------------------------------------------------------
-
-function! s:VimNavigate(direction)
-    try
-        execute 'wincmd ' . a:direction
-    catch
-        echohl ErrorMsg | echo 'E11: Invalid in command-line window; <CR> executes, C  TRL-C quits: wincmd k' | echohl None
-    endtry
-endfunction
-
-command! BspwmNavigateWest call s:BspwmAwareNavigate('h')
-command! BspwmNavigateSouth call s:BspwmAwareNavigate('j')
-command! BspwmNavigateNorth call s:BspwmAwareNavigate('k')
-command! BspwmNavigateEast call s:BspwmAwareNavigate('l')
-
-function! s:BspwmAwareNavigate(direction)
-    let nr = winnr()
-    call s:VimNavigate(a:direction)
-
-    let at_tab_page_edge = (nr == winnr())
-    if at_tab_page_edge
-        if a:direction ==? 'h'
-            let bspc_direction = 'west'
-        elseif a:direction ==? 'j'
-            let bspc_direction = 'south'
-        elseif a:direction ==? 'k'
-            let bspc_direction = 'north'
-        elseif a:direction ==? 'l'
-            let bspc_direction = 'east'
-        endif
-
-        let cmd = 'movement ' . bspc_direction . ' tmux'
-        call system(cmd)
-    endif
-endfunction
 
 
 " Explorer
@@ -405,8 +362,8 @@ let g:coc_explorer_global_presets = {
                                         \   }
                                         \ }
 
-nmap <space>e :CocCommand explorer<CR>
-nmap <space>0 :CocCommand explorer --preset floating<CR>
+nmap <leader>e :CocCommand explorer<CR>
+nmap <leader>0 :CocCommand explorer --preset floating<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 
@@ -646,28 +603,6 @@ nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 
 
 " ----------------------------------------------------------------------------
-"  - easymotion
-" ----------------------------------------------------------------------------
-
-" This setting makes EasyMotion work similarly to Vim's smartcase option for global searches.
-let g:EasyMotion_smartcase = 1
-
-" Don't map easymotion defaults
-let g:EasyMotion_do_mapping = 0
-
-" Don't interfere with Coc
-autocmd User EasyMotionPromptBegin silent! CocDisable
-autocmd User EasyMotionPromptEnd silent! CocEnable
-
-" Easymotion keys
-let g:EasyMotion_keys = 'fjdksla;ghrueiwoqpvmcnxbz''tyqp,.'
-
-" keep cursor column when JK motion
-let g:EasyMotion_startofline = 0 
-
-
-
-" ----------------------------------------------------------------------------
 "  - Vimade
 " ----------------------------------------------------------------------------
 
@@ -692,23 +627,6 @@ let g:asterisk#keeppos = 1
 "  - nerdcommenter             
 " ----------------------------------------------------------------------------
 
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indenta  tion
-let g:NERDDefaultAlign = 'left'
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not
-let g:NERDToggleCheckAllLines = 1
 
 
 
@@ -743,34 +661,6 @@ let g:lightline = {
                         \ }
 
 
-" ----------------------------------------------------------------------------
-"  - Git gutter
-" ----------------------------------------------------------------------------
-
-let g:gitgutter_enabled=1
-let g:gitgutter_max_signs=2000
-let g:gitgutter_preview_win_floating=1
-
-let g:gitgutter_override_sign_column_highlight = 0
-call gitgutter#highlight#define_highlights()
-
-" highlight clear SignColumn
-
-" Flatten all gutter icons
-let g:gitgutter_sign_added = '│' " █▓▒░║
-let g:gitgutter_sign_modified = '│'
-let g:gitgutter_sign_removed = '▔'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_modified_removed = '▔'
-
-function! GitGutterNextHunkCycle()
-    let line = line('.')
-    silent! GitGutterNextHunk
-    if line('.') == line
-        1
-        GitGutterNextHunk
-    endif
-endfunction
 
 " ----------------------------------------------------------------------------
 "  - TaskWiki
@@ -814,46 +704,6 @@ let g:lf_command_override = 'lf -command "map <enter> open" -command "map <esc> 
 
 
 
-" ----------------------------------------------------------------------------
-"  - Goyo
-" ----------------------------------------------------------------------------
-
-let g:goyo_width = 90
-let g:goyo_height = '100%'
-
-function! s:goyo_enter()
-    let b:quitting = 0
-    let b:quitting_bang = 0
-    autocmd QuitPre <buffer> let b:quitting = 1
-    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-    if executable('tmux') && strlen($TMUX) && &filetype !=# 'man' && &filetype !=# 'help'
-        silent !tmux set status off
-        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    endif
-    " :Limelight
-endfunction
-
-function! s:goyo_leave()
-    " :Limelight!
-    if executable('tmux') && strlen($TMUX) 
-        silent !tmux set status on
-        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    endif
-    " Quit Vim if this is the only remaining buffer
-    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-        if b:quitting_bang
-            qa!
-        else
-            qa
-        endif
-    endif
-endfunction
-
-augroup Goyo
-    autocmd!  
-    autocmd! User GoyoEnter call <SID>goyo_enter()
-    autocmd! User GoyoLeave call <SID>goyo_leave()
-augroup END
 
 
 " ----------------------------------------------------------------------------
@@ -876,79 +726,18 @@ autocmd FileType markdown,markdown.mdx call <SID>markdown_enter()
 
 
 " ----------------------------------------------------------------------------
-"  - Telescope
+"  - Utilisnips
 " ----------------------------------------------------------------------------
 
-lua << EOF
-local actions = require('telescope.actions')
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-require('telescope').setup{
-defaults = {
-    mappings = {
-        i = {
-            ["<esc>"] = actions.close
-            },
-        },
-    layout_strategy = "vertical",
-    sorting_strategy = "ascending",
-    layout_config = {
-        horizontal = {
-            mirror = false,
-            },
-        vertical = {
-            mirror = true,
-            },
-        },
-    },
-pickers = {
-    -- Your special builtin config goes in here
-    buffers = {
-        sort_lastused = true,
-        theme = "dropdown",
-        previewer = false,
-        mappings = {
-            i = {
-                ["<c-d>"] = require("telescope.actions").delete_buffer,
-                -- Right hand side can also be the name of the action as a string
-                ["<c-d>"] = "delete_buffer",
-                },
-            n = {
-                ["<c-d>"] = require("telescope.actions").delete_buffer,
-                }
-            }
-        },
-    find_files = {
-        theme = "dropdown"
-        },
-    },
-}
-
-require('telescope').load_extension('coc')
-
---require('auto-session').setup {
---auto_session_enable_last_session=true,
---    }
-
-require("todo-comments").setup {
-    keywords = {
-        FIX = {
-            icon = " ", -- icon used for the sign, and in search results
-            color = "error", -- can be a hex color, or a named color (see below)
-            alt = { "FIXME", "BUG", "FIXIT", "FIX", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
-            -- signs = false, -- configure signs for some keywords individually
-            },
-        TODO = { icon = " ", color = "info" },
-        HACK = { icon = " ", color = "warning" },
-        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-        }
-    }
-
-require("trouble").setup {}
-
-EOF
-
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 
 " ============================================================================
@@ -957,8 +746,7 @@ EOF
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader=' '
-
+let mapleader = "\<space>"
 
 " ============================================================================
 "  - Project navigation
@@ -982,15 +770,6 @@ nnoremap          <F4>      :<C-u>Telescope keymaps<CR>
 "  - Motions
 " ============================================================================
 
-" Movement
-vmap j <Plug>(easymotion-j)
-vmap k <Plug>(easymotion-k)
-
-" Jumping
-nmap <silent> s <Plug>(easymotion-s2)
-xmap <silent> s <Plug>(easymotion-s2)
-omap <silent> s <Plug>(easymotion-s2)
-vmap <silent> s <Plug>(easymotion-s2)
 
 nmap <silent> <Right> <Plug>(coc-range-select)
 xmap <silent> <Right> <Plug>(coc-range-select)
@@ -1005,7 +784,8 @@ nmap <silent> qf <Plug>(coc-fix-current)
 nmap <silent> <leader>qf :<C-u>Telescope coc code_actions<CR> 
 
 nmap <silent> <Up> <Plug>(coc-diagnostic-prev)
-nmap <silent> <Down> <Plug>(coc-diagnostic-next)
+" nmap <silent> <Down> <Plug>(coc-diagnostic-next)
+nmap <silent> <Down> :<C-u>call HandleDownKey()<CR>
 
 " Goto definition of the symbol under the cursor
 nmap <silent> gd :<C-u>call CocActionAsync('jumpDefinition')<CR>
@@ -1054,9 +834,9 @@ nnoremap Y ^y$
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p pgvy
 
-" Vertical movements should respect line wrapping
-nnoremap j gj
-nnoremap k gk
+" When text is wrapped, move by terminal rows, not lines, unless a count is provided
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Move a line of text using Ctrl-[jk]
 nnoremap <silent> <C-j> :move+<cr>
@@ -1082,6 +862,39 @@ nnoremap <Leader>m `m
 
 " qq to record, Q to replay
 nnoremap Q @q
+
+" copy current file name (relative/absolute) to system clipboard
+if has("mac") || has("gui_macvim") || has("gui_mac")
+    " relative path  (src/foo.txt)
+    nnoremap <leader>cf :let @*=expand("%")<CR>
+
+    " absolute path  (/something/src/foo.txt)
+    nnoremap <leader>cF :let @*=expand("%:p")<CR>
+
+    " filename       (foo.txt)
+    nnoremap <leader>ct :let @*=expand("%:t")<CR>
+
+    " directory name (/something/src)
+    nnoremap <leader>ch :let @*=expand("%:p:h")<CR>
+endif
+
+" copy current file name (relative/absolute) to system clipboard (Linux version)
+if has("gui_gtk") || has("gui_gtk2") || has("gui_gnome") || has("unix")
+    " relative path (src/foo.txt)
+    nnoremap <leader>cf :let @+=expand("%")<CR>
+
+    " absolute path (/something/src/foo.txt)
+    nnoremap <leader>cF :let @+=expand("%:p")<CR>
+
+    " filename (foo.txt)
+    nnoremap <leader>ct :let @+=expand("%:t")<CR>
+
+    " directory name (/something/src)
+    nnoremap <leader>ch :let @+=expand("%:p:h")<CR>
+endif
+
+" Popup menu
+inoremap <silent><expr> <C-Space> coc#refresh()
 
 
 " ============================================================================
@@ -1145,6 +958,11 @@ hi CursorLine           guibg=#2D3239 guifg=None
 " Highlight current line
 set cursorline
 
+
+" ============================================================================
+"  => Scratch Pad (testing)
+" ============================================================================
+
 augroup CursorLineOnlyInActiveWindow
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -1155,16 +973,48 @@ augroup TodayFile
     autocmd FileReadPre,BufWritePost ${HOME}/Documents/notes/Today.md execute "silent !gawk -i inplace 'BEGIN {p=1} /Agenda/ {print;system(\"echo; khal list; echo\");p=0} /^-+$/ {p=1} p' %" | edit
 augroup END  
 
-" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-" - https://github.com/Valloric/YouCompleteMe
-" - https://github.com/nvim-lua/completion-nvim
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
-inoremap <silent><expr> <C-Space> coc#refresh()
 
-let g:vimspector_enable_mappings = 'HUMAN'
+nnoremap ,dd <Plug>VimspectorContinue
+nnoremap ,db <Plug>VimspectorAddFunctionBreakpoint
+nnoremap ,dh <Plug>VimspectorRunToCursor
+
+function! HandleDownKey()
+    if !empty(g:vimspector_session_windows.watches)
+        :call vimspector#StepInto()
+    else
+        :execute "normal \<Plug>(coc-diagnostic-next)"
+    endif
+endfunction
+
+
+" let g:vimspector_enable_mappings = 'HUMAN'
+nmap <silent> <leader>t :TestNearest<CR>
+let g:ultest_use_pty = 1
+
+xnoremap <leader>a :<C-u>Telescope coc line_code_actions<CR> 
+nnoremap <leader>a :<C-u>Telescope coc line_code_actions<CR> 
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Maintain the cursor position when yanking a visual selection
+vnoremap y myy`y
+vnoremap Y myY`y
+
+" Keep it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Open the current file in the default program
+nmap <leader>x :!xdg-open %<cr><cr>
+
+" Common configs
+nmap <leader>vv :edit ~/.config/nvim/init.vim<cr>
+nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
+
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
