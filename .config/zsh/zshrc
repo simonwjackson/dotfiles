@@ -244,7 +244,7 @@ function dots () {
 # add-zsh-hook chpwd load-nvmrc
 
 # ASDF
-. /opt/asdf-vm/asdf.sh
+[[ -f  /opt/asdf-vm/asdf.sh ]] && . /opt/asdf-vm/asdf.sh
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
