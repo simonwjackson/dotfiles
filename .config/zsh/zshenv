@@ -1,5 +1,6 @@
 export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$PATH
 
+export EDITOR="nvim"
 export BW_SESSION=$(cat "${HOME}/.secrets/bitwarden/session")
 export TERM="tmux-256color"
 export BSPWM_SOCKET="/tmp/bspwm-socket"
