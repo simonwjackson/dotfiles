@@ -70,7 +70,7 @@
   
 [core]
   pager = delta
-	excludesfile = /home/simonwjackson/.gitexcludes
+    excludesfile = ~/.gitignore
 
 [interactive]
   diffFilter = delta --color-only
@@ -90,3 +90,6 @@
 
 [init]
   defaultBranch = main
+
+[pull]
+  rebase = false

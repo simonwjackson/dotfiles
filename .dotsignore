@@ -1,0 +1,83 @@
+# Ignore everything by default.
+*
+
+# Git aliases, identification info
+!.gitconfig
+!.gitignore
+
+# The gitignore of this repository itself (!)
+!.dotsignore
+
+# My global Git excludes file (acts as a global .gitignore)
+!.gitexcludes
+
+# Config files
+!.config
+!.config/bspwm
+!.config/bspwm/**
+!.config/bpytop
+!.config/bpytop/**/*.conf
+!.config/bugwarrior
+!.config/bugwarrior/**
+!.config/gtk-4.0
+!.config/gtk-4.0/settings.ini
+!.config/mpv
+!.config/mpv/**/*[.conf, .lua]
+!.config/kitty
+!.config/kitty/**/*.conf
+!.config/nvim
+!.config/nvim/**/*[.json,.lua,.vim]
+!.config/nvim/spell
+!.config/nvim/spell/**/*
+!.config/picom
+!.config/picom/**
+!.config/polybar
+!.config/polybar/**
+!.config/pianobar
+!.config/pianobar/**
+!.config/qutebrowser
+!.config/qutebrowser/**
+!.config/qutebrowser/autoconfig.yml
+!.config/sxhkd
+!.config/sxhkd/**
+!.config/systemd
+!.config/systemd/user
+!.config/systemd/user/*[.service,.timer]
+!.config/taskwarrior
+!.config/taskwarrior/**
+!.config/tmux
+!.config/tmux/**/*.conf
+!.config/weechat
+!.config/weechat/**/*
+!.config/ytfzf
+!.config/ytfzf/**
+!.config/user-dirs.*
+!.config/zsh
+!.config/zsh/**
+
+!.local
+!.local/scripts
+!.local/scripts/**
+!.local/share
+!.local/share/barrier
+!.local/share/barrier/**/*.conf
+!.local/share/polybar
+!.local/share/polybar/**
+!.local/share/taskwarrior
+!.local/share/taskwarrior/hooks
+!.local/share/taskwarrior/hooks/**
+!.local/share/qutebrowser
+!.local/share/qutebrowser/{userscripts,greasemonkey}
+!.local/share/qutebrowser/{userscripts,greasemonkey}/**/*
+!.profile
+!.dialogrc
+!.Xresources
+
+# Symlinks
+!.task
+!.taskrc
+!.xinitrc
+!.zshrc
+!.zshenv
+!.tmux.conf
+!.tool-versions
