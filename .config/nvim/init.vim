@@ -237,7 +237,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tmux-plugins/vim-tmux-focus-events' 
 
 " An eye friendly plugin that fades your inactive buffers and preserves your syntax highlighting!
-Plug 'TaDaa/vimade'
+" Plug 'TaDaa/vimade'
 
 " LF file browser
 Plug 'ptzz/lf.vim'
@@ -289,6 +289,10 @@ Plug 'github/copilot.vim'
 Plug 'vim-test/vim-test'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 Plug 'dhruvasagar/vim-zoom'
+
+Plug 'pwntester/octo.nvim'
+Plug 'tpope/vim-obsession'
+Plug 'airblade/vim-rooter'
 
 call plug#end()
 
@@ -606,10 +610,10 @@ nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
 "  - Vimade
 " ----------------------------------------------------------------------------
 
-let g:vimade = { "fadelevel": 0.4 }
-
-au! FocusLost * VimadeFadeActive
-au! FocusGained * VimadeUnfadeActive
+" let g:vimade = { "fadelevel": 0.4 }
+"
+" au! FocusLost * VimadeFadeActive
+" au! FocusGained * VimadeUnfadeActive
 
 
 
@@ -811,10 +815,10 @@ map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 
 " Bspwm
-noremap <silent> <A-h> :BspwmNavigateWest<cr>
-noremap <silent> <A-j> :BspwmNavigateSouth<cr>
-noremap <silent> <A-k> :BspwmNavigateNorth<cr>
-noremap <silent> <A-l> :BspwmNavigateEast<cr>
+" noremap <silent> <A-h> :BspwmNavigateWest<cr>
+" noremap <silent> <A-j> :BspwmNavigateSouth<cr>
+" noremap <silent> <A-k> :BspwmNavigateNorth<cr>
+" noremap <silent> <A-l> :BspwmNavigateEast<cr>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>  

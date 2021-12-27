@@ -4,7 +4,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-lua << EOF local actions = require('telescope.actions')
+lua << EOF 
+local actions = require('telescope.actions')
 
 require('telescope').setup{
 defaults = {
