@@ -143,7 +143,8 @@ Plug 'jparise/vim-graphql'
 " quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
-source ~/.config/nvim/plugins/gitgutter.vim
+" source ~/.config/nvim/plugins/gitgutter.vim
+Plug 'airblade/vim-gitgutter'
 " source ~/.config/nvim/plugins/which-key.vim
 source ~/.config/nvim/plugins/bspwm.vim
 
@@ -180,7 +181,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 
 
-source ~/.config/nvim/plugins/goyo.vim
+" source ~/.config/nvim/plugins/goyo.vim
 source ~/.config/nvim/plugins/limelight.vim
 
 " fzf for vim
@@ -213,7 +214,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'npm install'}
 Plug 'antoinemadec/coc-fzf' 
 
 
-source ~/.config/nvim/plugins/easymotion.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/nerdcommenter.vim
 
@@ -226,11 +226,6 @@ Plug 'machakann/vim-highlightedyank'
 " Modify * to also work with visual selections.
 Plug 'nelstrom/vim-visual-star-search'
 
-" Automatically clear search highlights after you move your cursor.
-Plug 'haya14busa/is.vim'
-
-" Seamless navigation between tmux panes and vim splits
-Plug 'christoomey/vim-tmux-navigator'
 
 " FocusGained and FocusLost for vim inside Tmux
 " This is a plugin for Vim to dim inactive windows.  
@@ -250,12 +245,16 @@ Plug 'vimwiki/vimwiki'
 Plug 'tools-life/taskwiki'
 
 " Taskwarrior in VIM
-Plug 'farseer90718/vim-taskwarrior'
+" Plug 'farseer90718/vim-taskwarrior'
 
 " Zettelkasten for VIM
 Plug 'michal-h21/vim-zettel'
 
-source ~/.config/nvim/plugins/telescope.vim
+" source ~/.config/nvim/plugins/telescope.vim
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
@@ -293,6 +292,16 @@ Plug 'dhruvasagar/vim-zoom'
 Plug 'pwntester/octo.nvim'
 Plug 'tpope/vim-obsession'
 Plug 'airblade/vim-rooter'
+
+Plug 'easymotion/vim-easymotion'
+Plug 'camgraff/telescope-tmux.nvim'
+Plug 'RyanMillerC/better-vim-tmux-resizer'
+
+" Distraction-free writing in Vim
+Plug 'junegunn/goyo.vim'
+
+" Swap windows without ruining your layout!
+Plug 'wesQ3/vim-windowswap'
 
 call plug#end()
 
@@ -374,6 +383,9 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Better chars for splits
+set fillchars=stl\:─,vert\:\█   
 
 " ...?
 set hidden
@@ -600,10 +612,79 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 let g:tmux_navigator_no_mappings = 1
 
+" Disable tmux navigator when zooming the Vim pane
+let g:tmux_navigator_disable_when_zoomed = 1
+
 nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+
+let g:tmux_resizer_no_mappings = 1
+let g:tmux_resizer_resize_count = 5
+let g:tmux_resizer_vertical_resize_count = 10
+
+function! ResizeLeft()
+    if exists('#goyo')
+        call feedkeys("5\<C-w>\<")
+    else
+        TmuxResizeLeft
+    endif
+endfunction
+
+function! ResizeDown()
+    if exists('#goyo')
+        call feedkeys("5\<C-w>\-")
+    else
+        TmuxResizeDown
+    endif
+endfunction
+
+function! ResizeUp()
+    if exists('#goyo')
+        call feedkeys("5\<C-w>\+")
+    else
+        TmuxResizeUp
+    endif
+endfunction
+
+function! ResizeRight()
+    if exists('#goyo')
+        call feedkeys("5\<C-w>\>")
+    else
+        TmuxResizeRight
+    endif
+endfunction
+
+nnoremap <silent> <A-S-Left>  :call ResizeLeft()<CR>
+nnoremap <silent> <A-S-Down>  :call ResizeDown()<CR>
+nnoremap <silent> <A-S-Up>    :call ResizeUp()<CR>
+nnoremap <silent> <A-S-Right> :call ResizeRight()<CR>
+
+nnoremap <silent> <A-S-C-Left>  :call ResizeLeft()<CR>
+nnoremap <silent> <A-S-C-Down>  :call ResizeDown()<CR>
+nnoremap <silent> <A-S-C-Up>    :call ResizeUp()<CR>
+nnoremap <silent> <A-S-C-Right> :call ResizeRight()<CR>
+
+" ----------------------------------------------------------------------------
+"  - easymotion
+" ----------------------------------------------------------------------------
+
+" This setting makes EasyMotion work similarly to Vim's smartcase option for global searches.
+let g:EasyMotion_smartcase = 1
+
+" Don't map easymotion defaults
+let g:EasyMotion_do_mapping = 0
+
+" Don't interfere with Coc
+autocmd User EasyMotionPromptBegin silent! CocDisable
+autocmd User EasyMotionPromptEnd silent! CocEnable
+
+" Easymotion keys
+let g:EasyMotion_keys = 'fjdksla;ghrueiwoqpvmcnxbz''tyqp,.'
+
+" keep cursor column when JK motion
+let g:EasyMotion_startofline = 0 
 
 
 " ----------------------------------------------------------------------------
@@ -649,7 +730,7 @@ endfunction
 
 " \     [ 'cocapollo' ]
 let g:lightline = {
-            \ 'colorscheme': 'plastic',
+            \ 'colorscheme': 'one',
             \ 'active': {
                 \   'left': [
                     \     [ 'mode', 'paste' ],
@@ -664,6 +745,34 @@ let g:lightline = {
                         \ }
                         \ }
 
+" ----------------------------------------------------------------------------
+"  - Git gutter
+" ----------------------------------------------------------------------------
+
+let g:gitgutter_enabled=1
+let g:gitgutter_max_signs=2000
+let g:gitgutter_preview_win_floating=1
+
+let g:gitgutter_override_sign_column_highlight = 0
+call gitgutter#highlight#define_highlights()
+
+" highlight clear SignColumn
+
+" Flatten all gutter icons
+let g:gitgutter_sign_added = '│' " █▓▒░║
+let g:gitgutter_sign_modified = '│'
+let g:gitgutter_sign_removed = '▔'
+let g:gitgutter_sign_removed_first_line = '▔'
+let g:gitgutter_sign_modified_removed = '▔'
+
+function! GitGutterNextHunkCycle()
+    let line = line('.')
+    silent! GitGutterNextHunk
+    if line('.') == line
+        1
+        GitGutterNextHunk
+    endif
+endfunction
 
 
 " ----------------------------------------------------------------------------
@@ -744,6 +853,79 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
 
+" ----------------------------------------------------------------------------
+"  - Telescope
+" ----------------------------------------------------------------------------
+
+lua << EOF
+local actions = require('telescope.actions')
+
+require('telescope').setup{
+defaults = {
+    mappings = {
+        i = {
+            ["<esc>"] = actions.close
+            },
+        },
+    layout_strategy = "horizontal",
+    sorting_strategy = "ascending",
+    layout_config = {
+        horizontal = {
+            mirror = false,
+            },
+        vertical = {
+            mirror = true,
+            },
+        },
+    },
+pickers = {
+    -- Your special builtin config goes in here
+    buffers = {
+        sort_lastused = true,
+        previewer = false,
+        mappings = {
+            i = {
+                ["<c-d>"] = require("telescope.actions").delete_buffer,
+                -- Right hand side can also be the name of the action as a string
+                ["<c-d>"] = "delete_buffer",
+                },
+            n = {
+                ["<c-d>"] = require("telescope.actions").delete_buffer,
+                }
+            }
+        },
+    find_files = {
+        },
+    },
+}
+
+require('telescope').load_extension('coc')
+
+--require('auto-session').setup {
+--auto_session_enable_last_session=true,
+--    }
+
+require("todo-comments").setup {
+    keywords = {
+        FIX = {
+            icon = " ", -- icon used for the sign, and in search results
+            color = "error", -- can be a hex color, or a named color (see below)
+            alt = { "FIXME", "BUG", "FIXIT", "FIX", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
+            -- signs = false, -- configure signs for some keywords individually
+            },
+        TODO = { icon = " ", color = "info" },
+        HACK = { icon = " ", color = "warning" },
+        WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+        PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+        NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        }
+    }
+
+require("trouble").setup {}
+
+EOF
+
+
 " ============================================================================
 "  - Bindings
 " ============================================================================
@@ -774,6 +956,15 @@ nnoremap          <F4>      :<C-u>Telescope keymaps<CR>
 "  - Motions
 " ============================================================================
 
+" Movement
+vmap j <Plug>(easymotion-j)
+vmap k <Plug>(easymotion-k)
+
+" Jumping
+nmap <silent> s <Plug>(easymotion-s2)
+xmap <silent> s <Plug>(easymotion-s2)
+omap <silent> s <Plug>(easymotion-s2)
+vmap <silent> s <Plug>(easymotion-s2)
 
 nmap <silent> <Right> <Plug>(coc-range-select)
 xmap <silent> <Right> <Plug>(coc-range-select)
@@ -842,10 +1033,18 @@ xnoremap p pgvy
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" Movement: Keep under (j/k remap)
+vnoremap j <Plug>(easymotion-j)
+vnoremap k <Plug>(easymotion-k)
+
+" Movement
+vmap j <Plug>(easymotion-j)
+vmap k <Plug>(easymotion-k)
+
 " Move a line of text using Ctrl-[jk]
 nnoremap <silent> <C-j> :move+<cr>
-nnoremap <silent> <C-k> :move-2<cr>
-xnoremap <silent> <C-k> :move-2<cr>gv
+" nnoremap <silent> <C-k> :move-2<cr>
+" xnoremap <silent> <C-k> :move-2<cr>gv
 xnoremap <silent> <C-j> :move'>+<cr>gv
 
 " Git
@@ -985,11 +1184,11 @@ nnoremap ,db <Plug>VimspectorAddFunctionBreakpoint
 nnoremap ,dh <Plug>VimspectorRunToCursor
 
 function! HandleDownKey()
-    if !empty(g:vimspector_session_windows.watches)
-        :call vimspector#StepInto()
-    else
-        :execute "normal \<Plug>(coc-diagnostic-next)"
-    endif
+    " if !empty(g:vimspector_session_windows.watches)
+    " :call vimspector#StepInto()
+    " else
+    :execute "normal \<Plug>(coc-diagnostic-next)"
+    " endif
 endfunction
 
 
@@ -1022,3 +1221,98 @@ nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
+
+
+" function! GoGoyo()
+"     if !empty(g:vimspector_session_windows.watches)
+"         :call vimspector#StepInto()
+"     else
+"         :execute "normal \<Plug>(coc-diagnostic-next)"
+"     endif
+" endfunction
+
+
+let g:goyo_width = 90
+let g:goyo_height = '100%'
+
+function! s:goyo_enter()
+    let b:quitting = 0
+    let b:quitting_bang = 0
+    autocmd QuitPre <buffer> let b:quitting = 1
+    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+    if executable('tmux') && strlen($TMUX) && &filetype !=# 'man' && &filetype !=# 'help'
+        silent !tmux set status off
+        silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    endif
+    " :Limelight
+endfunction
+
+function! s:goyo_leave()
+    " :Limelight!
+    if executable('tmux') && strlen($TMUX)
+        silent !tmux set status on
+        silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    endif
+    " Quit Vim if this is the only remaining buffer
+    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+        if b:quitting_bang
+            qa!
+        else
+            qa
+        endif
+    endif
+
+    " HACK: Sourcing the VIMRC to ensure colors dont get borked after exiting Goyo.
+    " This is slow and will not work with changing color schemes.
+    source $MYVIMRC
+    redraw
+endfunction
+
+augroup Goyo
+    autocmd!
+    autocmd! User GoyoEnter call <SID>goyo_enter()
+    autocmd! User GoyoLeave call <SID>goyo_leave()
+augroup END
+
+nmap <A-m> :Goyo<CR>
+nmap <A-S-m> <Plug>(zoom-toggle)
+
+highlight StatusLine   guifg=#2C323D guibg=#2C323D
+highlight StatusLineNC guifg=#2C323D guibg=#2C323D
+highlight VertSplit cterm=none ctermfg=blue ctermbg=blue guifg=#2C323D guibg=#2C323D
+
+let g:windowswap_map_keys = 0 "prevent default bindings
+
+function! DoSwapLeft()
+    call WindowSwap#MarkWindowSwap() 
+    wincmd h 
+    call WindowSwap#DoWindowSwap()
+endfunction
+
+function! DoSwapDown()
+    call WindowSwap#MarkWindowSwap() 
+    wincmd j
+    call WindowSwap#DoWindowSwap()
+endfunction
+
+function! DoSwapUp()
+    call WindowSwap#MarkWindowSwap() 
+    wincmd k
+    call WindowSwap#DoWindowSwap()
+endfunction
+
+function! DoSwapRight()
+    call WindowSwap#MarkWindowSwap() 
+    wincmd l
+    call WindowSwap#DoWindowSwap()
+endfunction
+
+nnoremap <leader>wh :call DoSwapLeft()<CR>
+nnoremap <leader>wj :call DoSwapDown()<CR>
+nnoremap <leader>wk :call DoSwapUp()<CR>
+nnoremap <leader>wl :call DoSwapRight()<CR>
+
+nnoremap <A-Down> :tabnext<CR>
+nnoremap <A-Up> :tabprevious<CR>
+
+map <A-x> :confirm q<CR>

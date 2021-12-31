@@ -35,6 +35,7 @@ bspc subscribe desktop | while read -r _ _ _ layout; do
   bspc config bottom_padding -$gap
 done &
 
+bspc rule -a VIRTUAL1 monitor=VIRTUAL1
 
 # Various settings
 bspc config gapless_monocle       true
@@ -69,32 +70,22 @@ bspc subscribe node_state | while read -r _ _ _ node state status; do
   fi
 done &
 
-# Event listener :: theme {{{
 
-# if [[ -n "$(type theme::event_listeners 2>/dev/null)" ]]; then
-#   theme::event_listeners 2>/dev/null &
-# fi
+# Only VIRTUAL1 terminal on VIRTUAL1 desktop
+bspc subscribe node_focus | while read -r event monitor desktop node; do
+  bspc query --monitors --monitor ${monitor} --names | rg -q "VIRTUAL1" && {
+      xwininfo -id ${node} | rg -q VIRTUAL1 || bspc node --to-monitor eDP1 --focus --activate
+  }
+done &
 
-# }}}
-
-
-# echo "bspwm configuration loaded..."
-
-# if [[ -n "$(type theme::post_bspwmrc 2>/dev/null)" ]]; then
-#   theme::post_bspwmrc 2>/dev/null &
-# fi
-
-# hostname=`hostname -s`
-
-# if [[ $hostname == "fiji" ]]; then
-#   [[ ! $(pgrep -u $UID barriers-start) ]] && barriers-start &
-# elif [[ $hostname == "tokachi" ]]; then
-#   [[ ! $(pgrep -u $UID barrierc-start) ]] && barrierc-start &
-# fi
-
-#bluetoothctl power on 
+# Update polybar
+# bspc subscribe node_focus | while read -r _ _ _ id ; do
+#   polybar-msg hook window-title 1
+#   sleep .7
+#   polybar-msg hook tmux-bar 1
+# done &
 
 # BUG: This belongs in xinit, however volume/brightness fail to work or kill input all together
 [[ ! $(pgrep -u $UID sxhkd) ]] && sxhkd &
 
-dbus-send --system --type=method_call --print-reply=literal --dest=org.bluez /org/bluez/hci0 org.freedesktop.DBus.Properties.Set string:org.bluez.Adapter1 string:Powered variant:boolean:true
+hsetroot -solid "#000000"

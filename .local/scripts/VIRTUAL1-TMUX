@@ -1,0 +1,69 @@
+#!/bin/bash
+
+export DISPLAY=:0
+declare -r script="$(realpath $0)"
+
+case $1 in
+  setup)
+    # xrandr --newmode "3200x3200_60.00"  887.00  3200 3480 3832 4464  3200 3203 3213 3313 -hsync +vsync
+    # xrandr --newmode "2880x1920_60.00"  473.25  2880 3112 3424 3968  1920 1923 1933 1989 -hsync +vsync
+    xrandr --newmode "1440x1920_60.00"  236.50  1440 1560 1712 1984  1920 1923 1933 1989 -hsync +vsync
+    xrandr --addmode VIRTUAL1 "1440x1920_60.00"
+
+    xrandr \
+      --output eDP1 --primary --mode 2880x1920 --pos 1440x0 --rotate normal \
+      --output VIRTUAL1 --mode 1440x1920_60.00 --pos 0x0 --rotate normal
+    # xrandr \
+    #   --output eDP1 \
+    #     --primary \
+    #     --rotate normal \
+    #   --output VIRTUAL1 \
+    #     --mode 3200x3200_60.00 \
+    #     --left-of eDP1 \
+    #     --rotate normal
+    # xrandr \
+    #   --output eDP1 \
+    #     --primary \
+    #     --mode 2880x1920 \
+    #     --pos 3200x0 \
+    #     --rotate normal \
+    #   --output VIRTUAL1 \
+    #     --mode 3200x3200_60.00 \
+    #     --pos 0x2150 \
+    #     --rotate normal
+
+    xdotool search \
+      --class VIRTUAL1 || \
+      kitty \
+      --single-instance \
+      --detach \
+      --title VIRTUAL1 \
+      --name VIRTUAL1 \
+      --class VIRTUAL1 \
+      --override 'font_size=0' \
+      -- tmux \
+        -L VIRTUAL1 \
+        -f ${HOME}/.config/tmux/share.conf \
+        new-session \
+        -A \
+        -s SERVER \
+        'export TMUX=; exec tmux new-session -A -s INNER'
+  ;;
+  start)
+      "${script}" setup
+
+      # TODO: Don't copy pasta
+      tmux \
+        -L VIRTUAL1 \
+        -f ${HOME}/.config/tmux/share.conf \
+        new-session \
+        -A \
+        -s SERVER \
+        'export TMUX=; exec tmux new-session -A -s INNER'
+  ;;
+  stop)
+    xrandr \
+      --output VIRTUAL1 --off
+    xrandr --auto
+  ;;
+esac;

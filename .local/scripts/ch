@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+cat "${HOME}/.zhistory" | fzf +s --tac --expect=return,left,right

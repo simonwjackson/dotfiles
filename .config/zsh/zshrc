@@ -44,6 +44,7 @@ WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider
 # Spaceship
 #autoload -U promptinit; promptinit
 #prompt spaceship
+autoload edit-command-line; zle -N edit-command-line
 
 ## Keybindings section
 # Vi mode
@@ -58,6 +59,34 @@ alias vim=nvim
 __fzfcmd() {
   [ -n "$TMUX_PANE" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "$FZF_TMUX_OPTS" ]; } &&
     echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
+}
+
+CommandHistory () {
+    output=$(cat ${HISTFILE} \
+      | fzf +s --tac --header="return: exec, ctrl-e: edit, left: edit, right: edit" --expect=return,ctrl-e,left,right \
+    )
+    type=$(echo "${output}" | head -n 1)
+    command=$(echo "${output}" | awk 'NR>1')
+
+    case $type in
+        "ctrl-e")
+          BUFFER="$command"
+          edit-command-line
+          zle accept-line
+        ;;
+        "return")
+          BUFFER="$command"
+          zle accept-line
+        ;;
+        "left")
+          BUFFER="$command"
+          zle beginning-of-line
+        ;;
+        "right")
+          BUFFER="$command"
+          zle end-of-line
+        ;;
+    esac
 }
 
 # paru install
@@ -218,36 +247,18 @@ function dots () {
   unset GIT_WORK_TREE
 }
 
-# [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
-# \. /usr/share/nvm/nvm.sh --no-use
-# source /usr/share/nvm/bash_completion
-# source /usr/share/nvm/install-nvm-exec
-# autoload -U add-zsh-hook
-#
-# load-nvmrc() {
-#   local node_version="$(nvm version)"
-#   local nvmrc_path="$(nvm_find_nvmrc)"
-#
-#   if [ -n "$nvmrc_path" ]; then
-#     local nvmrc_node_version=$(nvm version "$(/bin/cat "${nvmrc_path}")")
-#
-#     if [ "$nvmrc_node_version" = "N/A" ]; then
-#       nvm install
-#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
-#       nvm use
-#     fi
-#   elif [ "$node_version" != "$(nvm version default)" ]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-
 # ASDF
 [[ -f  /opt/asdf-vm/asdf.sh ]] && . /opt/asdf-vm/asdf.sh
 
 bindkey -v
-bindkey '^R' history-incremental-search-backward
+zle -N CommandHistory
+bindkey '^R' CommandHistory
+
+bindkey -s '^e' 'nvim^M'
+# F7
+bindkey -s '\e[18~' 'nvim $(fzf)^M'
+
+bindkey -M vicmd v edit-command-line
 
 # To customize prompt, run `p10k configure` or edit p10k
 [[ ! -f ~/.config/zsh/p10k ]] || source ~/.config/zsh/p10k

@@ -1,5 +1,7 @@
-export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$PATH
+export GOPATH=$(${HOME}/.asdf/shims/go env GOPATH)
+export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$GOPATH/bin:$PATH
 
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export EDITOR="nvim"
 export BW_SESSION=$(cat "${HOME}/.secrets/bitwarden/session")
 export TERM="tmux-256color"

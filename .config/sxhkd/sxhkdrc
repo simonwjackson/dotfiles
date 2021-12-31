@@ -2,20 +2,17 @@
 # kitty-popup wifi-menu
   
 # new term
-super + {_, alt +} Return
-  {kitty, bspc rule -a \* -o state=floating sticky=on layer=above rectangle=720x360+600+26 && kitty}
+super + {_, ctrl +, alt +} Return
+  {kitty tmux, kitty, kitty-popup $SHELL}}
+  # {kitty, bspc rule -a \* -o state=floating sticky=on layer=above rectangle=720x360+600+26 && kitty}
   # {kitty tmux, kitty-popup $SHELL}
 
 # kill focused window
 super + x
   kill-or-close
 
-# start window switcher
-super + t
-  kitty-popup window-switch
-
-super + {_, shift +} Tab
-  kitty-popup window-switch
+super + {_, alt +} t
+  flameshot {gui,full --clipboard}
 
 super + alt + ctrl + j
   kitty-popup xrandr-scale
@@ -32,7 +29,7 @@ super + shift + r; p
 
 # Reload sxhkdrc
 super + shift + r; s
-  pkill -usr1 -x sxhkd;
+  pkill -usr1 -x sxhkd
 
 # Reload bspwmrc
 super + shift + r; b
@@ -116,7 +113,7 @@ XF86MonBrightnessDown
 
 # swap the current node and the biggest window
 super + g
-  bspc node -s biggest.window
+  bspc node -s biggest.window.local
 
 # toggle floating
 super + space
@@ -124,11 +121,21 @@ super + space
 
 # focus the node in the given direction
 super + {h,j,k,l}
-  movement {west,south,north,east}
+  [[ $(bspc query -T -d | jq -er '.layout == "tiled"') == "true" ]] \
+    && bspc node -f {west,south,north,east}.local \
+    || bspc node {prev.!hidden.window.local,next.!hidden.window.local,prev.!hidden.window.local,next.!hidden.window.local} --focus
+  #movement {west,south,north,east}
 
-# focus the node in the given direction
-super + alt + {h,j,k,l}
+# move the node in the given direction
+super + ctrl + {h,j,k,l}
   bspc node -s {west,south,north,east}
+
+super + shift + {h,j,k,l}
+  bspc node -p {west,south,north,east}
+
+# Go to monitor
+super + {Left,Right} 
+  bspc monitor {west,east} --focus
 
 # focus the older or newer node in the focus history
 super + {o,i}
@@ -153,14 +160,16 @@ super + {o,i}
 #   bspc desktop -m {prev,next}; \
 #   bspc desktop -f $desk
 
+super + alt + ctrl + {h,l} 
+  bspc node --to-monitor {west,east} --follow
 	
 #####################
 # Resize
 ##################### 
 
-# expand; a window by moving one of its side outward # expandd; a window by moving one of its side outwa
-super + {Left,Down,Up,Right}
-  STEP=20; SELECTION={1,2,3,4}; \
+# Resizing (natural)
+super + shift {_,+ ctrl} + {Left,Down,Up,Right}
+  STEP={100,20}; SELECTION={1,2,3,4}; \
   bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
   bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
 

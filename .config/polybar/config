@@ -63,7 +63,7 @@ modules-left = hostname window-title tmux-bar
 ; modules-center = task
 modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery send-audio pulseaudio network vpn reddit time
 
-tray-position = left
+tray-position = right
 tray-padding = 0
 ;tray-background = #0063ff
 
@@ -80,10 +80,21 @@ cursor-scroll = ns-resize
 inherit = bar/heads-up
 monitor = ${env:MONITOR:}
 
+[module/window-title]
+type = custom/ipc
+hook-0 = ${HOME}/.local/share/polybar/window-title
+initial = 1
+format-foreground = #aaa
+
+; label-focused = %name%
+format-background = ${colors.background-alt}
+; label-focused-underline= ${colors.primary}
+format-padding = 2
+
 [module/tmux-bar]
-type = custom/script
-exec = ${HOME}/.local/share/polybar/tmux-bar
-interval = 1
+type = custom/ipc
+hook-0 = ${HOME}/.local/share/polybar/tmux-bar
+initial = 1
 format-foreground = ${colors.format-foreground}
 
 [module/send-audio]
@@ -147,13 +158,11 @@ format-foreground = #000000
 label-padding = 1
 
 [module/hostname]
-format-prefix = " "
 format-foreground = ${colors.foreground-dim}
 type = custom/script
-exec = hostname -s
+;exec = hostname -s
+exec = echo ""
 interval = 3200
-click-left = bluetooth-on
-click-right = bluetooth-on
 
 ; TODO: Use "ramp" to show colors based on number of files modified
 ; TODO: Show notification when out of sync with origin
@@ -225,35 +234,6 @@ ramp-capacity-1-foreground = #fba922
 ramp-capacity-2=
 ramp-capacity-3=
 ramp-capacity-4=
-
-
-[module/window-title]
-type = custom/script
-exec = ${HOME}/.local/share/polybar/window-title
-interval = 1
-
-; type = internal/bspwm
-
-format-foreground = #aaa
-
-; label-focused = %name%
-label-background = ${colors.background-alt}
-; label-focused-underline= ${colors.primary}
-label-padding = 2
-
-; label-occupied = %name%
-; label-occupied-padding = 2
-;
-; label-urgent = %name%!
-; label-urgent-background = ${colors.alert}
-; label-urgent-padding = 2
-;
-; label-empty = %name%
-; label-empty-foreground = ${colors.foreground-dim}
-; label-empty-padding = 2
-;
-; ; Separator in between workspaces
-; ; label-separator = |
 
 
 [module/backlight-acpi]
