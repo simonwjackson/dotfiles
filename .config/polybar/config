@@ -59,9 +59,9 @@ font-0 = "NotoSansMono Nerd Font:pixelsize=20;5"
 font-1 = "NotoSansMono Nerd Font:pixelsize=18;4"
 font-2 = "NotoSansMono Nerd Font:pixelsize=15;4"
 
-modules-left = hostname window-title tmux-bar
+modules-left = vpn window-title tmux-bar
 ; modules-center = task
-modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery send-audio pulseaudio network vpn reddit time
+modules-right = mpv filesystem memory cpu barrier song headphones dots-repo spark-repo battery send-audio pulseaudio network reddit time
 
 tray-position = right
 tray-padding = 0
@@ -334,7 +334,7 @@ exec-if = ss | grep :24800
 type = internal/battery
 battery = BAT1
 adapter = ADP1
-poll-interval = 300
+poll-interval = 5
 full-at = 99
 
 ramp-capacity-foreground = ${colors.foreground-dim}

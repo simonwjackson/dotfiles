@@ -26,6 +26,9 @@
   amend-all-now = commit --amend --no-edit -a
 
   fzf = "!f() { git-fzf $@ }; f"
+
+  edit-modified = "! git status --porcelain  | awk '{print $2}' | xargs -I '%' echo \"$(git rev-parse --show-toplevel)/%\" | xargs nvim -p"
+  em = "edit-modified"
   
   # Graph log: gives you history of current branch
   l = log --graph --decorate --oneline

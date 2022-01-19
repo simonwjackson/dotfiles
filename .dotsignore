@@ -25,6 +25,8 @@
 !.config/mpv/**/*[.conf, .lua]
 !.config/kitty
 !.config/kitty/**/*.conf
+!.config/lazygit
+!.config/lazygit/*.yml
 !.config/nvim
 !.config/nvim/**/*[.json,.lua,.vim]
 !.config/nvim/spell

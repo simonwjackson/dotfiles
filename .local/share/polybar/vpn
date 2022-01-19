@@ -1,12 +1,20 @@
 #!/bin/bash
 
-output=""
-[[ $(ip rule | head -n 2 | tail -n 1 | awk '{$1=$2=""; print $0}' | xargs) == "all lookup main" ]] && is_routing=0 || is_routing=1
+(sudo wg | rg --invert-match --quiet 'hour' && sudo wg | rg --invert-match --quiet '[4-9] minute') && {
+  # connected
+  [[ $(ip rule | head -n 2 | tail -n 1 | awk '{$1=$2=""; print $0}' | xargs) == "all lookup main" ]] && is_routing=0 || is_routing=1
 
-if [[ $is_routing -eq 1 ]]; then
-    output="%{F#af98e6}%{F-}"
-else
-    output="%{F#333}%{F-}"
-fi
+  if [[ $is_routing -eq 1 ]]; then
+    output="%{F#00ff00}%{F-}"
+  else
+    output=""
+  fi
   
-echo $output
+  echo $output
+
+} || {
+  # disconnected
+  output="%{F#e06c75}%{F-}"
+
+  echo $output
+}
