@@ -202,6 +202,8 @@ alias more="less"
 alias ll="exa --long --header --git "
 alias top="btop || bpytop || htop || top"
 alias paru="paru --noconfirm"
+alias lan="nmap -n -sn 192.18.1.0/24 -oG - | awk '/Up$/{print $2}' | sort -V"
+alias wgn="nmap -n -sn 192.18.2.0/24 -oG - | awk '/Up$/{print $2}' | sort -V"
 
 
 # ex - archive extractor
