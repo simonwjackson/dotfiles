@@ -60,3 +60,4 @@ XTerm*selectToClipboard: true
 Xcursor.theme: xcursor-breeze
 Xcursor.size:                     32
 
+*.vt100.metaSendsEscape: true
