@@ -1,5 +1,6 @@
 lastupdatecheck: 0
 recentrepos:
+- /mnt/storage/simonwjackson/.secrets
 - /mnt/storage/code/github/kronologic/web
 - /mnt/storage/code/github/kronologic/services
 startuppopupversion: 5

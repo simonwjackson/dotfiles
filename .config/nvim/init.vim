@@ -191,6 +191,7 @@ Plug 'junegunn/fzf.vim'
 " \ 'coc-apollo',
 " COC for code completion
 let g:coc_global_extensions = [
+            \ 'coc-react-refactor',
             \ 'coc-python',
             \ 'coc-coverage',
             \ 'coc-css',

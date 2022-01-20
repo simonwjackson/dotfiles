@@ -3,7 +3,8 @@
   
 # new term
 super + {_, ctrl +, alt +} Return
-  {kitty tmux, kitty, kitty-popup $SHELL}}
+  {kitty tmux, kitty, kitty-popup $SHELL}
+  # {alacritty --command tmux, alacritty, kitty-popup $SHELL}}
   # {kitty, bspc rule -a \* -o state=floating sticky=on layer=above rectangle=720x360+600+26 && kitty}
   # {kitty tmux, kitty-popup $SHELL}
 

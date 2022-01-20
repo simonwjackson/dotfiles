@@ -1,5 +1,6 @@
 export GOPATH=$(${HOME}/.asdf/shims/go env GOPATH)
 export PATH=$( find "${HOME}/.local/scripts" -type d -printf ":%p" ):$GOPATH/bin:$PATH
+export TZ=/usr/share/zoneinfo/US/Central
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 export EDITOR="nvim"

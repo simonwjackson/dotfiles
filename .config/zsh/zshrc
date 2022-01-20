@@ -255,6 +255,8 @@ zle -N CommandHistory
 bindkey '^R' CommandHistory
 
 bindkey -s '^e' 'nvim^M'
+bindkey -s '^g' 'lazygit^M'
+
 # F7
 bindkey -s '\e[18~' 'nvim $(fzf)^M'
 
