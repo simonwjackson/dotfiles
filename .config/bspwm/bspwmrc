@@ -74,7 +74,7 @@ done &
 # Only VIRTUAL1 terminal on VIRTUAL1 desktop
 bspc subscribe node_focus | while read -r event monitor desktop node; do
   bspc query --monitors --monitor ${monitor} --names | rg -q "VIRTUAL1" && {
-      xwininfo -id ${node} | rg -q VIRTUAL1 || bspc node --to-monitor eDP1 --focus --activate
+      xprop -id ${node} | rg -q VIRTUAL1 || bspc node --to-monitor eDP1 --focus --activate
   }
 done &
 
